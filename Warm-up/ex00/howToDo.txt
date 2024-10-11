@@ -4,3 +4,5 @@ ln -s
 ln
 touch -h -t YYYYMMDDHHmm arquivo
 touch -t
+tar -cvf exo2.tar test*
+tar -xvf exo2.tar
