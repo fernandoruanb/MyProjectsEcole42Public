@@ -1,0 +1,6 @@
+chmod (numbers or u+rwx for example)
+truncate -s
+ln -s
+ln
+touch -h -t YYYYMMDDHHmm arquivo
+touch -t
