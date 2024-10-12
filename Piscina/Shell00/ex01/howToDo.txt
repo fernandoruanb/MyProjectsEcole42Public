@@ -1,0 +1,5 @@
+chmod
+truncate -s
+touch -t YYYYMMDDhhmm arquivo
+tar -cvf (create archive) v -> verbose (show the process)
+tar -xvf (descompact the archive)
