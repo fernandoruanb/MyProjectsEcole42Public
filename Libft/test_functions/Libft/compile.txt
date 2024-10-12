@@ -1,1 +1,3 @@
 cc -Wall -Werror -Wextra "test_function.c" -I ../../libft.h -L ../.. -lft -o test_isalpha
+VIM
+:%s/ft_isalpha/ft_isprint/g (HELP to test)

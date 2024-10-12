@@ -15,7 +15,18 @@ OBJDIR = obj
 
 # Archives .c
 
-SRCS = $(SRCDIR)/ft_isalpha.c $(SRCDIR)/ft_isdigit.c $(SRCDIR)/ft_isalnum.c $(SRCDIR)/ft_isprint.c $(SRCDIR)/ft_isascii.c $(SRCDIR)/ft_strlen.c $(SRCDIR)/ft_bzero.c $(SRCDIR)/ft_toupper.c $(SRCDIR)/ft_tolower.c $(SRCDIR)/ft_strchr.c $(SRCDIR)/ft_memset.c $(SRCDIR)/ft_strrchr.c
+SRCS =  $(SRCDIR)/ft_isalpha.c\
+	$(SRCDIR)/ft_isdigit.c\
+	$(SRCDIR)/ft_isalnum.c\
+	$(SRCDIR)/ft_isprint.c\
+	$(SRCDIR)/ft_isascii.c\
+	$(SRCDIR)/ft_strlen.c\
+	$(SRCDIR)/ft_memset.c\
+	$(SRCDIR)/ft_bzero.c\
+	$(SRCDIR)/ft_strchr.c\
+	$(SRCDIR)/ft_strrchr.c\
+	$(SRCDIR)/ft_toupper.c\
+	$(SRCDIR)/ft_tolower.c
 
 # Archives .o
 
