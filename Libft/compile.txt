@@ -4,3 +4,7 @@ cc -Wall -Werror -Wextra main.c -I libft.h -L . -lft -o teste_program
 -L -> Library (biblioteca, onde ela está)
 -lft -> l de lib e o ft é o final depois do lib
 -o -> output como desejas o nome do seu programa 
+
+make
+make fclean
+make re
