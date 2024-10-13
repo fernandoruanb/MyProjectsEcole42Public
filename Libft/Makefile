@@ -30,7 +30,9 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ft_strncmp.c\
 	$(SRCDIR)/ft_memchr.c\
 	$(SRCDIR)/ft_atoi.c\
-	$(SRCDIR)/ft_memcmp.c
+	$(SRCDIR)/ft_memcmp.c\
+	$(SRCDIR)/ft_strlcpy.c\
+	$(SRCDIR)/ft_strnstr.c
 
 # Archives .o
 

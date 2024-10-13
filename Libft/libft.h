@@ -31,5 +31,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memchr(const char *s, int c, size_t n);
 int		ft_atoi(const char *nptr);
 int		ft_memcmp(const char *s1, const char *s2, size_t n);
+char	*ft_strnstr(const char *big, const char *little, size_t n);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 #endif /* LIBFT_H */
