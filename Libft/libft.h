@@ -33,5 +33,11 @@ int		ft_atoi(const char *nptr);
 int		ft_memcmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_strdup(const char *s);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 #endif /* LIBFT_H */
