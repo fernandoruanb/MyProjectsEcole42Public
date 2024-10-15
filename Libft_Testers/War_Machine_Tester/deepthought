@@ -3,7 +3,7 @@ $> hostname; uname -msr
 c3r11p2.42sp.org.br
 Linux 5.4.0-196-generic x86_64
 $> date
-ter 15 out 2024 18:01:01 -03
+ter 15 out 2024 19:34:23 -03
 $> gcc --version
 Ubuntu clang version 12.0.0-3ubuntu1~20.04.5
 Target: x86_64-pc-linux-gnu
@@ -58,7 +58,7 @@ $> make bonus
 make: *** Sem regra para processar o alvo 'bonus'.  Pare.
 
 $> ls -la libft.a
--rw-r--r-- 1 fruan-ba candidate 39076 out 15 18:01 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
+-rw-r--r-- 1 fruan-ba candidate 39282 out 15 19:34 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
 
 = Part1_functions ==============================================================
 
@@ -235,7 +235,7 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_memcmp/user_output_test07	2024-10-15 18:01:06.534378292 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_memcmp/user_output_test07	2024-10-15 19:34:28.347042219 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_memcmp/test07.output	2024-10-15 15:46:50.870596792 -0300$
 @@ -1 +1 @@$
 --1$
@@ -252,7 +252,7 @@ Diff OK :D
 = Test 9 ===================================================
 $> ./user_exe 09
 $> diff -U 3 user_output_test09 test09.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_memcmp/user_output_test09	2024-10-15 18:01:06.594380807 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_memcmp/user_output_test09	2024-10-15 19:34:28.407044607 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_memcmp/test09.output	2024-10-15 15:46:50.878597154 -0300$
 @@ -1 +1 @@$
 -1$
@@ -349,7 +349,7 @@ Diff KO :(
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-15 18:01:08.730470286 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-15 19:34:30.287119454 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test07.output	2024-10-15 15:46:51.114607862 -0300$
 @@ -0,0 +1,2 @@$
 +31$
@@ -426,25 +426,13 @@ Diff OK :D
 = Test 5 ===================================================
 $> ./user_exe 05
 $> diff -U 3 user_output_test05 test05.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strchr/user_output_test05	2024-10-15 18:01:10.514545011 -0300$
-+++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strchr/test05.output	2024-10-15 15:46:50.994602418 -0300$
-@@ -1,2 +0,0 @@$
--$
--Return value is false$
-\ Nenhum caractere de nova linha no final do arquivo$
 
-Diff KO :(
+Diff OK :D
 = Test 6 ===================================================
 $> ./user_exe 06
 $> diff -U 3 user_output_test06 test06.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strchr/user_output_test06	2024-10-15 18:01:10.546546351 -0300$
-+++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strchr/test06.output	2024-10-15 15:46:50.998602599 -0300$
-@@ -1,2 +0,0 @@$
--$
--Return value is false$
-\ Nenhum caractere de nova linha no final do arquivo$
 
-Diff KO :(
+Diff OK :D
 
 = ft_strrchr.c =================================================================
 $> norminette ft_strrchr.c | grep -E '(Error|Warning)'
@@ -483,7 +471,7 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strrchr/user_output_test07	2024-10-15 18:01:11.138571145 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strrchr/user_output_test07	2024-10-15 19:34:32.683214841 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strrchr/test07.output	2024-10-15 15:46:51.390620382 -0300$
 @@ -1,2 +0,0 @@$
 -$
@@ -684,15 +672,8 @@ Diff OK :D
 = Test 14 ==================================================
 $> ./user_exe 14
 $> diff -U 3 user_output_test14 test14.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_atoi/user_output_test14	2024-10-15 18:01:13.630675504 -0300$
-+++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_atoi/test14.output	2024-10-15 15:46:50.550582272 -0300$
-@@ -1 +1 @@$
--0$
-\ Nenhum caractere de nova linha no final do arquivo$
-+469$
-\ Nenhum caractere de nova linha no final do arquivo$
 
-Diff KO :(
+Diff OK :D
 = Test 15 ==================================================
 $> ./user_exe 15
 $> diff -U 3 user_output_test15 test15.output
@@ -826,7 +807,7 @@ Diff OK :D
 = Test 5 ===================================================
 $> ./user_exe 05
 $> diff -U 3 user_output_test05 test05.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_isalnum/user_output_test05	2024-10-15 18:01:15.602758073 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_isalnum/user_output_test05	2024-10-15 19:34:36.567369465 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_isalnum/test05.output	2024-10-15 15:46:50.626585719 -0300$
 @@ -1 +1 @@$
 -111111$
@@ -1017,10 +998,11 @@ Diff OK :D
 $> norminette ft_strmapi.c | grep -E '(Error|Warning)'
 $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_strmapi.c main.c libft.a -o user_exe
 
-/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strmapi/main.c:56:11: error: incompatible integer to pointer conversion assigning to 'char *' from 'char' [-Werror,-Wint-conversion]
-                strmapi = ft_strmapi(str, &mapi);
-                        ^ ~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.
+= Test 1 ===================================================
+$> ./user_exe 01
+$> diff -U 3 user_output_test01 test01.output
+
+Diff OK :D
 
 = ft_substr.c ==================================================================
 $> norminette ft_substr.c | grep -E '(Error|Warning)'

@@ -42,7 +42,8 @@ int	ft_atoi(const char *nptr)
 	signal = 1;
 	result = 0;
 	count = 0;
-	while (nptr[index] == ' ' || nptr[index] == '\n' || nptr[index] == '\t')
+	while (nptr[index] == ' ' || nptr[index] == '\n' || nptr[index] == '\t'
+		|| nptr[index] == '\v' || nptr[index] == '\r' || nptr[index] == '\f')
 		index++;
 	while (nptr[index] == '-' || nptr[index] == '+')
 	{

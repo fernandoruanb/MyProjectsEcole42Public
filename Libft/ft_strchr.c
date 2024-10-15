@@ -13,6 +13,8 @@
 //#include <stdio.h>
 #include <string.h>
 
+size_t	ft_strlen(const char *s);
+
 /*char	*ft_strchr(const char *s, int c);
 
 int	main(int argc, char **argv)
@@ -32,15 +34,29 @@ int	main(int argc, char **argv)
 char	*ft_strchr(const char *s, int c)
 {
 	int	index;
+	int	length;
 
+	length = ft_strlen(s);
 	index = 0;
+	if (!s)
+		return (NULL);
 	if (c == '\0')
-		return ((char *)"\0");
+		return ((char *)&s[length]);
 	while (s[index] != '\0')
 	{
-		if (s[index] == c)
+		if (s[index] == (unsigned char)c)
 			return ((char *)&s[index]);
 		index++;
 	}
 	return (NULL);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	length;
+
+	length = 0;
+	while (s[length] != '\0')
+		length++;
+	return (length);
 }
