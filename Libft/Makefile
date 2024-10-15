@@ -38,7 +38,11 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ft_putstr_fd.c\
 	$(SRCDIR)/ft_putendl_fd.c\
 	$(SRCDIR)/ft_putnbr_fd.c\
-	$(SRCDIR)/ft_calloc.c
+	$(SRCDIR)/ft_calloc.c\
+	$(SRCDIR)/ft_itoa.c\
+	$(SRCDIR)/ft_memmove.c\
+	$(SRCDIR)/ft_strlcat.c\
+	$(SRCDIR)/ft_memcpy.c
 
 # Archives .o
 
