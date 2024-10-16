@@ -40,7 +40,9 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	ptr1 = (const unsigned char *)s1;
 	ptr2 = (const unsigned char *)s2;
 	index = 0;
-	while (index < n)
+	if (n == 0)
+		return (0);
+	while (index < n - 1)
 	{
 		if (ptr1[index] != ptr2[index])
 			return (ptr1[index] - ptr2[index]);

@@ -1,9 +1,9 @@
 = Host-specific information ====================================================
 $> hostname; uname -msr
-c3r11p2.42sp.org.br
+c1r7p1.42sp.org.br
 Linux 5.4.0-196-generic x86_64
 $> date
-ter 15 out 2024 19:34:23 -03
+qua 16 out 2024 07:47:28 -03
 $> gcc --version
 Ubuntu clang version 12.0.0-3ubuntu1~20.04.5
 Target: x86_64-pc-linux-gnu
@@ -58,7 +58,7 @@ $> make bonus
 make: *** Sem regra para processar o alvo 'bonus'.  Pare.
 
 $> ls -la libft.a
--rw-r--r-- 1 fruan-ba candidate 39282 out 15 19:34 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
+-rw-r--r-- 1 fruan-ba candidate 39242 out 16 07:47 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
 
 = Part1_functions ==============================================================
 
@@ -109,9 +109,8 @@ $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_calloc.c main.c libft.a
 = Test 1 ===================================================
 $> ./user_exe 01
 $> diff -U 3 user_output_test01 test01.output
-Os arquivos binM-CM-!rios /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_calloc/user_output_test01 e /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_calloc/test01.output sM-CM-#o diferentes$
 
-Diff KO :(
+Diff OK :D
 
 = ft_memcpy.c ==================================================================
 $> norminette ft_memcpy.c | grep -E '(Error|Warning)'
@@ -235,15 +234,8 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_memcmp/user_output_test07	2024-10-15 19:34:28.347042219 -0300$
-+++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_memcmp/test07.output	2024-10-15 15:46:50.870596792 -0300$
-@@ -1 +1 @@$
---1$
-\ Nenhum caractere de nova linha no final do arquivo$
-+0$
-\ Nenhum caractere de nova linha no final do arquivo$
 
-Diff KO :(
+Diff OK :D
 = Test 8 ===================================================
 $> ./user_exe 08
 $> diff -U 3 user_output_test08 test08.output
@@ -252,15 +244,8 @@ Diff OK :D
 = Test 9 ===================================================
 $> ./user_exe 09
 $> diff -U 3 user_output_test09 test09.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_memcmp/user_output_test09	2024-10-15 19:34:28.407044607 -0300$
-+++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_memcmp/test09.output	2024-10-15 15:46:50.878597154 -0300$
-@@ -1 +1 @@$
--1$
-\ Nenhum caractere de nova linha no final do arquivo$
-+0$
-\ Nenhum caractere de nova linha no final do arquivo$
 
-Diff KO :(
+Diff OK :D
 
 = ft_strlen.c ==================================================================
 $> norminette ft_strlen.c | grep -E '(Error|Warning)'
@@ -314,15 +299,13 @@ $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_strlcat.c main.c libft.
 = Test 1 ===================================================
 $> ./user_exe 01
 $> diff -U 3 user_output_test01 test01.output
-Os arquivos binM-CM-!rios /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test01 e /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test01.output sM-CM-#o diferentes$
 
-Diff KO :(
+Diff OK :D
 = Test 2 ===================================================
 $> ./user_exe 02
 $> diff -U 3 user_output_test02 test02.output
-Os arquivos binM-CM-!rios /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test02 e /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test02.output sM-CM-#o diferentes$
 
-Diff KO :(
+Diff OK :D
 = Test 3 ===================================================
 $> ./user_exe 03
 $> diff -U 3 user_output_test03 test03.output
@@ -331,25 +314,22 @@ Diff OK :D
 = Test 4 ===================================================
 $> ./user_exe 04
 $> diff -U 3 user_output_test04 test04.output
-Os arquivos binM-CM-!rios /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test04 e /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test04.output sM-CM-#o diferentes$
 
-Diff KO :(
+Diff OK :D
 = Test 5 ===================================================
 $> ./user_exe 05
 $> diff -U 3 user_output_test05 test05.output
-Os arquivos binM-CM-!rios /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test05 e /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test05.output sM-CM-#o diferentes$
 
-Diff KO :(
+Diff OK :D
 = Test 6 ===================================================
 $> ./user_exe 06
 $> diff -U 3 user_output_test06 test06.output
-Os arquivos binM-CM-!rios /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test06 e /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test06.output sM-CM-#o diferentes$
 
-Diff KO :(
+Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-15 19:34:30.287119454 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-16 07:47:35.369141588 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test07.output	2024-10-15 15:46:51.114607862 -0300$
 @@ -0,0 +1,2 @@$
 +31$
@@ -365,9 +345,8 @@ Diff OK :D
 = Test 9 ===================================================
 $> ./user_exe 09
 $> diff -U 3 user_output_test09 test09.output
-Os arquivos binM-CM-!rios /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test09 e /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test09.output sM-CM-#o diferentes$
 
-Diff KO :(
+Diff OK :D
 
 = ft_strlcpy.c =================================================================
 $> norminette ft_strlcpy.c | grep -E '(Error|Warning)'
@@ -471,14 +450,8 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strrchr/user_output_test07	2024-10-15 19:34:32.683214841 -0300$
-+++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strrchr/test07.output	2024-10-15 15:46:51.390620382 -0300$
-@@ -1,2 +0,0 @@$
--$
--Return value is false$
-\ Nenhum caractere de nova linha no final do arquivo$
 
-Diff KO :(
+Diff OK :D
 = Test 8 ===================================================
 $> ./user_exe 08
 $> diff -U 3 user_output_test08 test08.output
@@ -807,7 +780,7 @@ Diff OK :D
 = Test 5 ===================================================
 $> ./user_exe 05
 $> diff -U 3 user_output_test05 test05.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_isalnum/user_output_test05	2024-10-15 19:34:36.567369465 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_isalnum/user_output_test05	2024-10-16 07:47:41.681401226 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_isalnum/test05.output	2024-10-15 15:46:50.626585719 -0300$
 @@ -1 +1 @@$
 -111111$
