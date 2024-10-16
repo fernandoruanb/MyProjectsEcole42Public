@@ -14,7 +14,7 @@
 #include <stdlib.h>*/
 #include <stddef.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+//void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 size_t	ft_strlen(const char *s);
 
@@ -35,25 +35,22 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	len_dst;
 	size_t	len_src;
-	size_t	disponible;
+	size_t	index;
 
 	len_dst = ft_strlen(dst);
 	len_src = ft_strlen(src);
-	disponible = size - len_dst;
+	index = 0;
 	if (size == 0)
 		return (len_src);
-	else if (len_dst >= size)
+	if (len_dst >= size)
 		return (size + len_src);
-	else if (disponible > len_src)
+	while ((len_dst + index) < (size - 1) && src[index] != '\0')
 	{
-		ft_memcpy(dst + len_dst, src, len_src);
-		dst[len_dst + len_src] = '\0';
+		dst[len_dst + index] = src[index];
+		index++;
 	}
-	else
-	{
-		ft_memcpy(dst + len_dst, src, disponible - 1);
-		dst[len_dst + disponible - 1] = '\0';
-	}
+	if (len_dst < size)
+		dst[len_dst + index] = '\0';
 	return (len_dst + len_src);
 }
 
@@ -67,7 +64,7 @@ size_t	ft_strlen(const char *s)
 	return (length);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+/*void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char		*ptr1;
 	const unsigned char	*ptr2;
@@ -82,4 +79,4 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		index++;
 	}
 	return (dest);
-}
+}*/

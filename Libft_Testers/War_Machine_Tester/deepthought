@@ -3,7 +3,7 @@ $> hostname; uname -msr
 c2r8p5.42sp.org.br
 Linux 5.4.0-196-generic x86_64
 $> date
-Wed 16 Oct 2024 12:54:40 PM -03
+Wed 16 Oct 2024 05:57:47 PM -03
 $> gcc --version
 Ubuntu clang version 12.0.0-3ubuntu1~20.04.5
 Target: x86_64-pc-linux-gnu
@@ -58,7 +58,7 @@ $> make bonus
 make: *** No rule to make target 'bonus'.  Stop.
 
 $> ls -la libft.a
--rw-r--r-- 1 fruan-ba candidate 39234 Oct 16 12:54 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
+-rw-r--r-- 1 fruan-ba candidate 39472 Oct 16 17:57 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
 
 = Part1_functions ==============================================================
 
@@ -329,7 +329,7 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-16 12:54:47.315340094 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-16 17:57:54.811976771 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test07.output	2024-10-15 15:46:51.114607862 -0300$
 @@ -0,0 +1,2 @@$
 +31$
