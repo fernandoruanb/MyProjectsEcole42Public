@@ -47,7 +47,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 			ptr1[n - 1] = ptr2[n - 1];
 			n--;
 		}
-		return (dest);
 	}
 	else
 	{
@@ -56,6 +55,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 			ptr1[index] = ptr2[index];
 			index++;
 		}
-		return (dest);
 	}
+	return (dest);
 }
