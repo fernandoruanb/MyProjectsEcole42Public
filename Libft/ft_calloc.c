@@ -28,8 +28,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ptr = (unsigned char *)buffer;
 	while (index < length)
 	{
-		ptr[length] = 0;
-		length++;
+		ptr[index] = 0;
+		index++;
 	}
 	return (buffer);
 }
