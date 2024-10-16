@@ -36,8 +36,10 @@ char	*ft_strrchr(const char *s, int c)
 	int	length;
 
 	length = ft_strlen(s);
+	if (!s)
+		return (NULL);
 	if (s[0] == '\0')
-		return ((char *)"\0");
+		return ((char *)&s[length]);
 	while (length >= 0)
 	{
 		if (s[length] == c)
