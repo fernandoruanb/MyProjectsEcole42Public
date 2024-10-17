@@ -3,7 +3,7 @@ $> hostname; uname -msr
 c2r8p5.42sp.org.br
 Linux 5.4.0-196-generic x86_64
 $> date
-Wed 16 Oct 2024 05:57:47 PM -03
+Thu 17 Oct 2024 01:13:38 PM -03
 $> gcc --version
 Ubuntu clang version 12.0.0-3ubuntu1~20.04.5
 Target: x86_64-pc-linux-gnu
@@ -52,13 +52,15 @@ cc -Wall -Werror -Wextra -I . -c ft_strlcat.c -o obj/ft_strlcat.o
 cc -Wall -Werror -Wextra -I . -c ft_memcpy.c -o obj/ft_memcpy.o
 cc -Wall -Werror -Wextra -I . -c ft_striteri.c -o obj/ft_striteri.o
 cc -Wall -Werror -Wextra -I . -c ft_strmapi.c -o obj/ft_strmapi.o
-ar rcs libft.a obj/ft_isalpha.o obj/ft_isdigit.o obj/ft_isalnum.o obj/ft_isprint.o obj/ft_isascii.o obj/ft_strlen.o obj/ft_memset.o obj/ft_bzero.o obj/ft_strchr.o obj/ft_strrchr.o obj/ft_toupper.o obj/ft_tolower.o obj/ft_strncmp.o obj/ft_memchr.o obj/ft_atoi.o obj/ft_memcmp.o obj/ft_strlcpy.o obj/ft_strnstr.o obj/ft_strdup.o obj/ft_putchar_fd.o obj/ft_putstr_fd.o obj/ft_putendl_fd.o obj/ft_putnbr_fd.o obj/ft_calloc.o obj/ft_itoa.o obj/ft_memmove.o obj/ft_strlcat.o obj/ft_memcpy.o obj/ft_striteri.o obj/ft_strmapi.o
+cc -Wall -Werror -Wextra -I . -c ft_strjoin.c -o obj/ft_strjoin.o
+cc -Wall -Werror -Wextra -I . -c ft_substr.c -o obj/ft_substr.o
+ar rcs libft.a obj/ft_isalpha.o obj/ft_isdigit.o obj/ft_isalnum.o obj/ft_isprint.o obj/ft_isascii.o obj/ft_strlen.o obj/ft_memset.o obj/ft_bzero.o obj/ft_strchr.o obj/ft_strrchr.o obj/ft_toupper.o obj/ft_tolower.o obj/ft_strncmp.o obj/ft_memchr.o obj/ft_atoi.o obj/ft_memcmp.o obj/ft_strlcpy.o obj/ft_strnstr.o obj/ft_strdup.o obj/ft_putchar_fd.o obj/ft_putstr_fd.o obj/ft_putendl_fd.o obj/ft_putnbr_fd.o obj/ft_calloc.o obj/ft_itoa.o obj/ft_memmove.o obj/ft_strlcat.o obj/ft_memcpy.o obj/ft_striteri.o obj/ft_strmapi.o obj/ft_strjoin.o obj/ft_substr.o
 
 $> make bonus
 make: *** No rule to make target 'bonus'.  Stop.
 
 $> ls -la libft.a
--rw-r--r-- 1 fruan-ba candidate 39472 Oct 16 17:57 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
+-rw-r--r-- 1 fruan-ba candidate 42702 Oct 17 13:13 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
 
 = Part1_functions ==============================================================
 
@@ -329,7 +331,7 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-16 17:57:54.811976771 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-17 13:13:44.975499986 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test07.output	2024-10-15 15:46:51.114607862 -0300$
 @@ -0,0 +1,2 @@$
 +31$
@@ -974,19 +976,95 @@ Diff OK :D
 $> norminette ft_substr.c | grep -E '(Error|Warning)'
 $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_substr.c main.c libft.a -o user_exe
 
-clang: error: no such file or directory: '/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft//ft_substr.c'
+= Test 1 ===================================================
+$> ./user_exe 01
+$> diff -U 3 user_output_test01 test01.output
+
+Diff OK :D
+= Test 2 ===================================================
+$> ./user_exe 02
+$> diff -U 3 user_output_test02 test02.output
+
+Diff OK :D
+= Test 3 ===================================================
+$> ./user_exe 03
+$> diff -U 3 user_output_test03 test03.output
+
+Diff OK :D
+= Test 4 ===================================================
+$> ./user_exe 04
+$> diff -U 3 user_output_test04 test04.output
+
+Diff OK :D
+= Test 5 ===================================================
+$> ./user_exe 05
+$> diff -U 3 user_output_test05 test05.output
+
+Diff OK :D
 
 = ft_strjoin.c =================================================================
 $> norminette ft_strjoin.c | grep -E '(Error|Warning)'
 $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_strjoin.c main.c libft.a -o user_exe
 
-clang: error: no such file or directory: '/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft//ft_strjoin.c'
+= Test 1 ===================================================
+$> ./user_exe 01
+$> diff -U 3 user_output_test01 test01.output
+
+Diff OK :D
+= Test 2 ===================================================
+$> ./user_exe 02
+$> diff -U 3 user_output_test02 test02.output
+
+Diff OK :D
+= Test 3 ===================================================
+$> ./user_exe 03
+$> diff -U 3 user_output_test03 test03.output
+
+Diff OK :D
+= Test 4 ===================================================
+$> ./user_exe 04
+$> diff -U 3 user_output_test04 test04.output
+
+Diff OK :D
 
 = ft_strtrim.c =================================================================
 $> norminette ft_strtrim.c | grep -E '(Error|Warning)'
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft/ft_strtrim.c: Error!
+Error: MISALIGNED_VAR_DECL  (line:  37, col:  13):	Misaligned variable declaration
+Norme check failed
 $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_strtrim.c main.c libft.a -o user_exe
 
-clang: error: no such file or directory: '/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft//ft_strtrim.c'
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:38:19: error: implicit declaration of function 'ft_strtrim' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+                if (!(strtrim = ft_strtrim(s1, " ")))
+                                ^
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:38:17: error: incompatible integer to pointer conversion assigning to 'char *' from 'int' [-Werror,-Wint-conversion]
+                if (!(strtrim = ft_strtrim(s1, " ")))
+                              ^ ~~~~~~~~~~~~~~~~~~~
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:48:19: error: implicit declaration of function 'ft_strtrim' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+                if (!(strtrim = ft_strtrim(s1, "te")))
+                                ^
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:48:17: error: incompatible integer to pointer conversion assigning to 'char *' from 'int' [-Werror,-Wint-conversion]
+                if (!(strtrim = ft_strtrim(s1, "te")))
+                              ^ ~~~~~~~~~~~~~~~~~~~~
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:58:19: error: implicit declaration of function 'ft_strtrim' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+                if (!(strtrim = ft_strtrim(s1, "l ")))
+                                ^
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:58:17: error: incompatible integer to pointer conversion assigning to 'char *' from 'int' [-Werror,-Wint-conversion]
+                if (!(strtrim = ft_strtrim(s1, "l ")))
+                              ^ ~~~~~~~~~~~~~~~~~~~~
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:68:19: error: implicit declaration of function 'ft_strtrim' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+                if (!(strtrim = ft_strtrim(s1, "tel")))
+                                ^
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:68:17: error: incompatible integer to pointer conversion assigning to 'char *' from 'int' [-Werror,-Wint-conversion]
+                if (!(strtrim = ft_strtrim(s1, "tel")))
+                              ^ ~~~~~~~~~~~~~~~~~~~~~
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:78:19: error: implicit declaration of function 'ft_strtrim' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+                if (!(strtrim = ft_strtrim(s1, " ")))
+                                ^
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:78:17: error: incompatible integer to pointer conversion assigning to 'char *' from 'int' [-Werror,-Wint-conversion]
+                if (!(strtrim = ft_strtrim(s1, " ")))
+                              ^ ~~~~~~~~~~~~~~~~~~~
+10 errors generated.
 
 = ft_split.c ===================================================================
 $> norminette ft_split.c | grep -E '(Error|Warning)'
