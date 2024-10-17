@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include <fcntl.h>
-#include <stdlib.h>*/
+#include <fcntl.h>
+#include <stdlib.h>
 #include <unistd.h>
 
-/*void	ft_putnbr_fd(int n, int fd);
+void	ft_putnbr_fd(int n, int fd);
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	int	file_descriptor;
 

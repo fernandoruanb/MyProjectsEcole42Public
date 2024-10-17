@@ -45,5 +45,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *c));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif /* LIBFT_H */

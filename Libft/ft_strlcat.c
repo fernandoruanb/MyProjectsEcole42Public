@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include <stdio.h>
-#include <stdlib.h>*/
+#include <stdio.h>
+#include <stdlib.h>
 #include <stddef.h>
 
 size_t	ft_strlen(const char *s);
@@ -46,13 +46,13 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	disponible = size - len_dst;
 	if (len_src < disponible)
 	{
-		ft_memcpy(dst + len_dst, src, len_src);
+		ft_memcpy(dst + len_dst, src, len_src + 1);
 		dst[len_dst + len_src] = '\0';
 	}
 	else
 	{
 		ft_memcpy(dst + len_dst, src, disponible - 1);
-		dst[len_dst + disponible - 1] = '\0';
+		dst[size - 1] = '\0';
 	}
 	return (len_dst + len_src);
 }
