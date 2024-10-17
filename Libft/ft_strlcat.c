@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 17:10:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/16 17:10:52 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/10/16 18:56:04 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/10/16 18:56:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <stdlib.h>*/
 #include <stddef.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-
 size_t	ft_strlen(const char *s);
+
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
@@ -39,12 +39,12 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 
 	len_dst = ft_strlen(dst);
 	len_src = ft_strlen(src);
-	disponible = size - len_dst;
 	if (size == 0)
 		return (len_src);
-	else if (len_dst >= size)
+	if (len_dst >= size)
 		return (size + len_src);
-	else if (disponible > len_src)
+	disponible = size - len_dst;
+	if (len_src < disponible)
 	{
 		ft_memcpy(dst + len_dst, src, len_src);
 		dst[len_dst + len_src] = '\0';
@@ -55,16 +55,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		dst[len_dst + disponible - 1] = '\0';
 	}
 	return (len_dst + len_src);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	length;
-
-	length = 0;
-	while (s[length] != '\0')
-		length++;
-	return (length);
 }
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
@@ -82,4 +72,14 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		index++;
 	}
 	return (dest);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	length;
+
+	length = 0;
+	while (s[length] != '\0')
+		length++;
+	return (length);
 }
