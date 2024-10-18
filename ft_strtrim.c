@@ -1,0 +1,119 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/17 19:43:26 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/10/17 19:43:26 by fruan-ba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int		calc_fi(char const *s1, char const *s2);
+
+int		calculate_ini(char const *s1, char const *s2);
+
+size_t	ft_strlen(const char *s);
+
+/*char	*ft_strtrim(char const *s1, char const *s2);
+
+int	main(int argc, char **argv)
+{
+	char	*result;
+
+	if (argc < 3)
+		return (1);
+	result = ft_strtrim(argv[1], argv[2]);
+	printf("(MY FUNCTION) %s.\n", result);
+	free(result);
+	return (0);
+}*/
+
+char	*ft_strtrim(char const *s1, char const *s2)
+{
+	int		index;
+	int		init;
+	int		final;
+	char	*buffer;
+
+	if (s1[0] == '\0')
+	{
+		buffer = (char *)malloc(1);
+		buffer[0] = '\0';
+		return (buffer);
+	}
+	index = 0;
+	init = calculate_ini(s1, s2);
+	final = calc_fi(s1, s2);
+	buffer = (char *)malloc((final - init) + 1);
+	while (init <= final)
+	{
+		buffer[index] = s1[init];
+		index++;
+		init++;
+	}
+	buffer[index] = '\0';
+	return (buffer);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	length;
+
+	length = 0;
+	while (s[length] != '\0')
+		length++;
+	return (length);
+}
+
+int	calculate_ini(char const *s1, char const *s2)
+{
+	int	index;
+	int	count;
+
+	index = 0;
+	count = 0;
+	while (s1[index] != '\0')
+	{
+		count = 0;
+		while ((s1[index] != s2[count])
+			&& s2[count] != '\0')
+			count++;
+		if (s2[count] == '\0')
+			break ;
+		index++;
+	}
+	return (index);
+}
+
+int	calc_fi(char const *s1, char const *s2)
+{
+	int	length;
+	int	count;
+
+	length = ft_strlen(s1) - 1;
+	while (length >= 0)
+	{
+		count = 0;
+		while (s2[count] != '\0')
+		{
+			if (s1[length - 1] == s2[count])
+			{
+				count = 0;
+				length--;
+				continue ;
+			}
+			if (s1[length] == s2[count])
+				break ;
+			count++;
+		}
+		if (s2[count] == '\0')
+			break ;
+		length--;
+	}
+	return (length);
+}

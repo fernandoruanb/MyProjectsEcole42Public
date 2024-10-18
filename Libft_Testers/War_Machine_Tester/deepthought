@@ -3,7 +3,7 @@ $> hostname; uname -msr
 c2r8p5.42sp.org.br
 Linux 5.4.0-196-generic x86_64
 $> date
-Thu 17 Oct 2024 01:13:38 PM -03
+Thu 17 Oct 2024 03:41:12 PM -03
 $> gcc --version
 Ubuntu clang version 12.0.0-3ubuntu1~20.04.5
 Target: x86_64-pc-linux-gnu
@@ -60,7 +60,7 @@ $> make bonus
 make: *** No rule to make target 'bonus'.  Stop.
 
 $> ls -la libft.a
--rw-r--r-- 1 fruan-ba candidate 42702 Oct 17 13:13 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
+-rw-r--r-- 1 fruan-ba candidate 42702 Oct 17 15:41 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
 
 = Part1_functions ==============================================================
 
@@ -331,7 +331,7 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-17 13:13:44.975499986 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-17 15:41:20.373166171 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test07.output	2024-10-15 15:46:51.114607862 -0300$
 @@ -0,0 +1,2 @@$
 +31$
@@ -1029,9 +1029,6 @@ Diff OK :D
 
 = ft_strtrim.c =================================================================
 $> norminette ft_strtrim.c | grep -E '(Error|Warning)'
-/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft/ft_strtrim.c: Error!
-Error: MISALIGNED_VAR_DECL  (line:  37, col:  13):	Misaligned variable declaration
-Norme check failed
 $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_strtrim.c main.c libft.a -o user_exe
 
 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/main.c:38:19: error: implicit declaration of function 'ft_strtrim' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
