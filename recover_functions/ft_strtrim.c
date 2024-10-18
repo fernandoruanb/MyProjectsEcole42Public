@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
-int	calculate_fi(char const *s1, char const *s2);
+int		calc_fi(char const *s1, char const *s2);
 
-int	calculate_ini(char const *s1, char const *s2);
+int		calculate_ini(char const *s1, char const *s2);
 
 size_t	ft_strlen(const char *s);
 
-/*char	*ft_strtrim(char const *s1, char const *s2);
+char	*ft_strtrim(char const *s1, char const *s2);
 
 int	main(int argc, char **argv)
 {
@@ -29,23 +29,28 @@ int	main(int argc, char **argv)
 		return (1);
 	result = ft_strtrim(argv[1], argv[2]);
 	printf("(MY FUNCTION) %s.\n", result);
+	free(result);
 	return (0);
-}*/
+}
 
 char	*ft_strtrim(char const *s1, char const *s2)
 {
-	int	index;
-	int	init;
-	int	final;
+	int		index;
+	int		init;
+	int		final;
 	char	*buffer;
-	int	length;
 
+	if (s1[0] == '\0')
+	{
+		buffer = (char *)malloc(1);
+		buffer[0] = '\0';
+		return (buffer);
+	}
 	index = 0;
-	length = ft_strlen(s2);
 	init = calculate_ini(s1, s2);
-	final = calculate_fi(s1, s2);
+	final = calc_fi(s1, s2);
 	buffer = (char *)malloc((final - init) + 1);
-	while (init < final - length)
+	while (init <= final)
 	{
 		buffer[index] = s1[init];
 		index++;
@@ -85,22 +90,18 @@ int	calculate_ini(char const *s1, char const *s2)
 	return (index);
 }
 
-int	calculate_fi(char const *s1, char const *s2)
+int	calc_fi(char const *s1, char const *s2)
 {
 	int	length;
-	int	count;
+	int	length_2;
 
-	count = 0;
-	length = ft_strlen(s1);
-	while (length >= 0)
+	length = ft_strlen(s1) - 1;
+	length_2 = ft_strlen(s2) - 1;
+	while (length >= 0 && length_2 >= 0)
 	{
-		count = 0;
-		while (s1[length] != s2[count]
-			&& s2[count] != '\0')
-			count++;
-		if (s2[count] == '\0')
-			break ;
-		length--;
+		while (s1[length] == s2[length_2])
+			length--;
+		length_2--;
 	}
 	return (length);
 }
