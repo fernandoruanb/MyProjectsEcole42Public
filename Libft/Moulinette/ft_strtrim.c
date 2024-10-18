@@ -29,7 +29,6 @@ int	main(int argc, char **argv)
 		return (1);
 	result = ft_strtrim(argv[1], argv[2]);
 	printf("(MY FUNCTION) %s.\n", result);
-	free(result);
 	return (0);
 }*/
 
@@ -40,12 +39,6 @@ char	*ft_strtrim(char const *s1, char const *s2)
 	int		final;
 	char	*buffer;
 
-	if (s1[0] == '\0')
-	{
-		buffer = (char *)malloc(1);
-		buffer[0] = '\0';
-		return (buffer);
-	}
 	index = 0;
 	init = calculate_ini(s1, s2);
 	final = calc_fi(s1, s2);
