@@ -19,7 +19,7 @@ int		calculate_ini(char const *s1, char const *s2);
 
 size_t	ft_strlen(const char *s);
 
-/*char	*ft_strtrim(char const *s1, char const *s2);
+/*char	*ft_strtrim(char const *s1, char const *set);
 
 int	main(int argc, char **argv)
 {
@@ -33,15 +33,15 @@ int	main(int argc, char **argv)
 	return (0);
 }*/
 
-char	*ft_strtrim(char const *s1, char const *s2)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		index;
 	int		init;
 	int		final;
 	char	*buffer;
 
-	init = calculate_ini(s1, s2);
-	final = calc_fi(s1, s2);
+	init = calculate_ini(s1, set);
+	final = calc_fi(s1, set);
 	if (s1[0] == '\0' || init > final)
 	{
 		buffer = (char *)malloc(1);
