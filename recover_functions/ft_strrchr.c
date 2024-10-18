@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+//#include <stdio.h>
 #include <string.h>
 
 size_t	ft_strlen(const char *s);
 
-char	*ft_strrchr(const char *s, int c);
+/*char	*ft_strrchr(const char *s, int c);
 
-/*int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	char	*result;
 	char	*result2;
@@ -38,11 +38,11 @@ char	*ft_strrchr(const char *s, int c)
 	length = ft_strlen(s);
 	if (!s)
 		return (NULL);
-	if (c == '\0')
+	if (s[0] == '\0')
 		return ((char *)&s[length]);
 	while (length >= 0)
 	{
-		if (s[length] == (unsigned char)c)
+		if (s[length] == c)
 			return ((char *)&s[length]);
 		length--;
 	}

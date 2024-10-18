@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s);
 
 char	*ft_strrchr(const char *s, int c);
 
-/*int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	char	*result;
 	char	*result2;
@@ -29,7 +29,7 @@ char	*ft_strrchr(const char *s, int c);
 	printf("(MY FUNCTION) %s.\n", result);
 	printf("(ORIGINAL) %s.\n", result2);
 	return (0);
-}*/
+}
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -38,8 +38,8 @@ char	*ft_strrchr(const char *s, int c)
 	length = ft_strlen(s);
 	if (!s)
 		return (NULL);
-	if (c == '\0')
-		return ((char *)&s[length]);
+	if (s[0] == '\0')
+		return (NULL);
 	while (length >= 0)
 	{
 		if (s[length] == (unsigned char)c)
