@@ -40,15 +40,15 @@ char	*ft_strtrim(char const *s1, char const *s2)
 	int		final;
 	char	*buffer;
 
-	if (s1[0] == '\0')
+	init = calculate_ini(s1, s2);
+	final = calc_fi(s1, s2);
+	if (s1[0] == '\0' || init > final)
 	{
 		buffer = (char *)malloc(1);
 		buffer[0] = '\0';
 		return (buffer);
 	}
 	index = 0;
-	init = calculate_ini(s1, s2);
-	final = calc_fi(s1, s2);
 	buffer = (char *)malloc((final - init) + 1);
 	while (init <= final)
 	{
@@ -99,9 +99,14 @@ int	calc_fi(char const *s1, char const *s2)
 	length_2 = ft_strlen(s2) - 1;
 	while (length >= 0 && length_2 >= 0)
 	{
+		length_2 = ft_strlen(s2) - 1;
+		while (s1[length] != s2[length_2]
+			&& length_2 >= 0)
+			length_2--;
+		if (s2[length_2] == '\0')
+			return (length);
 		while (s1[length] == s2[length_2])
 			length--;
-		length_2--;
 	}
 	return (length);
 }
