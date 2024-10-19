@@ -47,7 +47,9 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ft_strmapi.c\
 	$(SRCDIR)/ft_strjoin.c\
 	$(SRCDIR)/ft_substr.c\
-	$(SRCDIR)/ft_strtrim.c
+	$(SRCDIR)/ft_strtrim.c\
+	$(SRCDIR)/ft_split.c
+	#$(SRCDIR)/ft_lstnew.c
 
 # Archives .o
 
@@ -81,3 +83,7 @@ fclean: clean
 # Restart
 
 re: fclean $(NAME)
+
+# bonus
+
+bonus: fclean re

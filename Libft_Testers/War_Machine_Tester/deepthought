@@ -1,9 +1,9 @@
 = Host-specific information ====================================================
 $> hostname; uname -msr
-c3r12p4.42sp.org.br
-Linux 5.15.0-122-generic x86_64
+c3r11p3.42sp.org.br
+Linux 5.4.0-196-generic x86_64
 $> date
-sex 18 out 2024 10:23:28 -03
+Sat 19 Oct 2024 10:02:47 AM -03
 $> gcc --version
 Ubuntu clang version 12.0.0-3ubuntu1~20.04.5
 Target: x86_64-pc-linux-gnu
@@ -17,6 +17,11 @@ InstalledDir: /usr/bin
 
 = libft.h=======================================================================
 $> norminette libft.h | grep -E '(Error|Warning)'
+/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.h: Error!
+Error: TAB_REPLACE_SPACE    (line:  18, col:   1):	Found tab when expecting space
+Error: TAB_REPLACE_SPACE    (line:  21, col:  11):	Found tab when expecting space
+Error: MISALIGNED_VAR_DECL  (line:  21, col:  21):	Misaligned variable declaration
+Norme check failed
 
 = Compiling libft ==============================================================
 $> make re
@@ -55,13 +60,50 @@ cc -Wall -Werror -Wextra -I . -c ft_strmapi.c -o obj/ft_strmapi.o
 cc -Wall -Werror -Wextra -I . -c ft_strjoin.c -o obj/ft_strjoin.o
 cc -Wall -Werror -Wextra -I . -c ft_substr.c -o obj/ft_substr.o
 cc -Wall -Werror -Wextra -I . -c ft_strtrim.c -o obj/ft_strtrim.o
-ar rcs libft.a obj/ft_isalpha.o obj/ft_isdigit.o obj/ft_isalnum.o obj/ft_isprint.o obj/ft_isascii.o obj/ft_strlen.o obj/ft_memset.o obj/ft_bzero.o obj/ft_strchr.o obj/ft_strrchr.o obj/ft_toupper.o obj/ft_tolower.o obj/ft_strncmp.o obj/ft_memchr.o obj/ft_atoi.o obj/ft_memcmp.o obj/ft_strlcpy.o obj/ft_strnstr.o obj/ft_strdup.o obj/ft_putchar_fd.o obj/ft_putstr_fd.o obj/ft_putendl_fd.o obj/ft_putnbr_fd.o obj/ft_calloc.o obj/ft_itoa.o obj/ft_memmove.o obj/ft_strlcat.o obj/ft_memcpy.o obj/ft_striteri.o obj/ft_strmapi.o obj/ft_strjoin.o obj/ft_substr.o obj/ft_strtrim.o
+cc -Wall -Werror -Wextra -I . -c ft_split.c -o obj/ft_split.o
+ar rcs libft.a obj/ft_isalpha.o obj/ft_isdigit.o obj/ft_isalnum.o obj/ft_isprint.o obj/ft_isascii.o obj/ft_strlen.o obj/ft_memset.o obj/ft_bzero.o obj/ft_strchr.o obj/ft_strrchr.o obj/ft_toupper.o obj/ft_tolower.o obj/ft_strncmp.o obj/ft_memchr.o obj/ft_atoi.o obj/ft_memcmp.o obj/ft_strlcpy.o obj/ft_strnstr.o obj/ft_strdup.o obj/ft_putchar_fd.o obj/ft_putstr_fd.o obj/ft_putendl_fd.o obj/ft_putnbr_fd.o obj/ft_calloc.o obj/ft_itoa.o obj/ft_memmove.o obj/ft_strlcat.o obj/ft_memcpy.o obj/ft_striteri.o obj/ft_strmapi.o obj/ft_strjoin.o obj/ft_substr.o obj/ft_strtrim.o obj/ft_split.o
 
 $> make bonus
-make: *** Sem regra para processar o alvo 'bonus'.  Pare.
+rm -rf obj
+rm -f libft.a
+cc -Wall -Werror -Wextra -I . -c ft_isalpha.c -o obj/ft_isalpha.o
+cc -Wall -Werror -Wextra -I . -c ft_isdigit.c -o obj/ft_isdigit.o
+cc -Wall -Werror -Wextra -I . -c ft_isalnum.c -o obj/ft_isalnum.o
+cc -Wall -Werror -Wextra -I . -c ft_isprint.c -o obj/ft_isprint.o
+cc -Wall -Werror -Wextra -I . -c ft_isascii.c -o obj/ft_isascii.o
+cc -Wall -Werror -Wextra -I . -c ft_strlen.c -o obj/ft_strlen.o
+cc -Wall -Werror -Wextra -I . -c ft_memset.c -o obj/ft_memset.o
+cc -Wall -Werror -Wextra -I . -c ft_bzero.c -o obj/ft_bzero.o
+cc -Wall -Werror -Wextra -I . -c ft_strchr.c -o obj/ft_strchr.o
+cc -Wall -Werror -Wextra -I . -c ft_strrchr.c -o obj/ft_strrchr.o
+cc -Wall -Werror -Wextra -I . -c ft_toupper.c -o obj/ft_toupper.o
+cc -Wall -Werror -Wextra -I . -c ft_tolower.c -o obj/ft_tolower.o
+cc -Wall -Werror -Wextra -I . -c ft_strncmp.c -o obj/ft_strncmp.o
+cc -Wall -Werror -Wextra -I . -c ft_memchr.c -o obj/ft_memchr.o
+cc -Wall -Werror -Wextra -I . -c ft_atoi.c -o obj/ft_atoi.o
+cc -Wall -Werror -Wextra -I . -c ft_memcmp.c -o obj/ft_memcmp.o
+cc -Wall -Werror -Wextra -I . -c ft_strlcpy.c -o obj/ft_strlcpy.o
+cc -Wall -Werror -Wextra -I . -c ft_strnstr.c -o obj/ft_strnstr.o
+cc -Wall -Werror -Wextra -I . -c ft_strdup.c -o obj/ft_strdup.o
+cc -Wall -Werror -Wextra -I . -c ft_putchar_fd.c -o obj/ft_putchar_fd.o
+cc -Wall -Werror -Wextra -I . -c ft_putstr_fd.c -o obj/ft_putstr_fd.o
+cc -Wall -Werror -Wextra -I . -c ft_putendl_fd.c -o obj/ft_putendl_fd.o
+cc -Wall -Werror -Wextra -I . -c ft_putnbr_fd.c -o obj/ft_putnbr_fd.o
+cc -Wall -Werror -Wextra -I . -c ft_calloc.c -o obj/ft_calloc.o
+cc -Wall -Werror -Wextra -I . -c ft_itoa.c -o obj/ft_itoa.o
+cc -Wall -Werror -Wextra -I . -c ft_memmove.c -o obj/ft_memmove.o
+cc -Wall -Werror -Wextra -I . -c ft_strlcat.c -o obj/ft_strlcat.o
+cc -Wall -Werror -Wextra -I . -c ft_memcpy.c -o obj/ft_memcpy.o
+cc -Wall -Werror -Wextra -I . -c ft_striteri.c -o obj/ft_striteri.o
+cc -Wall -Werror -Wextra -I . -c ft_strmapi.c -o obj/ft_strmapi.o
+cc -Wall -Werror -Wextra -I . -c ft_strjoin.c -o obj/ft_strjoin.o
+cc -Wall -Werror -Wextra -I . -c ft_substr.c -o obj/ft_substr.o
+cc -Wall -Werror -Wextra -I . -c ft_strtrim.c -o obj/ft_strtrim.o
+cc -Wall -Werror -Wextra -I . -c ft_split.c -o obj/ft_split.o
+ar rcs libft.a obj/ft_isalpha.o obj/ft_isdigit.o obj/ft_isalnum.o obj/ft_isprint.o obj/ft_isascii.o obj/ft_strlen.o obj/ft_memset.o obj/ft_bzero.o obj/ft_strchr.o obj/ft_strrchr.o obj/ft_toupper.o obj/ft_tolower.o obj/ft_strncmp.o obj/ft_memchr.o obj/ft_atoi.o obj/ft_memcmp.o obj/ft_strlcpy.o obj/ft_strnstr.o obj/ft_strdup.o obj/ft_putchar_fd.o obj/ft_putstr_fd.o obj/ft_putendl_fd.o obj/ft_putnbr_fd.o obj/ft_calloc.o obj/ft_itoa.o obj/ft_memmove.o obj/ft_strlcat.o obj/ft_memcpy.o obj/ft_striteri.o obj/ft_strmapi.o obj/ft_strjoin.o obj/ft_substr.o obj/ft_strtrim.o obj/ft_split.o
 
 $> ls -la libft.a
--rw-r--r-- 1 fruan-ba candidate 45126 out 18 10:23 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
+-rw-r--r-- 1 fruan-ba candidate 47592 Oct 19 10:02 /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft/libft.a
 
 = Part1_functions ==============================================================
 
@@ -332,12 +374,12 @@ Diff OK :D
 = Test 7 ===================================================
 $> ./user_exe 07
 $> diff -U 3 user_output_test07 test07.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-18 10:23:37.617847266 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/user_output_test07	2024-10-19 10:02:56.079396055 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part1_functions/ft_strlcat/test07.output	2024-10-15 15:46:51.114607862 -0300$
 @@ -0,0 +1,2 @@$
 +31$
 +rrrrrrrrrrrrrrr$
-\ Nenhum caractere de nova linha no final do arquivo$
+\ No newline at end of file$
 
 Diff KO :(
 = Test 8 ===================================================
@@ -1035,43 +1077,43 @@ $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_strtrim.c main.c libft.
 = Test 1 ===================================================
 $> ./user_exe 01
 $> diff -U 3 user_output_test01 test01.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/user_output_test01	2024-10-18 10:23:48.190274404 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/user_output_test01	2024-10-19 10:03:09.547925121 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/test01.output	2024-10-15 15:46:52.026649235 -0300$
 @@ -0,0 +1,3 @@$
 +lorem $
 + ipsum 	 dolor $
 + sit 	 amet$
-\ Nenhum caractere de nova linha no final do arquivo$
+\ No newline at end of file$
 
 Diff KO :(
 = Test 2 ===================================================
 $> ./user_exe 02
 $> diff -U 3 user_output_test02 test02.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/user_output_test02	2024-10-18 10:23:48.346280707 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/user_output_test02	2024-10-19 10:03:09.779934236 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/test02.output	2024-10-15 15:46:52.030649417 -0300$
 @@ -0,0 +1 @@$
 +lorem ipsum dolor sit am$
-\ Nenhum caractere de nova linha no final do arquivo$
+\ No newline at end of file$
 
 Diff KO :(
 = Test 3 ===================================================
 $> ./user_exe 03
 $> diff -U 3 user_output_test03 test03.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/user_output_test03	2024-10-18 10:23:48.454285071 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/user_output_test03	2024-10-19 10:03:09.887938480 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/test03.output	2024-10-15 15:46:52.034649598 -0300$
 @@ -0,0 +1 @@$
 +orem ipsum dolor sit amet$
-\ Nenhum caractere de nova linha no final do arquivo$
+\ No newline at end of file$
 
 Diff KO :(
 = Test 4 ===================================================
 $> ./user_exe 04
 $> diff -U 3 user_output_test04 test04.output
---- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/user_output_test04	2024-10-18 10:23:48.566289596 -0300$
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/user_output_test04	2024-10-19 10:03:10.003943037 -0300$
 +++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_strtrim/test04.output	2024-10-15 15:46:52.042649961 -0300$
 @@ -0,0 +1 @@$
 +orem ipsum dolor sit am$
-\ Nenhum caractere de nova linha no final do arquivo$
+\ No newline at end of file$
 
 Diff KO :(
 = Test 5 ===================================================
@@ -1084,7 +1126,104 @@ Diff OK :D
 $> norminette ft_split.c | grep -E '(Error|Warning)'
 $> clang -Wextra -Wall -Werror -g3 -fsanitize=address ft_split.c main.c libft.a -o user_exe
 
-clang: error: no such file or directory: '/nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/dirlibft//ft_split.c'
+= Test 1 ===================================================
+$> ./user_exe 01
+$> diff -U 3 user_output_test01 test01.output
+
+Diff OK :D
+= Test 2 ===================================================
+$> ./user_exe 02
+$> diff -U 3 user_output_test02 test02.output
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_split/user_output_test02	2024-10-19 10:03:10.791973997 -0300$
++++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_split/test02.output	2024-10-15 15:46:51.810639437 -0300$
+@@ -0,0 +1,12 @@$
++lorem$
++ipsum$
++dolor$
++sit$
++amet,$
++consectetur$
++adipiscing$
++elit.$
++Sed$
++non$
++risus.$
++Suspendisse$
+
+Diff KO :(
+= Test 3 ===================================================
+$> ./user_exe 03
+$> diff -U 3 user_output_test03 test03.output
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_split/user_output_test03	2024-10-19 10:03:10.895978084 -0300$
++++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_split/test03.output	2024-10-15 15:46:51.814639618 -0300$
+@@ -0,0 +1,12 @@$
++lorem$
++ipsum$
++dolor$
++sit$
++amet,$
++consectetur$
++adipiscing$
++elit.$
++Sed$
++non$
++risus.$
++Suspendisse$
+
+Diff KO :(
+= Test 4 ===================================================
+$> ./user_exe 04
+$> diff -U 3 user_output_test04 test04.output
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_split/user_output_test04	2024-10-19 10:03:11.003982326 -0300$
++++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_split/test04.output	2024-10-15 15:46:51.818639799 -0300$
+@@ -0,0 +1,25 @@$
++lorem $
++psum dolor s$
++t amet, consectetur ad$
++p$
++sc$
++ng el$
++t. Sed non r$
++sus. Suspend$
++sse lectus tortor, d$
++gn$
++ss$
++m s$
++t amet, ad$
++p$
++sc$
++ng nec, ultr$
++c$
++es sed, dolor. Cras elementum ultr$
++c$
++es d$
++am. Maecenas l$
++gula massa, var$
++us a, semper congue, eu$
++smod non, m$
++.$
+
+Diff KO :(
+= Test 5 ===================================================
+$> ./user_exe 05
+$> diff -U 3 user_output_test05 test05.output
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_split/user_output_test05	2024-10-19 10:03:11.135987513 -0300$
++++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_split/test05.output	2024-10-15 15:46:51.822639981 -0300$
+@@ -0,0 +1 @@$
++lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultricies diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.$
+
+Diff KO :(
+= Test 6 ===================================================
+$> ./user_exe 06
+$> diff -U 3 user_output_test06 test06.output
+--- /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_split/user_output_test06	2024-10-19 10:03:11.247991913 -0300$
++++ /nfs/homes/fruan-ba/GitHub/MyProjectsEcole42Public/Libft_Testers/War_Machine_Tester/tests/Part2_functions/ft_split/test06.output	2024-10-15 15:46:51.826640162 -0300$
+@@ -1 +1 @@$
+-NULL$
+\ No newline at end of file$
++ok$
+
+Diff KO :(
 
 = ft_itoa.c ====================================================================
 $> norminette ft_itoa.c | grep -E '(Error|Warning)'

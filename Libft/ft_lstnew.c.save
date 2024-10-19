@@ -1,0 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/19 07:40:34 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/10/19 07:40:36 by fruan-ba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <stddef.h>
+#include "libft.h"
+
+void	ft_lstnew(void *content);
+
+/*int	main(void)
+{
+	t_list	*add_new;
+	int	content;
+
+	add_new = NULL;
+	content = 42;
+	ft_lst_new, &content);
+	printf("The value: %i.\n", *(int *)add_new->content);
+	free(add_new);
+	return (0);
+}*/
+
+void	ft_lstnew(void *content)
+{
+	t_list	*add_new;
+
+	add_new = (t_list *)malloc(sizeof(t_list));
+	add_new->content = content;
+	add_new->next = *next;
+	*next = add_new;
+}
