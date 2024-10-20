@@ -15,6 +15,13 @@
 
 # include <stddef.h>
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+
+}			t_list;
+
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -47,6 +54,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *c));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strtrim(char const *s1, char const *s2);
+char	*ft_strtrim(char const *s1, char const *set);
+t_list	*ft_lstnew(void *content);
+char	**ft_split(char const *s, char c);
 
 #endif /* LIBFT_H */

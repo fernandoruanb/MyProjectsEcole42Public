@@ -48,8 +48,15 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ft_strjoin.c\
 	$(SRCDIR)/ft_substr.c\
 	$(SRCDIR)/ft_strtrim.c\
-	$(SRCDIR)/ft_split.c
-	#$(SRCDIR)/ft_lstnew.c
+	#$(SRCDIR)/ft_split.c
+
+# BONUS SRCS
+
+BONUS_SRCS = $(SRCDIR)/ft_lstnew.c
+
+# BONUS OBJS
+
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 # Archives .o
 
@@ -64,6 +71,12 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
+# Main bonus
+
+bonus: $(NAME) $(BONUS_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_SRCS)
+	ar rcs $(NAME) $(BONUS_OBJS)
+
 # .c -> .o
 
 $(OBJDIR)/%.o:$(SRCDIR)/%.c
@@ -74,6 +87,7 @@ $(OBJDIR)/%.o:$(SRCDIR)/%.c
 
 clean:
 	rm -rf $(OBJDIR)
+	rm -rf *.o
 
 # Full clean
 
@@ -83,7 +97,3 @@ fclean: clean
 # Restart
 
 re: fclean $(NAME)
-
-# bonus
-
-bonus: fclean re
