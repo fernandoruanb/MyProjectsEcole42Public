@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <stddef.h>
+#include <stdint.h>
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -21,6 +22,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	size_t			index;
 
 	index = 0;
+	if (nmemb != 0 && size > SIZE_MAX / nmemb)
+		return (NULL);
 	length = nmemb * size;
 	buffer = malloc(length);
 	if (!buffer)

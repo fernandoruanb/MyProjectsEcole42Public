@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 //#include <stdio.h>
+#include "libft.h"
 #include <stdlib.h>
 
 int	calculate_how_many_numbers(int n);
@@ -35,7 +36,7 @@ char	*ft_itoa(int n)
 	unsigned int	number;
 
 	if (n == -2147483648)
-		return ("-2147483648");
+		return (ft_strdup("-2147483648"));
 	if (n < 0)
 		number = -n;
 	else

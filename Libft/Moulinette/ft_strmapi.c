@@ -11,11 +11,10 @@
 /* ************************************************************************** */
 
 //#include <stdio.h>
+#include "libft.h"
 #include <stdlib.h>
 
 //char	ft_toupper_i(unsigned int index, char c);
-
-size_t	ft_strlen(const char *s);
 
 /*char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
@@ -55,13 +54,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		return (c - ('a' - 'A'));
 	return (c);
 }*/
-
-size_t	ft_strlen(const char *s)
-{
-	int	length;
-
-	length = 0;
-	while (s[length] != '\0')
-		length++;
-	return (length);
-}

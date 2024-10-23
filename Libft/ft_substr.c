@@ -13,10 +13,9 @@
 //#include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include "libft.h"
 
 char	*allocate_memory(size_t len_s, unsigned int start, size_t len);
-
-size_t	ft_strlen(const char *s);
 
 /*char	*ft_substr(char const *s, unsigned int start, size_t len);
 
@@ -48,16 +47,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	buffer[index] = '\0';
 	return (buffer);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	length;
-
-	length = 0;
-	while (s[length])
-		length++;
-	return (length);
 }
 
 char	*allocate_memory(size_t len_s, unsigned int start, size_t len)

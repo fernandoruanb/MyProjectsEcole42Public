@@ -12,8 +12,7 @@
 
 //#include <stdio.h>
 #include <string.h>
-
-size_t	ft_strlen(const char *s);
+#include "libft.h"
 
 /*char	*ft_strchr(const char *s, int c);
 
@@ -49,14 +48,4 @@ char	*ft_strchr(const char *s, int c)
 		index++;
 	}
 	return (NULL);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	length;
-
-	length = 0;
-	while (s[length] != '\0')
-		length++;
-	return (length);
 }

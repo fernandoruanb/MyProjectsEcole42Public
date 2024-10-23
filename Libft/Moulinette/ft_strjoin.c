@@ -13,8 +13,7 @@
 //#include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
-
-size_t	ft_strlen(const char *s);
+#include "libft.h"
 
 /*char	*ft_strjoin(char const *s1, char const *s2);
 
@@ -57,14 +56,4 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	}
 	buffer[index + count] = '\0';
 	return (buffer);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	length;
-
-	length = 0;
-	while (s[length] != '\0')
-		length++;
-	return (length);
 }

@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-
-size_t	ft_strlen(const char *s);
+/*#include <stdio.h>
+#include <string.h>*/
+#include <libft.h>
 
 char	*ft_strrchr(const char *s, int c);
 
@@ -47,14 +46,4 @@ char	*ft_strrchr(const char *s, int c)
 		length--;
 	}
 	return (NULL);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	length;
-
-	length = 0;
-	while (s[length] != '\0')
-		length++;
-	return (length);
 }

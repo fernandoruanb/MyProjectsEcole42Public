@@ -13,8 +13,8 @@
 /*#include <stdio.h>
 #include <stdlib.h>*/
 #include <string.h>
+#include "libft.h"
 
-size_t	ft_strlen(const char *s);
 /*
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
@@ -45,14 +45,4 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	}
 	dst[index] = '\0';
 	return (len_src);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	length;
-
-	length = 0;
-	while (s[length] != '\0')
-		length++;
-	return (length);
 }

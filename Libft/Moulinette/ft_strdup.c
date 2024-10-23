@@ -13,8 +13,7 @@
 /*#include <string.h>
 #include <unistd.h>*/
 #include <stdlib.h>
-
-size_t	ft_strlen(const char *s);
+#include "libft.h"
 
 /*char	*ft_strdup(const char *s);
 
@@ -56,6 +55,8 @@ char	*ft_strdup(const char *s)
 	index = 0;
 	length = ft_strlen(s);
 	buffer = (char *)malloc(length + 1);
+	if (!buffer)
+		return (NULL);
 	while (s[index] != '\0')
 	{
 		buffer[index] = s[index];
@@ -63,14 +64,4 @@ char	*ft_strdup(const char *s)
 	}
 	buffer[index] = '\0';
 	return (buffer);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	int	length;
-
-	length = 0;
-	while (s[length] != '\0')
-		length++;
-	return (length);
 }
