@@ -1,1 +1,0 @@
-cc -Wall -Werror -Wextra "test_function.c" -I ../../libft.h -L ../.. -lft -o test_isalpha
