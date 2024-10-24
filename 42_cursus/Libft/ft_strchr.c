@@ -39,6 +39,8 @@ char	*ft_strchr(const char *s, int c)
 		return (NULL);
 	length = ft_strlen(s);
 	index = 0;
+	if (c > 255)
+		c = c % 256;
 	if (c == '\0')
 		return ((char *)&s[length]);
 	while (s[index] != '\0')
