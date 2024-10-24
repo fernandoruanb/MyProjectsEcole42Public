@@ -15,7 +15,7 @@
 #include <stddef.h>
 #include "libft.h"
 
-char	*allocate_memory(size_t len_s, unsigned int start, size_t len);
+char	*allocate_memory(size_t len);
 
 /*char	*ft_substr(char const *s, unsigned int start, size_t len);
 
@@ -37,12 +37,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	index;
 
 	if (!s)
-		return (NULL);
+		return (ft_calloc(1, sizeof(char)));
 	len_s = ft_strlen(s);
-	if (len_s < len || start > len_s)
-		return (NULL);
+	if (start >= len_s)
+		return (ft_calloc(1, sizeof(char)));
+	if (start + len > len_s)
+		len = len_s - start;
 	index = 0;
-	buffer = allocate_memory(len_s, start, len);
+	buffer = allocate_memory(len);
+	if (!buffer)
+		return (NULL);
 	while (index < len)
 	{
 		buffer[index] = s[start];
@@ -53,22 +57,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (buffer);
 }
 
-char	*allocate_memory(size_t len_s, unsigned int start, size_t len)
+char	*allocate_memory(size_t len)
 {
 	char	*buffer;
-	size_t	size;
 
-	if (start > len_s)
-	{
-		buffer = (char *)malloc(1);
-		buffer[0] = '\0';
-		return (buffer);
-	}
-	size = len_s - start;
-	if (size < len)
-		buffer = (char *)malloc(size + 1);
-	else
-		buffer = (char *)malloc(len + 1);
+	buffer = (char *)malloc(len + 1);
 	if (!buffer)
 		return (NULL);
 	return (buffer);

@@ -33,7 +33,7 @@ char	*ft_strtrim(const char *s1, const char *set)
 	char	*verificate_valid_answer;
 
 	if (!s1 || !set)
-		return (NULL);
+		return (ft_calloc(1, sizeof(char)));
 	start = 0;
 	end = ft_strlen(s1);
 	while (s1[start] && ft_strchr(set, s1[start]))
@@ -42,6 +42,6 @@ char	*ft_strtrim(const char *s1, const char *set)
 		end--;
 	verificate_valid_answer = ft_substr(s1, start, end - start);
 	if (!verificate_valid_answer)
-		return (NULL);
+		return (ft_calloc(1, sizeof(char)));
 	return (verificate_valid_answer);
 }

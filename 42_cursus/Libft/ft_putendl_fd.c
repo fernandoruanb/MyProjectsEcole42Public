@@ -41,6 +41,8 @@ void	ft_putendl_fd(char *s, int fd)
 {
 	int	index;
 
+	if (!s || fd < 0)
+		return ;
 	index = 0;
 	while (s[index] != '\0')
 	{

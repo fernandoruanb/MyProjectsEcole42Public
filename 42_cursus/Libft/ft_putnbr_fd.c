@@ -40,20 +40,19 @@ void	ft_putnbr_fd(int n, int fd);
 
 void	ft_putnbr_fd(int n, int fd)
 {
+	long	num;
 	char	digit;
 
-	if (n == -2147483648)
-	{
-		write(fd, "-2147483648", 11);
+	if (fd < 0)
 		return ;
-	}
+	num = n;
 	if (n < 0)
 	{
 		write(fd, "-", 1);
-		n = -n;
+		num = -num;
 	}
-	if (n >= 10)
-		ft_putnbr_fd(n / 10, fd);
-	digit = (n % 10) + '0';
+	if (num >= 10)
+		ft_putnbr_fd((int)(num / 10), fd);
+	digit = (num % 10) + '0';
 	write(fd, &digit, 1);
 }

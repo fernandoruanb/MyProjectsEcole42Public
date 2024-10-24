@@ -35,10 +35,10 @@ char	*ft_strchr(const char *s, int c)
 	int	index;
 	int	length;
 
-	length = ft_strlen(s);
-	index = 0;
 	if (!s)
 		return (NULL);
+	length = ft_strlen(s);
+	index = 0;
 	if (c == '\0')
 		return ((char *)&s[length]);
 	while (s[index] != '\0')
