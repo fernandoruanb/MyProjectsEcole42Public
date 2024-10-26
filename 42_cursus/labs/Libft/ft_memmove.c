@@ -38,8 +38,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	const unsigned char	*ptr2;
 	size_t				index;
 
-	if (!dest || !src)
-		return (0);
+	if (!dest && !src)
+		return (NULL);
 	ptr1 = (unsigned char *)dest;
 	ptr2 = (const unsigned char *)src;
 	index = 0;
