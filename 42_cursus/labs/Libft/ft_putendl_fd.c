@@ -1,51 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 09:37:33 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/12 09:37:35 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/10/14 12:51:23 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/10/14 12:51:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
-#include <string.h>
-#include "libft.h"
+//#include <fcntl.h>
+#include <unistd.h>
 
-/*char	*ft_strchr(const char *s, int c);
+/*void	ft_putendl_fd(char *s, int fd);
 
 int	main(int argc, char **argv)
 {
-	char	*result;
-	char	*result2;
+	int	file_descriptor;
 
-	if (argc < 3)
+	if (argc < 2)
+	{
+		write(1, "File name missing.\n", 19);
 		return (1);
-	result = ft_strchr(argv[1], argv[2][0]);
-	result2 = strchr(argv[1], argv[2][0]);
-	printf("(MY FUNCTION) %s.\n", result);
-	printf("(ORIGINAL) %s.\n", result2);
+	}
+	if (argc > 3)
+	{
+		write(1, "Too many arguments.\n", 20);
+		return (1);
+	}
+	file_descriptor = open(argv[1], O_WRONLY | O_APPEND);
+	if (file_descriptor == -1)
+		return (1);
+	ft_putendl_fd(argv[2], file_descriptor);
+	close(file_descriptor);
 	return (0);
 }*/
 
-char	*ft_strchr(const char *s, int c)
+void	ft_putendl_fd(char *s, int fd)
 {
 	int	index;
-	int	length;
 
-	length = ft_strlen(s);
+	if (!s || fd < 0)
+		return ;
 	index = 0;
-	if (c > 255)
-		c = c % 256;
-	if (c == '\0')
-		return ((char *)&s[length]);
 	while (s[index] != '\0')
 	{
-		if (s[index] == (unsigned char)c)
-			return ((char *)&s[index]);
+		write(fd, &s[index], 1);
 		index++;
 	}
-	return (NULL);
+	write(fd, "\n", 1);
 }

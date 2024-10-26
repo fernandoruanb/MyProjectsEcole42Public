@@ -39,8 +39,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	index = 0;
 	length = ft_strlen(s);
 	buffer = (char *)malloc(length + 1);
-	if (!buffer)
-		return (NULL);
 	while (s[index] != '\0')
 	{
 		buffer[index] = f(index, s[index]);

@@ -1,50 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 09:37:33 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/12 09:37:35 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/10/13 10:43:22 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/10/13 10:43:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
+/*#include <stdio.h>
 #include <string.h>
-#include "libft.h"
+#include <stdlib.h>*/
+#include <stddef.h>
 
-/*char	*ft_strchr(const char *s, int c);
+/*void	*ft_memchr(const void *s, int c, size_t n);
 
 int	main(int argc, char **argv)
 {
 	char	*result;
 	char	*result2;
 
-	if (argc < 3)
+	if (argc < 2)
 		return (1);
-	result = ft_strchr(argv[1], argv[2][0]);
-	result2 = strchr(argv[1], argv[2][0]);
+	result = ft_memchr(argv[1], argv[2][0], atoi(argv[3]));
+	result2 = memchr(argv[1], argv[2][0], atoi(argv[3]));
 	printf("(MY FUNCTION) %s.\n", result);
 	printf("(ORIGINAL) %s.\n", result2);
 	return (0);
 }*/
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	index;
-	int	length;
+	const unsigned char	*ptr;
+	size_t				index;
 
-	length = ft_strlen(s);
 	index = 0;
-	if (c > 255)
-		c = c % 256;
-	if (c == '\0')
-		return ((char *)&s[length]);
-	while (s[index] != '\0')
+	ptr = (const unsigned char *)s;
+	while (index < n)
 	{
-		if (s[index] == (unsigned char)c)
-			return ((char *)&s[index]);
+		if (ptr[index] == (unsigned char)c)
+			return ((char *)&ptr[index]);
 		index++;
 	}
 	return (NULL);

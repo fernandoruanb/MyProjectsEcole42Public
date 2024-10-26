@@ -1,51 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 09:37:33 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/12 09:37:35 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/10/12 08:16:31 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/10/12 08:16:32 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
+/*#include <stdio.h>
 #include <string.h>
-#include "libft.h"
+#include <stdlib.h>*/
+#include <stddef.h>
 
-/*char	*ft_strchr(const char *s, int c);
+/*void	*ft_memset(void *s, int c, size_t n);
 
 int	main(int argc, char **argv)
 {
 	char	*result;
-	char	*result2;
+	//char	*result2;
 
-	if (argc < 3)
+	if (argc < 4)
 		return (1);
-	result = ft_strchr(argv[1], argv[2][0]);
-	result2 = strchr(argv[1], argv[2][0]);
+	result = ft_memset(argv[1], argv[2][0], atoi(argv[3]));
+	//result2 = memset(argv[1], argv[2][0], atoi(argv[3]));
 	printf("(MY FUNCTION) %s.\n", result);
-	printf("(ORIGINAL) %s.\n", result2);
+	//printf("(ORIGINAL) %s.\n", result2);
 	return (0);
 }*/
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	int	index;
-	int	length;
+	unsigned char	*ptr;
+	size_t			index;
 
-	length = ft_strlen(s);
+	ptr = (unsigned char *)s;
 	index = 0;
-	if (c > 255)
-		c = c % 256;
-	if (c == '\0')
-		return ((char *)&s[length]);
-	while (s[index] != '\0')
+	while (index < n)
 	{
-		if (s[index] == (unsigned char)c)
-			return ((char *)&s[index]);
+		ptr[index] = (unsigned char)c;
 		index++;
 	}
-	return (NULL);
+	return (s);
 }

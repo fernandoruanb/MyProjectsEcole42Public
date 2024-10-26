@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include <stdlib.h>
+#include <stdlib.h>
 #include <string.h>
-#include <stdio.h>*/
+#include <stdio.h>
 #include <stddef.h>
-#include "libft.h"
 
-/*void	*ft_memmove(void *dest, const void *src, size_t n);
+void	*ft_memmove(void *dest, const void *src, size_t n);
 
 int	main(int argc, char **argv)
 {
@@ -30,19 +29,17 @@ int	main(int argc, char **argv)
 	printf("(MY FUNCTION) %s.\n", result);
 	printf("(ORIGINAL) %s.\n", result2);
 	return (0);
-}*/
+}
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char		*ptr1;
 	const unsigned char	*ptr2;
-	size_t				index;
 
-	if (!dest && !src)
-		return (NULL);
+	if (!dest || !src)
+		return (0);
 	ptr1 = (unsigned char *)dest;
 	ptr2 = (const unsigned char *)src;
-	index = 0;
 	if (ptr1 > ptr2 && ptr1 < (ptr2 + n))
 	{
 		while (n > 0)
@@ -52,6 +49,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		}
 	}
 	else
-		dest = ft_memcpy(dest, src, n);
+	{
+		*ptr1++ = *ptr2++;
+	}
 	return (dest);
 }

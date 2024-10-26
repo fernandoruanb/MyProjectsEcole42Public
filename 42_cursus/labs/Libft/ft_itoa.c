@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 17:10:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/15 17:10:50 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/10/15 12:23:53 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/10/15 12:23:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "libft.h"
 #include <stdlib.h>
 
-//char	ft_toupper_i(unsigned int index, char c);
+int	calculate_how_many_numbers(int n);
 
-/*char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+/*char	*ft_itoa(int n);
 
 int	main(int argc, char **argv)
 {
@@ -24,35 +24,49 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (1);
-	printf("A string bonita para teste foi: %s.\n", argv[1]);
-	result = ft_strmapi(argv[1], &ft_toupper_i);
+	result = ft_itoa(atoi(argv[1]));
 	printf("(MY FUNCTION) %s.\n", result);
 	return (0);
 }*/
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_itoa(int n)
 {
-	unsigned int	index;
-	unsigned int	length;
 	char			*buffer;
+	int				length;
+	unsigned int	number;
 
-	index = 0;
-	length = ft_strlen(s);
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	if (n < 0)
+		number = -n;
+	else
+		number = n;
+	length = calculate_how_many_numbers(n);
 	buffer = (char *)malloc(length + 1);
 	if (!buffer)
 		return (NULL);
-	while (s[index] != '\0')
+	buffer[length] = '\0';
+	while (length--)
 	{
-		buffer[index] = f(index, s[index]);
-		index++;
+		buffer[length] = (number % 10) + '0';
+		number /= 10;
 	}
-	buffer[index] = '\0';
+	if (n < 0)
+		buffer[0] = '-';
 	return (buffer);
 }
 
-/*char	ft_toupper_i(unsigned int index, char c)
+int	calculate_how_many_numbers(int n)
 {
-	if ((index % 2 == 0) && (c >= 'a' && c <= 'z'))
-		return (c - ('a' - 'A'));
-	return (c);
-}*/
+	int	length;
+
+	length = 0;
+	if (n <= 0)
+		length = 1;
+	while (n)
+	{
+		n /= 10;
+		length++;
+	}
+	return (length);
+}
