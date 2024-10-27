@@ -1,61 +1,103 @@
-# Name of Library or Program
+# Name of the program or library
 
 NAME = libft.a
-
-# C archives
-
-MANDATORY_SRCS = \
-	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
-	ft_isdigit.c ft_isprint.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c \
-	ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-	ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c \
-	ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
-	ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_itoa.c
-
-# Bonus SRCS
-
-BONUS_SRCS = \
-	ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
-	ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
-	ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
-
-# Create all .o
-
-MANDATORY_OBJS = $(MANDATORY_SRCS:.c=.o)
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 # Compilers and flags
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Werror -Wextra
 
-# Main all
+# Directories
+
+SRCDIR = .
+INCDIR = .
+
+# Archives .c
+
+SRCS =  $(SRCDIR)/ft_isalpha.c\
+	$(SRCDIR)/ft_isdigit.c\
+	$(SRCDIR)/ft_isalnum.c\
+	$(SRCDIR)/ft_isprint.c\
+	$(SRCDIR)/ft_isascii.c\
+	$(SRCDIR)/ft_strlen.c\
+	$(SRCDIR)/ft_memset.c\
+	$(SRCDIR)/ft_bzero.c\
+	$(SRCDIR)/ft_strchr.c\
+	$(SRCDIR)/ft_strrchr.c\
+	$(SRCDIR)/ft_toupper.c\
+	$(SRCDIR)/ft_tolower.c\
+	$(SRCDIR)/ft_strncmp.c\
+	$(SRCDIR)/ft_memchr.c\
+	$(SRCDIR)/ft_atoi.c\
+	$(SRCDIR)/ft_memcmp.c\
+	$(SRCDIR)/ft_strlcpy.c\
+	$(SRCDIR)/ft_strnstr.c\
+	$(SRCDIR)/ft_strdup.c\
+	$(SRCDIR)/ft_putchar_fd.c\
+	$(SRCDIR)/ft_putstr_fd.c\
+	$(SRCDIR)/ft_putendl_fd.c\
+	$(SRCDIR)/ft_putnbr_fd.c\
+	$(SRCDIR)/ft_calloc.c\
+	$(SRCDIR)/ft_itoa.c\
+	$(SRCDIR)/ft_memmove.c\
+	$(SRCDIR)/ft_strlcat.c\
+	$(SRCDIR)/ft_memcpy.c\
+	$(SRCDIR)/ft_striteri.c\
+	$(SRCDIR)/ft_strmapi.c\
+	$(SRCDIR)/ft_strjoin.c\
+	$(SRCDIR)/ft_substr.c\
+	$(SRCDIR)/ft_strtrim.c\
+	$(SRCDIR)/ft_split.c
+
+# BONUS SRCS
+
+BONUS_SRCS = 	$(SRCDIR)/ft_lstnew_bonus.c\
+		$(SRCDIR)/ft_lstadd_front_bonus.c\
+		$(SRCDIR)/ft_lstsize_bonus.c\
+		$(SRCDIR)/ft_lstlast_bonus.c\
+		$(SRCDIR)/ft_lstadd_back_bonus.c\
+		$(SRCDIR)/ft_lstdelone_bonus.c\
+		$(SRCDIR)/ft_lstclear_bonus.c\
+		$(SRCDIR)/ft_lstiter_bonus.c\
+		$(SRCDIR)/ft_lstmap_bonus.c
+
+# Archives .o
+
+OBJS = $(SRCS:$(SRCDIR)/%.c=%.o)
+BONUS_OBJS = $(BONUS_SRCS:$(SRCDIR)/%.c=%.o)
+
+# Main
+
 all: $(NAME)
 
-# Dependecy of all
+# Main rule
 
-$(NAME): $(MANDATORY_OBJS)
-	ar rcs $@ $^
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-# make bonus
+# Main bonus
 
 bonus: $(BONUS_OBJS)
-	ar rcs $(NAME) $^
+	ar rcs $(NAME) $(BONUS_OBJS)
 
-# Todos os .o para .c
+# .c -> .o
 
-%.o: %.c libft.h
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
 
-# make clean
+# Clear archives
+
 clean:
-	rm -f $(MANDATORY_OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 
-# make fclean
+# Full clean
+
 fclean: clean
 	rm -f $(NAME)
 
-# make re
-re: fclean all
+# Restart
+
+re: fclean $(NAME)
 
 .PHONY: all clean fclean re bonus
+

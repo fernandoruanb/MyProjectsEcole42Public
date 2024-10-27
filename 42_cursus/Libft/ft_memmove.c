@@ -35,13 +35,11 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char		*ptr1;
 	const unsigned char	*ptr2;
-	size_t				index;
 
 	if (!dest && !src)
 		return (NULL);
 	ptr1 = (unsigned char *)dest;
 	ptr2 = (const unsigned char *)src;
-	index = 0;
 	if (ptr1 > ptr2 && ptr1 < (ptr2 + n))
 	{
 		while (n > 0)
