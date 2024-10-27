@@ -12,7 +12,6 @@
 
 //#include <stdio.h>
 #include "libft.h"
-#include <stdlib.h>
 
 //char	ft_toupper_i(unsigned int index, char c);
 

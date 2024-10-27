@@ -12,7 +12,6 @@
 
 #include "libft.h"
 //#include <stdio.h>
-#include <stdlib.h>
 
 //void	del_content(void *content);
 

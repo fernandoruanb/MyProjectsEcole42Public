@@ -13,7 +13,7 @@
 /*#include <stdio.h>
 #include <stdlib.h>*/
 
-void	count_signal(char c, int *signal, int *count);
+static void	count_signal(char c, int *signal, int *count);
 
 /*int	ft_atoi(const char *nptr);
 
@@ -59,7 +59,7 @@ int	ft_atoi(const char *nptr)
 	return (result * signal);
 }
 
-void	count_signal(char c, int *signal, int *count)
+static void	count_signal(char c, int *signal, int *count)
 {
 	if (c == '-' && *count == 0)
 		*signal = -1;

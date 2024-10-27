@@ -11,11 +11,9 @@
 /* ************************************************************************** */
 
 //#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
 #include "libft.h"
 
-char	*allocate_memory(size_t len);
+static char	*allocate_memory(size_t len);
 
 /*char	*ft_substr(char const *s, unsigned int start, size_t len);
 
@@ -57,7 +55,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (buffer);
 }
 
-char	*allocate_memory(size_t len)
+static char	*allocate_memory(size_t len)
 {
 	char	*buffer;
 

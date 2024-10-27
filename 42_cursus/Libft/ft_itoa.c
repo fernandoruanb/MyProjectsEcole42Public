@@ -12,9 +12,8 @@
 
 //#include <stdio.h>
 #include "libft.h"
-#include <stdlib.h>
 
-int	calculate_how_many_numbers(int n);
+static int	calculate_how_many_numbers(int n);
 
 /*char	*ft_itoa(int n);
 
@@ -56,7 +55,7 @@ char	*ft_itoa(int n)
 	return (buffer);
 }
 
-int	calculate_how_many_numbers(int n)
+static int	calculate_how_many_numbers(int n)
 {
 	int	length;
 

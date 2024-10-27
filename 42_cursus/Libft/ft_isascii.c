@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
-#include <ctype.h>
+/*#include <stdio.h>
+#include <ctype.h>*/
 
 //int	ft_isascii(int c);
 

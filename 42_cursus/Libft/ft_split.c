@@ -63,7 +63,7 @@ static int	count_words(const char *s, char c)
 	return (count);
 }
 
-void	fill_arr(int size, const char *s, char c, char ***str_list)
+static void	fill_arr(int size, const char *s, char c, char ***str_list)
 {
 	int		counter;
 	int		index;
