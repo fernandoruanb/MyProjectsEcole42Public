@@ -72,11 +72,10 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	free(content);
 }
 
-void	*duplicate_content(void *content)
+static void	*duplicate_content(void *content)
 {
 	void	*new_content;
 
 	new_content = content;
 	return (new_content);
-}
-*/
+}*/

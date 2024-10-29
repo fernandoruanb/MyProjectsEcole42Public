@@ -77,7 +77,7 @@ $(NAME): $(OBJS)
 
 # Main bonus
 
-bonus: $(BONUS_OBJS)
+bonus: $(NAME) $(BONUS_OBJS)
 	ar rcs $(NAME) $(BONUS_OBJS)
 
 # .c -> .o
