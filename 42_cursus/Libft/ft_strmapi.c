@@ -13,7 +13,7 @@
 //#include <stdio.h>
 #include "libft.h"
 
-//char	ft_toupper_i(unsigned int index, char c);
+//static char	ft_toupper_i(unsigned int index, char c);
 
 /*char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
@@ -49,7 +49,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	return (buffer);
 }
 
-/*char	ft_toupper_i(unsigned int index, char c)
+/*static char	ft_toupper_i(unsigned int index, char c)
 {
 	if ((index % 2 == 0) && (c >= 'a' && c <= 'z'))
 		return (c - ('a' - 'A'));

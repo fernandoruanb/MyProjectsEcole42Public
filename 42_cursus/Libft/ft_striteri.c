@@ -12,7 +12,7 @@
 
 /*#include <stdio.h>
 
-void	ft_toupper_i(unsigned int index, char *c);
+static void	ft_toupper_i(unsigned int index, char *c);
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
@@ -40,7 +40,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 	}
 }
 
-/*void	ft_toupper_i(unsigned int index, char *c)
+/*static void	ft_toupper_i(unsigned int index, char *c)
 {
 	if (index % 2 == 0 && (*c >= 'a' && *c <= 'z'))
 		*c = *c - ('a' - 'A');

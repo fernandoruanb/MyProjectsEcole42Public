@@ -11,6 +11,25 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+//#include <stdio.h>
+
+/*void	*ft_calloc(size_t nmemb, size_t size);
+
+int	main(int argc, char **argv)
+{
+	char	*buffer;
+	int	nmemb;
+	int	size;
+
+	nmemb = atoi(argv[1]);
+	size = atoi(argv[2]);
+	buffer = ft_calloc(nmemb, size);
+	if (!buffer)
+		printf("Error!!! Buffer não criado.\n");
+	else
+		printf("Buffer criado e zerado com sucesso.\n");
+	return (0);
+}*/
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <fcntl.h>
-#include "libft.h"
+/*#include <fcntl.h>
+#include "libft.h"*/
 #include <unistd.h>
 
-void	ft_putnbr_fd(int n, int fd);
+/*void	ft_putnbr_fd(int n, int fd);
 
-/*int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int	file_descriptor;
 
@@ -43,7 +43,7 @@ void	ft_putnbr_fd(int n, int fd)
 	long	num;
 	char	digit;
 
-	if (fd < 0)
+	if (fd == -1)
 		return ;
 	num = n;
 	if (n < 0)

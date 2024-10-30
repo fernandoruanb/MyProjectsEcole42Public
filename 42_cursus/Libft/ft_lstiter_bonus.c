@@ -13,7 +13,7 @@
 #include "libft.h"
 //#include <stdio.h>
 
-/*void	show_content(void *content);
+/*static void	show_content(void *content);
 
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
@@ -46,7 +46,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 	}
 }
 
-/*void	show_content(void *content)
+/*static void	show_content(void *content)
 {
 	printf("O conteúdo do meu nó é: %s.\n", (char *)content);
 }*/

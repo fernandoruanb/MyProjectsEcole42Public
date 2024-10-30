@@ -13,7 +13,7 @@
 #include "libft.h"
 //#include <stdio.h>
 
-/*void	*duplicate_content(void *content);
+/*static void	*duplicate_content(void *content);
 
 static void	del_content(void *content);*/
 

@@ -13,9 +13,9 @@
 //#include <stdio.h>
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
+/*size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
-/*int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int	result;
 
