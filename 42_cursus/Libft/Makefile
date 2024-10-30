@@ -66,6 +66,12 @@ BONUS_SRCS = 	$(SRCDIR)/ft_lstnew_bonus.c\
 OBJS = $(SRCS:$(SRCDIR)/%.c=%.o)
 BONUS_OBJS = $(BONUS_SRCS:$(SRCDIR)/%.c=%.o)
 
+# Check bonus relink
+
+ifeq ($(findstring bonus,$(MAKECMDGOALS)),bonus)
+	OBJS += $(BONUS_OBJS)
+endif
+
 # Main
 
 all: $(NAME)
@@ -77,8 +83,7 @@ $(NAME): $(OBJS)
 
 # Main bonus
 
-bonus: $(NAME) $(BONUS_OBJS)
-	ar rcs $(NAME) $(BONUS_OBJS)
+bonus: $(NAME)
 
 # .c -> .o
 
