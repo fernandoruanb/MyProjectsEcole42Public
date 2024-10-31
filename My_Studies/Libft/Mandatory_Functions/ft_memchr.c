@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 12:38:15 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/22 16:00:30 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/10/30 14:28:54 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/10/30 14:43:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>*/
-#include <stddef.h>
+/*#include <stdio.h>
+#include <string.h>*/
 #include "libft.h"
 
-/*void	*ft_memmove(void *dest, const void *src, size_t n);
+/*void	*ft_memchr(const void *s, int c, size_t n);
 
 int	main(int argc, char **argv)
 {
@@ -25,31 +23,27 @@ int	main(int argc, char **argv)
 
 	if (argc < 4)
 		return (1);
-	result = ft_memmove(argv[1], argv[2], atoi(argv[3]));
-	result2 = memmove(argv[1], argv[2], atoi(argv[3]));
+	result = ft_memchr(argv[1], argv[2][0], argv[3][0]);
+	result2 = memchr(argv[1], argv[2][0], argv[3][0]);
 	printf("(MY FUNCTION) %s.\n", result);
 	printf("(ORIGINAL) %s.\n", result2);
 	return (0);
 }*/
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char		*ptr1;
-	const unsigned char	*ptr2;
+	size_t			index;
+	unsigned char	*ptr;
+	size_t			length;
 
-	if (!dest && !src)
-		return (NULL);
-	ptr1 = (unsigned char *)dest;
-	ptr2 = (const unsigned char *)src;
-	if (ptr1 > ptr2 && ptr1 < (ptr2 + n))
+	index = 0;
+	ptr = (unsigned char *)s;
+	length = ft_strlen(s);
+	while (index < n)
 	{
-		while (n > 0)
-		{
-			ptr1[n - 1] = ptr2[n - 1];
-			n--;
-		}
+		if (ptr[index] == (unsigned char)c)
+			return ((char *)&ptr[index]);
+		index++;
 	}
-	else
-		dest = ft_memcpy(dest, src, n);
-	return (dest);
+	return (NULL);
 }
