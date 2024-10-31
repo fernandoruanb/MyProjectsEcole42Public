@@ -11,12 +11,10 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdlib.h>
-//#include <stdio.h>
+/*#include <stdlib.h>
+#include <stdio.h>*/
 
-/*static void	del_content(void *content);
-
-void	ft_lstclear(t_list **lst, void (*del)(void *));
+/*void	ft_lstclear(t_list **lst, void (*del)(void *));
 
 int	main(int argc, char **argv)
 {
@@ -35,10 +33,13 @@ int	main(int argc, char **argv)
 	head = ft_lstnew(content);
 	new_node = ft_lstnew(content2);
 	new_node2 = ft_lstnew(content3);
+	head->next = new_node;
+	new_node->next = new_node2;
+	new_node2->next = NULL;
 	printf("O conteúdo do primeiro nó: %s.\n", (char *)head->content);
 	printf("Conteúdo do segundo nó: %s.\n", (char *)new_node->content);
 	printf("O conteúdo do terceiro nó: %s.\n", (char *)new_node2->content);
-	ft_lstclear(&head, del_content);
+	ft_lstclear(&head, NULL);
 	if (!head)
 		printf("A lista foi completamente apagada.\n");
 	else
@@ -63,8 +64,3 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		*lst = NULL;
 	}
 }
-
-/*static void	del_content(void *content)
-{
-	free(content);
-}*/

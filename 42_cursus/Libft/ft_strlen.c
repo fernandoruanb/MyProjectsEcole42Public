@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (1);
 	result = ft_strlen(argv[1]);
-	result2 = strlen(argv[2]);
+	result2 = strlen(argv[1]);
 	printf("(MY FUNCTION) %i.\n", result);
 	printf("(ORIGINAL) %i.\n", result2);
 	return (0);
