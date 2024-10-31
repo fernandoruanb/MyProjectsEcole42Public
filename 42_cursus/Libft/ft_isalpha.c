@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (1);
 	result = ft_isalpha(argv[1][0]);
-	result2 = ft_isalpha(argv[1][0]);
+	result2 = isalpha(argv[1][0]);
 	printf("(MY FUNCTION) %i.\n", result);
 	printf("(ORIGINAL) %i.\n", result2);
 	return (0);
