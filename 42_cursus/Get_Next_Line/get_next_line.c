@@ -5,64 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 11:24:10 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/31 11:24:14 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/01 12:19:08 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/01 14:17:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "get_next_line.h"
+
+//static int	find_next_line(char *buffer);
 
 char	*get_next_line(int fd);
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv):
 {
-	char	buffer[1024];
 	int	file_descriptor;
-	ssize_t	bytes_read;
+	char	*buffer;
 
 	if (argc < 2)
-	{
-		write(1, "File name missing.\n", 19);
 		return (1);
-	}
-	if (argc > 2)
-	{
-		write(1, "Too few arguments.\n", 19);
+	file_descriptor = open(argv[1], O_RDONLY);
+	if (file_descriptor == -1)
 		return (1);
-	}
-	file_descriptor = atoi(argv[1]);
-	bytes_read = read(file_descriptor, buffer, sizeof(buffer));
-	while (bytes_read > 0)
-	{
-		write(1, &buffer, sizeof(buffer)));
-		bytes_read = read(file_descriptor, buffer, sizeof(buffer)-1);
-	}
-	close (file_descriptor);
+	buffer = get_next_line(file_descriptor);
+	printf("O resultado foi: %s.\n", buffer);
 	return (0);
 }
 
 char	*get_next_line(int fd)
 {
-	int	count;
-	int	bytes_read;
-	char	buffer[1024];
+	ssize_t	bytes_read;
+	static char	buffer[BUFFER_SIZE + 1];
 	int	index;
-	char	*temp[1024];
+	char	*line;
 
-	if (fd == -1)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	bytes_read = read(fd, buffer, sizeof(buffer));
 	index = 0;
-	while (index < bytes_read)
+	bytes_read = read(fd, buffer, BUFFER_SIZE);
+	if (bytes_read == -1 || bytes_read == 0)
+		return (NULL);
+	buffer[bytes_read] = '\0';
+	while (buffer[index] != '\n' && buffer[index] != '\0' && index < BUFFER_SIZE)
+	{
+		line = buffer[index];
+		index++;
+	}
+	return (buffer);
+}
+
+/*static int	find_next_line(char *buffer)
+{
+	int	index;
+
+	index = 0;
+	while (buffer[index] != '\0')
 	{
 		if (buffer[index] == '\n')
-			break;
-		else if (buffer[index] == '\0')
-			break;
-		index++
+			return (index);
+		index++;
 	}
-	temp = read(fd, buffer, sizeof(index));
-	write(1, buffer, sizeof(temp));
-}
+	return (index);
+}*/
