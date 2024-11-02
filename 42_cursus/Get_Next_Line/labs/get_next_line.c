@@ -16,8 +16,9 @@ char	*get_next_line(int fd);
 
 char	*get_next_line(int fd)
 {
+	static char	*remainder;
 	ssize_t	bytes_read;
-	static	buffer[BUFFER_SIZE + 1];
+	char	buffer[BUFFER_SIZE + 1];
 
 	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
