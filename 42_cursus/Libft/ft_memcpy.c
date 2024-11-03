@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+/*#include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
+#include <stdlib.h>*/
 #include "libft.h"
 
 /*void	*ft_memcpy(void *dest, const void *src, size_t n);
@@ -49,3 +49,13 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
+
+/*int	main(void)
+{
+	char	dest[50] = "Fernando";
+	char	*result;
+
+	result = ft_memcpy(dest + 1, dest, 8);
+	printf("What happened? %s.\n", result);
+	return (0);
+}*/

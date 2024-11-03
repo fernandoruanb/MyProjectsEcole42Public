@@ -52,3 +52,14 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		dest = ft_memcpy(dest, src, n);
 	return (dest);
 }
+
+/*int	main(void)
+{
+	char	dest[50] = "Fernando";
+	char	*result;
+
+	result = ft_memmove(dest + 1, dest, 8);
+	printf("Wow! That's work perfectly!!! %s.\n", result);
+	return (0);
+}
+*/
