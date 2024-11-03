@@ -1,0 +1,161 @@
+(SEM O BÔNUS).
+VirtualBox
+
+1 - Clique em Novo
+2 - Dê um Nome para o sistema como Born2BeRoot
+3 - Tamanho de memória RAM recomendado é 1024MB (pode ser mais).
+4 - Criar um novo disco rígido virtual
+5 - Virtual Disk Image
+6 - Disco dinamicamente alocado
+7 - Aloque o espaço em disco. 12GB foi o suficiente. (mais)
+
+---------------------------------------------
+PERGUNTAS SOBRE ESSA PRIMEIRA PARTE
+
+---------------------------------------------
+
+VirtualBox externo
+8 - Iniciar
+9 - Selecione a imagem ISO
+10 - Install (não o Graphical).
+11 - English
+12 - Other (onde estás)
+13 - South America (aqui)
+14 - Brazil (país)
+15 - en-US UTF-8 (o inglês a ser usado) United States
+16 - Brazilian (keymap do teclado).
+17 - O hostname tem que ser o seu login com 42 
+18 - Domain Name deixe vazio
+19 - Crie uma senha para o root
+20 - Redigite a senha para verificação.
+21 - Precisamos de um user agora (deve ser o seu login)
+22 - User e username os mesmos (seu login normal) (set senha)
+23 - timezone São Paulo
+24 - Partition Disks (Guided - ... encrypted LVM)
+25 - Escolha o HD mostrado
+26 - Separate /home partition
+27 - Write changes (podes cancelar o erasing data)
+28 - Aguarde instalar
+29 - Senha de encriptação (e digite novamente)
+30 - Use o volume completo na guided partition
+31 - Finish and write change in disk (confirm it)
+32 - Clique em Não sobre adicionar novas configurações.
+33 - O mirror será do seu próprio país.
+34 - deb.debian.org
+35 - o HTTP Proxy é vazio
+36 - Clique em NO para não participar da pesquisa de packages
+37 - Desmarque todas as opções da caixa (COM BARRA DE ESPAÇO)!!!
+38 - Install the GRUB Boot
+39 - escolha o HD /dev/sda criado
+40 - Aguarde terminar a instalação.
+41 - Reboot
+-----------------------------------------------------------
+PERGUNTAS SOBRE ESSA SEGUNDA PARTE
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+42 - Introduza a palavra (disco encriptado)
+43 - coloque o login de seu user normal e senha
+44 - Instalação do sudo (su) (apt install sudo)
+45 - reinicie a máquina com o sudo reboot
+46 - su (sudo -V > file.txt) enxergar tudo o que foi configurado
+47 - adicionar novo usuário (sudo adduser login)
+48 - adicionar grupo (sudo addgroup group) (user42 é o nome)
+49 - Ter certeza que foi criado getent group nome_do_grupo
+(se precisar deletar (sudo groupdel nomedogrupo)
+50 - Adicionar o usuário (sudo adduser login group)
+51 - Cheque se tudo deu certo com o getent group nomedogrupo
+52 - Precisamos instalar o openSSH dê sudo apt update (atualize)
+53 - sudo apt install openssh-server (depois de ter atualizado)
+54 - Verifique se está tudo funcionando corretamente
+(sudo service ssh status)
+55 - Vá em /etc/ssh/sshd_config com o nano (mude 22 para 4242)
+56 - Descomente a opção acima e ponha no em PermitRootLogin
+57 - Vá no ficheiro ssh_config e mude a porta 22 para 4242
+58 - Precisamos dá o restart no sistema.
+(sudo service ssh restart)
+(sudo service ssh status)
+59 - Precisamos instalar o ufw
+(sudo apt install ufw)
+60 - ative o ufw (sudo ufw enable)
+61 - verifique se ele está ativado (sudo ufw status)
+62 - permitir a porta 4242 (sudo ufw allow 4242)
+63 - verifique com o (sudo ufw status e verás)
+64 - Vamos criar o ficheiro touch /etc/sudoers.d/sudo_config
+(aqui vamos criar a configuração de senha)
+65 - mkdir /var/log/sudo (logs de senha armazenados)
+66 - Configurar o arquivo /etc/sudoers.d/sudo_config
+Defaults  passwd_tries=3
+Defaults  badpass_message="Mensaje de error personalizado"
+Defaults  logfile="/var/log/sudo/sudo_config"
+Defaults  log_input, log_output
+Defaults  iolog_dir="/var/log/sudo"
+Defaults  requiretty
+Defaults  secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+67 - nano /etc/login.defs
+(PASS_MAX_DAYS 30)
+(PASS_MIN_DAYS 2)
+68 - sudo apt install libpam-pwquality
+69 - nano /etc/pam.d/common-password
+minlen=10
+ucredit=-1
+dcredit=-1
+lcredit=-1
+maxrepeat=3
+reject_username
+difok=7
+enforce_for_root
+Tem que ficar do lado do retry=3
+70 - precisamos checar sudo chage -l root (não implementado ainda)
+71 - sudo chage -m 2 root
+sudo chage -M 30 root (mínimo e máximo de dias).
+72 - sudo chage -l root
+73 - sudo shutdown now (precisamos desligar a máquina).
+
+----------------------------------------------------------------
+PERGUNTAS PARTE 3
+
+----------------------------------------------------------------
+74 - Depois de sair da máquina, vá em Configurações, Redes, 
+Configurações avançadas. Redirecionamento de Portas.
+Na porta hospedeiro coloque 4242 e na porta convidado 4242.
+75 - ssh fruan-ba@localhost -p 4242 (poder se conectar com ela)
+76 - Vamos agora estudar o sistema (uname -a) mostra tudo menos
+crie um script.
+o tipo de processador se for desconhecido ou a plataforma de hardware.
+uname -a
+77 - grep "physical id" /proc/cpuinfo | wc -l (núcleos físicos)
+78 - grep processor /proc/cpuinfo | wc -l (núcleos virtuais)
+79 - free --mega | awk '$1 == "Mem:" {print $3}' (used)
+80 - free --mega | awk '$1 == "Mem:" {print $2}' (total)
+81 - free --mega | awk '$1 == "Mem:" {printf("(%.2f%%%%)\n",$3/$2*100)}'
+(Esse comando calcula a quantidade de memória em uso em %)
+82 - df -m | grep "/dev/" | grep -v "/boot" | awk '{memory_use += $3}
+END {print memory_use}'
+Memória em disco.
+df -m -> saída em Megabytes
+83 - Espaço total
+df -m | grep "/dev/" | grep -v "/boot" | awk '{memory_use += $2} END
+{print memory_use}'
+84 - Porcentagem da memória de disco usada
+df -m | grep "/dev" | grep -v "/boot" | awk '{use += $3} {total += $2} END {printf("%d%%)\n"), use/total*100}'
+85 - Porcentagem de utilização da CPU (parte do resultado final)
+vmstat 1 3 | tail -1 | awk '{print $15}'
+86 - Último reinício
+who -b | awk '{print $3 " " $4}'
+87 - Utilização de LVM.
+if [ $(lsblk | grep lvm | wc -l) -gt 0 ];then echo yes; else echo no; fi
+88 - Conexões TCP
+89 - ss -ta | grep ESTAB | wc -l
+90 - Quantidade de users
+users | wc -w
+91 - Endereço IP e MAC
+hostname -I
+ip link | grep "link/ether" | awk '{print $2}'
+92 - Número de comandos executados com sudo
+journalctl _COMM=sudo | grep COMMAND | wc -l
+---------------------------------------------------------------
+PERGUNTAS SOBRE ESSA PARTE
+
+---------------------------------------------------------------
+93 - Crie o script :) 

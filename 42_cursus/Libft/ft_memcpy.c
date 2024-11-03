@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:46:25 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/15 14:46:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/03 14:23:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include <stdio.h>
+#include <stdio.h>
 #include <string.h>
-#include <stdlib.h>*/
+#include <stdlib.h>
 #include "libft.h"
 
 /*void	*ft_memcpy(void *dest, const void *src, size_t n);
