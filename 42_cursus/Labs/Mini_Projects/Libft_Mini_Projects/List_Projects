@@ -1,0 +1,116 @@
+Para uma implementação completa da **libft** com uma abordagem passo a passo e detalhada, criei uma série de mini-projetos que guiarão sua jornada desde o básico até a finalização da biblioteca, abordando também a validação rigorosa de cada função. Esses projetos seguem uma “saga” de 10 fases, cada uma cobrindo uma etapa essencial. 
+
+### Saga Completa: Implementação da Libft
+
+---
+
+#### Fase 1: Preparação e Configuração do Projeto
+   - **Objetivo**: Configurar o ambiente e entender a estrutura básica da libft.
+   - **Passos**:
+     1. Crie a estrutura de diretórios para `src` e `include`.
+     2. Adicione o `Makefile` básico e configure para compilar apenas funções essenciais inicialmente.
+     3. Configure o arquivo `.h` e inclua as primeiras declarações de função e as macros.
+   - **Desafio**: Estruturar o `Makefile` para compilar os arquivos `.c` no diretório `src`, criando um executável ou biblioteca compartilhada.
+
+---
+
+#### Fase 2: Funções Básicas de Strings
+   - **Objetivo**: Implementar e testar as funções de manipulação de strings mais simples.
+   - **Funções**: `ft_strlen`, `ft_strcpy`, `ft_strncpy`.
+   - **Passos**:
+     1. Implemente cada função seguindo a Norma e compile com o `Makefile`.
+     2. Crie um programa de teste que valide cada função com strings de diferentes comprimentos e valores.
+   - **Desafio**: Teste `ft_strlen` com strings vazias e grandes e `ft_strcpy` para garantir que a cópia não ultrapassa o buffer.
+   - **Critério de Avaliação**: Testes completos com strings variadas. Funções devem retornar valores esperados sem falhas.
+
+---
+
+#### Fase 3: Funções de Caractere e Validação
+   - **Objetivo**: Implementar funções de conversão e validação de caracteres.
+   - **Funções**: `ft_isalpha`, `ft_isdigit`, `ft_isalnum`, `ft_isascii`, `ft_isprint`, `ft_toupper`, `ft_tolower`.
+   - **Passos**:
+     1. Implemente cada função, testando todos os caracteres ASCII (0-127).
+     2. Crie uma função de teste que passe cada caractere ASCII e valide o retorno esperado.
+   - **Desafio**: Validar corretamente caracteres especiais e o comportamento com valores de borda.
+   - **Critério de Avaliação**: Todas as funções devem retornar valores consistentes e corretos.
+
+---
+
+#### Fase 4: Manipulação de Memória
+   - **Objetivo**: Implementar funções que manipulam blocos de memória.
+   - **Funções**: `ft_memset`, `ft_bzero`, `ft_memcpy`, `ft_memmove`, `ft_memchr`, `ft_memcmp`.
+   - **Passos**:
+     1. Implemente cada função e crie casos de teste que cubram sobreposição, tamanhos diferentes de buffer e valores de borda.
+     2. Certifique-se de que o comportamento com blocos de memória sobrepostos funcione corretamente.
+   - **Desafio**: Testar `ft_memmove` com buffers sobrepostos para verificar que os dados são movidos corretamente.
+   - **Critério de Avaliação**: Teste rigoroso de cada função para garantir a manipulação correta de dados e o retorno adequado.
+
+---
+
+#### Fase 5: Funções Numéricas e Conversão de Strings
+   - **Objetivo**: Implementar funções que convertem dados numéricos e strings.
+   - **Funções**: `ft_atoi`, `ft_itoa`, `ft_strchr`, `ft_strrchr`.
+   - **Passos**:
+     1. Implemente `ft_atoi` para lidar com strings com espaços, sinais e números.
+     2. Implemente `ft_itoa` com suporte a valores negativos e zero.
+     3. Teste `ft_strchr` e `ft_strrchr` para retornar corretamente a primeira e última ocorrência.
+   - **Desafio**: Testar com valores extremos para `ft_atoi` e `ft_itoa`.
+   - **Critério de Avaliação**: Funções devem retornar os valores numéricos corretos em todas as entradas.
+
+---
+
+#### Fase 6: Manipulação Avançada de Strings
+   - **Objetivo**: Criar funções que trabalhem com substrings e junções de strings.
+   - **Funções**: `ft_strjoin`, `ft_strtrim`, `ft_substr`, `ft_split`.
+   - **Passos**:
+     1. Implemente `ft_strjoin` para unir duas strings e `ft_substr` para criar substrings.
+     2. Implemente `ft_split` para dividir uma string em substrings com base em delimitadores.
+   - **Desafio**: Dividir strings corretamente com delimitadores consecutivos e lidar com strings vazias.
+   - **Critério de Avaliação**: Todas as funções devem ser testadas com entradas diversas, garantindo saídas corretas.
+
+---
+
+#### Fase 7: Funções de Controle de Tamanho e Concatenamento
+   - **Objetivo**: Implementar funções que lidem com limites de buffer.
+   - **Funções**: `ft_strlcpy`, `ft_strlcat`.
+   - **Passos**:
+     1. Implemente `ft_strlcpy` e `ft_strlcat`, respeitando o limite do buffer.
+     2. Teste com buffers menores e maiores do que as strings para verificar o comportamento.
+   - **Desafio**: Verificar que ambas as funções retornam o tamanho correto, independentemente do tamanho do buffer.
+   - **Critério de Avaliação**: Garantir que o retorno é consistente com a documentação e que os dados copiados respeitam o limite.
+
+---
+
+#### Fase 8: Implementação de Funções Bonus
+   - **Objetivo**: Criar funções adicionais que trabalham com listas encadeadas.
+   - **Funções**: `ft_lstnew`, `ft_lstadd_front`, `ft_lstadd_back`, `ft_lstdelone`, `ft_lstclear`, `ft_lstiter`, `ft_lstmap`.
+   - **Passos**:
+     1. Implemente cada função e crie testes que validem o comportamento de inserção, exclusão e iteração na lista.
+     2. Teste o comportamento da lista em casos de borda, como uma lista vazia e uma lista com múltiplos elementos.
+   - **Desafio**: Implementar funções de forma que consigam lidar corretamente com listas grandes e pequenas.
+   - **Critério de Avaliação**: Todas as operações na lista devem ser testadas para garantir que não ocorrem vazamentos de memória.
+
+---
+
+#### Fase 9: Revisão e Testes Avançados
+   - **Objetivo**: Revisar todas as funções, realizar testes avançados e garantir conformidade com a Norma.
+   - **Passos**:
+     1. Revise o código de cada função para otimização e conformidade com a Norma.
+     2. Compile a biblioteca com o Makefile e execute testes automatizados.
+   - **Desafio**: Criar um script de teste que verifica a funcionalidade completa da libft com diferentes cenários de uso.
+   - **Critério de Avaliação**: Passar em todos os testes automatizados e validações manuais com sucesso.
+
+---
+
+#### Fase 10: Documentação e Finalização
+   - **Objetivo**: Criar documentação para a libft e preparar para entrega.
+   - **Passos**:
+     1. Documente cada função no arquivo header e adicione descrições gerais no README.
+     2. Verifique se o `Makefile` está pronto para gerar o binário final e crie uma documentação que explique o uso da biblioteca.
+   - **Desafio**: Garantir que a documentação está clara e suficiente para qualquer pessoa entender o uso da biblioteca.
+   - **Critério de Avaliação**: Documentação completa, clara e organizada.
+
+---
+
+### Conclusão
+Seguindo essa saga de 10 fases, você terá implementado a **libft** de maneira completa e organizada, passando por cada função com testes e validações rigorosas. A cada fase, você fortalecerá sua compreensão de C e manipulação de memória, resultando em uma libft funcional e pronta para uso em projetos mais avançados!
