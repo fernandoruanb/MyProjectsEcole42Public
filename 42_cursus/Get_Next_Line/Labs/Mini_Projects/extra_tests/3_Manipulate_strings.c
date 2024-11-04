@@ -43,6 +43,7 @@ int	main(int argc, char **argv)
 	}
 	if (read_and_write(file_descriptor) == 1)
 		return (1);
+	close(file_descriptor);
 	return (0);
 }
 
