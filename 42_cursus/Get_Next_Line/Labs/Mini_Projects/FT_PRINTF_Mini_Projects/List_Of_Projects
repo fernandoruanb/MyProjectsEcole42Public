@@ -1,0 +1,82 @@
+Aqui estão alguns mini-projetos organizados em sequência, cobrindo os aspectos fundamentais para desenvolver a função `ft_printf`. Esses mini-projetos vão ajudar a entender melhor a manipulação de strings, conversões, uso de variáveis variádicas e manipulação de buffer, todos necessários para construir uma função `ft_printf` eficiente.
+
+### Projeto 1: Funções Básicas de Impressão e Saída
+1. **Objetivo**: Desenvolver funções que imprimam caracteres e strings simples na saída padrão.
+2. **Tarefas**:
+   - Criar uma função `ft_putchar` para imprimir um único caractere.
+   - Criar uma função `ft_putstr` para imprimir uma string.
+   - Implementar `ft_strlen` para calcular o tamanho de uma string.
+
+3. **Conhecimento Aplicado**: Prática com `write()`, manipulação de ponteiros e strings.
+
+---
+
+### Projeto 2: Conversões de Inteiros em Strings
+1. **Objetivo**: Implementar a conversão de inteiros em strings para possibilitar a impressão de números inteiros.
+2. **Tarefas**:
+   - Criar a função `ft_itoa` para converter inteiros (`int`) para strings.
+   - Implementar tratamento de inteiros negativos.
+
+3. **Conhecimento Aplicado**: Manipulação de números, memória e strings.
+
+---
+
+### Projeto 3: Conversão de Inteiros para Hexadecimal
+1. **Objetivo**: Preparar o entendimento para conversões em `printf`, especialmente para números em bases diferentes.
+2. **Tarefas**:
+   - Implementar uma função `ft_itohex` que converta um número inteiro para uma string hexadecimal.
+   - Suporte para letras maiúsculas e minúsculas no hexadecimal.
+   
+3. **Conhecimento Aplicado**: Manipulação de bases e representação numérica.
+
+---
+
+### Projeto 4: Variáveis Variádicas
+1. **Objetivo**: Aprender a trabalhar com listas de argumentos variáveis.
+2. **Tarefas**:
+   - Implementar uma função simples que aceite um número variável de inteiros e os imprima (exemplo: soma dos números).
+   - Utilizar macros `va_start`, `va_arg` e `va_end`.
+
+3. **Conhecimento Aplicado**: Manipulação de argumentos variáveis, fundamental para `ft_printf`.
+
+---
+
+### Projeto 5: Manipulação de Flags Básicas
+1. **Objetivo**: Introduzir o conceito de flags, largura e precisão na formatação de saída.
+2. **Tarefas**:
+   - Implementar flags básicas como `+`, `-`, `0` e ` ` (espaço).
+   - Simular o comportamento de `printf` para números inteiros e strings, respeitando largura mínima e alinhamento à esquerda ou direita.
+
+3. **Conhecimento Aplicado**: Gerenciamento de formatação e impressão condicional.
+
+---
+
+### Projeto 6: Manipulação Avançada de Buffer
+1. **Objetivo**: Aprender a usar um buffer para otimizar a impressão.
+2. **Tarefas**:
+   - Criar uma função que armazene a saída em um buffer e a imprima ao final.
+   - Gerenciar o tamanho do buffer, garantindo que ele seja “flushado” periodicamente.
+
+3. **Conhecimento Aplicado**: Otimização de desempenho para `ft_printf`.
+
+---
+
+### Projeto 7: Implementação de `ft_printf` Simples
+1. **Objetivo**: Unir todas as partes para implementar um `ft_printf` simplificado.
+2. **Tarefas**:
+   - Implementar uma função `ft_printf` que aceite apenas `%d`, `%s` e `%x`.
+   - Usar variáveis variádicas, conversões de número para string e gerenciamento de buffer.
+
+3. **Conhecimento Aplicado**: Combinação de todos os conceitos anteriores, formando a base para um `ft_printf` funcional.
+
+---
+
+### Projeto 8: Adicionando Suporte Completo de Especificadores
+1. **Objetivo**: Expandir o `ft_printf` para suportar todos os especificadores (%c, %d, %i, %u, %x, %X, %p).
+2. **Tarefas**:
+   - Adicionar suporte para especificadores restantes.
+   - Implementar controle de precisão e largura total para cada especificador.
+
+3. **Conhecimento Aplicado**: Formatação avançada e implementação completa de `printf`.
+
+Após completar esses mini-projetos, você terá desenvolvido um entendimento profundo dos componentes fundamentais para o `ft_printf`. Com essa base, a implementação de uma versão completa de `ft_printf` se tornará mais intuitiva e organizada.
