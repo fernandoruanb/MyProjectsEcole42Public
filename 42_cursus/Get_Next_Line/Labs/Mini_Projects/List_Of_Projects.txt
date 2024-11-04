@@ -1,0 +1,40 @@
+Para facilitar seu aprendizado e ajudá-lo a dominar o `get_next_line`, vamos dividir o processo em pequenos projetos que abordam cada parte essencial da implementação. Esses mini projetos servirão como etapas para você praticar e entender cada componente. Vou listar os projetos, cada um com um objetivo específico, para que ao final você esteja preparado para implementar o `get_next_line` completo.
+
+### Mini Projetos para Aprender `get_next_line`
+
+#### 1. **Leitura de Arquivo Simples**
+   - **Objetivo:** Aprender a abrir e ler um arquivo.
+   - **Tarefa:** Crie uma função que abre um arquivo, lê um bloco de dados fixo (ex., 100 bytes), e imprime no terminal. O desafio é entender como abrir e fechar o arquivo corretamente usando `open()` e `close()` e manusear a leitura com `read()`.
+   - **Validação:** Certifique-se de que a função lida com erros, como arquivo inexistente ou permissões negadas.
+
+#### 2. **Buffer Dinâmico**
+   - **Objetivo:** Entender a importância do buffer e como ele armazena temporariamente os dados lidos.
+   - **Tarefa:** Crie uma função que usa um buffer de tamanho fixo para ler o arquivo e, a cada leitura, adiciona o conteúdo lido a uma string dinâmica que cresce conforme necessário.
+   - **Validação:** Verifique se a função lida com buffers de diferentes tamanhos e se consegue concatenar múltiplas leituras em uma única string.
+
+#### 3. **Manipulação de Strings com `\n`**
+   - **Objetivo:** Aprender a lidar com o caractere de nova linha (`\n`) ao longo das leituras.
+   - **Tarefa:** Modifique a função anterior para que ela pare de ler ao encontrar `\n`, retornando o conteúdo lido até esse ponto.
+   - **Validação:** Verifique se a função retorna corretamente uma linha de cada vez e lida com o caso em que `\n` não aparece em uma leitura.
+
+#### 4. **Implementação de Buffer Estático**
+   - **Objetivo:** Aprender a utilizar um buffer estático para armazenar dados entre leituras sucessivas, o que é essencial no `get_next_line`.
+   - **Tarefa:** Implemente um buffer estático que armazena o que sobrar após o caractere `\n` e reutilize-o na próxima chamada.
+   - **Validação:** Teste a função para garantir que o buffer está funcionando corretamente e que os dados sobrando são reutilizados na próxima leitura.
+
+#### 5. **Controle de Final de Arquivo**
+   - **Objetivo:** Tratar a condição de fim de arquivo e entender como terminar o processo de leitura.
+   - **Tarefa:** Modifique a função para retornar `NULL` quando o arquivo chegar ao fim ou quando não houver mais dados a serem lidos.
+   - **Validação:** Verifique se a função termina corretamente no final do arquivo e que não tenta ler além do conteúdo disponível.
+
+#### 6. **Limpeza de Memória**
+   - **Objetivo:** Implementar uma função de liberação de memória para garantir que não haja vazamentos.
+   - **Tarefa:** Crie uma função auxiliar para liberar o buffer e outros dados alocados dinamicamente quando a leitura terminar.
+   - **Validação:** Use uma ferramenta como o `valgrind` para verificar se não há vazamento de memória ao final da execução.
+
+#### 7. **Integração Final**
+   - **Objetivo:** Combinar todos os conceitos aprendidos para implementar o `get_next_line` completo.
+   - **Tarefa:** Com base nos componentes anteriores, implemente o `get_next_line` com todas as funcionalidades: ler linha por linha, armazenar dados em um buffer estático, controlar o fim do arquivo e liberar memória ao final.
+   - **Validação:** Teste exaustivamente o `get_next_line` em arquivos grandes, arquivos sem quebras de linha e arquivos vazios para garantir que todas as condições foram contempladas.
+
+Cada um desses mini projetos reforçará sua compreensão sobre a leitura de arquivos, manipulação de buffers, e o funcionamento dos conceitos centrais do `get_next_line`. Assim que você estiver confortável com cada etapa, você terá o conhecimento necessário para implementar o `get_next_line` com confiança.
