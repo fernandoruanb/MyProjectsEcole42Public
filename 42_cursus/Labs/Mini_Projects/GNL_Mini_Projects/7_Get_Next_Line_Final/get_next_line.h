@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 09:15:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/05 09:38:51 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/05 12:21:46 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/05 15:18:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@
 #  define BUFFER_SIZE 42
 # endif /* BUFFER_SIZE */
 
-# include <unistd.h>
 # include <stdlib.h>
+# include <unistd.h>
 
-char	*dynamic_str(const char *buffer, size_t len);
-int		print_line(const char *buffer, size_t *start, ssize_t bytes_read);
+size_t	ft_strlen(char *s);
+char	*dynamic_str(char *buffer, size_t len);
 void	free_memory(char **ptr);
-char	*get_next_line(int fd);
+char	*ft_strjoin(char *s1, char *s2, size_t len);
+ssize_t	find_newline(char *buffer);
+char	*append_line(char *line, char *buffer);
+void	process_buffer(char *buffer, ssize_t newline_pos);
+ssize_t	read_into_buffer(int fd, char *buffer);
 
 #endif /* GET_NEXT_LINE_H */
