@@ -5,37 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 19:32:33 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/06 19:32:33 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/07 10:05:30 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/07 13:44:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strchr(const char *s, int c)
 {
-	char	*buffer;
-	size_t	length;
 	size_t	index;
+	size_t	length;
 
-	if (!s1)
+	if (!s)
 		return (NULL);
-	length = ft_strlen(s1);
-	buffer = (char *)malloc(length + 1);
-	if (!buffer)
-		return (NULL);
-	while (s1[index] != '\0')
+	length = ft_strlen(s);
+	if (c == '\0')
+		return ((char *)&s[length]);
+	index = 0;
+	while (s[index] != '\0')
 	{
-		buffer[index] = s1[index];
+		if (s[index] == (unsigned char)c)
+			return ((char *)&s[index]);
 		index++;
 	}
-	return (buffer);
+	return (NULL);
 }
 
 size_t	ft_strlen(const char *s)
 {
 	size_t	length;
 
+	length = 0;
 	while (s[length] != '\0')
 		length++;
 	return (length);
@@ -51,14 +52,14 @@ char	*extract_line(char **buffer)
 	{
 		len = ft_strchr(*buffer, '\n') - *buffer + 1;
 		line = ft_substr(*buffer, 0, len);
-		new_buffer = *buffer + len;
-		free_buffer(buffer);
-		buffer = new_buffer;
+		new_buffer = ft_strdup(*buffer + len);
+		free_buffer(buffer, NULL);
+		*buffer = new_buffer;
 	}
 	else
 	{
 		line = ft_strdup(*buffer);
-		free(buffer);
+		free_buffer(buffer, NULL);
 	}
 	return (line);
 }
@@ -66,27 +67,33 @@ char	*extract_line(char **buffer)
 char	*read_to_buffer(int fd, char *buffer)
 {
 	char	*temp;
-	char	*read_buf[BUFFER_SIZE + 1];
+	char	*read_buf;
 	ssize_t	bytes_read;
 
 	bytes_read = 1;
-	while (!(ft_strchr(buffer, '\n') && bytes_read != 0))
+	if (!buffer)
+		buffer = ft_calloc(1, sizeof(char));
+	read_buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	while (!ft_strchr(buffer, '\n') && bytes_read != 0)
 	{
-		bytes_read = read(fd, read_buf, BUFFER_SIZE - 1);
+		bytes_read = read(fd, read_buf, BUFFER_SIZE);
 		if (bytes_read == -1)
-			free_buffer(&buffer);
+			return (free_buffer(&buffer, &read_buf));
+		read_buf[bytes_read] = '\0';
+		temp = ft_strjoin(buffer, read_buf);
+		free_buffer(&buffer, NULL);
+		buffer = temp;
 	}
-	read_buf[bytes_read] = '\0';
-	temp = ft_strjoin(buffer, read_buf);
-	free_buffer(&buffer);
-	buffer = temp;
+	free_buffer(&read_buf, NULL);
+	if ((buffer[0] == '\0' || !buffer) && bytes_read == 0)
+		return (free_buffer(&buffer, NULL));
 	return (buffer);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
-	char	*line;
+	char		*line;
 
 	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -95,35 +102,9 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = extract_line(&buffer);
 	if (!line)
-		free_buffer(&buffer);
+	{	
+		free_buffer(&buffer, NULL);
+		return (NULL);
+	}
 	return (line);
-}
-
-int	main(int argc, char **argv)
-{
-	int	file_descriptor;
-	char	*line;
-
-	if (argc < 2)
-	{
-		write(1, "File name missing.\n", 19);
-		return (1);
-	}
-	if (argc > 2)
-	{
-		write(1, "Too many arguments.\n", 20);
-		return (1);
-	}
-	file_descriptor = open(argv[1], O_RDONLY);
-	if (file_descriptor == -1)
-	{
-		write(1, "Error opening file.\n", 20);
-		return (1);
-	}
-	while ((line = get_next_line(file_descriptor) != NULL))
-	{
-		printf("%s", line);
-		free(line);
-	}	
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 10:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/07 13:44:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/07 13:36:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ char	*extract_line(char **buffer)
 		len = ft_strchr(*buffer, '\n') - *buffer + 1;
 		line = ft_substr(*buffer, 0, len);
 		new_buffer = ft_strdup(*buffer + len);
-		free_buffer(buffer, NULL);
+		free_buffer(buffer);
 		*buffer = new_buffer;
 	}
 	else
 	{
 		line = ft_strdup(*buffer);
-		free_buffer(buffer, NULL);
+		free_buffer(buffer);
 	}
 	return (line);
 }
@@ -78,15 +78,18 @@ char	*read_to_buffer(int fd, char *buffer)
 	{
 		bytes_read = read(fd, read_buf, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return (free_buffer(&buffer, &read_buf));
+		{
+			free_buffer(&buffer);
+			return (NULL);
+		}
 		read_buf[bytes_read] = '\0';
 		temp = ft_strjoin(buffer, read_buf);
-		free_buffer(&buffer, NULL);
+		free_buffer(&buffer);
 		buffer = temp;
 	}
-	free_buffer(&read_buf, NULL);
+	free_buffer(&read_buf);
 	if ((buffer[0] == '\0' || !buffer) && bytes_read == 0)
-		return (free_buffer(&buffer, NULL));
+		return (free_buffer(&buffer));
 	return (buffer);
 }
 
@@ -103,7 +106,7 @@ char	*get_next_line(int fd)
 	line = extract_line(&buffer);
 	if (!line)
 	{	
-		free_buffer(&buffer, NULL);
+		free_buffer(&buffer);
 		return (NULL);
 	}
 	return (line);
