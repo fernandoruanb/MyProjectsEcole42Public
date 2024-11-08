@@ -8,7 +8,7 @@ int main() {
     printf("Exemplo de tabulação horizontal:\t\nColuna 1\tColuna 2\tColuna 3\n");
 
     // Exemplo de barra invertida (\\)
-    printf("Exemplo de barra invertida:\\nC:\\Program Files\\MyApp\n");
+    printf("Exemplo de barra invertida:\nC:\\Program Files\\MyApp\n");
 
     // Exemplo de aspas duplas (\")
     printf("Exemplo de aspas duplas:\"\nEle disse: \"Olá, tudo bem?\"\n");
