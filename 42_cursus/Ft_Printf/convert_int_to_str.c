@@ -12,18 +12,18 @@
 
 #include "ft_printf.h"
 
-static int	calculate_how_many_numbers(long n);
+static int	calculate_how_many_numbers(int n);
 
-static char	*ft_itoa(long n);
+static char	*ft_itoa(int n);
 
 int	convert_int_to_str(va_list args)
 {
 	char	*buffer;
-	long	number;
+	int		number;
 	size_t	length;
 	int		result;
 
-	number = va_arg(args, long);
+	number = va_arg(args, int);
 	buffer = ft_itoa(number);
 	if (!buffer)
 		return (-1);
@@ -33,15 +33,15 @@ int	convert_int_to_str(va_list args)
 	return (result);
 }
 
-static char	*ft_itoa(long n)
+static char	*ft_itoa(int n)
 {
-	unsigned long	number;
 	char			*buffer;
 	int				length;
+	unsigned int	number;
 
 	if (n < 0)
 		number = -n;
-	else if (n >= 0)
+	else
 		number = n;
 	length = calculate_how_many_numbers(n);
 	buffer = (char *)malloc(length + 1);
@@ -58,22 +58,16 @@ static char	*ft_itoa(long n)
 	return (buffer);
 }
 
-static int	calculate_how_many_numbers(long n)
+static int	calculate_how_many_numbers(int n)
 {
-	int				length;
-	unsigned long	num;
+	int	length;
 
 	length = 0;
 	if (n <= 0)
-	{
 		length = 1;
-		num = -n;
-	}
-	else
-		num = n;
-	while (num)
+	while (n)
 	{
-		num /= 10;
+		n /= 10;
 		length++;
 	}
 	return (length);

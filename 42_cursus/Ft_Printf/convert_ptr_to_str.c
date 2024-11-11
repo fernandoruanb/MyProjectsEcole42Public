@@ -24,6 +24,8 @@ int	convert_ptr_to_str(va_list args)
 	int				result;
 
 	number = (unsigned long)va_arg(args, void *);
+	if (number == 0)
+		return (write(1, "(nil)", 5));
 	buffer = hex_to_str(number);
 	if (!buffer)
 		return (-1);
