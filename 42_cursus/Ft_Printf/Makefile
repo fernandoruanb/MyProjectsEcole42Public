@@ -1,6 +1,6 @@
 # Name of the program or library
 
-NAME = libftprintf
+NAME = libftprintf.a
 
 # Flags and Compilers
 
@@ -12,20 +12,21 @@ CFLAGS = -Wall -Werror -Wextra
 SRCDIR = .
 INCDIR = .
 
-# SRCS
+# Archives .c
 
 SRCS =	$(SRCDIR)/ft_printf.c\
 	$(SRCDIR)/convert_hex_to_str.c\
 	$(SRCDIR)/print_char.c\
 	$(SRCDIR)/convert_int_to_str.c\
-	$(SRCDIR)/handle_specifier.c
+	$(SRCDIR)/handle_specifier.c\
 	$(SRCDIR)/convert_ptr_to_str.c\
 	$(SRCDIR)/print_percentage.c\
 	$(SRCDIR)/print_str.c\
 	$(SRCDIR)/parse_format.c\
-	$(SRCDIR)/convert_unsigned_to_str.c
+	$(SRCDIR)/convert_unsigned_to_str.c\
+	$(SRCDIR)/ft_strlen.c
 
-# OBJS
+# Archives .o
 
 OBJS = $(SRCS:$(SRCDIR)/%.c=%.o)
 
@@ -55,6 +56,6 @@ fclean: clean
 
 # restart
 
-re: fclean all
+re: fclean $(NAME)
 
 .PHONY: all fclean clean re

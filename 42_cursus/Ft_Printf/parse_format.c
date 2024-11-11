@@ -24,7 +24,7 @@ int	parse_format(const char *format, va_list args)
 		if (format[index] == '%' && format[index + 1] != '\0')
 		{
 			index++;
-			total += handle_specifier(&format[index], args);
+			total += handle_specifier(format[index], args);
 		}
 		else
 		{

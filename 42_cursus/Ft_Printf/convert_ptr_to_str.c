@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
 static int	calculate_how_many_numbers(unsigned long number);
 
 static char	*hex_to_str(unsigned long number);

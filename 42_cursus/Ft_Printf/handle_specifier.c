@@ -30,8 +30,8 @@ int	handle_specifier(char specifier, va_list args)
 	else if (specifier == '%')
 		printed = print_percentage();
 	else if (specifier == 'p')
-		printed = print_pointer(args);
+		printed = convert_ptr_to_str(args);
 	else
-		printed = write_to_output('%');
+		printed = print_percentage();
 	return (printed);
 }
