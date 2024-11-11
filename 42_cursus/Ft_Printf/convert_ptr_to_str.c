@@ -28,7 +28,8 @@ int	convert_ptr_to_str(va_list args)
 	if (!buffer)
 		return (-1);
 	length = ft_strlen(buffer);
-	result = write(1, buffer, length);
+	result = write(1, "0x", 2);
+	result += write(1, buffer, length);
 	free(buffer);
 	return (result);
 }
