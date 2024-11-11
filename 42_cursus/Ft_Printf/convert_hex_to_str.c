@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
 static int	calculate_hex_length(unsigned int number);
 
 static char	*int_to_hex(va_list args, char specifier);
@@ -18,7 +20,7 @@ int	convert_hex_to_str(va_list args, char specifier)
 {
 	char	*buffer;
 	size_t	length;
-	int	result;
+	int		result;
 
 	buffer = int_to_hex(args, specifier);
 	if (!buffer)
@@ -26,15 +28,15 @@ int	convert_hex_to_str(va_list args, char specifier)
 	length = ft_strlen(buffer);
 	result = write(1, buffer, length);
 	free(buffer);
-	return (result);		
+	return (result);
 }
 
 static char	*int_to_hex(va_list args, char specifier)
 {
-	char	*hex_digits;
+	char			*hex_digits;
 	unsigned int	length;
 	unsigned int	number;
-	char	*buffer;
+	char			*buffer;
 
 	if (specifier == 'x')
 		hex_digits = "0123456789abcdef";

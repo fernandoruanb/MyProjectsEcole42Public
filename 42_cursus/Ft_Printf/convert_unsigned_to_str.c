@@ -10,16 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
 static unsigned int	calculate_how_many_numbers(unsigned int n);
 
-static char	*ft_itoa(unsigned int n);
+static char			*ft_itoa(unsigned int n);
 
 int	convert_unsigned_to_str(va_list args)
 {
-	char	*buffer;
+	char			*buffer;
 	unsigned int	number;
-	int	result;
-	size_t	length;
+	int				result;
+	size_t			length;
 
 	number = va_arg(args, unsigned int);
 	buffer = ft_itoa(number);
@@ -34,7 +36,7 @@ int	convert_unsigned_to_str(va_list args)
 static char	*ft_itoa(unsigned int n)
 {
 	unsigned int	length;
-	char	*buffer;
+	char			*buffer;
 
 	length = calculate_how_many_numbers(n);
 	buffer = (char *)malloc(length + 1);

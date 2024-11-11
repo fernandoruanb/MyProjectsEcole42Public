@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
 static int	calculate_how_many_numbers(long n);
 
 static char	*ft_itoa(long n);
@@ -19,7 +21,7 @@ int	convert_int_to_str(va_list args)
 	char	*buffer;
 	long	number;
 	size_t	length;
-	int	result;
+	int		result;
 
 	number = va_arg(args, long);
 	buffer = ft_itoa(number);
@@ -28,7 +30,7 @@ int	convert_int_to_str(va_list args)
 	length = ft_strlen(buffer);
 	result = write(1, buffer, length);
 	free(buffer);
-	return(result);	
+	return (result);
 }
 
 static char	*ft_itoa(long n)

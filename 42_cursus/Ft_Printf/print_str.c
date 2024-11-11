@@ -9,7 +9,9 @@
 /*   Updated: 2024/11/10 18:08:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
- 
+
+#include "ft_printf.h"
+
 int	print_str(va_list args)
 {
 	char	*str;
@@ -19,5 +21,5 @@ int	print_str(va_list args)
 	if (!str)
 		str = "(null)";
 	length = ft_strlen(str);
-	return (write(1, str, length));	
+	return (write(1, str, length));
 }

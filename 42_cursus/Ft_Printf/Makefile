@@ -27,7 +27,7 @@ SRCS =	$(SRCDIR)/ft_printf.c\
 
 # OBJS
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:$(SRCDIR)/%.c=%.o)
 
 # Main
 
@@ -35,4 +35,26 @@ all: $(NAME)
 
 # Main rule
 
-$(NAME): 
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
+
+# .c -> .o
+
+%.o: %.c
+	$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
+
+# clear
+
+clean:
+	rm -f $(OBJS)
+
+# Full clean
+
+fclean: clean
+	rm -f $(NAME) 
+
+# restart
+
+re: fclean all
+
+.PHONY: all fclean clean re
