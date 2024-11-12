@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/10 20:54:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/12 10:37:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	convert_int_to_str(va_list args)
 	number = va_arg(args, int);
 	buffer = ft_itoa(number);
 	if (!buffer)
-		return (-1);
+		return (0);
 	length = ft_strlen(buffer);
 	result = write(1, buffer, length);
 	free(buffer);

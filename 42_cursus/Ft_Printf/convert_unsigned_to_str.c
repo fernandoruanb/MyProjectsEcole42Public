@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 08:00:46 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/11 08:21:58 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/12 10:43:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	convert_unsigned_to_str(va_list args)
 	number = va_arg(args, unsigned int);
 	buffer = ft_itoa(number);
 	if (!buffer)
-		return (-1);
+		return (0);
 	length = ft_strlen(buffer);
 	result = write(1, buffer, length);
 	free(buffer);

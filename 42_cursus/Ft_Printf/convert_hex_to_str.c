@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:00:38 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/10 22:00:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/12 10:38:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	convert_hex_to_str(va_list args, char specifier)
 
 	buffer = int_to_hex(args, specifier);
 	if (!buffer)
-		return (-1);
+		return (0);
 	length = ft_strlen(buffer);
 	result = write(1, buffer, length);
 	free(buffer);
