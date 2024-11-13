@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 19:21:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/13 11:32:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:48:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,11 @@ int	main(void)
 	printf("%d\n", x);
 	printf("%z\n");
 	ft_printf("%z\n");
+	printf(NULL);
+	ft_printf(NULL);
+	x = printf(NULL);
+	printf("%d\n", x);
+	x = ft_printf(NULL);
+	printf("%d\n", x);
 	return (0);
 }
