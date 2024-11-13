@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 19:21:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/13 11:32:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:23:53 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	main(void)
 	x = ft_printf("%c %s %d %i %u %p %p %x %X %x %X 100%% %z", 'a', "Fernando", 22, 42, 294967295, &x, (void *)0, 255, 255, -255, -255);
 	printf("%d\n", x);
 	printf("%z\n");
-	ft_printf("%z\n");
+	ft_printf("%z");
 	return (0);
 }

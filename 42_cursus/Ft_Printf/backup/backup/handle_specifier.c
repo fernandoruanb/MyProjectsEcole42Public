@@ -6,19 +6,19 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:12:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/13 11:32:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:45:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	handle_specifier(char specifier, va_list args, int total)
+int	handle_specifier(char specifier, va_list args)
 {
 	int	printed;
 
 	printed = 0;
 	if (specifier == 'c')
-		printed += print_char(args);
+		printed = print_char(args);
 	else if (specifier == 's')
 		printed += print_str(args);
 	else if (specifier == 'd' || specifier == 'i')
@@ -33,9 +33,9 @@ int	handle_specifier(char specifier, va_list args, int total)
 		printed += convert_ptr_to_str(args);
 	else
 	{
-		if (total > 0)
-			return (-1);
-		write(1, "%", 1);
+		print_percentage();
+		printed = -1;
+		return (printed);
 	}
 	return (printed);
 }

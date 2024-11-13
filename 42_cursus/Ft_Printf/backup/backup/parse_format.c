@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:04:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/13 11:27:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:46:50 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	parse_format(const char *format, va_list args)
 {
-	int	temp;
 	int	total;
 	int	index;
 
@@ -25,10 +24,9 @@ int	parse_format(const char *format, va_list args)
 		if (format[index] == '%' && format[index + 1] != '\0')
 		{
 			index++;
-			temp = handle_specifier(format[index], args, total);
-			if (temp == -1)
+			if (handle_specifier(format[index], args) == -1)
 				return (-1);
-			total += temp;
+			total += handle_specifier(format[index], args);
 		}
 		else
 		{

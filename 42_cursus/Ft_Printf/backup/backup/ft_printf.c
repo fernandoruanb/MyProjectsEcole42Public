@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_format.c                                     :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 13:04:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/13 11:27:31 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/10 13:01:12 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/13 10:52:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	parse_format(const char *format, va_list args)
+int	ft_printf(const char *format, ...)
 {
-	int	temp;
-	int	total;
-	int	index;
+	va_list	args;
+	int		printed_char;
 
-	total = 0;
-	index = 0;
-	while (format[index] != '\0')
+	printed_char = 0;
+	va_start(args, format);
+	printed_char += parse_format(format, args);
+	if (parse_format(format, args) == -1)
 	{
-		if (format[index] == '%' && format[index + 1] != '\0')
-		{
-			index++;
-			temp = handle_specifier(format[index], args, total);
-			if (temp == -1)
-				return (-1);
-			total += temp;
-		}
-		else
-		{
-			write(1, &format[index], 1);
-			total++;
-		}
-		index++;
+		va_end(args);
+		return (-1);
 	}
-	return (total);
+	va_end(args);
+	return (printed_char);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:12:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/13 11:32:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:22:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	handle_specifier(char specifier, va_list args, int total)
 	{
 		if (total > 0)
 			return (-1);
-		write(1, "%", 1);
+		write(1, "%\n", 2);
+		return (-1);
 	}
 	return (printed);
 }
