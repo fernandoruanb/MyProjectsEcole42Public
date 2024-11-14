@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 10:50:15 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/07 12:02:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/14 08:54:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int	main(int argc, char **argv)
 		printf("%s", line);
 		free(line);
 	}
+	close(file_descriptor);
 	return (0);
 }
