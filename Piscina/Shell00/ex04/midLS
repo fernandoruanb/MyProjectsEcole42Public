@@ -1,6 +1,0 @@
-#!/bin/bash
-ls -mtp
-
-# t - time
-# p - parents (show directories)
-# m - spaced using , instead of \n

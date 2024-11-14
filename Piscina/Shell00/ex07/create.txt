@@ -1,3 +1,0 @@
-cp a b
-patch b sw.diff (com a cópia de a em b, podemos recuperar o b a partir do que não contém em sw.diff
-usando o comando patch).
