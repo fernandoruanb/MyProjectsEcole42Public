@@ -17,11 +17,11 @@ int	main(void)
 	int	fd;
 	char	*line;
 
-	ft_printf("Funciona!!!\n");
+	ft_printf("Funciona %s, %c%c%c!!!\n", "Fernando", 'e', 'b', 'a');
 	fd = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		ft_printf("%s\n", line);
+		ft_printf("%s", line);
 		free(line);
 	}
 	return (0);

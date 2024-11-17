@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup_v2(const char *s1)
 {
 	char	*buffer;
 	size_t	length;
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 
 	if (!s1)
 		return (NULL);
-	length = ft_strlen(s1);
+	length = ft_strlen_v2(s1);
 	buffer = (char *)malloc(length + 1);
 	if (!buffer)
 		return (NULL);
@@ -49,7 +49,7 @@ char	*free_buffer(char **buffer, char **read_buf)
 	return (NULL);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc_v2(size_t nmemb, size_t size)
 {
 	size_t			length;
 	void			*buffer;
@@ -72,7 +72,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (buffer);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin_v2(const char *s1, const char *s2)
 {
 	size_t	len_s1;
 	size_t	len_s2;
@@ -81,8 +81,8 @@ char	*ft_strjoin(const char *s1, const char *s2)
 
 	if (!s1 && !s2)
 		return (NULL);
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
+	len_s1 = ft_strlen_v2(s1);
+	len_s2 = ft_strlen_v2(s2);
 	buffer = (char *)malloc(len_s1 + len_s2 + 1);
 	if (!buffer)
 		return (NULL);
@@ -95,7 +95,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (buffer);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr_v2(const char *s, unsigned int start, size_t len)
 {
 	size_t	length;
 	size_t	index;
@@ -103,9 +103,9 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	length = ft_strlen(s);
+	length = ft_strlen_v2(s);
 	if (start >= length)
-		return (ft_strdup(""));
+		return (ft_calloc_v2(1, sizeof(char)));
 	if ((start + len) > length)
 		len = length - start;
 	buffer = (char *)malloc(len + 1);

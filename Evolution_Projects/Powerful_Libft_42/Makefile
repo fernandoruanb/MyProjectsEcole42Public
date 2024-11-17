@@ -49,7 +49,16 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ft_strtrim.c\
 	$(SRCDIR)/ft_split.c\
 	$(SRCDIR)/get_next_line.c\
-	$(SRCDIR)/ft_printf.c
+	$(SRCDIR)/ft_printf.c\
+	$(SRCDIR)/parse_format.c\
+	$(SRCDIR)/convert_hex_to_str.c\
+	$(SRCDIR)/print_char.c\
+	$(SRCDIR)/print_str.c\
+	$(SRCDIR)/handle_specifier.c\
+	$(SRCDIR)/convert_int_to_str.c\
+	$(SRCDIR)/print_percentage.c\
+	$(SRCDIR)/convert_ptr_to_str.c\
+	$(SRCDIR)/convert_unsigned_to_str.c
 
 # BONUS SRCS
 
