@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 18:34:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/17 09:17:04 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/17 10:12:56 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/17 10:18:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
+#include <stdio.h>
+
+int	ft_strlen(char *str);
 
 int	main(int argc, char **argv)
 {
-	int	fd;
-	char	*line;
+	int	result;
 
-	ft_printf("Funciona %s, %c%c%c!!!\n", "Fernando", 'e', 'b', 'a');
-	rev_print("hello");
-	//first_word(argc, argv);
-	fizzbuzz(argc, argv);
-	fd = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		ft_printf("%s", line);
-		free(line);
-	}
-	return (0);
+	(void)argc;
+	result = ft_strlen(argv[1]);
+	printf("%d\n", result);
+	return (1);
+}
+
+int	ft_strlen(char *str)
+{
+	int	length;
+
+	length = 0;
+	while (str[length] != '\0')
+		length++;
+	return (length);
 }

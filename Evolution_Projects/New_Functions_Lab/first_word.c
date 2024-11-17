@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 23:27:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/16 23:27:59 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/17 08:24:32 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/17 08:28:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,21 @@
 int	main(int argc, char **argv)
 {
 	int	index;
-	int	pass;
 
-	if (argc < 2)
+	if (argc < 2 || argc > 2)
 	{
 		write(1, "\n", 1);
 		return (1);
 	}
-	index = 0;
-	pass = 0;
-	while ((argv[1][index] == ' ' || argv[index] == '\t') &&
-		(argv[1][index] != '\0'))
-                index++;
-	while ((argv[1][pass] >= 'a' && argv[1][pass] <= 'z')
-		|| (argv[1][pass] >= 'A' && argv[1][pass] <= 'Z')
-		|| (argv[1][pass] >= '0' && argv[2][pass] <= '9')
-		|| (argv[1][pass] == ',') && (argv[1][pass] != '\0'))
-		pass++;
-	write(1, &argv[1][index], pass);
+	index++;
+	while (argv[1][index] == ' ' || argv[1][index] == '\t')
+		index++;
+	while ((argv[1][index] != ' ' && argv[1][index] != '\t')
+		&& (argv[1][index] != '\0'))
+	{
+		write(1, &argv[1][index], 1);
+		index++;
+	}
 	write(1, "\n", 1);
+	return (0);
 }

@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 18:34:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/17 09:17:04 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/17 09:30:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/17 09:35:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*void	ft_putstr(char *str);
+
 int	main(int argc, char **argv)
 {
-	int	fd;
-	char	*line;
-
-	ft_printf("Funciona %s, %c%c%c!!!\n", "Fernando", 'e', 'b', 'a');
-	rev_print("hello");
-	//first_word(argc, argv);
-	fizzbuzz(argc, argv);
-	fd = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		ft_printf("%s", line);
-		free(line);
-	}
+	ft_putstr(argv[1]);
+	write(1, "\n", 1);
 	return (0);
+}*/
+
+void	ft_putstr(char *str)
+{
+	int	index;
+
+	index = 0;
+	while (str[index] != '\0')
+		write(1, &str[index++], 1);
 }
