@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/17 12:27:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:11:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,9 @@ char	*ft_strcpy(char *s1, char *s2);
 size_t	ultimate_ft_strlen(const char *s1, const char *s2, const char *s3);
 void	ft_swap(int *a, int *b);
 void	repeat_alpha(const char *str);
+void	rot_13(char letter);
+void	rotone(char letter);
+void	search_and_replace(char *c, const char search, const char replace);
+void	ulstr(char *str);
 
 #endif /* LIBFT_H */

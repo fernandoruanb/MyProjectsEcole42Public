@@ -66,7 +66,11 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ft_strcpy.c\
 	$(SRCDIR)/ultimate_ft_strlen.c\
 	$(SRCDIR)/ft_swap.c\
-	$(SRCDIR)/repeat_alpha.c
+	$(SRCDIR)/repeat_alpha.c\
+	$(SRCDIR)/rot_13.c\
+	$(SRCDIR)/rotone.c\
+	$(SRCDIR)/search_and_replace.c\
+	$(SRCDIR)/ulstr.c
 
 # BONUS SRCS
 
