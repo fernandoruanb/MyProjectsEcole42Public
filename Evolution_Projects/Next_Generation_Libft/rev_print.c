@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rev_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 18:34:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/16 18:43:06 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/16 23:00:52 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/16 23:00:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	main(void)
-{
-	int	fd;
-	char	*line;
+/*char	*rev_print(char *str);
 
-	ft_printf("Funciona %s, %c%c%c!!!\n", "Fernando", 'e', 'b', 'a');
-	rev_print("hello");
-	fd = 0;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		ft_printf("%s", line);
-		free(line);
-	}
+int	main(int argc, char **argv)
+{
+	char	*result;
+
+	result = rev_print(argv[1]);
+	ft_printf("\nString original: %s\n", result);
 	return (0);
+}*/
+
+char	*rev_print(char *str)
+{
+	size_t	length;
+
+	if (!str)
+		return (NULL);
+	length = ft_strlen(str);
+	while (length--)
+		write(1, &str[length], 1);
+	return (str);
 }

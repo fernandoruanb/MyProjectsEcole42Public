@@ -78,5 +78,6 @@ int		convert_int_to_str(va_list args);
 int		print_percentage(void);
 int		convert_ptr_to_str(va_list args);
 int		convert_unsigned_to_str(va_list args);
+char	*rev_print(char *str);
 
 #endif /* LIBFT_H */
