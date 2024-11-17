@@ -64,7 +64,9 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/fizzbuzz.c\
 	$(SRCDIR)/ft_putstr.c\
 	$(SRCDIR)/ft_strcpy.c\
-	$(SRCDIR)/ultimate_ft_strlen.c
+	$(SRCDIR)/ultimate_ft_strlen.c\
+	$(SRCDIR)/ft_swap.c\
+	$(SRCDIR)/repeat_alpha.c
 
 # BONUS SRCS
 

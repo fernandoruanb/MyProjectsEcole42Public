@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/17 10:30:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/17 12:27:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ void	fizzbuzz(int argc, char **argv);
 void	ft_putstr(char *str);
 char	*ft_strcpy(char *s1, char *s2);
 size_t	ultimate_ft_strlen(const char *s1, const char *s2, const char *s3);
+void	ft_swap(int *a, int *b);
+void	repeat_alpha(const char *str);
 
 #endif /* LIBFT_H */
