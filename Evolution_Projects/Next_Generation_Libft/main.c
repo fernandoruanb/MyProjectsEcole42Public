@@ -12,13 +12,14 @@
 
 #include "libft.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	int	fd;
 	char	*line;
 
 	ft_printf("Funciona %s, %c%c%c!!!\n", "Fernando", 'e', 'b', 'a');
 	rev_print("hello");
+	first_word(argc, argv);
 	fd = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{

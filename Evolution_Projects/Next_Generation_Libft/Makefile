@@ -59,7 +59,8 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/print_percentage.c\
 	$(SRCDIR)/convert_ptr_to_str.c\
 	$(SRCDIR)/convert_unsigned_to_str.c\
-	$(SRCDIR)/rev_print.c
+	$(SRCDIR)/rev_print.c\
+	$(SRCDIR)/first_word.c
 
 # BONUS SRCS
 
