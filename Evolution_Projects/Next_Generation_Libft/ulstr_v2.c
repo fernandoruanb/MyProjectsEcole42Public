@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ulstr.c                                            :+:      :+:    :+:   */
+/*   ulstr_v2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:45:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/18 14:57:16 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/18 14:57:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*void	ulstr(char *str);
+/*void	ulstr_v2(char *str);
 
 int	main(int argc, char **argv)
 {
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	return (0);
 }*/
 
-void	ulstr(char *str)
+void	ulstr_v2(char *str)
 {
 	size_t	index;
 	size_t	length;
@@ -43,4 +43,8 @@ void	ulstr(char *str)
 			str[index] += 32;
 		index++;
 	}
+	index = 0;
+	while (length--)
+		write(1, &str[length], 1);
+	write(1, "\n", 1);
 }
