@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/17 18:11:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/18 10:30:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ void	rot_13(char letter);
 void	rotone(char letter);
 void	search_and_replace(char *c, const char search, const char replace);
 void	ulstr(char *str);
+void	alpha_mirror(char *c);
+void	camel_to_snake(char *str);
 
 #endif /* LIBFT_H */

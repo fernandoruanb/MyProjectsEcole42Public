@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ulstr.c                                            :+:      :+:    :+:   */
+/*   alpha_mirror.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 17:18:22 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/18 07:46:37 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/18 07:52:28 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/18 08:20:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	ft_strlen(const char *s);
 
-void			ulstr(char *str);
+void			alpha_mirror(char *c);
 
 int	main(int argc, char **argv)
 {
@@ -26,30 +26,37 @@ int	main(int argc, char **argv)
 		write(1, "\n", 1);
 		return (1);
 	}
-	index = 0;
 	length = ft_strlen(argv[1]);
-	ulstr(argv[1]);
+	index = 0;
+	while (argv[1][index] != '\0')
+	{	
+		alpha_mirror(&argv[1][index]);
+		index++;
+	}
 	write(1, argv[1], length);
 	write(1, "\n", 1);
 	return (0);
 }
 
-void	ulstr(char *str)
+void	alpha_mirror(char *c)
 {
-	size_t	index;
-	size_t	length;
-	char	temp;
+	char	*alphabet_l;
+	char	*alphabet_u;
+	int		index;
+	int		s_index;
 
 	index = 0;
-	length = ft_strlen(str);
-	while (str[index] != '\0')
-	{
-		if (str[index] >= 'a' && str[index] <= 'z')
-			str[index] -= 32;
-		else if (str[index] >= 'A' && str[index] <= 'Z')
-			str[index] += 32;
+	s_index = 0;
+	alphabet_l = "abcdefghijklmnopqrstuvwxyz";
+	alphabet_u = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	while (alphabet_l[index] != *c && alphabet_l[index] != '\0')
 		index++;
-	}
+	if (alphabet_l[index] == *c)
+		*c = alphabet_l[25 - index];
+	while (alphabet_u[s_index] != *c && alphabet_u[s_index] != '\0')
+		s_index++;
+	if (alphabet_u[s_index] == *c)
+		*c = alphabet_u[25 - s_index];
 }
 
 static size_t	ft_strlen(const char *s)

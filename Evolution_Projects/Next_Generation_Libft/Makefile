@@ -70,7 +70,9 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/rot_13.c\
 	$(SRCDIR)/rotone.c\
 	$(SRCDIR)/search_and_replace.c\
-	$(SRCDIR)/ulstr.c
+	$(SRCDIR)/ulstr.c\
+	$(SRCDIR)/alpha_mirror.c\
+	$(SRCDIR)/camel_to_snake.c
 
 # BONUS SRCS
 
