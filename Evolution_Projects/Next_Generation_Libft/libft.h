@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/18 15:17:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:22:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void	camel_to_snake(char *str);
 int		do_op(const char *n1, const char operator, const char *n2);
 void	ulstr_v2(char *str);
 size_t	ft_strcspn(const char *s, const char *reject);
+char	*ft_strpbrk(const char *s1, const char *s2);
 
 #endif /* LIBFT_H */

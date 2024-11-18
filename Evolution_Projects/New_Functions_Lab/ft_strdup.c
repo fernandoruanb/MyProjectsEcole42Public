@@ -15,7 +15,7 @@
 
 static size_t	ft_strlen(const char *s);
 
-char	*ft_strdup(char *src);
+char			*ft_strdup(char *src);
 
 int	main(int argc, char **argv)
 {
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 
 char	*ft_strdup(char *src)
 {
-	int	index;
+	int		index;
 	char	*buffer;
 	size_t	length;
 
