@@ -31,11 +31,9 @@ int	main(int argc, char **argv)
 
 char	*ft_strpbrk(const char *s1, const char *s2)
 {
-	size_t	length;
 	size_t	index;
 
 	index = 0;
-	length = ft_strlen(s1);
 	while (s1[index] != '\0')
 	{
 		if (ft_strchr(s2, s1[index]))

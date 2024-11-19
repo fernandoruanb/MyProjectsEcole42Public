@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 	length = ft_strlen(argv[1]);
 	index = 0;
 	while (argv[1][index] != '\0')
-	{	
+	{
 		alpha_mirror(&argv[1][index]);
 		index++;
 	}

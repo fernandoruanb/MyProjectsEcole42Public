@@ -31,10 +31,8 @@ int	main(int argc, char **argv)
 void	ulstr(char *str)
 {
 	size_t	index;
-	size_t	length;
 
 	index = 0;
-	length = ft_strlen(str);
 	while (str[index] != '\0')
 	{
 		if (str[index] >= 'a' && str[index] <= 'z')

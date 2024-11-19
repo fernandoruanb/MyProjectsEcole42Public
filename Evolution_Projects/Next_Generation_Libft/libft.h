@@ -96,5 +96,6 @@ int		do_op(const char *n1, const char operator, const char *n2);
 void	ulstr_v2(char *str);
 size_t	ft_strcspn(const char *s, const char *reject);
 char	*ft_strpbrk(const char *s1, const char *s2);
+char	*ft_strrev(char *str);
 
 #endif /* LIBFT_H */
