@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/19 09:23:01 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:19:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ char	*ft_strpbrk(const char *s1, const char *s2);
 char	*ft_strrev(char *str);
 size_t	ft_strspn(const char *s, const char *accept);
 void	inter(const char *s1, const char *s2);
+int		is_power_of_2(unsigned int n);
 
 #endif /* LIBFT_H */

@@ -1,0 +1,17 @@
+1 - Obter arquitetura do sistema
+2 - Contar CPUs físicas
+3 - Contar CPUs virtuais
+4 - Memória RAM total MB
+5 - Memória RAM usada MB
+6 - Porcentagem de Memória RAM usada
+7 - Espaço total em Disco GB
+8 - Espaço usado em Disco MB
+9 - Porcentagem de Disco Usado
+10 - Carga da CPU
+11 - Último Boot do Sistema
+12 - Verificar uso de LVM
+13 - Conexões TCP Estabelecidas
+14 - Número de usuários logados
+15 - Endereço IP e MAC
+16 - Número de comandos sudo executados
+17 - Mensagem com Wall
