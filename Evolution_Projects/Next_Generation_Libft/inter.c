@@ -1,45 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrev.c                                        :+:      :+:    :+:   */
+/*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 22:01:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/19 09:24:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/19 09:05:00 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/19 09:20:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*char	*ft_strrev(char *str);
+/*void	inter(const char *s1, const char *s2);
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	char	str[8] = "Hello";
-	char	*result;
-
-	ft_printf("A string bonita para teste: %s\n", str);
-	result = ft_strrev(str);
-	ft_printf("Resultado: %s\n", result);
+	if (argc < 3)
+	{
+		write(1, "\n", 1);
+		return (1);
+	}
+	inter(argv[1], argv[2]);
+	write(1, "\n", 1);
 	return (0);
 }*/
 
-char	*ft_strrev(char *str)
+void	inter(const char *s1, const char *s2)
 {
-	size_t	index;
-	size_t	length;
-	char	temp;
+	char	array[256];
+	int		index;
+	int		s_index;
 
 	index = 0;
-	length = ft_strlen(str);
-	while (index < length)
+	s_index = 0;
+	while (s1[index] != '\0')
 	{
-		temp = str[index];
-		str[index] = str[length - 1];
-		str[length - 1] = temp;
+		if (ft_strchr(s2, s1[index]) && !ft_strchr(array, s1[index]))
+		{
+			write(1, &s1[index], 1);
+			array[s_index] = s1[index];
+			s_index++;
+		}
 		index++;
-		length--;
 	}
-	return (str);
 }

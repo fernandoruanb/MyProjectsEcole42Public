@@ -77,7 +77,9 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ulstr_v2.c\
 	$(SRCDIR)/ft_strcspn.c\
 	$(SRCDIR)/ft_strpbrk.c\
-	$(SRCDIR)/ft_strrev.c
+	$(SRCDIR)/ft_strrev.c\
+	$(SRCDIR)/ft_strspn.c\
+	$(SRCDIR)/inter.c
 
 # BONUS SRCS
 

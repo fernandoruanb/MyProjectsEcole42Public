@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:12:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/13 11:36:50 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:16:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	handle_specifier(char specifier, va_list args, int total)
+int	handle_specifier(char specifier, va_list args)
 {
 	int	printed;
 
@@ -32,10 +32,6 @@ int	handle_specifier(char specifier, va_list args, int total)
 	else if (specifier == 'p')
 		printed = convert_ptr_to_str(args);
 	else
-	{
-		if (total > 0)
-			return (-1);
 		write(1, "%", 1);
-	}
 	return (printed);
 }
