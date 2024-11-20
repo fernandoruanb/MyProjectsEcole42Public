@@ -80,7 +80,12 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ft_strrev.c\
 	$(SRCDIR)/ft_strspn.c\
 	$(SRCDIR)/inter.c\
-	$(SRCDIR)/is_power_of_2.c
+	$(SRCDIR)/is_power_of_2.c\
+	$(SRCDIR)/last_word.c\
+	$(SRCDIR)/max.c\
+	$(SRCDIR)/print_bits.c\
+	$(SRCDIR)/reverse_bits.c\
+	$(SRCDIR)/snake_to_camel.c
 
 # BONUS SRCS
 
