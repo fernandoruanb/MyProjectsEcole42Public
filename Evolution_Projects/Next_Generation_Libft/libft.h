@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/20 19:32:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:31:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,13 @@ int			max(int *tab, unsigned int len);
 void		print_bits(unsigned char octet);
 char		reverse_bits(char octet);
 void		snake_to_camel(char *s);
+char		swap_bits(char octet);
+void		union_display(const char *s1, const char *s2);
+void		wdmatch(const char *s1, const char *s2);
+void		ft_putnbr(int n);
+int			is_prime(int n);
+void		add_prime_num(int argc, char **argv);
+void		epur_str(const char *str);
+void		expand_str(const char *str);
 
 #endif /* LIBFT_H */

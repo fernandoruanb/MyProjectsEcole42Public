@@ -85,7 +85,15 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/max.c\
 	$(SRCDIR)/print_bits.c\
 	$(SRCDIR)/reverse_bits.c\
-	$(SRCDIR)/snake_to_camel.c
+	$(SRCDIR)/snake_to_camel.c\
+	$(SRCDIR)/swap_bits.c\
+	$(SRCDIR)/union.c\
+	$(SRCDIR)/wdmatch.c\
+	$(SRCDIR)/ft_putnbr.c\
+	$(SRCDIR)/is_prime.c\
+	$(SRCDIR)/add_prime_num.c\
+	$(SRCDIR)/epur_str.c\
+	$(SRCDIR)/expand_str.c
 
 # BONUS SRCS
 
