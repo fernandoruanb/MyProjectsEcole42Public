@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/22 15:18:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:09:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ int			ft_atoi_base(const char *str, int str_base);
 int			ft_list_size(t_list *begin_list);
 int			ft_abs(int n);
 int			*ft_range(int start, int end);
+int			*ft_rrange(int start, int end);
 
 #endif /* LIBFT_H */
