@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/21 19:31:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:18:13 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,11 @@ int			is_prime(int n);
 void		add_prime_num(int argc, char **argv);
 void		epur_str(const char *str);
 void		expand_str(const char *str);
+int			get_decimal_digit(char c, int str_base);
+char		to_lower(const char c);
+int			ft_atoi_base(const char *str, int str_base);
+int			ft_list_size(t_list *begin_list);
+int			ft_abs(int n);
+int			*ft_range(int start, int end);
 
 #endif /* LIBFT_H */

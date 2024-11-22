@@ -93,7 +93,12 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/is_prime.c\
 	$(SRCDIR)/add_prime_num.c\
 	$(SRCDIR)/epur_str.c\
-	$(SRCDIR)/expand_str.c
+	$(SRCDIR)/expand_str.c\
+	$(SRCDIR)/get_decimal_digit.c\
+	$(SRCDIR)/to_lower.c\
+	$(SRCDIR)/ft_atoi_base.c\
+	$(SRCDIR)/ft_abs.c\
+	$(SRCDIR)/ft_range.c
 
 # BONUS SRCS
 
@@ -105,7 +110,8 @@ BONUS_SRCS = 	$(SRCDIR)/ft_lstnew_bonus.c\
 		$(SRCDIR)/ft_lstdelone_bonus.c\
 		$(SRCDIR)/ft_lstclear_bonus.c\
 		$(SRCDIR)/ft_lstiter_bonus.c\
-		$(SRCDIR)/ft_lstmap_bonus.c
+		$(SRCDIR)/ft_lstmap_bonus.c\
+		$(SRCDIR)/ft_list_size.c
 
 # Archives .o
 
