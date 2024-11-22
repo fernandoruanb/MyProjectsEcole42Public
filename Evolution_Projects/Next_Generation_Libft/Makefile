@@ -99,7 +99,8 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ft_atoi_base.c\
 	$(SRCDIR)/ft_abs.c\
 	$(SRCDIR)/ft_range.c\
-	$(SRCDIR)/ft_rrange.c
+	$(SRCDIR)/ft_rrange.c\
+	$(SRCDIR)/hidenp.c
 
 # BONUS SRCS
 
