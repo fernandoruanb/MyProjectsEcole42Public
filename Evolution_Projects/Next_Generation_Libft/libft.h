@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/22 19:00:56 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/23 14:30:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,9 @@ int			ft_abs(int n);
 int			*ft_range(int start, int end);
 int			*ft_rrange(int start, int end);
 void		hidenp(const char *s1, const char *s2);
+int			lcm(int a, int b);
+int			paramsum(int argc);
+int			pgcd(int nbr1, int nbr2);
+void		print_hex(int n);
 
 #endif /* LIBFT_H */

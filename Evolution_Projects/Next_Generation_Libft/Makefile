@@ -100,7 +100,11 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ft_abs.c\
 	$(SRCDIR)/ft_range.c\
 	$(SRCDIR)/ft_rrange.c\
-	$(SRCDIR)/hidenp.c
+	$(SRCDIR)/hidenp.c\
+	$(SRCDIR)/lcm.c\
+	$(SRCDIR)/paramsum.c\
+	$(SRCDIR)/pgcd.c\
+	$(SRCDIR)/print_hex.c
 
 # BONUS SRCS
 
