@@ -117,7 +117,9 @@ BONUS_SRCS = 	$(SRCDIR)/ft_lstnew_bonus.c\
 		$(SRCDIR)/ft_lstclear_bonus.c\
 		$(SRCDIR)/ft_lstiter_bonus.c\
 		$(SRCDIR)/ft_lstmap_bonus.c\
-		$(SRCDIR)/ft_list_size.c
+		$(SRCDIR)/ft_list_size.c\
+		$(SRCDIR)/ft_list_foreach.c\
+		$(SRCDIR)/ft_list_remove_if.c
 
 # Archives .o
 
