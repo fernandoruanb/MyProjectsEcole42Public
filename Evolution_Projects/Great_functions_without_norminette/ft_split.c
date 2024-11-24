@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/24 15:38:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/24 16:20:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv)
 	int	index;
 	char	**result;
 
+	(void)argc;
 	result = ft_split(argv[1]);
 	index = 0;
 	while (result[index] != NULL)
