@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		write(1, "\n", 1);
 		return (1);
 	}
-	index++;
+	index = 0;
 	while (argv[1][index] == ' ' || argv[1][index] == '\t')
 		index++;
 	while ((argv[1][index] != ' ' && argv[1][index] != '\t')
