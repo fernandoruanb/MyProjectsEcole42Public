@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/23 17:04:16 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:34:50 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,8 @@ int			pgcd(int nbr1, int nbr2);
 void		print_hex(int n);
 void		ft_list_foreach(t_list begin_list, void (*f)(void *));
 void		ft_list_remove_if(t_list **begin_list, char data_ref, int (*cmp)());
+int			int_ft_strlen(const char *s);
+void		rev_wstr(const char *str);
+void		rostring(const char *str, int index);
 
 #endif /* LIBFT_H */
