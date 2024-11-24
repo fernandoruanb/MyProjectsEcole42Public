@@ -108,7 +108,8 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/int_ft_strlen.c\
 	$(SRCDIR)/rev_wstr.c\
 	$(SRCDIR)/rostring.c\
-	$(SRCDIR)/sort_int_tab.c
+	$(SRCDIR)/sort_int_tab.c\
+	$(SRCDIR)/fprime.c
 
 # BONUS SRCS
 
