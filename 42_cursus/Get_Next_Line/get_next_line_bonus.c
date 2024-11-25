@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -92,18 +92,18 @@ char	*read_to_buffer(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffers[1024];
 	char		*line;
 
-	if (fd == -1 || BUFFER_SIZE <= 0)
+	if (fd == -1 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = read_to_buffer(fd, buffer);
-	if (!buffer)
+	buffers[fd] = read_to_buffer(fd, buffers[fd]);
+	if (!buffers[fd])
 		return (NULL);
-	line = extract_line(&buffer);
+	line = extract_line(&buffers[fd]);
 	if (!line)
-	{	
-		free_buffer(&buffer, NULL);
+	{
+		free_buffer(&buffers[fd], NULL);
 		return (NULL);
 	}
 	return (line);

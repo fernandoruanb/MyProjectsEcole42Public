@@ -102,7 +102,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = extract_line(&buffer);
 	if (!line)
-	{	
+	{
 		free_buffer(&buffer, NULL);
 		return (NULL);
 	}

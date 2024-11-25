@@ -31,4 +31,4 @@ void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
 
-#endif /* GET_NEXT_LINE_H */
+#endif /* GET_NEXT_LINE_BONUS_H */
