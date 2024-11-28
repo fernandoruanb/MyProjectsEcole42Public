@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/28 08:58:05 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:09:32 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,6 @@ void		rostring(const char *str, int index);
 void		sort_int_tab(int *tab, unsigned int size);
 void		fprime(int number);
 void		tab_mult(int number);
+void		str_capitalizer(char *str);
 
 #endif /* LIBFT_H */
