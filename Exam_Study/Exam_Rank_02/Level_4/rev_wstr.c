@@ -41,7 +41,8 @@ int	main(int argc, char **argv)
 			write(1, &argv[1][start], 1);
 			start++;
 		}
-		write(1, " ", 1);
+		if (length - 1 > 0)
+			write(1, " ", 1);
 	}
 	write(1, "\n", 1);
 	return (0);
