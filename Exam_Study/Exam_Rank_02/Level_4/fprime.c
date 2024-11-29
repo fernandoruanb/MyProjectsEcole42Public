@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	number = atoi(argv[1]);
 	if (number == 1)
 	{
-		write(1, "1", 1);
+		write(1, "1\n", 2);
 		return (0);
 	}
 	fprime(number);
