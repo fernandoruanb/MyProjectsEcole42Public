@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/24 16:20:01 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:08:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	ft_strlen(const char *s);
 
 void	free_memory(char ***str_list, int allocated);
 
-void	fill_arr(int size, const char *str, char ***str_list);
+int	fill_arr(int size, const char *str, char ***str_list);
 
 int	count_words(const char *str);
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 	while (result[index] != NULL)
 	{
 		printf("Array [%d]: %s\n", index, result[index]);
+		free(result[index]);
 		index++;
 	}
 	free(result);
@@ -57,7 +58,11 @@ char	**ft_split(char *str)
 	str_list = (char **)ft_calloc(size + 1, sizeof(char *));
 	if (!str_list)
 		return (NULL);
-	fill_arr(size, str, &str_list);
+	if(!fill_arr(size, str, &str_list))
+	{
+		free(str_list);
+		return (NULL);
+	}
 	return (str_list);
 }
 
@@ -88,7 +93,7 @@ int	count_words(const char *str)
 	return (count);
 }
 
-void	fill_arr(int size, const char *str, char ***str_list)
+int	fill_arr(int size, const char *str, char ***str_list)
 {
 	int	counter;
 	int	index;
@@ -110,13 +115,14 @@ void	fill_arr(int size, const char *str, char ***str_list)
 		if (!test)
 		{
 			free_memory(str_list, counter);
-			return ;
+			return (0);
 		}
 		(*str_list)[counter] = test;
 		counter++;
 		index += pass;
 	}
-	(*str_list)[size] = 0;
+	(*str_list)[size] = NULL;
+	return (1);
 }
 
 void	free_memory(char ***str_list, int allocated)
