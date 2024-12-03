@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-/*void	ft_putstr_fd(const char *s, int fd);
+/*int	ft_putstr_fd(const char *s, int fd);
 
 int	main(void)
 {
@@ -20,7 +20,7 @@ int	main(void)
 	return (0);
 }*/
 
-void	ft_putstr_fd(const char *s, int fd)
+int	ft_putstr_fd(const char *s, int fd)
 {
 	int	index;
 
@@ -30,4 +30,5 @@ void	ft_putstr_fd(const char *s, int fd)
 		write(fd, &s[index], 1);
 		index++;
 	}
+	return (1);
 }

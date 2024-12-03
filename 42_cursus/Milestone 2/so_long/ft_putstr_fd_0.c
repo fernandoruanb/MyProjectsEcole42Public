@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 17:51:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/03 17:59:10 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/03 15:09:15 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/03 15:58:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
-{
-	t_game	game;
+/*int	ft_putstr_fd(const char *s, int fd);
 
-	if (argc < 2)
-		return (ft_putstr_fd("Uso: ./so_long <mapa.ber>.\n", 2));
-	if (!init_game(&game, argv[1]))
-		return (ft_putstr_fd("Erro na inicialização. Entrada inválida.\n", 2));
-	render_map(&game);
-	mlx_key_hook(game.win_ptr, key_press, &game);
-	mlx_hook(game.win_ptr, 17, 0, close_game, &game);
-	mlx_loop(game.mlx_ptr);
-	free_game(&game);
+int	main(void)
+{
+	ft_putstr_fd("Número inválido de argumentos.\n", 2);
+	return (0);
+}*/
+
+int	ft_putstr_fd(const char *s, int fd)
+{
+	int	index;
+
+	index = 0;
+	while (s[index] != '\0')
+	{
+		write(fd, &s[index], 1);
+		index++;
+	}
 	return (0);
 }

@@ -15,6 +15,9 @@
 
 # include <unistd.h>
 
-void	ft_putstr_fd(const char *s, int fd);
+int		ft_putstr_fd(const char *s, int fd);
+int		ft_putstr_fd_0(const char *s, int fd);
+int		init_game(t_game *game, char *map_file);
+size_t	ft_strlen(const char *s);
 
 #endif /* SO_LONG_H */
