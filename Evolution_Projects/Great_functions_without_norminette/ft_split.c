@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:55:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/29 12:08:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:22:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_calloc(size_t nmemb, size_t size);
 
 size_t	ft_strlen(const char *s);
 
-void	free_memory(char ***str_list, int allocated);
+int	free_memory(char ***str_list, int allocated);
 
 int	fill_arr(int size, const char *str, char ***str_list);
 
@@ -113,10 +113,7 @@ int	fill_arr(int size, const char *str, char ***str_list)
 			pass++;
 		test = ft_substr((char *)&str[index], 0, pass);
 		if (!test)
-		{
-			free_memory(str_list, counter);
-			return (0);
-		}
+			return (free_memory(str_list, counter));
 		(*str_list)[counter] = test;
 		counter++;
 		index += pass;
@@ -125,12 +122,12 @@ int	fill_arr(int size, const char *str, char ***str_list)
 	return (1);
 }
 
-void	free_memory(char ***str_list, int allocated)
+int	free_memory(char ***str_list, int allocated)
 {
 	int	index;
 
 	if (!str_list || !*str_list)
-		return ;
+		return (1);
 	index = 0;
 	while (index < allocated)
 	{
@@ -138,6 +135,7 @@ void	free_memory(char ***str_list, int allocated)
 		index++;
 	}
 	*str_list = NULL;
+	return (1);
 }
 
 size_t	ft_strlen(const char *s)

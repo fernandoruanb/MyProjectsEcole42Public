@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:11:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/27 11:35:19 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:20:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int argc, char **argv)
 	}
 	result = ft_itoa(atoi(argv[1]));
 	printf("%s\n", result);
+	free(result);
 	return (0);
 }
 
