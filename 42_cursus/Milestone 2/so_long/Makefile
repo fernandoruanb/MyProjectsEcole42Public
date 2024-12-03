@@ -14,11 +14,12 @@ INCDIR = .
 
 # SRCS
 
-SRCS =  $(SRCDIR)/ft_putstr_fd.c
+SRCS =  $(SRCDIR)/main.c\
+	$(SRCDIR)/ft_putstr_fd.c
 
 # OBJS
 
-OBJS = $(SRCS:$(SRCDIR)%.c=%.o)
+OBJS = $(SRCS:$(SRCDIR)/%.c=%.o)
 
 # Main
 
@@ -27,11 +28,11 @@ all: $(NAME)
 # Main rule
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $?
+	$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS)
 
 # clear
 
-clear:
+clean:
 	rm -f $(OBJS)
 
 # Full clear
@@ -43,5 +44,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all fclean clear re 
-	
+.PHONY: all fclean clear re 	

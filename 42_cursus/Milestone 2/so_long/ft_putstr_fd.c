@@ -6,11 +6,11 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:09:15 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/03 15:12:05 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:58:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../includes/so_long.h>
+#include "so_long.h"
 
 /*void	ft_putstr_fd(const char *s, int fd);
 

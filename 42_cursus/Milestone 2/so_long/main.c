@@ -6,11 +6,11 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:01:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/03 15:14:40 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:59:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "so_long.h"
 
 int	main(int argc, char **argv)
 {
