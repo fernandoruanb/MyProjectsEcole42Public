@@ -29,7 +29,11 @@ SRCS =  $(SRCDIR)/main.c\
 	$(SRCDIR)/convert_hex_to_str.c\
 	$(SRCDIR)/convert_unsigned_to_str.c\
 	$(SRCDIR)/convert_ptr_to_str.c\
-	$(SRCDIR)/print_percentage.c
+	$(SRCDIR)/print_percentage.c\
+	$(SRCDIR)/ft_putstr_fd_n.c\
+	$(SRCDIR)/ft_calloc.c\
+	$(SRCDIR)/read_map.c\
+	$(SRCDIR)/validate_map.c
 
 # OBJS
 

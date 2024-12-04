@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/04 12:14:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:40:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # endif /* TILE_SIZE */
 
 # include <stdlib.h>
+# include <stdarg.h>
 # include <unistd.h>
 # include <mlx.h>
 # include <fcntl.h>
@@ -26,8 +27,8 @@ typedef struct s_game
 	void	*mlx_ptr;
 	void	*win_ptr;
 	char	**map;
-	int		map_width;
-	int		map_height;
+	int		width;
+	int		height;
 	int		player_x;
 	int		player_y;
 	int		collectibles;
@@ -54,5 +55,9 @@ int		convert_int_to_str(va_list args);
 int		convert_hex_to_str(va_list args, char specifier);
 int		convert_ptr_to_str(va_list args);
 int		convert_unsigned_to_str(va_list args);
+char	*ft_putstr_fd_n(const char *s, int fd);
+void	*ft_calloc(size_t nmemb, size_t size);
+char	**read_map(char *filename);
+int		validate_map(char **map);
 
 #endif /* SO_LONG_H */

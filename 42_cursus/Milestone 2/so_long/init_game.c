@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 19:44:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/03 19:44:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:37:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	init_game(t_game *game, char *map_file)
 {
 	game->moves = 0;
 	game->collectibles = 0;
-	game->map = read_map(map_file, game);
+	game->map = read_map(map_file);
 	if (!game->map || !validate_map(game->map, game))
 		return (ft_putstr_fd_0("Mapa inválido ou leitura falhou.\n", 2));
 	game->mlx_ptr = mlx_init();
@@ -26,8 +26,8 @@ int	init_game(t_game *game, char *map_file)
 	game->height = 0;
 	while (game->map[game->map_height])
 		game->map_height++;
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map_width * TILE_SIZE,
-			game->map_height * TILE_SIZE, "so_long");
+	game->win_ptr = mlx_new_window(game->mlx_ptr, game->width * TILE_SIZE,
+			game->height * TILE_SIZE, "so_long");
 	if (!game->win_ptr)
 		return (ft_putstr_fd_0("Falha ao abrir a janela.\n", 2));
 	if (!load_textures(game))
