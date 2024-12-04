@@ -18,7 +18,18 @@ SRCS =  $(SRCDIR)/main.c\
 	$(SRCDIR)/ft_putstr_fd.c\
 	$(SRCDIR)/ft_putstr_fd_0.c\
 	$(SRCDIR)/init.game.c\
-	$(SRCDIR)/ft_strlen.c
+	$(SRCDIR)/ft_strlen.c\
+	$(SRCDIR)/get_next_line.c\
+	$(SRCDIR)/ft_printf.c\
+	$(SRCDIR)/parse_format.c\
+	$(SRCDIR)/handle_specifier.c\
+	$(SRCDIR)/print_char.c\
+	$(SRCDIR)/print_str.c\
+	$(SRCDIR)/convert_int_to_str.c\
+	$(SRCDIR)/convert_hex_to_str.c\
+	$(SRCDIR)/convert_unsigned_to_str.c\
+	$(SRCDIR)/convert_ptr_to_str.c\
+	$(SRCDIR)/print_percentage.c
 
 # OBJS
 
