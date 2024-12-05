@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/05 12:34:40 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:40:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		convert_unsigned_to_str(va_list args);
 char	*ft_putstr_fd_n(const char *s, int fd);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	**read_map(char *filename);
-int		validate_map(char **map);
+int		validate_map(char **map, t_game *game);
 void	render_map(char **map, t_game *game);
 int		load_textures(t_game *game);
 void	free_game(t_game **game);

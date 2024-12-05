@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:44:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/04 18:05:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:54:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*ft_strchr_v3(const char *s, int c)
 	return (NULL);
 }
 
-static int	check_elements(char **map)
+static int	check_elements(char **map, t_game *game)
 {
 	char	*set;
 	int		index;
@@ -47,6 +47,13 @@ static int	check_elements(char **map)
 		{
 			if (!ft_strchr(set, map[index][s_index]))
 				return (0);
+			if (map[index][s_index] == 'C')
+				game->collectible++;
+			if (map[index][s_index] == 'P')
+			{
+				game->player_x = index;
+				game->player_y = s_index;
+			}
 			s_index++;
 		}
 		index++;
@@ -101,13 +108,13 @@ static int	is_rectangular(char **map)
 	return (1);
 }
 
-int	validate_map(char **map)
+int	validate_map(char **map, t_game *game)
 {
 	if (!is_rectangular(map))
-		return (ft_putstr_fd_0("O mapa não é retangular.\n", 2));
+		return (ft_putstr_fd_0("The map is not rectangular.\n", 2));
 	if (!is_surrounded_by_walls(map))
-		return (ft_putstr_fd_0("O mapa não é cercado por paredes.\n", 2));
-	if (!check_elements(map))
-		return (ft_putstr_fd_0("O mapa contém elementos incorretos.\n", 2));
+		return (ft_putstr_fd_0("The map isn't surrounded by walls.\n", 2));
+	if (!check_elements(map, game))
+		return (ft_putstr_fd_0("There is/are invalid elements on map.\n", 2));
 	return (1);
 }
