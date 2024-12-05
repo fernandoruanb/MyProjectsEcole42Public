@@ -35,7 +35,9 @@ SRCS =  $(SRCDIR)/main.c\
 	$(SRCDIR)/read_map.c\
 	$(SRCDIR)/validate_map.c\
 	$(SRCDIR)/render_map.c\
-	$(SRCDIR)/load_textures.c
+	$(SRCDIR)/load_textures.c\
+	$(SRCDIR)/free_game.c\
+	$(SRCDIR)/key_press.c
 
 # OBJS
 

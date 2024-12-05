@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/05 10:11:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:34:40 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ char	**read_map(char *filename);
 int		validate_map(char **map);
 void	render_map(char **map, t_game *game);
 int		load_textures(t_game *game);
+void	free_game(t_game **game);
+void	key_press(int keycode, t_game *game);
 
 #endif /* SO_LONG_H */

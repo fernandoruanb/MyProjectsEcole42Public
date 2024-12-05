@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test_keycode_mlx.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 17:51:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/05 12:27:37 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/05 11:26:56 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/05 11:31:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include <stdio.h>
+#include <mlx.h>
 
-int	main(int argc, char **argv)
+int	key_press(int keycode, void *param)
 {
-	t_game	game;
+	(void)param;
+	printf("Keycode: %d\n", keycode);
+	return (0);
+}
 
-	if (argc < 2)
-		return (ft_putstr_fd("how to use: ./so_long <mapa.ber>.\n", 2));
-	if (!init_game(&game, argv[1]))
-		return (ft_putstr_fd("Inicialization error.\n", 2));
-	render_map(&game);
-	mlx_key_hook(game.win_ptr, key_press, &game);
-	mlx_hook(game.win_ptr, 17, 0, free_game, &game);
-	mlx_loop(game.mlx_ptr);
-	free_game(&game);
+int	main(void)
+{
+	void	*mlx;
+	void	*win;
+
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 800, 600, "Keycode Test");
+	mlx_key_hook(win, key_press, NULL);
+	mlx_loop(mlx);
 	return (0);
 }

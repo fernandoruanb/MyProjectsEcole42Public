@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:45:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/05 08:43:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:53:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	**read_map(char *filename)
 	index = 0;
 	while (index < lines)
 		map[index++] = get_next_line(file_descriptor);
+	map[lines] = NULL;
 	close(file_descriptor);
 	return (map);
 }

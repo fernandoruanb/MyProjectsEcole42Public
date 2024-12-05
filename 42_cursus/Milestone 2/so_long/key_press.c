@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 17:51:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/05 12:27:37 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/05 12:27:48 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/05 12:32:50 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+void	key_press(int keycode, t_game *game)
 {
-	t_game	game;
-
-	if (argc < 2)
-		return (ft_putstr_fd("how to use: ./so_long <mapa.ber>.\n", 2));
-	if (!init_game(&game, argv[1]))
-		return (ft_putstr_fd("Inicialization error.\n", 2));
-	render_map(&game);
-	mlx_key_hook(game.win_ptr, key_press, &game);
-	mlx_hook(game.win_ptr, 17, 0, free_game, &game);
-	mlx_loop(game.mlx_ptr);
-	free_game(&game);
-	return (0);
+	if (keycode == 65307)
+		free_game(&game);
+	else if (keycode == 119 || keycode == 65362)
+		move_player(game, -1, 0);
+	else if (keycode == 115 || keycode == 65364)
+		move_player(game, 1, 0);
+	else if (keycode == 97 || keycode == 65361)
+		move_player(game, 0, -1);
+	else if (keycode == 100 || keycode == 65363)
+		move_player(game, 0, 1);
 }
