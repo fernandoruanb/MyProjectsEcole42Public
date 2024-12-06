@@ -6,14 +6,14 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/06 12:30:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 12:47:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # ifndef TILE_SIZE
-#  define TILE_SIZE 32
+#  define TILE_SIZE 128
 # endif /* TILE_SIZE */
 
 # include <stdlib.h>
