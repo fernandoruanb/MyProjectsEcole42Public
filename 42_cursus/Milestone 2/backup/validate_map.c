@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:44:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/06 09:58:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:42:53 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static int	check_each_el(char el)
 	static int	count_e;
 	char		*set;
 
-	count_p = 0;
-	count_e = 0;
+	if (!count_p)
+		count_p = 0;
+	if (!count_e)
+		count_e = 0;
 	set = "PCE01\n";
 	if (el == 'P')
 		count_p++;
