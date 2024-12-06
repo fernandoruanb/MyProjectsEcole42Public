@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 12:27:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/06 12:28:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 13:01:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	move_player(t_game *game, int mod_x, int mod_y, char **map)
 
 	new_x = game->player_x + mod_x;
 	new_y = game->player_y + mod_y;
-	if (new_y < 0 || new_y >= game->height || new_x < 0 || new_x >= game->width)
+	if (new_y < 0 || new_y > game->height || new_x < 0 || new_x > game->width)
 		return ;
 	next_tile = game->map[new_x][new_y];
 	if (next_tile == '1' || 

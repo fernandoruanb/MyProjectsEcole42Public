@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 09:28:42 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/06 11:31:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 13:20:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	main_imgs(t_game *game, int *width, int *heigth)
 {
 	game->player_img = mlx_xpm_file_to_image(game->mlx_ptr,
-			"textures/Kaelor.xpm", width, heigth);
+			"textures/Cat.xpm", width, heigth);
 	if (!game->player_img)
 		return (ft_putstr_fd_0("Error loading player_img.\n", 2));
 	if (*width != TILE_SIZE || *heigth != TILE_SIZE)
