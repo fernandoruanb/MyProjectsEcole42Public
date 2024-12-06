@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 19:44:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/06 11:46:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:27:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	init_game(t_game *game, char *map_file)
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 		return (ft_putstr_fd_0("Error! Wrong connection MLX\n.", 2));
-	game->width = ft_strlen(game->map[0]);
+	game->width = ft_strlen(game->map[0]) - 1;
 	game->height = 0;
 	while (game->map[game->height])
 		game->height++;

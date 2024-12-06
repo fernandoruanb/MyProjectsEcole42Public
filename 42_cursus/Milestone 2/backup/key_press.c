@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 12:27:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/06 13:01:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:24:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	move_player(t_game *game, int mod_x, int mod_y, char **map)
 
 	new_x = game->player_x + mod_x;
 	new_y = game->player_y + mod_y;
-	if (new_y < 0 || new_y > game->height || new_x < 0 || new_x > game->width)
+	if (new_y < 0 || new_x < 0)
 		return ;
 	next_tile = game->map[new_x][new_y];
 	if (next_tile == '1' || 
@@ -66,5 +66,12 @@ int	key_press(int keycode, t_game *game)
 		move_player(game, 0, -1, game->map);
 	else if (keycode == 100 || keycode == 65363)
 		move_player(game, 0, 1, game->map);
+	if (keycode == 119 || keycode == 65362 || keycode == 115
+		|| keycode == 65364 || keycode == 97 || keycode == 65361
+		|| keycode == 100 || keycode == 65363)
+	{
+		game->moves++;
+		ft_printf("You tried %d movements.\n", game->moves);
+	}
 	return (0);
 }

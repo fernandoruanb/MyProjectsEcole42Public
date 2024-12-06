@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 10:58:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/05 19:15:21 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:10:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 static void	check_other_things(t_game *game)
 {
-	if (game->wall_img)
-		mlx_destroy_image(game->mlx_ptr, game->wall_img);
-	if (game->win_ptr)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-}
-
-int	free_game(t_game *game)
-{
 	int	index;
 
+	index = 0;
 	if (game->map)
 	{
-		index = 0;
-		while (game->map[index] != NULL)
+		while (game->map[index])
 		{
 			free(game->map[index]);
 			index++;
 		}
-		free(game);
+		free(game->map);
 	}
+	if (game->mlx_ptr)
+		mlx_destroy_display(game->mlx_ptr);
+}
+
+int	free_game(t_game *game)
+{
+	if (game->win_ptr)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	if (game->player_img)
 		mlx_destroy_image(game->mlx_ptr, game->player_img);
 	if (game->floor_img)
@@ -42,7 +42,10 @@ int	free_game(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->collectible_img);
 	if (game->exit_img)
 		mlx_destroy_image(game->mlx_ptr, game->exit_img);
-	check_other_things(game);
+	if (game->wall_img)
+		mlx_destroy_image(game->mlx_ptr, game->wall_img);
+	if (game)
+		check_other_things(game);
 	exit(0);
 	return (0);
 }
