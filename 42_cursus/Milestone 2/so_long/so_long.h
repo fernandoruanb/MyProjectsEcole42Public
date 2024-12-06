@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/05 19:45:01 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 12:30:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	render_map(char **map, t_game *game);
 int		load_textures(t_game *game);
 int		free_game(t_game *game);
 int		key_press(int keycode, t_game *game);
+char	*ft_strchr_v3(const char *s, int c);
 
 #endif /* SO_LONG_H */

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 19:44:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/05 18:54:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:46:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	init_game(t_game *game, char *map_file)
 {
 	game->moves = 0;
-	game->collectibles = 0;
+	game->collectible = 0;
 	game->map = read_map(map_file);
 	if (!game->map || !validate_map(game->map, game))
 		return (ft_putstr_fd_0("Invalid map file.\n", 2));

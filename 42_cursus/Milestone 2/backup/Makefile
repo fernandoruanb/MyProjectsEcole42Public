@@ -5,17 +5,19 @@ NAME = so_long
 # Compilers and flags
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -L /usr/local/lib -lmlx -lXext -lX11 -lm -lbsd
+CFLAGS = -Wall -Werror -Wextra 
+MLXFLAGS = -L $(MLXDIR) -lmlx -lXext -lX11 -lm
 
 # Directories
 
 SRCDIR = .
 INCDIR = .
+MLXDIR = /usr/local/lib
 
 # SRCS
 
 SRCS =  $(SRCDIR)/main.c\
-	$(SRCDIR)/ft_putstr_fd.c\
+	$(SRCDIR)/ft_putstr_fd_1.c\
 	$(SRCDIR)/ft_putstr_fd_0.c\
 	$(SRCDIR)/init_game.c\
 	$(SRCDIR)/ft_strlen.c\
@@ -37,7 +39,9 @@ SRCS =  $(SRCDIR)/main.c\
 	$(SRCDIR)/render_map.c\
 	$(SRCDIR)/load_textures.c\
 	$(SRCDIR)/free_game.c\
-	$(SRCDIR)/key_press.c
+	$(SRCDIR)/key_press.c\
+	$(SRCDIR)/get_next_line_utils.c\
+	$(SRCDIR)/ft_strchr_v3.c
 
 # OBJS
 
@@ -50,7 +54,7 @@ all: $(NAME)
 # Main rule
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -I $(INCDIR) -I $(MLXDIR) -o $(NAME) $(OBJS) $(MLXFLAGS)
 
 # clear
 
@@ -66,4 +70,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all fclean clear re 	
+.PHONY: all fclean clear re	

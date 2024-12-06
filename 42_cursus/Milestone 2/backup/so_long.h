@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/05 18:58:35 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 12:30:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_game
 	void	*floor_img;
 }	t_game;
 
-int		ft_putstr_fd(const char *s, int fd);
+int		ft_putstr_fd_1(const char *s, int fd);
 int		ft_putstr_fd_0(const char *s, int fd);
 int		init_game(t_game *game, char *map_file);
 size_t	ft_strlen(const char *s);
@@ -63,5 +63,6 @@ void	render_map(char **map, t_game *game);
 int		load_textures(t_game *game);
 int		free_game(t_game *game);
 int		key_press(int keycode, t_game *game);
+char	*ft_strchr_v3(const char *s, int c);
 
 #endif /* SO_LONG_H */

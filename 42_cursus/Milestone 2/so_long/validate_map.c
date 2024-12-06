@@ -6,54 +6,54 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:44:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/05 19:45:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 09:58:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static char	*ft_strchr_v3(const char *s, int c)
+static int	check_each_el(char el)
 {
-	size_t	length;
-	size_t	index;
+	static int	count_p;
+	static int	count_e;
+	char		*set;
 
-	if (!s)
-		return (NULL);
-	index = 0;
-	length = 0;
-	while (s[length] != '\0')
-		length++;
-	while (s[index] != '\0')
-	{
-		if (s[index] == (unsigned char)c)
-			return ((char *)&s[index]);
-		index++;
-	}
-	return (NULL);
+	count_p = 0;
+	count_e = 0;
+	set = "PCE01\n";
+	if (el == 'P')
+		count_p++;
+	if (el == 'P' && count_p > 1)
+		return (0);
+	if (el == 'E')
+		count_e++;
+	if (el == 'E' && count_e > 1)
+		return (0);
+	if (!ft_strchr_v3(set, el))
+		return (0);
+	return (1);
 }
 
-static int	check_elements(char **map, t_game *game)
+static int	check_els(char **map, t_game *game)
 {
-	char	*set;
 	int		index;
 	int		s_index;
 
-	set = "01PCE";
 	index = 0;
 	while (map[index] != NULL)
 	{
 		s_index = 0;
 		while (map[index][s_index] != '\0')
 		{
-			if (!ft_strchr_v3(set, map[index][s_index]))
-				return (0);
-			if (map[index][s_index] == 'C')
-				game->collectible++;
+			if (!check_each_el(map[index][s_index]))
+				return (ft_putstr_fd_0("Invalid element!\n", 2));
 			if (map[index][s_index] == 'P')
 			{
 				game->player_x = index;
 				game->player_y = s_index;
 			}
+			if (map[index][s_index] == 'C')
+				game->collectible++;
 			s_index++;
 		}
 		index++;
@@ -74,14 +74,14 @@ static int	is_surrounded_by_walls(char **map)
 		letter = 0;
 		if (index == 0 || map[index + 1] == NULL)
 		{
-			while (map[index][letter] != '\0')
+			while (map[index][letter] != '\0' && map[index][letter] != '\n')
 			{
 				if (map[index][letter] != '1')
 					return (0);
 				letter++;
 			}
 		}
-		else if (map[index][0] != '1' || map[index][length - 1] != '1')
+		else if (map[index][0] != '1' || map[index][length - 2] != '1')
 			return (0);
 		index++;
 	}
@@ -114,7 +114,7 @@ int	validate_map(char **map, t_game *game)
 		return (ft_putstr_fd_0("The map is not rectangular.\n", 2));
 	if (!is_surrounded_by_walls(map))
 		return (ft_putstr_fd_0("The map isn't surrounded by walls.\n", 2));
-	if (!check_elements(map, game))
-		return (ft_putstr_fd_0("There is/are invalid elements on map.\n", 2));
+	if (!check_els(map, game))
+		return (ft_putstr_fd_0("There is/are invalid els on map.\n", 2));
 	return (1);
 }
