@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:13:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/04 09:10:42 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/06 19:02:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,18 @@ char	*extract_line(char **buffer)
 		len = ft_strchr_v2(*buffer, '\n') - *buffer + 1;
 		line = ft_substr_v2(*buffer, 0, len);
 		if (!line)
-			return (free_buffer(buffer, NULL));
+			return (free_buffer(buffer, &line));
 		new_buffer = ft_strdup_v2(*buffer + len);
+		if (!new_buffer)
+			return (free_buffer(buffer, &line));
 		free_buffer(buffer, NULL);
 		*buffer = new_buffer;
 	}
 	else
 	{
 		line = ft_strdup_v2(*buffer);
+		if (!line)
+			return (free_buffer(buffer, &line));
 		free_buffer(buffer, NULL);
 	}
 	return (line);
@@ -81,6 +85,8 @@ char	*read_to_buffer(int fd, char *buffer)
 			return (free_buffer(&buffer, &read_buf));
 		read_buf[bytes_read] = '\0';
 		temp = ft_strjoin_v2(buffer, read_buf);
+		if (!temp)
+			return (free_buffer(&buffer, &read_buf));
 		free_buffer(&buffer, NULL);
 		buffer = temp;
 	}
