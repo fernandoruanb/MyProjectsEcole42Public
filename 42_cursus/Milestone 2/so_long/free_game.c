@@ -28,6 +28,11 @@ static void	check_other_things(t_game *game)
 	}
 	if (game->mlx_ptr)
 		mlx_destroy_display(game->mlx_ptr);
+	if (game->mlx_ptr)
+		free(game->mlx_ptr);
+	game->map = NULL;
+	game->win_ptr = NULL;
+	game->mlx_ptr = NULL;
 }
 
 int	free_game(t_game *game)
@@ -46,6 +51,10 @@ int	free_game(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->wall_img);
 	if (game)
 		check_other_things(game);
-	exit(0);
+	game->player_img = NULL;
+	game->floor_img = NULL;
+	game->collectible_img = NULL;
+	game->exit_img = NULL;
+	game->wall_img = NULL;
 	return (0);
 }
