@@ -42,8 +42,6 @@ char	*ft_itoa_unsigned(unsigned int n)
 		buffer[length] = (n % 10) + '0';
 		n /= 10;
 	}
-	if (n < 0)
-		buffer[0] = '-';
 	return (buffer);
 }
 

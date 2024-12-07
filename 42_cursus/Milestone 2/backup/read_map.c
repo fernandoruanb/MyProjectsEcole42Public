@@ -12,19 +12,54 @@
 
 #include "so_long.h"
 
+static char	**fill_map(char **map, int lines, int fd)
+{
+	int	index;
+
+	index = 0;
+	while (index < lines)
+	{
+		map[index] = get_next_line(fd);
+		if (!map[index])
+		{
+			while (index > 0)
+				free(map[--index]);
+			free(map);
+			close(fd);
+			return (NULL);
+		}
+		index++;
+	}
+	close(fd);
+	return (map);
+}
+
+static int	count_lines(int file_descriptor)
+{
+	char	*line;
+	int		lines;
+
+	lines = 0;
+	line = get_next_line(file_descriptor);
+	while (line != NULL)
+	{
+		free(line);
+		lines++;
+		line = get_next_line(file_descriptor);
+	}
+	return (lines);
+}
+
 char	**read_map(char *filename)
 {
 	char	**map;
 	int		file_descriptor;
 	int		lines;
-	int		index;
 
 	file_descriptor = open(filename, O_RDONLY);
 	if (file_descriptor == -1)
 		return (ft_putstr_fd_n("There was a mistake opening file\n", 2));
-	lines = 0;
-	while ((get_next_line(file_descriptor)) != NULL)
-		lines++;
+	lines = count_lines(file_descriptor);
 	close(file_descriptor);
 	file_descriptor = open(filename, O_RDONLY);
 	if (file_descriptor == -1)
@@ -32,9 +67,9 @@ char	**read_map(char *filename)
 	map = (char **)ft_calloc(lines + 1, sizeof(char *));
 	if (!map)
 		return (ft_putstr_fd_n("Error allocating memory to map.\n", 2));
-	index = 0;
-	while (index < lines)
-		map[index++] = get_next_line(file_descriptor);
+	map = fill_map(map, lines, file_descriptor);
+	if (!map)
+		return (ft_putstr_fd_n("Error fill array!\n", 2));
 	map[lines] = NULL;
 	close(file_descriptor);
 	return (map);

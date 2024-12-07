@@ -56,5 +56,6 @@ int	free_game(t_game *game)
 	game->collectible_img = NULL;
 	game->exit_img = NULL;
 	game->wall_img = NULL;
+	exit(0);
 	return (0);
 }

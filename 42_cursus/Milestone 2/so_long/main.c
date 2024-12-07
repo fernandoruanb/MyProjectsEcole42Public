@@ -26,8 +26,8 @@ int	main(int argc, char **argv)
 	render_map(game.map, &game);
 	mlx_key_hook(game.win_ptr, key_press, &game);
 	mlx_hook(game.win_ptr, 17, 0, free_game, &game);
-	mlx_loop(game.mlx_ptr);
+	if (game.mlx_ptr && game.win_ptr && game.map)
+		mlx_loop(game.mlx_ptr);
 	free_game(&game);
-	exit(0);
 	return (0);
 }
