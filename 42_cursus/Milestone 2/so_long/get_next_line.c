@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:13:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/06 19:02:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:11:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*extract_line(char **buffer)
 	{
 		line = ft_strdup_v2(*buffer);
 		if (!line)
-			return (free_buffer(buffer, &line));
+			return (free_buffer(buffer, NULL));
 		free_buffer(buffer, NULL);
 	}
 	return (line);
@@ -98,16 +98,16 @@ char	*read_to_buffer(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffers[1024];
+	static char	*buffer;
 	char		*line;
 
-	if (fd == -1 || fd > 1024 || BUFFER_SIZE <= 0)
+	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffers[fd] = read_to_buffer(fd, buffers[fd]);
-	if (!buffers[fd])
+	buffer = read_to_buffer(fd, buffer);
+	if (!buffer)
 		return (NULL);
-	line = extract_line(&buffers[fd]);
+	line = extract_line(&buffer);
 	if (!line)
-		return (free_buffer(&buffers[fd], NULL));
+		return (free_buffer(&buffer, NULL));
 	return (line);
 }

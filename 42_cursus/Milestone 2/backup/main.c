@@ -6,11 +6,22 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:51:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/06 08:58:36 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:38:42 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	initialize_game_ptrs(t_game *game)
+{
+	game->mlx_ptr = NULL;
+	game->win_ptr = NULL;
+	game->player_img = NULL;
+	game->wall_img = NULL;
+	game->floor_img = NULL;
+	game->collectible_img = NULL;
+	game->exit_img = NULL;
+}
 
 int	main(int argc, char **argv)
 {
@@ -20,6 +31,7 @@ int	main(int argc, char **argv)
 		return (ft_putstr_fd_1("how to use: ./so_long <map.ber>.\n", 2));
 	if (!init_game(&game, argv[1]))
 	{
+		initialize_game_ptrs(&game);
 		free_game(&game);
 		return (ft_putstr_fd_1("Inicialization error.\n", 2));
 	}

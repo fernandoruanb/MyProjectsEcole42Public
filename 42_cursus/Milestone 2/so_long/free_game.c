@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 10:58:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/06 16:10:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:31:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,14 @@ int	free_game(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->wall_img);
 	if (game)
 		check_other_things(game);
-	game->player_img = NULL;
-	game->floor_img = NULL;
-	game->collectible_img = NULL;
-	game->exit_img = NULL;
-	game->wall_img = NULL;
+	if (game)
+	{
+		game->player_img = NULL;
+		game->floor_img = NULL;
+		game->collectible_img = NULL;
+		game->exit_img = NULL;
+		game->wall_img = NULL;
+	}
 	exit(0);
 	return (0);
 }

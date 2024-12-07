@@ -37,8 +37,8 @@ static void	move_player(t_game *game, int mod_x, int mod_y, char **map)
 	if (new_y < 0 || new_x < 0)
 		return ;
 	next_tile = game->map[new_x][new_y];
-	if (next_tile == '1' || 
-		(next_tile == 'E' && (!check_win(next_tile, game))))
+	if (next_tile == '1'
+		|| (next_tile == 'E' && (!check_win(next_tile, game))))
 		return ;
 	else if (next_tile == 'C')
 	{
