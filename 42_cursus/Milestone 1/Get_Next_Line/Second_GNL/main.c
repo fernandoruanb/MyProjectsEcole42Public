@@ -6,11 +6,12 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 10:50:15 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/07 19:23:08 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/07 18:49:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
+#include <fcntl.h>
 #include <stdio.h>
 
 int	main(int argc, char **argv)
@@ -44,9 +45,9 @@ int	main(int argc, char **argv)
 		lines++;
 		free(line);
 	}
-	//printf("%d\n", lines);
+	printf("%d\n", lines);
 	close(file_descriptor);
-	map = (char **)ft_calloc(lines + 1, sizeof(char *));
+	map = (char **)ft_calloc_v2(lines + 1, sizeof(char *));
 	file_descriptor = open(argv[1], O_RDONLY);
 	if (file_descriptor == -1)
 	{

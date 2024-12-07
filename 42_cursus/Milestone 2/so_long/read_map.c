@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:45:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/07 15:29:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:31:32 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static char	**fill_map(char **map, int lines, int fd, t_game *game)
 			free_game(game);
 		index++;
 	}
+	free(get_next_line(fd));
 	close(fd);
 	return (map);
 }

@@ -5,7 +5,7 @@ NAME = so_long
 # Compilers and flags
 
 CC = cc
-CFLAGS = -g -Wall -Werror -Wextra 
+CFLAGS = -g3 -Wall -Werror -Wextra 
 MLXFLAGS = -L $(MLXDIR) -lmlx -lXext -lX11 -lm
 
 # Directories
