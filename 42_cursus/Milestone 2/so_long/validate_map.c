@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:44:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/06 18:42:53 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:56:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	check_each_el(char el)
+static int	check_each_el(char el, t_game *game)
 {
 	static int	count_p;
 	static int	count_e;
@@ -28,7 +28,10 @@ static int	check_each_el(char el)
 	if (el == 'P' && count_p > 1)
 		return (0);
 	if (el == 'E')
+	{
 		count_e++;
+		game->exit = 1;
+	}
 	if (el == 'E' && count_e > 1)
 		return (0);
 	if (!ft_strchr_v3(set, el))
@@ -47,7 +50,7 @@ static int	check_els(char **map, t_game *game)
 		s_index = 0;
 		while (map[index][s_index] != '\0')
 		{
-			if (!check_each_el(map[index][s_index]))
+			if (!check_each_el(map[index][s_index], game))
 				return (ft_putstr_fd_0("Invalid element!\n", 2));
 			if (map[index][s_index] == 'P')
 			{
@@ -60,6 +63,8 @@ static int	check_els(char **map, t_game *game)
 		}
 		index++;
 	}
+	if (game->exit == 0)
+		return (ft_putstr_fd_0("There isn't a valid exit!\n", 2));
 	return (1);
 }
 
@@ -118,5 +123,7 @@ int	validate_map(char **map, t_game *game)
 		return (ft_putstr_fd_0("The map isn't surrounded by walls.\n", 2));
 	if (!check_els(map, game))
 		return (ft_putstr_fd_0("There is/are invalid els on map.\n", 2));
+	if (!check_cosplay(map, game))
+		return (ft_putstr_fd_0("Invalid number collectibles or players.\n", 2));
 	return (1);
 }
