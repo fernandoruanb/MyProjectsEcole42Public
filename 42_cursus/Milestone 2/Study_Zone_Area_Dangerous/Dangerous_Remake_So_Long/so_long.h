@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 12:37:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 12:45:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:36:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_game
 	void	*collectible_img;
 }	t_game;
 
-int	init_game(char *filename, t_game *game);
+int		init_game(char *filename, t_game *game);
+int		ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
 
 #endif /* TILE_SIZE */

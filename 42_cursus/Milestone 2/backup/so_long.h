@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 11:56:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:45:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ int		free_game(t_game *game);
 int		key_press(int keycode, t_game *game);
 char	*ft_strchr_v3(const char *s, int c);
 int		check_cosplay(char **map, t_game *game);
+int		check_newline(char **map);
 
 #endif /* SO_LONG_H */

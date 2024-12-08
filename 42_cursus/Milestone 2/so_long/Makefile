@@ -42,7 +42,8 @@ SRCS =  $(SRCDIR)/main.c\
 	$(SRCDIR)/key_press.c\
 	$(SRCDIR)/get_next_line_utils.c\
 	$(SRCDIR)/ft_strchr_v3.c\
-	$(SRCDIR)/check_cosplay.c
+	$(SRCDIR)/check_cosplay.c\
+	$(SRCDIR)/check_newline.c
 
 # OBJS
 

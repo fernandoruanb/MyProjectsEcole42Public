@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:12:54 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 14:18:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:39:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static int	check_els(char **map, t_game *game)
 		test_map = ft_strtrim(map[index], '\n');
 		if (!test_map)
 			return (ft_putstr_fd_0("Error trim map.\n", 2));
+		if (!is_rectangular(&test_map))
+			return (ft_putstr_fd_0("Invalid map els.\n", 2));
 		while (test_map[s_index] != '\0')
 			if (!ft_strchr_v3(set, test_map[s_index++]))
 				return (0);

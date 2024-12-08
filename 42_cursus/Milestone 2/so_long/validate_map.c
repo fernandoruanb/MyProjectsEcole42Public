@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:44:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 11:56:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:45:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ int	validate_map(char **map, t_game *game)
 		return (ft_putstr_fd_0("The map is not rectangular.\n", 2));
 	if (!is_surrounded_by_walls(map))
 		return (ft_putstr_fd_0("The map isn't surrounded by walls.\n", 2));
+	if (!check_newline(map))
+		return (ft_putstr_fd_0("There is/are invalid newlines.\n", 2));
 	if (!check_els(map, game))
 		return (ft_putstr_fd_0("There is/are invalid els on map.\n", 2));
 	if (!check_cosplay(map, game))
