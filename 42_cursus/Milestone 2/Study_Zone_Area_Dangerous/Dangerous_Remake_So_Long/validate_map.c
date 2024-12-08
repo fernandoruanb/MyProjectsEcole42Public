@@ -6,56 +6,66 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:12:54 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 15:39:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:49:08 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static char	*ft_strchr_v3(const char *s, int c)
-{
-	int	index;
-	int	length;
-
-	index = 0;
-	length = ft_strlen(s);
-	if (c == '\0')
-		return ((char *)&s[length]);
-	while (s[index] != '\0')
-	{
-		if (s[index] == (unsigned char)c)
-			return ((char *)&s[index]);
-		index++;
-	}
-	return (NULL);
-}
-
-static int	check_els(char **map, t_game *game)
+static int	check_each_el(char el, t_game *game)
 {
 	static int	count_p;
 	static int	count_e;
-	char		*set;
-	char		*test_map;
 
 	if (!count_p)
 		count_p = 0;
 	if (!count_e)
 		count_e = 0;
-	set = "0PEC1";
-	while (map[index] != NULL)
+	if (el == 'P')
+	{
+		game->player++;
+		count_p++;
+	}
+	if (el == 'P' && count_p > 1)
+		return (0);
+	if (el == 'E')
+	{
+		count_e++;
+		game->exit++;
+	}
+	if (el == 'E' && count_p > 1)
+		return (0);
+	if (game->exit == 0 || game->exit > 1)
+		return (0);
+	return (1);
+}
+
+static int	check_els(t_game *game)
+{
+	int	index;
+	int	s_index;
+
+	index = 0;
+	while (game->map[index] != NULL)
 	{
 		s_index = 0;
-		test_map = ft_strtrim(map[index], '\n');
-		if (!test_map)
-			return (ft_putstr_fd_0("Error trim map.\n", 2));
-		if (!is_rectangular(&test_map))
-			return (ft_putstr_fd_0("Invalid map els.\n", 2));
-		while (test_map[s_index] != '\0')
-			if (!ft_strchr_v3(set, test_map[s_index++]))
+		while (game->map[index][s_index] != '\0')
+		{
+			if (!check_each_el(game->map[index][s_index], game))
 				return (0);
-		free(test_map);
+			if (game->map[index][s_index] == 'P')
+			{
+				game->player_x = index;
+				game->player_y = s_index;
+			}
+			if (game->map[index][s_index] == 'C')
+				game->collectible++;
+			s_index++;
+		}
 		index++;
 	}
+	if (game->collectible == 0)
+		return (0);
 	return (1);
 }
 
@@ -101,15 +111,15 @@ static int	is_rectangular(char **map)
 	return (1);
 }
 
-int	validate_map(char **map, t_game *game)
+int	validate_map(t_game *game)
 {
-	if (!is_rectangular(map))
+	if (!is_rectangular(game->map))
 		return (ft_putstr_fd_0("The map isn't rectangular.\n", 2));
-	if (!is_surrounded_by_walls(map))
+	if (!is_surrounded_by_walls(game->map))
 		return (ft_putstr_fd_0("The map isn't surrounded by walls.\n", 2));
-	if (!check_els(map))
+	if (!check_els(game->map, game))
 		return (ft_putstr_fd_0("There is/are invalid els on the map.\n", 2));
-	if (!check_cosplay(map))
+	if (!check_cosplay(game->player))
 		return (ft_putstr_fd_0("There isn't a player or collectibles.\n", 2));
 	return (1);
 }

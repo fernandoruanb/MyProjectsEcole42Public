@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 12:22:00 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 13:08:20 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:46:05 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	init_game(char *filename, t_game *game)
 {
 	initialize_countable_variables(game);
 	game->map = read_map(filename, game);
-	if (!game->map || !validate_map(game->map, game))
+	if (!game->map || !validate_map(game))
 		return (ft_putstr_fd_1("Error reading or validating map\n"), 2);
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
