@@ -22,7 +22,14 @@ SRCS =  $(SRCDIR)/main.c\
 	$(SRCDIR)/read_map.c\
 	$(SRCDIR)/ft_strlen.c\
 	$(SRCDIR)/ft_strchr_v3.c\
-	$(SRCDIR)/check_cosplay.c
+	$(SRCDIR)/check_cosplay.c\
+	$(SRCDIR)/render_map.c\
+	$(SRCDIR)/load_textures.c\
+	$(SRCDIR)/free_game.c\
+	$(SRCDIR)/keypress.c\
+	$(SRCDIR)/ft_putstr_fd_0.c\
+	$(SRCDIR)/ft_putstr_fd_1.c\
+	$(SRCDIR)/ft_putstr_fd_0.c
 
 # OBJS
 

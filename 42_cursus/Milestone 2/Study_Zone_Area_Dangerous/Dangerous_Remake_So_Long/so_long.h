@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 12:37:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 19:19:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:23:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include <stdarg.h>
 
 typedef struct s_game
@@ -46,5 +47,13 @@ int		validate_map(t_game *game);
 int		ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 int		check_cosplay(int player);
+int		render_map(t_game *game);
+int		keypress(int keycode, t_game *game);
+int		load_textures(t_game *game);
+int		render_map(t_game *game);
+int		free_game(t_game *game);
+int		ft_putstr_fd_0(const char *s, int fd);
+int		ft_putstr_fd_1(const char *s, int fd);
+char	*ft_putstr_fd_n(const char *s, int fd);
 
 #endif /* TILE_SIZE */
