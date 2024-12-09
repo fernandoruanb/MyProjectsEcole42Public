@@ -29,7 +29,14 @@ SRCS =  $(SRCDIR)/main.c\
 	$(SRCDIR)/keypress.c\
 	$(SRCDIR)/ft_putstr_fd_0.c\
 	$(SRCDIR)/ft_putstr_fd_1.c\
-	$(SRCDIR)/ft_putstr_fd_0.c
+	$(SRCDIR)/ft_putstr_fd_0.c\
+	$(SRCDIR)/get_next_line.c\
+	$(SRCDIR)/get_next_line_utils.c\
+	$(SRCDIR)/ft_printf.c\
+	$(SRCDIR)/parse_format.c\
+	$(SRCDIR)/handle_specifier.c\
+	$(SRCDIR)/print_char.c\
+	$(SRCDIR)/print_str.c
 
 # OBJS
 
