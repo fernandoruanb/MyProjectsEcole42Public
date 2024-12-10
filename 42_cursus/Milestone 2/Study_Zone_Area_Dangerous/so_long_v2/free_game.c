@@ -5,18 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 11:32:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/10 14:34:02 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/10 17:48:56 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/10 18:02:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	erase_map_and_mlx(t_game *game)
+static void	destroy_other_things(t_game *game)
 {
-	int	index;
-
-	index = 0;
 	if (game->map)
 	{
 		while (game->map[index] != NULL)
@@ -43,18 +40,21 @@ int	free_game(t_game *game)
 	if (game->wall_img)
 		mlx_destroy_image(game->mlx_ptr, game->wall_img);
 	if (game->floor_img)
-		mlx_destroy_image(game->mlx_ptr, game->floor_img);
-	if (game->collectible_img)
-		mlx_destroy_image(game->mlx_ptr, game->collectible_img);
+		mlx_destroy_image(game->mlx_ptr, game->wall_img);
 	if (game->exit_img)
 		mlx_destroy_image(game->mlx_ptr, game->exit_img);
-	erase_map_and_mlx(game);
-	game->win_ptr = NULL;
-	game->player_img = NULL;
-	game->wall_img = NULL;
-	game->floor_img = NULL;
-	game->exit_img = NULL;
-	game->collectible_img = NULL;
+	if (game->collectible_img)
+		mlx_destroy_image(game->mlx_ptr, game->collectible_img);
+	if (game)
+		destroy_other_things(game);
+	if (game)
+	{
+		game->win_ptr = NULL;
+		game->player_img = NULL;
+		game->wall_img = NULL;
+		game->floor_img = NULL;
+		game->collectible = NULL;
+	}
 	exit(0);
 	return (0);
 }
