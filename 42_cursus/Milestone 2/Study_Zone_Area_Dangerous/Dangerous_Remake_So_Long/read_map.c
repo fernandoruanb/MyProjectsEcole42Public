@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 12:46:42 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 18:50:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:18:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static char	*fill_map(char **map, int lines, int fd, t_game *game)
+static char	**fill_map(char **map, int lines, int fd, t_game *game)
 {
 	int	index;
 
@@ -40,6 +40,7 @@ static int	count_lines(int file_descriptor)
 	int		lines;
 	char	*temp_line;
 
+	lines = 0;
 	temp_line = get_next_line(file_descriptor);
 	while (temp_line != NULL)
 	{
@@ -53,14 +54,13 @@ static int	count_lines(int file_descriptor)
 
 char	**read_map(char *filename, t_game *game)
 {
+	int	lines;
 	int		file_descriptor;
-	int		lines;
 	char	**map;
-	int		index;
 
 	file_descriptor = open(filename, O_RDONLY);
 	if (file_descriptor == -1)
-		return (ft_putstr_fd_0("Error opening file.\n", 2));
+		return (ft_putstr_fd_n("Error opening file.\n", 2));
 	lines = count_lines(file_descriptor);
 	close(file_descriptor);
 	map = (char **)ft_calloc(lines + 1, sizeof(char *));

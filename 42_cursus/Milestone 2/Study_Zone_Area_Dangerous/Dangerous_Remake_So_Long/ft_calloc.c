@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_v3.c                                     :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 15:33:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/10 13:20:44 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/10 13:10:58 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/10 13:47:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int	length;
-	int	index;
+	size_t	length;
+	unsigned char	*ptr;
+	void	*buffer;
+	size_t	index;
 
-	if (!s)
+	if (nmemb != 0 && size > ((size_t) - 1) / nmemb)
 		return (NULL);
-	length = ft_strlen(s);
-	if (c == '\0')
-		return ((char *)&s[length]);
+	length = nmemb * size;
+	buffer = malloc(length);
+	if (!buffer)
+		return (NULL);
+	ptr = (unsigned char *)buffer;
 	index = 0;
-	while (s[index] != '\0')
+	while (index < length)
 	{
-		if (s[index] == (unsigned char)c)
-			return ((char *)&s[index]);
+		ptr[index] = 0;
 		index++;
 	}
-	return (NULL);
+	return (buffer);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 12:37:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/09 13:23:26 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:19:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct s_game
 	char	**map;
 	int		collectible;
 	int		player;
+	int		move;
+	int		width;
+	int		height;
 	int		player_x;
 	int		player_y;
 	int		exit;
@@ -54,6 +57,19 @@ int		render_map(t_game *game);
 int		free_game(t_game *game);
 int		ft_putstr_fd_0(const char *s, int fd);
 int		ft_putstr_fd_1(const char *s, int fd);
-char	*ft_putstr_fd_n(const char *s, int fd);
+char	**ft_putstr_fd_n(const char *s, int fd);
+int	convert_int_to_str(va_list args);
+int	convert_hex_to_str(char specifier, va_list args);
+int	convert_ptr_to_str(va_list args);
+int	convert_unsigned_to_str(va_list args);
+int	print_char(va_list args);
+int	print_str(va_list args);
+int	print_percentage(va_list args);
+int	ft_printf(const char *format, ...);
+int	parse_format(const char *format, va_list args);
+int	handle_specifier(char specifier, va_list args);
+char	*get_next_line(int fd);
+void	*ft_calloc(size_t nmemb, size_t size);
+int	ft_strlen(const char *s);
 
 #endif /* TILE_SIZE */

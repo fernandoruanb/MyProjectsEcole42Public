@@ -1,63 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_unsigned_to_str.c                          :+:      :+:    :+:   */
+/*   convert_ptr_to_str.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 10:18:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/10 12:19:38 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/10 12:26:09 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/10 12:41:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static unsigned int	calculate_how_many_numbers(unsigned int n)
+static unsigned long	calculate_how_many_numbers(unsigned long n)
 {
-	int	length;
+	unsigned long	length;
 
 	length = 0;
-	if (n == 0)
-		length = 1;
 	while (n)
 	{
 		length++;
-		n /= 10;
+		n /= 16;
 	}
 	return (length);
 }
 
-static char	*ft_itoa_uns(unsigned int n)
+static char	*ft_itoa_ptr(unsigned long n)
 {
+	char	*hex_digits;
+	unsigned long	length;
 	char	*buffer;
-	unsigned int	length;
 
 	length = calculate_how_many_numbers(n);
 	buffer = (char *)malloc(length + 1);
 	if (!buffer)
 		return (NULL);
 	buffer[length] = '\0';
+	hex_digits = "0123456789abcdef";
 	while (length--)
 	{
-		buffer[length] = (n % 10) + '0';
-		n /= 10;
+		buffer[length] = hex_digits[n % 16];
+		n /= 16;
 	}
 	return (buffer);
 }
 
-int	convert_unsigned_to_str(va_list args)
+int	convert_ptr_to_str(va_list args)
 {
 	int	length;
 	int	result;
 	char	*buffer;
-	unsigned int number;
+	unsigned long	number;
 
-	number = va_arg(args, unsigned int);
-	buffer = ft_itoa_uns(number);
+	number = (unsigned long)va_arg(args, void *);
+	if (number == 0)
+		return (write(1, "(nil)", 5));
+	buffer = ft_itoa_ptr(number);
 	if (!buffer)
 		return (0);
 	length = ft_strlen(buffer);
-	result = write(1, buffer, length);
+	result = write(1, "0x", 2);
+	result += write(1, buffer, length);
 	free(buffer);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 21:14:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/10 09:47:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:42:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	handle_specifier(char specifier, va_list args)
 		printed = convert_int_to_str(args);
 	else if (specifier == 'x' || specifier == 'X')
 		printed = convert_hex_to_str(specifier, args);
+	else if (specifier == 'u')
+		printed = convert_unsigned_to_str(args);
+	else if (specifier == 'p')
+		printed = convert_ptr_to_str(args);
 	else
 	{
 		write(1, "%", 1);

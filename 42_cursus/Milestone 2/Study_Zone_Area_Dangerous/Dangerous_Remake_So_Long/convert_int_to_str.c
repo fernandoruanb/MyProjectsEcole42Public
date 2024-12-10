@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 17:19:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/09 17:47:12 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/10 09:19:45 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/10 09:33:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	calculate_how_many_numbers(int n)
 {
 	int	length;
 
+	length = 0;
 	if (n <= 0)
 		length = 1;
 	while (n)
@@ -29,8 +30,8 @@ static int	calculate_how_many_numbers(int n)
 static char	*ft_itoa(int n)
 {
 	int				length;
-	unsigned int	number;
 	char			*buffer;
+	unsigned int	number;
 
 	if (n < 0)
 		number = -n;
@@ -54,8 +55,8 @@ static char	*ft_itoa(int n)
 int	convert_int_to_str(va_list args)
 {
 	int		length;
-	int		result;
 	char	*buffer;
+	int		result;
 	int		number;
 
 	number = va_arg(args, int);
@@ -64,5 +65,6 @@ int	convert_int_to_str(va_list args)
 		return (0);
 	length = ft_strlen(buffer);
 	result = write(1, buffer, length);
+	free(buffer);
 	return (result);
 }

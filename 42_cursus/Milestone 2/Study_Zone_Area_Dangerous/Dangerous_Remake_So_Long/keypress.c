@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 09:31:56 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/09 11:26:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:44:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	render_new_map(t_game *game)
 {
 	if (!render_map(game))
 	{
-		ft_putstr_0("Error rendering again the map.\n", 2);
+		ft_putstr_fd_0("Error rendering again the map.\n", 2);
 		free_game(game);
 	}
 }
@@ -43,7 +43,7 @@ static void	move_player(t_game *game, int x, int y)
 	{
 		game->collectible--;
 		ft_printf("You need to find %d collectibles", game->collectible);
-		game->map[new_x][new_y] == '0';
+		game->map[new_x][new_y] = '0';
 	}
 	if (game->map[new_x][new_y] == 'E')
 	{
@@ -54,7 +54,7 @@ static void	move_player(t_game *game, int x, int y)
 	game->player_x = new_x;
 	game->player_y = new_y;
 	render_new_map(game);
-	return (1);
+	game->move++;
 }
 
 int	keypress(int keycode, t_game *game)
@@ -67,4 +67,5 @@ int	keypress(int keycode, t_game *game)
 		move_player(game, 1, 0);
 	else if (keycode == 115 || keycode == 65364)
 		move_player(game, 0, 1);
+	return (0);
 }

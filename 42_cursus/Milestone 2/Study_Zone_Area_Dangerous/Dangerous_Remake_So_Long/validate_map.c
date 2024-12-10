@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:12:54 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/10 10:23:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:01:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,12 @@ static int	check_els(t_game *game)
 
 static int	is_surrounded_by_walls(char **map)
 {
+	int	length;
 	int	index;
 	int	s_index;
 
 	index = 0;
+	length = ft_strlen(map[0]);
 	while (map[index] != NULL)
 	{
 		s_index = 0;
@@ -120,7 +122,7 @@ int	validate_map(t_game *game)
 		return (ft_putstr_fd_0("The map isn't rectangular.\n", 2));
 	if (!is_surrounded_by_walls(game->map))
 		return (ft_putstr_fd_0("The map isn't surrounded by walls.\n", 2));
-	if (!check_els(game->map, game))
+	if (!check_els(game))
 		return (ft_putstr_fd_0("There is/are invalid els on the map.\n", 2));
 	if (!check_cosplay(game->player))
 		return (ft_putstr_fd_0("There isn't a player or collectibles.\n", 2));

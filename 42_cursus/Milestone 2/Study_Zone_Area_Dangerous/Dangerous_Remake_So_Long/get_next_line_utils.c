@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:52:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/09 16:10:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:57:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup_v2(const char *s)
 {
 	size_t		index;
 	size_t		length;
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	length = ft_strlen(s);
+	length = ft_strlen_v2(s);
 	buffer = (char *)malloc(length + 1);
 	if (!buffer)
 		return (NULL);
@@ -34,7 +34,7 @@ char	*ft_strdup(const char *s)
 	return (buffer);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin_v2(const char *s1, const char *s2)
 {
 	size_t	len_s1;
 	size_t	len_s2;
@@ -43,8 +43,8 @@ char	*ft_strjoin(const char *s1, const char *s2)
 
 	if (!s1 && !s2)
 		return (NULL);
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
+	len_s1 = ft_strlen_v2(s1);
+	len_s2 = ft_strlen_v2(s2);
 	buffer = (char *)malloc(len_s1 + len_s2 + 1);
 	if (!buffer)
 		return (NULL);
@@ -57,7 +57,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (buffer);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc_v2(size_t nmemb, size_t size)
 {
 	unsigned char	*ptr;
 	void			*buffer;
@@ -80,17 +80,17 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (buffer);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr_v2(const char *s, unsigned int start, size_t len)
 {
 	size_t	length;
 	size_t	index;
 	char	*buffer;
 
 	if (!s)
-		return (ft_calloc(1, sizeof(char)));
-	length = ft_strlen(s);
+		return (ft_calloc_v2(1, sizeof(char)));
+	length = ft_strlen_v2(s);
 	if (start >= length)
-		return (ft_calloc(1, sizeof(char)));
+		return (ft_calloc_v2(1, sizeof(char)));
 	if (start + len > length)
 		len = length - start;
 	buffer = (char *)malloc(len + 1);
