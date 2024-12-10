@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   convert_unsigned_to_str.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 21:41:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/10 09:46:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/10 09:55:49 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/10 10:11:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
- 
-#include "ft_printf.h"
-#include <limits.h>
-#include <stdio.h>
 
-int	main(void)
+#include "ft_printf.h"
+
+int	convert_unsigned_to_str(va_list args)
 {
-	//ft_printf("%d\n", ft_printf("%c %c\n", 'a', 'b'));
-	ft_printf("%c %c %s 100%%\n", 'a', 'b', "Fernando");
-	ft_printf("%d %i\n", INT_MIN, INT_MAX);
-	ft_printf("%x %X %x %X\n", 255, 255, -255, -255);
-	return (0);
+	int	result;
+	char	*buffer;
+	unsigned int	number;
+
+	number = 
+	buffer = ft_itoa_uns(number);
 }

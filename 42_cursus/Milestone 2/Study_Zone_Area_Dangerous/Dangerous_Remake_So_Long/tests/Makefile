@@ -20,6 +20,8 @@ SRCS =  $(SRCDIR)/ft_printf.c\
 	$(SRCDIR)/print_char.c\
 	$(SRCDIR)/print_str.c\
 	$(SRCDIR)/print_percentage.c\
+	$(SRCDIR)/convert_int_to_str.c\
+	$(SRCDIR)/convert_hex_to_str.c\
 	$(SRCDIR)/ft_strlen.c
 
 # OBJS

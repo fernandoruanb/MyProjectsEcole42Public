@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 13:12:54 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 18:49:08 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/10 10:23:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,11 @@ static int	is_rectangular(char **map)
 	index = 0;
 	while (map[index] != NULL)
 	{
-		if (length != ft_strlen(map[index]))
-			return (0);
+		if (map[index][0] != '\n')
+		{
+			if (length != ft_strlen(map[index]))
+				return (0);
+		}
 		index++;
 	}
 	return (1);

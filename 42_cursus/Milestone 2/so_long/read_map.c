@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:45:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/07 19:31:32 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:26:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static char	**fill_map(char **map, int lines, int fd, t_game *game)
 		index++;
 	}
 	free(get_next_line(fd));
+	free(get_next_line(fd));
 	close(fd);
 	return (map);
 }
@@ -38,6 +39,11 @@ static int	count_lines(int file_descriptor)
 	line = get_next_line(file_descriptor);
 	while (line != NULL)
 	{
+		if (line[0] == '\n')
+		{
+			free(line);
+			break ;
+		}
 		free(line);
 		lines++;
 		line = get_next_line(file_descriptor);

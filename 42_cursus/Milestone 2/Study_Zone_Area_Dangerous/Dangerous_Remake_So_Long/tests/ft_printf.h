@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 21:28:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/09 21:28:17 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/10 09:53:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int	print_char(va_list args);
 int	print_str(va_list args);
 int	print_percentage(void);
 int	ft_strlen(const char *s);
+int	convert_int_to_str(va_list args);
+int	convert_hex_to_str(char specifier, va_list args);
 
 #endif /* FT_PRINTF_H */
