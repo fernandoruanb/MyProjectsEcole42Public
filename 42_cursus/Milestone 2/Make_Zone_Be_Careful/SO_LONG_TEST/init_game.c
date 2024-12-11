@@ -5,43 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 19:44:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/11 15:19:13 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/11 09:16:53 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/11 09:33:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	init_countables(t_game *game)
+static void	initialize_common_variables(t_game *game)
 {
 	game->moves = 0;
-	game->collectible = 0;
-	game->exit = 0;
-	game->player = 0;
+	game->collectibles = 0;
+	game->players = 0;
+	game->exits = 0;
 }
 
-int	init_game(t_game *game, char *map_file)
+int	init_game(char *filename, t_game *game)
 {
-	init_countables(game);
-	game->map = read_map(map_file, game);
-	if (!game->map || !validate_map(game->map, game))
-		return (ft_putstr_fd_0("Invalid map file.\n", 2));
+	initialize_common_variables(game);
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
-		return (ft_putstr_fd_0("Error! Wrong connection MLX\n.", 2));
+		return (ft_putstr_fd_1("Error connection with MLX\n", 2));
+	game->map = read_map(filename);
+	if (!game->map || !validate_map(&game))
+		return (ft_putstr_fd_1("Error reading or validating map.\n", 2));
 	game->width = ft_strlen(game->map[0]) - 1;
-	if (game->width > 30)
-		return (ft_putstr_fd_0("Map is so big!!!\n", 2));
 	game->height = 0;
 	while (game->map[game->height])
 		game->height++;
-	if (game->height > 16)
-		return (ft_putstr_fd_0("Map is so big height\n", 2));
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->width * TILE_SIZE,
 			game->height * TILE_SIZE, "so_long");
 	if (!game->win_ptr)
-		return (ft_putstr_fd_0("Error opening MLX window.\n", 2));
-	if (!load_textures(game))
-		return (ft_putstr_fd_0("Error loading textures\n", 2));
+		return (ft_putstr_fd_1("Error opening the window.\n", 2));
+	if (!load_textures)
+		return (ft_putstr_fd_1("Error loading textures.\n", 2));
 	return (1);
 }

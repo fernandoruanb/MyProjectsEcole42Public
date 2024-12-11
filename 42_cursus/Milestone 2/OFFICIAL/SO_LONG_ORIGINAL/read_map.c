@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:45:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/11 10:03:22 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:00:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ char	**read_map(char *filename, t_game *game)
 	if (!map)
 		return (ft_putstr_fd_n("Error fill array!\n", 2));
 	map[lines] = NULL;
+	close(file_descriptor);
 	return (map);
 }
