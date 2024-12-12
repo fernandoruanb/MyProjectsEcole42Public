@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 07:56:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/12 08:37:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/12 09:30:49 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/12 09:32:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	ft_putstr_fd_0(const char *s, int fd)
 {
-	if (argc < 2)
-		return (ft_putstr_fd_1("Too few arguments.\n", 2));
-	if (!parse_args(argc, argv))
-		return (ft_putstr_fd_1("Invalid numbers detected!\n", 2));
+	int	index;
+
+	index = 0;
+	while (s[index] != '\0')
+	{
+		write(fd, &s[index], 1);
+		index++;
+	}
 	return (0);
 }

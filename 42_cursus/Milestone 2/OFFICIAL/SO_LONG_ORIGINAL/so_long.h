@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/10 10:24:50 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:36:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ typedef struct s_game
 	void	*collectible_img;
 	void	*exit_img;
 	void	*floor_img;
+	int		mlx_flag;
+	int		win_flag;
+	int		floor_flag;
+	int		wall_flag;
+	int		player_flag;
+	int		collectible_flag;
+	int		exit_flag;
 }	t_game;
 
 int		ft_putstr_fd_1(const char *s, int fd);

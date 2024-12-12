@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 07:56:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/12 08:37:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/12 08:45:40 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/12 09:25:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-int	main(int argc, char **argv)
+# include <unistd.h>
+# include <stdlib.h>
+
+typedef struct s_stacks
 {
-	if (argc < 2)
-		return (ft_putstr_fd_1("Too few arguments.\n", 2));
-	if (!parse_args(argc, argv))
-		return (ft_putstr_fd_1("Invalid numbers detected!\n", 2));
-	return (0);
-}
+	int	*numbers_a;
+	int	*numbers_b;
+	int	size_a;
+	int	size_b;
+	int	capacity_a;
+	int	capacity_b;
+}		t_stacks;
+
+int	parse_args(int argc, char **argv, t_stacks *stack);
+
+#endif /* PUSH_SWAP_H */

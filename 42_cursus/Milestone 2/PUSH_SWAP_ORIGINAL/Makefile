@@ -15,7 +15,9 @@ INCDIR = .
 # SRCS
 
 SRCS =  $(SRCDIR)/main.c\
-	$(SRCDIR)/parse_args.c
+	$(SRCDIR)/parse_args.c\
+	$(SRCDIR)/ft_putstr_fd_1.c\
+	$(SRCDIR)/ft_putstr_fd_0.c
 
 # OBJS
 

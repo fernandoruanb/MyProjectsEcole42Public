@@ -6,21 +6,28 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:51:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/07 15:38:42 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:52:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	initialize_game_ptrs(t_game *game)
+static void	initialize_heap_variables(t_game *game)
 {
-	game->mlx_ptr = NULL;
-	game->win_ptr = NULL;
-	game->player_img = NULL;
-	game->wall_img = NULL;
-	game->floor_img = NULL;
-	game->collectible_img = NULL;
-	game->exit_img = NULL;
+	if (game->mlx_flag != 1)
+		game->mlx_ptr = NULL;
+	if (game->win_flag != 1)
+		game->win_ptr = NULL;
+	if (game->player_flag != 1)
+		game->player_img = NULL;
+	if (game->floor_flag != 1)
+		game->floor_img = NULL;
+	if (game->wall_flag != 1)
+		game->wall_img = NULL;
+	if (game->collectible_flag != 1)
+		game->collectible_img = NULL;
+	if (game->exit_flag != 1)
+		game->exit_img = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -31,9 +38,9 @@ int	main(int argc, char **argv)
 		return (ft_putstr_fd_1("how to use: ./so_long <map.ber>.\n", 2));
 	if (!init_game(&game, argv[1]))
 	{
-		initialize_game_ptrs(&game);
+		initialize_heap_variables(&game);
+		ft_putstr_fd_1("Error initializing the game\n", 2);
 		free_game(&game);
-		return (ft_putstr_fd_1("Inicialization error.\n", 2));
 	}
 	render_map(game.map, &game);
 	mlx_key_hook(game.win_ptr, key_press, &game);

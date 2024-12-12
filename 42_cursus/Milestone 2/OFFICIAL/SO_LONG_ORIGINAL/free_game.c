@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 10:58:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/07 15:31:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:51:17 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ static void	check_other_things(t_game *game)
 		free(game->map);
 	}
 	if (game->mlx_ptr)
+	{
 		mlx_destroy_display(game->mlx_ptr);
-	if (game->mlx_ptr)
 		free(game->mlx_ptr);
+	}
 	game->map = NULL;
 	game->win_ptr = NULL;
 	game->mlx_ptr = NULL;
