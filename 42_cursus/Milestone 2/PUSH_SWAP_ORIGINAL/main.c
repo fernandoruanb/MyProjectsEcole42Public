@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 15:36:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/04 15:39:41 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/12 07:56:40 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/12 07:58:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "push_swap.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+int	main(int argc, char **argv)
 {
-	unsigned char	*ptr;
-	void			*buffer;
-	size_t			index;
-	size_t			length;
-
-	if (nmemb != 0 && size > ((size_t) - 1) / nmemb)
-		return (NULL);
-	length = nmemb * size;
-	buffer = malloc(length);
-	if (!buffer)
-		return (NULL);
-	ptr = (unsigned char *)buffer;
-	index = 0;
-	while (index < length)
-	{
-		ptr[index] = 0;
-		index++;
-	}
-	return (buffer);
+	if (argc < 2)
+		return (ft_putstr_fd_1("Too few arguments.\n", 2));
+	return (0);
 }

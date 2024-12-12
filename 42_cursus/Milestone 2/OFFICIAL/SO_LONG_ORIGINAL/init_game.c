@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 19:44:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 11:54:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/12 07:06:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	init_game(t_game *game, char *map_file)
 	if (game->width > 30)
 		return (ft_putstr_fd_0("Map is so big!!!\n", 2));
 	game->height = 0;
-	if (game->height > 16)
-		return (ft_putstr_fd_0("Less height, please!!!\n", 2));
 	while (game->map[game->height])
 		game->height++;
+	if (game->height > 16)
+		return (ft_putstr_fd_0("Map is so big! Extreme height!\n", 2));
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->width * TILE_SIZE,
 			game->height * TILE_SIZE, "so_long");
 	if (!game->win_ptr)
