@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/13 10:03:47 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:00:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int		free_game(t_game *game);
 int		key_press(int keycode, t_game *game);
 char	*ft_strchr_v3(const char *s, int c);
 int		load_image(void **img, char *path, t_game *game);
+void	initialize_heap_variables(t_game *game);
 
 #endif /* SO_LONG_H */
