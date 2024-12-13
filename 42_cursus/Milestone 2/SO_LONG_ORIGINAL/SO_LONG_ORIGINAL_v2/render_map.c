@@ -44,7 +44,7 @@ int	render_map(t_game *game)
 	while (game->map[y] != NULL)
 	{
 		x = 0;
-		while (game->map[y][x] != '\0' 
+		while (game->map[y][x] != '\0'
 			&& game->map[y][x] != '\n')
 		{
 			if (!render_tile(game, x, y))

@@ -68,7 +68,7 @@ char	**ft_putstr_fd_n(const char *s, int fd);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	**read_map(char *filename, t_game *game);
 int		validate_map(char **map, t_game *game);
-int	render_map(t_game *game);
+int		render_map(t_game *game);
 int		load_textures(t_game *game);
 int		free_game(t_game *game);
 int		key_press(int keycode, t_game *game);
