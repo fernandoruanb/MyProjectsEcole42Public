@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 14:28:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/13 14:34:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:06:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	send_message(unsigned char *message)
+void	send_message(int pid, unsigned char *message)
 {
 	int	index;
 	int	s_index;
