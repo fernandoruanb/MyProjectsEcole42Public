@@ -43,7 +43,8 @@ SRCS =  $(SRCDIR)/main.c\
 	$(SRCDIR)/get_next_line_utils.c\
 	$(SRCDIR)/ft_strchr_v3.c\
 	$(SRCDIR)/load_image.c\
-	$(SRCDIR)/initialize_heap_variables.c
+	$(SRCDIR)/initialize_heap_variables.c\
+	$(SRCDIR)/check_ber.c
 
 # OBJS
 
