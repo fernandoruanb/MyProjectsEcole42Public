@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_bits.c                                       :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 17:29:52 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/15 16:36:34 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/15 08:38:07 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/15 08:40:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef MINITALK_H
+# define MINITALK_H
 
-void	print_bits(unsigned char octet);
+# include <unistd.h>
+# include <stdlib.h>
+# include <signal.h>
+# include <stdio.h>
 
-int	main(void)
-{
-	print_bits('o');
-	write(1, "\n", 1);
-	return (0);
-}
+typedef struct sigaction t_sigaction;
 
-void	print_bits(unsigned char octet)
-{
-	int	index;
-	unsigned char	digit;
-	
-	index = 8;
-	while (index--)
-	{
-		digit = ((octet >> index) & 1) + '0';
-		write(1, &digit, 1);
-	}
-}
+#endif /* MINITALK_H */

@@ -5,31 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 17:29:52 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/15 16:36:34 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/15 09:31:31 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/15 15:47:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "minitalk.h"
 
-void	print_bits(unsigned char octet);
-
-int	main(void)
-{
-	print_bits('o');
-	write(1, "\n", 1);
-	return (0);
-}
-
-void	print_bits(unsigned char octet)
+int	print_bits(char character)
 {
 	int	index;
-	unsigned char	digit;
-	
-	index = 8;
-	while (index--)
+	int	bit;
+
+	index = 7;
+	while (index >= 0)
 	{
-		digit = ((octet >> index) & 1) + '0';
-		write(1, &digit, 1);
+		bit = (character >> index) & 1;
+		printf("%d", bit);
+		index--;
 	}
+	printf("\n");
+	return (0);
 }
