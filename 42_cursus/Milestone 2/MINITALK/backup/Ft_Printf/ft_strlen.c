@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 08:38:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/16 16:17:58 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/11 18:26:15 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/11 18:26:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <stdio.h>
+size_t	ft_strlen(const char *s)
+{
+	size_t	length;
 
-typedef struct sigaction t_sigaction;
-
-#endif /* MINITALK_H */
+	length = 0;
+	while (s[length] != '\0')
+		length++;
+	return (length);
+}

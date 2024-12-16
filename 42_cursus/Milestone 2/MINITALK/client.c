@@ -6,11 +6,28 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 09:05:58 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/15 19:32:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:18:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+static void	send_bits(pid_t pid, unsigned char character, const char *s);
+
+static void	handle_answer(int signum, siginfo_t *info, void *context)
+{
+	static int	index = 0;
+
+	if (signum == SIGUSR2)
+	{
+		printf("Client received SIGUSR2.\n");
+		printf("%s\n", str);
+		send_bits(signum, str[index], str);
+		index++;
+	}
+	if (index == 7)
+		index = 0;
+}
 
 static int	ft_strlen(const char *s)
 {
@@ -72,19 +89,19 @@ static int	ft_atoi(const char *nptr)
 int	main(int argc, char **argv)
 {
 	pid_t	pid;
-	char	*str;
-	int	index;
+	t_sigaction	sa;
 
 	if (argc != 3)
 		return (1);
+	sa.sa_sigaction = handle_answer;
+	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGUSR2, &sa, NULL);
 	pid = ft_atoi(argv[1]);
-	str = argv[2];
-	index = 0;
-	while (argv[2][index] != '\0')
+	kill(pid, SIGUSR1);
+	while (1)
 	{
-		send_bits(pid, (unsigned char)argv[2][index], argv[2]);
-		index++;
+		pause();
 	}
-	send_bits(pid, (unsigned char)argv[2][index], argv[2]);
 	return (0);
 }

@@ -6,11 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 09:05:58 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/16 16:48:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:57:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+int	ready_to_send = 0;
 
 static int	ft_strlen(const char *s)
 {
@@ -24,12 +26,8 @@ static int	ft_strlen(const char *s)
 
 static void	send_bits(pid_t pid, unsigned char character, char *s)
 {
-	int	index;
-	int	length;
-	int	time;
+	static int	index;
 
-	length = ft_strlen(s);
-	time = length * 8;
 	index = 7;
 	while (index >= 0)
 	{
@@ -37,7 +35,8 @@ static void	send_bits(pid_t pid, unsigned char character, char *s)
 			kill(pid, SIGUSR1);
 		else if (((character >> index) & 1) == 1)
 			kill(pid, SIGUSR2);
-		usleep(time);
+		while (!ready_to_send)
+			pause();
 		index--;
 	}
 }
@@ -69,20 +68,33 @@ static int	ft_atoi(const char *nptr)
 	return (result * signal);
 }
 
+static void	handle_answer(int signum, siginfo_t *info, void *context)
+{
+	(void)info;
+	(void)context;
+	if (signum == SIGUSR1)
+		ready_to_send = 1;
+	else if (signum == SIGUSR2)
+		ready_to_send = 0;
+}
+
 int	main(int argc, char **argv)
 {
 	pid_t	pid;
-	char	*str;
+	t_sigaction	sa;
 	int	index;
 
 	if (argc != 3)
 		return (1);
+	sa.sa_sigaction = handle_answer;
+	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 	pid = ft_atoi(argv[1]);
-	str = argv[2];
 	index = 0;
 	while (argv[2][index] != '\0')
 	{
-		usleep(500);
 		send_bits(pid, (unsigned char)argv[2][index], argv[2]);
 		index++;
 	}

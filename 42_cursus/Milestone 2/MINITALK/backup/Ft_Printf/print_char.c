@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   print_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 08:38:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/16 16:17:58 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/10 13:39:26 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/10 17:21:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <stdio.h>
+int	print_char(va_list args)
+{
+	char	c;
 
-typedef struct sigaction t_sigaction;
-
-#endif /* MINITALK_H */
+	c = (char)va_arg(args, int);
+	return (write(1, &c, 1));
+}

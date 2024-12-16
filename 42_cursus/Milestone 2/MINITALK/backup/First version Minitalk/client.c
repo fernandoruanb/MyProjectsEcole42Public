@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 09:05:58 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/16 16:48:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:44:36 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ static void	send_bits(pid_t pid, unsigned char character, char *s)
 	int	time;
 
 	length = ft_strlen(s);
-	time = length * 8;
+	if (length <= 100)
+		time = 900;
+	if (length > 100)
+		time = 5000;
 	index = 7;
 	while (index >= 0)
 	{
@@ -82,7 +85,6 @@ int	main(int argc, char **argv)
 	index = 0;
 	while (argv[2][index] != '\0')
 	{
-		usleep(500);
 		send_bits(pid, (unsigned char)argv[2][index], argv[2]);
 		index++;
 	}

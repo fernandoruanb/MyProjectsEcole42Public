@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 08:38:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/16 16:17:58 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/10 18:08:39 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/10 18:08:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <stdio.h>
+int	print_str(va_list args)
+{
+	char	*str;
+	size_t	length;
 
-typedef struct sigaction t_sigaction;
-
-#endif /* MINITALK_H */
+	str = (char *)va_arg(args, char *);
+	if (!str)
+		str = "(null)";
+	length = ft_strlen(str);
+	return (write(1, str, length));
+}

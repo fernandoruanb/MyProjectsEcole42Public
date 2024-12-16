@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 08:32:58 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/16 11:04:36 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:59:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	print_bits(char character);
+int	print_bits(char character);
 
 static void	ft_putchar(char c)
 {
@@ -21,21 +21,18 @@ static void	ft_putchar(char c)
 
 static void	mount_char(int signum)
 {
-	static int	connections = 0;
 	static int	index = 8;
 	static unsigned char	character = 0;
 
-	if (connections == 0)
-		connections++;
-	if (signum == SIGUSR1 && connections > 0)
+	if (signum == SIGUSR1)
 		character = character << 1 | 0;
-	if (signum == SIGUSR2 && connections > 0)
+	if (signum == SIGUSR2)
 		character = character << 1 | 1;
-	if (connections > 0)
-		index--;
-	print_bits(character);
+	//print_bits(character);
+	index--;
 	if (index == 0)
 	{
+		//printf("Entrou aqui.\n");
 		ft_putchar(character);
 		index = 8;
 		character = 0;
@@ -44,18 +41,21 @@ static void	mount_char(int signum)
 
 static void	handle_signal(int signum, siginfo_t *info, void *context)
 {
+	(void)info;
 	(void)context;
 	if (signum == SIGUSR1)
 	{
-		printf("Received signal 0.\n");
+		//printf("Sinal 0 received.\n");
 		mount_char(signum);
-		kill(info->si_pid, SIGUSR2);
+		//kill(info->si_pid, SIGUSR2);
+		//write(1, "\n", 1);
 	}
 	else if (signum == SIGUSR2)
 	{
-		printf("Received signal 1.\n");
+		//printf("Sinal 1 receveid.\n");
 		mount_char(signum);
-		kill(info->si_pid, SIGUSR2);
+		//kill(info->si_pid, SIGUSR1);
+		//write(1, "\n", 1);
 	}
 }
 
