@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:12:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/17 17:34:25 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:48:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,16 @@ char	*ft_strcpy(char *dest, const char *src, char c)
 	return (dest);
 }
 
-int	ft_strlen(const char *s)
+void	reinitialize_global_var(void)
 {
-	int	length;
-
-	length = 0;
-	while (s[length] != '\0')
-		length++;
-	return (length);
+	g_data.character = 0;
+	g_data.bit_count = 0;
 }
 
 static void	append_char(char c)
 {
 	char	*new_str;
 	int		length;
-	int		index;
 
 	if (g_data.message)
 		length = ft_strlen(g_data.message);
@@ -68,6 +63,7 @@ static void	append_char(char c)
 
 static void	handle_signal(int signal, siginfo_t *info, void *context)
 {
+	(void)context;
 	g_data.character = g_data.character << 1;
 	if (signal == SIGUSR2)
 	{
@@ -88,8 +84,7 @@ static void	handle_signal(int signal, siginfo_t *info, void *context)
 			}
 			exit(0);
 		}
-		g_data.character = 0;
-		g_data.bit_count = 0;
+		reinitialize_global_var();
 	}
 	usleep(900);
 	kill(info->si_pid, SIGUSR1);

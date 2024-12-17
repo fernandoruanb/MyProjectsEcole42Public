@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:13:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/17 17:20:50 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:49:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ typedef struct s_data
 	char	character;
 	int		bit_count;
 }	t_data;
+
+int	ft_strlen(const char *s);
 
 #endif /* TEST_MINITALK_H */
