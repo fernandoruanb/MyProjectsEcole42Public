@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:52:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/17 17:02:47 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:33:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ static void	handle_signal(int signal, siginfo_t *info, void *context)
 			{
 				free(g_data.message);
 				g_data.message = NULL;
+				kill(info->si_pid, SIGUSR1);
 			}
+			exit(0);
 		}
 		g_data.character = 0;
 		g_data.bit_count = 0;
