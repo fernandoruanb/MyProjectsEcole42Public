@@ -16,12 +16,26 @@ SRCDIR = .
 # SERVER_SRCS
 
 SERVER_SRCS =	$(SRCDIR)/server.c\
-	        $(SRCDIR)/utils.c
+	        $(SRCDIR)/utils.c\
+		$(SRCDIR)/ft_printf.c\
+		$(SRCDIR)/parse_format.c\
+		$(SRCDIR)/handle_specifier.c\
+		$(SRCDIR)/print_char.c\
+		$(SRCDIR)/print_str.c\
+		$(SRCDIR)/print_percentage.c\
+		$(SRCDIR)/convert_int_to_str.c
 
 # CLIENT_SRCS
 
 CLIENT_SRCS = 	$(SRCDIR)/client.c\
-		$(SRCDIR)/utils.c
+		$(SRCDIR)/utils.c\
+		$(SRCDIR)/ft_printf.c\
+		$(SRCDIR)/parse_format.c\
+		$(SRCDIR)/handle_specifier.c\
+		$(SRCDIR)/print_char.c\
+		$(SRCDIR)/print_str.c\
+		$(SRCDIR)/print_percentage.c\
+		$(SRCDIR)/convert_int_to_str.c
 
 # SERVER_OBJS
 

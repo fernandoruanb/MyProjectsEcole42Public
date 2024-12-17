@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:12:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/17 18:48:35 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:41:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	handle_signal(int signal, siginfo_t *info, void *context)
 		append_char(g_data.character);
 		if (g_data.character == '\0')
 		{
-			printf("%s\n", g_data.message);
+			ft_printf("%s\n", g_data.message);
 			if (g_data.message)
 			{
 				free(g_data.message);
@@ -96,7 +96,7 @@ int	main(void)
 	t_sigaction	new_connection;
 
 	pid = getpid();
-	printf("The server PID is: %d\n", pid);
+	ft_printf("The server PID is: %d\n", pid);
 	new_connection.sa_sigaction = handle_signal;
 	new_connection.sa_flags = SA_SIGINFO;
 	sigemptyset(&new_connection.sa_mask);

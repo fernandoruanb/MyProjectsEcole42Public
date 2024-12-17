@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:12:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/17 17:12:26 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:41:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	send_char(pid_t pid, char c)
 static void	handle_answer(int signal)
 {
 	if (signal == SIGUSR1)
-		printf("The server signal was received successfully.\n");
+		ft_printf("The server signal was received successfully.\n");
 }
 
 static int	ft_atoi(const char *nptr)
@@ -84,13 +84,13 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("How to use: ./client [PID] [MESSAGE].\n");
+		ft_printf("How to use: ./client [PID] [MESSAGE].\n");
 		return (1);
 	}
 	pid = ft_atoi(argv[1]);
 	if (pid <= 0 || pid > 4194304)
 	{
-		printf("Invalid PID.\n");
+		ft_printf("Invalid PID.\n");
 		return (1);
 	}
 	signal(SIGUSR1, handle_answer);
