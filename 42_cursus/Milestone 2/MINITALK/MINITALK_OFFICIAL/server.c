@@ -6,13 +6,34 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 21:32:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/16 21:32:07 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/17 08:30:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	handle_signal(int sig, siginfo_t *info, void *context)
+static t_data	g_data = {NULL, 0, 0};
+
+static char	*append_char(char *str, char c)
+{
+	int		index;
+	int		length;
+	char	*new_str;
+
+	if (str)
+		length = ft_strlen(str);
+	new_str = (char *)malloc(length + 2);
+	if (!new_str)
+		return (NULL);
+	new_str = ft_strcpy(new_str, str);
+	new_str[length] = c;
+	new_str[length + 1] = '\0';
+	if (str)
+		free(str);
+	return (new_str);
+}
+
+static void	handle_signal(int sig, siginfo_t *info, void *context)
 {
 	(void)context;
 	g_data.current_char = g_data.current_char << 1;
@@ -41,7 +62,7 @@ void	handle_signal(int sig, siginfo_t *info, void *context)
 int	main(void)
 {
 	t_sigaction	new_connection;
-	pid_t	pid;
+	pid_t		pid;
 
 	pid = getpid();
 	if (pid < 0)
@@ -61,3 +82,4 @@ int	main(void)
 		pause();
 	}
 	return (0);
+}

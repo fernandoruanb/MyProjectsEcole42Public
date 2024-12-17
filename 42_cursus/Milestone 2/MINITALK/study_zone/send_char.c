@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   send_char.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 08:33:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/17 08:58:44 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/17 09:14:19 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/17 09:23:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include <stdio.h>
 
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
-# include <stdio.h>
-
-typedef struct s_data
+void	send_char(char c)
 {
-	char	*message;
-	int		count_bits;
-	char	current_char;
-}	t_data;
+	int				index;
+	unsigned char	character;
 
-typedef struct sigaction	t_sigaction;
+	character = (unsigned char)c;
+	index = 7;
+	while (index >= 0)
+	{
+		if (character >> index & 1)
+			printf("1");
+		else
+			printf("0");
+		index--;
+	}
+	printf("\n");
+}
 
-void	*handle_signal(int signal, siginfo_t *info, void *context);
-int		ft_atoi(const char *str);
-void	send_message(int pid, char *message);
-
-#endif /* MINITALK_H */
+/*int	main(void)
+{
+	send_char('o');
+	send_char('A');
+	send_char('B');
+	send_char('C');
+	send_char('7');
+	return (0);
+}*/
