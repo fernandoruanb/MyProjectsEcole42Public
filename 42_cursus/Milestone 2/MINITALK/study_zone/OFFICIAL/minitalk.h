@@ -5,19 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 08:38:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/15 08:40:19 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/17 17:13:01 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/17 17:20:50 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
 
+# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
-# include <stdio.h>
 
-typedef struct sigaction t_sigaction;
+typedef struct sigaction	t_sigaction;
 
-#endif /* MINITALK_H */
+typedef struct s_data
+{
+	char	*message;
+	char	character;
+	int		bit_count;
+}	t_data;
+
+#endif /* TEST_MINITALK_H */

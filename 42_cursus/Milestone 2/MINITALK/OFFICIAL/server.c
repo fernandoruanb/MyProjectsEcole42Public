@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_second_step.c                               :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 12:52:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/17 17:02:47 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/17 17:12:34 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/17 17:17:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test_minitalk.h"
+#include "minitalk.h"
 
-static t_data g_data = {NULL, 0, 0};
+static t_data	g_data = {NULL, 0, 0};
 
 char	*ft_strcpy(char *dest, const char *src, char c)
 {
@@ -42,8 +42,8 @@ int	ft_strlen(const char *s)
 static void	append_char(char c)
 {
 	char	*new_str;
-	int	length;
-	int	index;
+	int		length;
+	int		index;
 
 	if (g_data.message)
 		length = ft_strlen(g_data.message);
@@ -68,12 +68,12 @@ static void	append_char(char c)
 
 static void	handle_signal(int signal, siginfo_t *info, void *context)
 {
-	g_data.character = g_data.character << 1; // Move para a esquerda, trata zero automaticamente
+	g_data.character = g_data.character << 1;
 	if (signal == SIGUSR2)
 	{
-		g_data.character |= 1;	// Para acrescentar o binário um corretamente
+		g_data.character |= 1;
 	}
-	g_data.bit_count++; // Incrementa a quantidade de bits.
+	g_data.bit_count++;
 	if (g_data.bit_count == 8)
 	{
 		append_char(g_data.character);
@@ -92,19 +92,20 @@ static void	handle_signal(int signal, siginfo_t *info, void *context)
 	usleep(900);
 	kill(info->si_pid, SIGUSR1);
 }
+
 int	main(void)
 {
-	pid_t	pid;
+	pid_t		pid;
 	t_sigaction	new_connection;
 
 	pid = getpid();
-	printf("The server PID is: %d\n", pid); // Aqui estamos pegando o PID do servidor
+	printf("The server PID is: %d\n", pid);
 	new_connection.sa_sigaction = handle_signal;
 	new_connection.sa_flags = SA_SIGINFO;
 	sigemptyset(&new_connection.sa_mask);
 	sigaction(SIGUSR1, &new_connection, NULL);
 	sigaction(SIGUSR2, &new_connection, NULL);
-	while (1) // Nessa etapa, estamos colocando em loop infinito, para que o servidor continue rodando e recebendo sinais do client
+	while (1)
 	{
 		pause();
 	}

@@ -5,41 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 09:05:58 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/16 16:48:10 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/17 17:12:16 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/17 17:12:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static int	ft_strlen(const char *s)
-{
-	size_t	length;
+static void	send_char(pid_t pid, char c);
 
-	length = 0;
-	while (s[length] != '\0')
-		length++;
-	return (length);
-}
-
-static void	send_bits(pid_t pid, unsigned char character, char *s)
+static void	send_message(pid_t pid, const char *message)
 {
 	int	index;
-	int	length;
-	int	time;
 
-	length = ft_strlen(s);
-	time = length * 8;
+	index = 0;
+	while (message[index] != '\0')
+	{
+		send_char(pid, message[index]);
+		index++;
+	}
+	send_char(pid, message[index]);
+}
+
+static void	send_char(pid_t pid, char c)
+{
+	int				index;
+	unsigned char	character;
+
 	index = 7;
+	character = (unsigned char)c;
 	while (index >= 0)
 	{
-		if (((character >> index) & 1) == 0)
-			kill(pid, SIGUSR1);
-		else if (((character >> index) & 1) == 1)
+		if (character >> index & 1)
 			kill(pid, SIGUSR2);
-		usleep(time);
+		else
+			kill(pid, SIGUSR1);
+		pause();
 		index--;
 	}
+}
+
+static void	handle_answer(int signal)
+{
+	if (signal == SIGUSR1)
+		printf("The server signal was received successfully.\n");
 }
 
 static int	ft_atoi(const char *nptr)
@@ -52,12 +61,12 @@ static int	ft_atoi(const char *nptr)
 	result = 0;
 	signal = 1;
 	while (nptr[index] == ' ' || nptr[index] == '\t' || nptr[index] == '\n'
-		|| nptr[index] == '\v' || nptr[index] == '\f' || nptr[index] == '\r')
+		|| nptr[index] == '\r' || nptr[index] == '\f' || nptr[index] == '\v')
 		index++;
 	if (nptr[index] == '+' || nptr[index] == '-')
 	{
 		if (nptr[index] == '-')
-			signal *= -1;
+			signal = -1;
 		index++;
 	}
 	while (nptr[index] >= '0' && nptr[index] <= '9')
@@ -72,20 +81,19 @@ static int	ft_atoi(const char *nptr)
 int	main(int argc, char **argv)
 {
 	pid_t	pid;
-	char	*str;
-	int	index;
 
 	if (argc != 3)
-		return (1);
-	pid = ft_atoi(argv[1]);
-	str = argv[2];
-	index = 0;
-	while (argv[2][index] != '\0')
 	{
-		usleep(500);
-		send_bits(pid, (unsigned char)argv[2][index], argv[2]);
-		index++;
+		printf("How to use: ./client [PID] [MESSAGE].\n");
+		return (1);
 	}
-	send_bits(pid, (unsigned char)argv[2][index], argv[2]);
+	pid = ft_atoi(argv[1]);
+	if (pid <= 0 || pid > 4194304)
+	{
+		printf("Invalid PID.\n");
+		return (1);
+	}
+	signal(SIGUSR1, handle_answer);
+	send_message(pid, argv[2]);
 	return (0);
 }
