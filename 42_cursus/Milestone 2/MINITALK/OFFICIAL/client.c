@@ -6,11 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:12:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/17 19:41:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:31:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+static int	g_confirm = 0;
 
 static void	send_char(pid_t pid, char c);
 
@@ -40,7 +42,8 @@ static void	send_char(pid_t pid, char c)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		pause();
+		while (!g_confirm)
+			;
 		index--;
 	}
 }
@@ -48,7 +51,7 @@ static void	send_char(pid_t pid, char c)
 static void	handle_answer(int signal)
 {
 	if (signal == SIGUSR1)
-		ft_printf("The server signal was received successfully.\n");
+		g_confirm = 1;
 }
 
 static int	ft_atoi(const char *nptr)

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:12:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/17 19:41:33 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:41:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_data	g_data = {NULL, 0, 0};
 
-char	*ft_strcpy(char *dest, const char *src, char c)
+static char	*ft_strcpy(char *dest, const char *src, char c)
 {
 	int	index;
 
@@ -27,12 +27,6 @@ char	*ft_strcpy(char *dest, const char *src, char c)
 	dest[index] = c;
 	dest[index + 1] = '\0';
 	return (dest);
-}
-
-void	reinitialize_global_var(void)
-{
-	g_data.character = 0;
-	g_data.bit_count = 0;
 }
 
 static void	append_char(char c)
@@ -66,9 +60,7 @@ static void	handle_signal(int signal, siginfo_t *info, void *context)
 	(void)context;
 	g_data.character = g_data.character << 1;
 	if (signal == SIGUSR2)
-	{
 		g_data.character |= 1;
-	}
 	g_data.bit_count++;
 	if (g_data.bit_count == 8)
 	{
@@ -82,11 +74,10 @@ static void	handle_signal(int signal, siginfo_t *info, void *context)
 				g_data.message = NULL;
 				kill(info->si_pid, SIGUSR1);
 			}
-			exit(0);
 		}
-		reinitialize_global_var();
+		g_data.character = 0;
+		g_data.bit_count = 0;
 	}
-	usleep(900);
 	kill(info->si_pid, SIGUSR1);
 }
 
@@ -96,6 +87,7 @@ int	main(void)
 	t_sigaction	new_connection;
 
 	pid = getpid();
+	ft_printf("Welcome to Fernando's server. =D\n");
 	ft_printf("The server PID is: %d\n", pid);
 	new_connection.sa_sigaction = handle_signal;
 	new_connection.sa_flags = SA_SIGINFO;
