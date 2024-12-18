@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:12:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/18 10:31:47 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:49:17 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	send_char(pid_t pid, char c)
 	character = (unsigned char)c;
 	while (index >= 0)
 	{
+		g_confirm = 0;
 		if (character >> index & 1)
 			kill(pid, SIGUSR2);
 		else
