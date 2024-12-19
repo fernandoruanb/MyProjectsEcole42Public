@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 07:56:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/12 08:37:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/19 10:55:57 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/19 15:25:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	parse_args(int argc, char **argv)
 {
-	if (argc < 2)
-		return (ft_putstr_fd_1("Too few arguments.\n", 2));
-	if (!parse_args(argc, argv))
-		return (ft_putstr_fd_1("Invalid numbers detected!\n", 2));
-	return (0);
+	int		index;
+	char	**result;
+	t_stack	stacks;
+
+	index = 1;
+	while (index < argc)
+	{
+		result = ft_split(argv[index]);
+		if (!is_valid(result, &stacks))
+			return (0);
+		free(result);
+		index++;
+	}
+	return (1);
 }
