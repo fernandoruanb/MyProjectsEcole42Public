@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:45:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/19 16:29:08 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:18:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	**ft_split(const char *s)
 	return (str_list);
 }
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	int		index;
 	char	**result;
@@ -120,4 +120,4 @@ int	main(int argc, char **argv)
 	}
 	free(result);
 	return (0);
-}
+}*/

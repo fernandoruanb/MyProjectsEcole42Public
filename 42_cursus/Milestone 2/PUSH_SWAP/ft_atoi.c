@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:34:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/19 12:43:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/20 10:19:17 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ long	ft_atoi(const char *nptr)
 	return (result * signal);
 }
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	long	result;
 
@@ -51,4 +51,4 @@ int	main(int argc, char **argv)
 	result = ft_atoi(argv[1]);
 	printf("The number is: %ld\n", result);
 	return (0);
-}
+}*/
