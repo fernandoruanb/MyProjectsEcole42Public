@@ -5,27 +5,59 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 10:55:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/19 15:25:47 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/19 20:10:31 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/19 20:10:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	parse_args(int argc, char **argv)
+static int	ft_isdigit(char c)
 {
-	int		index;
-	char	**result;
-	t_stack	stacks;
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
-	index = 1;
-	while (index < argc)
+static int	is_number(char *str)
+{
+	int	index;
+
+	index = 0;
+	while ((str[index] && (str[index] == '-' 
+		|| str[index] == '+')))
+		index++;
+	while (str[index])
 	{
-		result = ft_split(argv[index]);
-		if (!is_valid(result, &stacks))
+		if (!ft_isdigit(str[index]))
 			return (0);
-		free(result);
 		index++;
 	}
+	if (str[index - 1] == '-' || str[index - 1] == '+')
+		return (0);
 	return (1);
+}
+
+int	*parse_args(int argc, char **argv, int *size)
+{
+	int	index;
+	int	value;
+
+	if (argc < 2)
+	{
+		printf("How to use: ./push_swap [args...]\n");
+		return (1);
+	}
+	while (index < argc)
+	{
+		value = 0;
+		if (!is_number(argv[index]))
+			return (0);
+		if (!is_valid_number(argv[index]))
+			return (0);
+		if (!has_duplicates(argc, argv)
+			return (0);
+		index++;
+	}
+	return (0);
 }

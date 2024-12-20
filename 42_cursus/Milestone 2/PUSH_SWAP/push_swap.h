@@ -31,5 +31,7 @@ typedef struct s_stack
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nmemb, size_t len);
+int	*parse_args(int argc, char **argv, int *size);
+int	is_valid_number(char *str);
 
 #endif /* PUSH_SWAP_H */
