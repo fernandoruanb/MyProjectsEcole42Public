@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:12:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/20 16:44:54 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:15:40 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ static int	has_duplicates(t_stacks stack)
 {
 	int	index;
 
-	while (stack->stack_a)
+	index = 1;
+	while (stack->stack_a[index])
 	{
+		s_index = index - 1;
+		if (stack->stack_a[index] == stack->stack_a[s_index])
+			return (ft_putstr_fd_1(""));
 	}
 	index = 0;
-	
 }
 
 static int	parsing_numbers_to_stack(char **result, t_stacks stack)
