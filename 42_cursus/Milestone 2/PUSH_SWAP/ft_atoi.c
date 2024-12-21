@@ -12,7 +12,18 @@
 
 #include "push_swap.h"
 
-long	ft_atoi(const char *nptr)
+static int	is_valid_limit(long result, int sig, int *error)
+{
+	if (result < INT_MIN || result > INT_MAX)
+	{
+		*error = 1;
+		return (ft_putendl_fd_0("INT_MIN/MAX Error.", 2));
+	}
+	else
+		return ((int)(result * signal));
+}
+
+int	ft_atoi(const char *nptr, int *error)
 {
 	int		index;
 	long	result;
@@ -36,7 +47,7 @@ long	ft_atoi(const char *nptr)
 		result += (nptr[index] - '0');
 		index++;
 	}
-	return (result * signal);
+	return (is_valid_limit(result, signal, error));
 }
 
 /*int	main(int argc, char **argv)

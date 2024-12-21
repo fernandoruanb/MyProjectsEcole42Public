@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd_1.c                                   :+:      :+:    :+:   */
+/*   is_valid_number.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/20 10:57:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/20 10:58:29 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/20 21:22:07 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/20 21:22:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_putstr_fd_1(const char *str, int fd)
+int	is_valid_number(const char *str)
 {
 	int	index;
 
 	index = 0;
+	while (str[index] == '-' || str[index] == '+')
+		index++;
+	if (str[index] == '\0')
+		return (ft_putendl_fd_0("There is/are not numbers.", 2));
 	while (str[index] != '\0')
 	{
-		write(fd, &str[index], 1);
+		if (!ft_isdigit(str[index]))
+			return (ft_putendl_fd_0("Ops! Invalid char!", 2));
 		index++;
 	}
 	return (1);
