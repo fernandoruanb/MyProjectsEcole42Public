@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_number.c                                  :+:      :+:    :+:   */
+/*   is_number.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/20 21:22:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/22 10:10:18 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/22 15:34:24 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/22 15:35:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_valid_number(const char *str)
+int	is_number(const char *str)
 {
 	int	index;
 	int	error;
