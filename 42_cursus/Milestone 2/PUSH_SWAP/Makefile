@@ -20,8 +20,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 # SRCS
 
-SRCS = $(shell find $(SRCDIR) -name "*.c")
-
+SRCS =  $(shell find -type f -name *.c)
+	
 # OBJS
 
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
@@ -34,6 +34,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS) $(LIBFT)
 
 # Clear
@@ -57,4 +58,4 @@ re: fclean all
 norm:
 	norminette $(SRCDIR) $(INCDIR) $(LIBFT_DIR)
 
-.PHONY: all fclean re clean 
+.PHONY: all fclean re clean norm 
