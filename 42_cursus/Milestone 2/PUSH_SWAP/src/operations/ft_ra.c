@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sb.c                                            :+:      :+:    :+:   */
+/*   ft_ra.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 13:21:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/23 15:20:18 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/23 15:15:08 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/23 16:40:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/push_swap.h"
+#include "../../push_swap.h"
 
-void	ft_sb(t_stack *stack, int flag)
+void	ft_ra(t_stack *stack, int total, int flag)
 {
 	int	temp;
+	int	index;
 
-	if (stack->elements_b < 2)
+	if (total < 2)
 		return ;
-	temp = stack->stack_b[0];
-	stack->stack_b[0] = stack->stack_b[1];
-	stack->stack_b[1] = temp;
+	temp = stack->stack_a[0];
+	index = 1;
+	while (index < total)
+	{
+		stack->stack_a[index - 1] = stack->stack_a[index];
+		index++;
+	}
+	stack->stack_a[total] = temp;
 	if (flag == 1)
-		ft_printf("sb\n");
+		ft_printf("ra\n");
 }
