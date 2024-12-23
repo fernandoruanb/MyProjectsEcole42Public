@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:20:12 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/22 16:25:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/23 13:32:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	init_stack(t_stack *stack, int total)
 	if (!stack->stack_b)
 		return (ft_putendl_fd_0("Failed malloc int stack_b", 2));
 	stack->size_b = total;
+	stack->elements_b = 0;
 	stack->count = 0;
 	return (1);
 }
