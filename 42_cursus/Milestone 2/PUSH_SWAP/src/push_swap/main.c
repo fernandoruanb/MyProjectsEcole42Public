@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 09:08:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/22 16:42:22 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/23 09:09:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ int	main(int argc, char **argv)
 	if (!init_stack(&stack, total_numbers))
 		return (ft_putendl_fd_1("Failed init stacks", 2));
 	if (!parse_args(argc, argv, &stack))
-		return (ft_putendl_fd_1("Invalid things found!", 2));
+		return (1);
 	index = 0;
 	while (index < total_numbers)
 		ft_printf("%d ", stack.stack_a[index++]);
 	ft_printf("\n");
+	free(stack.stack_a);
+	free(stack.stack_b);
 	return (0);
 }

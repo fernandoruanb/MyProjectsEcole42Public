@@ -6,11 +6,32 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:17:06 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/22 16:10:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/23 10:22:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int	has_duplicates(t_stack *stack)
+{
+	int	index;
+	int	s_index;
+
+	index = 0;
+	while (index < stack->count - 1)
+	{
+		s_index = index + 1;
+		while (s_index < stack->count)
+		{
+			if (stack->stack_a[index] == stack->stack_a[s_index])
+				return (ft_putendl_fd_1("Has duplicates!!!", 2));
+			else
+				s_index++;
+		}
+		index++;
+	}
+	return (0);
+}
 
 static int	append_stack(int value, t_stack *stack)
 {
@@ -36,7 +57,6 @@ static int	erase_split_stack(char **result, t_stack *stack)
 	{
 		free(stack->stack_a);
 		free(stack->stack_b);
-		free(stack);
 	}
 	return (0);
 }
@@ -55,8 +75,8 @@ static int	check_regular_str(const char *s, char **res, t_stack *stack)
 	if (!append_stack(value, stack))
 		return (erase_split_stack(res, stack));
 	stack->count++;
-	//if (has_duplicates(stack))
-	//	return (erase_split_stack(res, stack));
+	if (has_duplicates(stack))
+		return (erase_split_stack(res, stack));
 	return (1);
 }
 
