@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:17:06 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/23 10:22:58 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/23 13:05:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,13 @@ static int	erase_split_stack(char **result, t_stack *stack)
 	if (result)
 	{
 		index = 0;
-		while (result[index++] != NULL)
+		while (result[index] != NULL)
+		{
 			free(result[index]);
+			index++;
+		}
 		free(result);
+		result = NULL;
 	}
 	if (stack)
 	{
@@ -100,8 +104,8 @@ int	parse_args(int argc, char **argv, t_stack *stack)
 				return (ft_putendl_fd_0("Invalid things found", 2));
 			s_index++;
 		}
+		erase_split_stack(result, NULL);
 		index++;
 	}
-	erase_split_stack(result, NULL);
 	return (1);
 }

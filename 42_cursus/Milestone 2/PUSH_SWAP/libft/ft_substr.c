@@ -6,14 +6,12 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 08:40:46 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/17 08:40:47 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/23 12:39:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include <stdio.h>
 #include "libft.h"
-
-static char	*allocate_memory(size_t len);
 
 /*char	*ft_substr(char const *s, unsigned int start, size_t len);
 
@@ -41,10 +39,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_calloc(1, sizeof(char)));
 	if (start + len > len_s)
 		len = len_s - start;
-	index = 0;
-	buffer = allocate_memory(len);
+	buffer = (char *)malloc(len + 1);
 	if (!buffer)
 		return (NULL);
+	index = 0;
 	while (index < len)
 	{
 		buffer[index] = s[start];
@@ -52,15 +50,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		start++;
 	}
 	buffer[index] = '\0';
-	return (buffer);
-}
-
-static char	*allocate_memory(size_t len)
-{
-	char	*buffer;
-
-	buffer = (char *)malloc(len + 1);
-	if (!buffer)
-		return (NULL);
 	return (buffer);
 }

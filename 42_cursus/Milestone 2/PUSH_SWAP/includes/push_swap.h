@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/22 16:04:07 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/23 11:04:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_stack
 	int		*stack_b;
 	int		size_a;
 	int		size_b;
-	int	count;
+	int		count;
 }	t_stack;
 
 int		ft_putendl_fd_0(const char *str, int fd);
@@ -43,5 +43,6 @@ int		ft_atoi_check(const char *nptr, int *error);
 int		init_stack(t_stack *stack, int total_numbers);
 int		is_number(const char *str);
 int		parse_args(int argc, char **argv, t_stack *stack_a);
+int		is_sorted(t_stack *stack, int total_numbers);
 
 #endif /* PUSH_SWAP_H */
