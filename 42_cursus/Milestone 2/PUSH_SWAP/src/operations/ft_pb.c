@@ -1,64 +1,70 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pa.c                                            :+:      :+:    :+:   */
+/*   ft_pb.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:14:46 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/24 17:46:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/24 16:39:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-static int	move_all_elements_pa(t_stack *stack)
+static int	move_all_elements(t_stack *stack, int temp)
 {
 	int	index;
 	int	*new_arr;
 
-	new_arr = (int *)ft_calloc(stack->size_b - 1, sizeof(int));
+	stack->size_b++;
+	if (stack->elements_b == 0)
+	{
+		stack->stack_b[0] = temp;
+		return (1);
+	}
+	new_arr = (int *)ft_calloc(stack->size_b, sizeof(int));
 	if (!new_arr)
-		return (ft_putendl_fd_0("Failed allocating new_arr pa", 2));
+		return (ft_putendl_fd_0("Failed allocating new_arr pb", 2));
 	else
 	{
 		index = 1;
-		while (index < stack->elements_b)
+		while (index < stack->size_b)
 		{
-			new_arr[index - 1] = stack->stack_b[index];
+			new_arr[index] = stack->stack_b[index - 1];
 			index++;
 		}
+		new_arr[0] = temp;
 		free(stack->stack_b);
 		stack->stack_b = new_arr;
 	}
-	stack->elements_b--;
 	return (1);
 }
 
-void	ft_pa(t_stack *stack, int flag)
+void	ft_pb(t_stack *stack, int flag)
 {
 	int	temp;
 	int	*new_arr;
 	int	index;
 
-	if (stack->elements_b <= 0)
+	if (stack->size_a <= 0)
 		return ;
-	new_arr = (int *)ft_calloc(stack->size_a + 1, sizeof(int));
+	new_arr = (int *)ft_calloc(stack->size_a - 1, sizeof(int));
 	if (!new_arr)
 		return ;
-	temp = stack->stack_b[0];
-	index = 0;
+	temp = stack->stack_a[0];
+	index = 1;
 	while (index < stack->size_a)
 	{
-		new_arr[index + 1] = stack->stack_a[index];
+		new_arr[index - 1] = stack->stack_a[index];
 		index++;
 	}
-	stack->size_a++;
+	stack->size_a--;
 	free(stack->stack_a);
 	stack->stack_a = new_arr;
-	stack->stack_a[0] = temp;
-	if (!move_all_elements_pa(stack))
+	if (!move_all_elements(stack, temp))
 		return ;
+	stack->elements_b++;
 	if (flag == 1)
-		ft_printf("pa\n");
+		ft_printf("pb\n");
 }

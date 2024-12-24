@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:20:12 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/23 15:44:16 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/24 15:48:05 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	init_stack(t_stack *stack, int total)
 	if (!stack->stack_a)
 		return (ft_putendl_fd_0("Failed malloc int stack_a", 2));
 	stack->size_a = total;
-	stack->stack_b = (int *)malloc(total * sizeof(int));
+	stack->stack_b = (int *)malloc(1 * sizeof(int));
 	if (!stack->stack_b)
 		return (ft_putendl_fd_0("Failed malloc int stack_b", 2));
-	stack->size_b = total;
+	stack->size_b = 1;
 	stack->elements_b = 0;
 	stack->elements_a = total;
 	stack->top_a = 0;

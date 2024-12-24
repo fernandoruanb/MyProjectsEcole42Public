@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 09:08:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/24 08:59:26 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/24 17:55:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,18 @@ int	main(int argc, char **argv)
 		return (ft_putendl_fd_1("Failed init stacks", 2));
 	if (!parse_args(argc, argv, &stack))
 		return (1);
+	ft_pb(&stack, 1);
+	ft_pb(&stack, 1);
+	ft_pa(&stack, 1);
+	ft_pa(&stack, 1);
 	index = 0;
-	while (index < total_numbers)
+	while (index < stack.size_a)
 		ft_printf("%d ", stack.stack_a[index++]);
 	ft_printf("\n");
-	if (is_sorted(&stack, total_numbers))
+	index = 0;
+	while (index < stack.elements_b)
+		ft_printf("%d ", stack.stack_b[index++]);
+	if (is_sorted(&stack, stack.size_a))
 		return (ft_putendl_fd_0("Is sorted!", 2));
 	free(stack.stack_a);
 	free(stack.stack_b);
