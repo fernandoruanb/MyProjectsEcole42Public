@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:17:06 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/23 13:05:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/24 10:42:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	erase_split_stack(char **result, t_stack *stack)
 	return (0);
 }
 
-static int	check_regular_str(const char *s, char **res, t_stack *stack)
+static int	check_str(const char *s, char **res, t_stack *stack)
 {
 	int	value;
 	int	error;
@@ -92,6 +92,8 @@ int	parse_args(int argc, char **argv, t_stack *stack)
 
 	index = 1;
 	s_index = 0;
+	if (is_nothing(argv))
+		return (erase_split_stack(NULL, stack));
 	while (index < argc)
 	{
 		result = ft_split(argv[index], ' ');
@@ -100,7 +102,7 @@ int	parse_args(int argc, char **argv, t_stack *stack)
 		s_index = 0;
 		while (result[s_index] != NULL)
 		{
-			if (!check_regular_str(result[s_index], result, stack))
+			if (!check_str(result[s_index], result, stack))
 				return (ft_putendl_fd_0("Invalid things found", 2));
 			s_index++;
 		}

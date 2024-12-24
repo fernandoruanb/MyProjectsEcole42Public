@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/23 18:37:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/24 10:15:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		init_stack(t_stack *stack, int total_numbers);
 int		is_number(const char *str);
 int		parse_args(int argc, char **argv, t_stack *stack_a);
 int		is_sorted(t_stack *stack, int total_numbers);
+int		is_nothing(char **str);
 void	ft_sa(t_stack *stack, int flag);
 void	ft_sb(t_stack *stack, int flag);
 void	ft_ss(t_stack *stack);
