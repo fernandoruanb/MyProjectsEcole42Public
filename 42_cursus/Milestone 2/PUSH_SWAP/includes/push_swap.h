@@ -18,15 +18,8 @@
 # include "../libft/libft.h"
 # include <limits.h>
 
-typedef struct s_node
-{
-	int				value;
-	struct s_node	*next;
-}	t_node;
-
 typedef struct s_stack
 {
-	t_node	*top;
 	int		*stack_a;
 	int		*stack_b;
 	int		size_a;
@@ -34,6 +27,7 @@ typedef struct s_stack
 	int		top_a;
 	int		position_b;
 	int		elements_b;
+	int		elements_a;
 	int		count;
 }	t_stack;
 
@@ -48,12 +42,7 @@ int		parse_args(int argc, char **argv, t_stack *stack_a);
 int		is_sorted(t_stack *stack, int total_numbers);
 void	ft_sa(t_stack *stack, int flag);
 void	ft_sb(t_stack *stack, int flag);
-void	ft_ss(t_stack *stack, int total_numbers);
-void	ft_ra(t_stack *stack, int total, int flag);
-void	ft_pa(t_stack *stack, int numbers, int flag);
-void	ft_pb(t_stack *stack, int flag);
-void	ft_rra(t_stack *stack, int total, int flag);
-void	ft_rrb(t_stack *stack, int flag);
-void	ft_rrr(t_stack *stack, int flag);
+void	ft_ss(t_stack *stack);
+void	ft_pa(t_stack *stack, int flag);
 
 #endif /* PUSH_SWAP_H */

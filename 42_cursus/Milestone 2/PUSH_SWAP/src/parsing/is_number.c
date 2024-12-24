@@ -16,7 +16,6 @@ int	is_number(const char *str)
 {
 	int	index;
 	int	error;
-	int	value;
 
 	index = 0;
 	error = 0;
@@ -32,7 +31,7 @@ int	is_number(const char *str)
 			return (ft_putendl_fd_0("Ops! Invalid char!", 2));
 		index++;
 	}
-	value = ft_atoi_check(str, &error);
+	ft_atoi_check(str, &error);
 	if (error == 1)
 		return (0);
 	return (1);

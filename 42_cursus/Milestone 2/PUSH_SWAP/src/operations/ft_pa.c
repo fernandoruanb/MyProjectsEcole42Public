@@ -16,15 +16,12 @@ void	ft_pa(t_stack *stack, int flag)
 {
 	int	temp;
 
-	if (total_numbers == 0 || stack->position_b == total_numbers)
+	if (stack->elements_b == 0)
 		return ;
-	temp = stack->stack_a[0];
-	stack->count = size_a;
-	while (stack->count > 0)
-	{
-		stack->stack_a[count - 1] = stack->stack_a[count];
-		count--;
-	}
+	temp = stack->stack_b[stack->size_b - stack->elements_b];
+	stack->stack_a[stack->size_a - stack->elements_a - 1] = temp;
+	stack->elements_a++;
+	stack->elements_b--;	
 	if (flag == 1)
 		ft_printf("pa\n");
 }

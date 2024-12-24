@@ -25,6 +25,7 @@ int	init_stack(t_stack *stack, int total)
 		return (ft_putendl_fd_0("Failed malloc int stack_b", 2));
 	stack->size_b = total;
 	stack->elements_b = 0;
+	stack->elements_a = total;
 	stack->top_a = 0;
 	stack->position_b = total;
 	stack->count = 0;

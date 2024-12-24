@@ -12,9 +12,9 @@
 
 #include "../../includes/push_swap.h"
 
-void	ft_ss(t_stack *stack, int total_numbers)
+void	ft_ss(t_stack *stack)
 {
-	ft_sa(stack, total_numbers);
-	ft_sb(stack);
+	ft_sa(stack, 0);
+	ft_sb(stack, 0);
 	ft_printf("ss\n");
 }

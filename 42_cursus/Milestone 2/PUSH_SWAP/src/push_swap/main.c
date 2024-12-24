@@ -31,10 +31,14 @@ int	main(int argc, char **argv)
 	ft_printf("\n");
 	//if (is_sorted(&stack, total_numbers))
 	//	return (ft_putendl_fd_0("Is sorted!", 2));
-	ft_sa(&stack, total_numbers);
+	ft_sa(&stack, 1);
 	index = 0;
 	while (index < total_numbers)
 		ft_printf("%d ", stack.stack_a[index++]);
+	ft_printf("\n");
+	index++;
+	while (index < total_numbers)
+		ft_printf("%d ", stack.stack_b[index++]);
 	ft_printf("\n");
 	free(stack.stack_a);
 	free(stack.stack_b);
