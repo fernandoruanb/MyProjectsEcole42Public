@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/24 17:51:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/24 18:44:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ void	ft_sb(t_stack *stack, int flag);
 void	ft_ss(t_stack *stack);
 void	ft_pb(t_stack *stack, int flag);
 void	ft_pa(t_stack *stack, int flag);
+void	ft_ra(t_stack *stack, int flag);
+void	ft_rb(t_stack *stack, int flag);
+void	ft_rr(t_stack *stack);
 
 #endif /* PUSH_SWAP_H */
