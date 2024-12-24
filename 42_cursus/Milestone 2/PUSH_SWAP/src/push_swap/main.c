@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 09:08:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/24 18:44:32 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/24 19:49:08 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ int	main(int argc, char **argv)
 	//ft_pa(&stack, 1);
 	//ft_pa(&stack, 1);
 	//ft_ra(&stack, 1);
-	ft_rb(&stack, 1);
-	ft_rr(&stack);
+	//ft_rb(&stack, 1);
+	//ft_rr(&stack);
+	//ft_rra(&stack, 1);
+	//ft_rrb(&stack, 1);
+	ft_rrr(&stack);
 	index = 0;
 	while (index < stack.size_a)
 		ft_printf("%d ", stack.stack_a[index++]);
