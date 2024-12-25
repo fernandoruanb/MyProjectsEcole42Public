@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 13:41:55 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/23 15:19:07 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/25 10:34:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,5 @@ void	ft_ss(t_stack *stack)
 	ft_sa(stack, 0);
 	ft_sb(stack, 0);
 	ft_printf("ss\n");
+	stack->operations++;
 }

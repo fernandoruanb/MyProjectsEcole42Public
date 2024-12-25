@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 13:21:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/23 19:11:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/25 10:35:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@ void	ft_sb(t_stack *stack, int flag)
 	stack->stack_b[0] = stack->stack_b[1];
 	stack->stack_b[1] = temp;
 	if (flag == 1)
+	{
 		ft_printf("sb\n");
+		stack->operations++;
+	}
 }

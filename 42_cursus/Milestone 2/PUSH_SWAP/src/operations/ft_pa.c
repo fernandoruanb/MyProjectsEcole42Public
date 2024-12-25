@@ -6,11 +6,20 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:14:46 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/24 17:46:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/25 10:37:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
+
+static void	mark_all_notices(t_stack *stack, int flag)
+{
+	if (flag == 1)
+	{
+		ft_printf("pa\n");
+		stack->operations++;
+	}
+}
 
 static int	move_all_elements_pa(t_stack *stack)
 {
@@ -59,6 +68,5 @@ void	ft_pa(t_stack *stack, int flag)
 	stack->stack_a[0] = temp;
 	if (!move_all_elements_pa(stack))
 		return ;
-	if (flag == 1)
-		ft_printf("pa\n");
+	mark_all_notices(stack, flag);
 }

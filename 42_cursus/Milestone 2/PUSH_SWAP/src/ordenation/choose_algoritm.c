@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sa.c                                            :+:      :+:    :+:   */
+/*   choose_algoritm.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 13:10:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/25 10:34:51 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/25 08:49:35 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/25 11:51:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	ft_sa(t_stack *stack, int flag)
+int	choose_algoritm(t_stack *stack, int flag)
 {
-	int	temp;
-
-	if (stack->size_a < 2)
-		return ;
-	temp = stack->stack_a[0];
-	stack->stack_a[0] = stack->stack_a[1];
-	stack->stack_a[1] = temp;
 	if (flag == 1)
-	{
-		ft_printf("sa\n");
-		stack->operations++;
-	}
+		return (ft_putendl_fd_0("Isn't sorted!", 2));
+	if (stack->size_a == 2)
+		two_elements(stack);
+	else if (stack->size_a == 3)
+		three_elements(stack);
+	else if (stack->size_a == 4)
+		four_elements(stack);
+	return (0);
 }

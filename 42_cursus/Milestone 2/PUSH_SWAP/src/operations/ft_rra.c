@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 18:48:50 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/24 19:22:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/25 10:43:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ void	ft_rra(t_stack *stack, int flag)
 	free(stack->stack_a);
 	stack->stack_a = new_arr;
 	if (flag == 1)
+	{
 		ft_printf("rra\n");
+		stack->operations++;
+	}
 }
