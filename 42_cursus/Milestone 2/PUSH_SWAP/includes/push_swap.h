@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/25 12:42:53 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/25 18:48:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ void	two_elements(t_stack *stack);
 void	three_elements(t_stack *stack);
 void	four_elements(t_stack *stack);
 void	five_elements(t_stack *stack);
+void	find_smallest_n1(t_stack *stack, int *index);
+void	find_smallest_n2(t_stack *stack, int *index, int flag);
 
 #endif /* PUSH_SWAP_H */
