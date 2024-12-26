@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   choose_algoritm.c                                  :+:      :+:    :+:   */
+/*   low_numbers_generic.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 08:49:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/26 12:00:32 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/26 11:40:34 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/26 12:07:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	choose_algoritm(t_stack *stack, int flag)
+void	low_numbers_generic(t_stack *stack)
 {
-	if (flag == 1)
-		return (ft_putendl_fd_0("Isn't sorted!", 2));
-	if (stack->size_a == 2)
-		two_elements(stack);
-	else if (stack->size_a == 3)
-		three_elements(stack);
-	else if (stack->size_a == 4)
-		four_elements(stack);
-	else if (stack->size_a == 5)
-		five_elements(stack);
-	else if (stack->size_a == 6)
-		six_elements(stack);
-	else
-		low_numbers_generic(stack);
-	return (0);
+	int	counter;
+	int	second_counter;
+	int	first;
+
+	first = 0;
+	counter = stack->size_a;
+	while (counter != 6)
+	{
+		find_smallest_num(stack, &first);
+		move_to_b(stack, &first);
+		counter--;
+	}
+	six_elements(stack);
+	second_counter = stack->elements_b;
+	while (second_counter != 0)
+	{
+		ft_pa(stack, 1);
+		second_counter--;
+	}
 }

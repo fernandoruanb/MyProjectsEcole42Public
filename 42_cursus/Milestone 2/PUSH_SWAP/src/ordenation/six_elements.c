@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   choose_algoritm.c                                  :+:      :+:    :+:   */
+/*   six_elements.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 08:49:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/26 12:00:32 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/26 10:44:04 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/26 11:48:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	choose_algoritm(t_stack *stack, int flag)
+static void	move_smallest_num_a_b(t_stack *stack, int *local)
 {
-	if (flag == 1)
-		return (ft_putendl_fd_0("Isn't sorted!", 2));
-	if (stack->size_a == 2)
-		two_elements(stack);
-	else if (stack->size_a == 3)
-		three_elements(stack);
-	else if (stack->size_a == 4)
-		four_elements(stack);
-	else if (stack->size_a == 5)
-		five_elements(stack);
-	else if (stack->size_a == 6)
-		six_elements(stack);
-	else
-		low_numbers_generic(stack);
-	return (0);
+	while (*local > 0)
+	{
+		ft_ra(stack, 1);
+		(*local)--;
+	}
+	ft_pb(stack, 1);
+}
+
+void	six_elements(t_stack *stack)
+{
+	int	location;
+
+	location = 0;
+	find_smallest_num(stack, &location);
+	move_smallest_num_a_b(stack, &location);
+	five_elements(stack);
+	ft_pa(stack, 1);
 }
