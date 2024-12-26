@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:40:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/26 12:07:09 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/26 13:10:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	low_numbers_generic(t_stack *stack)
 		find_smallest_num(stack, &first);
 		move_to_b(stack, &first);
 		counter--;
+		first = 0;
 	}
 	six_elements(stack);
 	second_counter = stack->elements_b;
