@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 08:46:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/26 09:17:32 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/26 15:41:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	find_smallest_num(t_stack *stack, int *index)
 {
 	int	target_number;
 	int	flag;
+	int	check;
 
-	target_number = stack->stack_a[0];
+	check = *index;
+	target_number = stack->stack_a[*index];
 	flag = 0;
 	while (*index < stack->size_a)
 	{
@@ -25,7 +27,7 @@ void	find_smallest_num(t_stack *stack, int *index)
 		{
 			target_number = stack->stack_a[*index];
 			flag = *index;
-			*index = 0;
+			*index = check;
 		}
 		(*index)++;
 	}
