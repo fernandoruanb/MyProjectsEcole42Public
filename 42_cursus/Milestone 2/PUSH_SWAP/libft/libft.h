@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/28 14:09:32 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/27 19:45:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void		ft_list_remove_if(t_list **begin_list, char data_ref, int (*cmp)());
 int			int_ft_strlen(const char *s);
 void		rev_wstr(const char *str);
 void		rostring(const char *str, int index);
-void		sort_int_tab(int *tab, unsigned int size);
+int			*sort_int_tab(int *tab, unsigned int size);
 void		fprime(int number);
 void		tab_mult(int number);
 void		str_capitalizer(char *str);
