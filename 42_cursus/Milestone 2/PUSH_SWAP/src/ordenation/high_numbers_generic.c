@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/26 11:40:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/26 18:14:52 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/27 13:23:02 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/27 13:36:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,4 @@
 
 /*void	high_numbers_generic(t_stack *stack)
 {
-	int	index;
-
-	index = 0;
-	while (index < stack->size_a)
-	{
-		
-	}
 }*/

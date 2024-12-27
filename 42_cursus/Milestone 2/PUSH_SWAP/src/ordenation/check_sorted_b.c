@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   choose_algoritm.c                                  :+:      :+:    :+:   */
+/*   check_sorted_b.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 08:49:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/27 13:37:12 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/26 18:10:42 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/27 10:39:05 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	choose_algoritm(t_stack *stack, int flag)
+int	check_sorted_b(t_stack *stack)
 {
-	if (flag == 1)
-		return (ft_putendl_fd_0("Isn't sorted!", 2));
-	if (stack->size_a == 2)
-		two_elements(stack);
-	else if (stack->size_a == 3)
-		three_elements(stack);
-	else if (stack->size_a == 4)
-		four_elements(stack);
-	else if (stack->size_a == 5)
-		five_elements(stack);
-	else if (stack->size_a == 6)
-		six_elements(stack);
-	else
-		low_numbers_generic(stack);
-	return (0);
+	int	index;
+	int	s_index;
+
+	index = 0;
+	while (index < stack->elements_b)
+	{
+		s_index = index + 1;
+		while (s_index < stack->elements_b)
+		{
+			if (stack->stack_b[index] < stack->stack_b[s_index])
+				return (0);
+			s_index++;
+		}
+		index++;
+	}
+	return (1);
 }

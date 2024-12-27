@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 09:08:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/26 17:18:43 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/27 10:33:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ int	main(int argc, char **argv)
 	ft_printf("Strike: %d\n", stack.size_a);
 	if (is_sorted(&stack, stack.size_a, 1))
 		ft_putendl_fd_0("Is sorted!", 2);
+	index = 0;
+	while (index < stack.elements_b)
+		ft_printf("%d ", stack.stack_b[index++]);
+	ft_printf("\n");
 	free(stack.stack_a);
 	free(stack.stack_b);
 	return (0);

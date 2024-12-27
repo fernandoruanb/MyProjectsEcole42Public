@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   choose_algoritm.c                                  :+:      :+:    :+:   */
+/*   push_all_to_a.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 08:49:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/27 13:37:12 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/27 11:47:19 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/27 11:47:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	choose_algoritm(t_stack *stack, int flag)
+void	push_all_to_a(t_stack *stack)
 {
-	if (flag == 1)
-		return (ft_putendl_fd_0("Isn't sorted!", 2));
-	if (stack->size_a == 2)
-		two_elements(stack);
-	else if (stack->size_a == 3)
-		three_elements(stack);
-	else if (stack->size_a == 4)
-		four_elements(stack);
-	else if (stack->size_a == 5)
-		five_elements(stack);
-	else if (stack->size_a == 6)
-		six_elements(stack);
-	else
-		low_numbers_generic(stack);
-	return (0);
+	while (stack->elements_b > 0)
+		ft_pa(stack, 1);
 }

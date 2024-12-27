@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/26 18:38:17 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/27 12:55:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_stack
 	int		elements_b;
 	int		operations;
 	int		count;
+	int		max_b;
+	int		min_b;
 }	t_stack;
 
 int		ft_putendl_fd_0(const char *str, int fd);
@@ -62,5 +64,10 @@ void	low_numbers_generic(t_stack *stack);
 void	high_numbers_generic(t_stack *stack);
 int		get_least_moves(t_stack *stack, int *local);
 int		check_sorted(t_stack *stack);
+int		check_sorted_b(t_stack *stack);
+int		get_least_moves_b(t_stack *stack, int local);
+void	push_all_to_a(t_stack *stack);
+int	max_b_determine(t_stack *stack);
+int	min_b_determine(t_stack *stack);
 
 #endif /* PUSH_SWAP_H */

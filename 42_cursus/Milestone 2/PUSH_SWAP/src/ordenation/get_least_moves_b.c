@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   choose_algoritm.c                                  :+:      :+:    :+:   */
+/*   get_least_moves_b.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 08:49:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/27 13:37:12 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/26 15:16:54 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/27 10:50:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	choose_algoritm(t_stack *stack, int flag)
+int	get_least_moves_b(t_stack *stack, int local)
 {
-	if (flag == 1)
-		return (ft_putendl_fd_0("Isn't sorted!", 2));
-	if (stack->size_a == 2)
-		two_elements(stack);
-	else if (stack->size_a == 3)
-		three_elements(stack);
-	else if (stack->size_a == 4)
-		four_elements(stack);
-	else if (stack->size_a == 5)
-		five_elements(stack);
-	else if (stack->size_a == 6)
-		six_elements(stack);
-	else
-		low_numbers_generic(stack);
+	if (stack->elements_b - local < local)
+		return (1);
 	return (0);
 }
