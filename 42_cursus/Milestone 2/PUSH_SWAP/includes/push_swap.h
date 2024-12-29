@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/27 12:55:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/29 08:29:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int		check_sorted(t_stack *stack);
 int		check_sorted_b(t_stack *stack);
 int		get_least_moves_b(t_stack *stack, int local);
 void	push_all_to_a(t_stack *stack);
-int	max_b_determine(t_stack *stack);
-int	min_b_determine(t_stack *stack);
+int		max_b_determine(t_stack *stack);
+int		min_b_determine(t_stack *stack);
+int		find_location_max_b(t_stack *stack);
 
 #endif /* PUSH_SWAP_H */
