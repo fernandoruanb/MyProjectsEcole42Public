@@ -6,27 +6,27 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:40:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/30 12:55:53 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:48:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-static void     max_b_to_top_operation(t_stack *stack)
+static void	max_b_to_top_operation(t_stack *stack)
 {
-	int     index;
-	int     moves;
+	int		index;
+	int		moves;
 
 	index = find_location_max_b(stack);
 	moves = get_least_moves_b(stack, index);
-        choose_best_movement(stack, stack->max_b, moves);
+	choose_best_movement(stack, stack->max_b, moves);
 }
 
 static void	max_b_to_top(t_stack *stack)
 {
 	int	index;
 	int	moves;
-	
+
 	index = find_location_max_b(stack);
 	moves = get_least_moves_b(stack, index);
 	if (moves == 1)
@@ -41,19 +41,21 @@ static void	max_b_to_top(t_stack *stack)
 	}
 }
 
-/*static void	organize_stack_a(t_stack *stack)
+static void	organize_stack_a(t_stack *stack)
 {
-	//while (stack->elements_b != 0)
-	//{
-		if (stack->stack_a[stack->size_a - 1]
-			> stack->stack_b[0])
-			ft_rra(stack, 1);
-		else if ((stack->stack_a[0] > stack->stack_b[0]
-			&& stack->stack_a[stack->size_a - 1]
-			< stack->stack_b[0]))
+	int	max;
+
+	max = max_a_determine(stack);
+	while (stack->elements_b != 0)
+	{
+		if (stack->stack_b[0] == stack->stack_a[0] - 1)
 			ft_pa(stack, 1);
-	//}
-}*/
+		else if (stack->stack_b[0] > stack->stack_a[stack->size_a - 1])
+			ft_pa(stack, 1);
+		else if (stack->stack_b[0] < stack->stack_a[stack->size_a - 1])
+			ft_rra(stack, 1);
+	}
+}
 
 static void	sort_stack_b(t_stack *stack)
 {
@@ -96,7 +98,7 @@ void	high_numbers_generic(t_stack *stack)
 	sorted_b = check_sorted_b(stack);
 	if (sorted_b == 1)
 		ft_printf("YES!!!!\n");
-	/*stack->max_b = max_b_determine(stack);
-	stack->min_b = min_b_determine(stack);
-	organize_stack_a(stack);*/
+	organize_stack_a(stack);
+	while (!check_sorted(stack))
+		ft_rra(stack, 1);
 }
