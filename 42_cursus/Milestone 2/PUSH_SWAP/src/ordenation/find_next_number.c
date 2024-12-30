@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_sorted_b.c                                   :+:      :+:    :+:   */
+/*   find_next_number.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/26 18:10:42 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/29 09:36:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/29 09:38:55 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/12/29 16:42:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	check_sorted_b(t_stack *stack)
+int	find_next_number(t_stack *stack)
 {
 	int	index;
-	int	s_index;
 
 	index = 0;
 	while (index < stack->elements_b)
 	{
-		s_index = index + 1;
-		while (s_index < stack->elements_b)
-		{
-			if (stack->stack_b[index] < stack->stack_b[s_index])
-				return (0);
-			s_index++;
-		}
+		if (stack->stack_b[index] < stack->stack_a[0])
+			return (index);
 		index++;
 	}
-	return (1);
+	return (index);
 }
