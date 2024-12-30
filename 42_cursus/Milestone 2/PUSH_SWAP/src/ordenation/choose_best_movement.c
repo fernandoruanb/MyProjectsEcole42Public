@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 08:32:33 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/29 10:25:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/30 12:53:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	choose_best_movement(t_stack *stack, int target, int moves)
 {
-	if (moves)
+	if (moves == 1)
 	{
 		while (stack->stack_b[0] != target)
 			ft_rb(stack, 1);
