@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 08:49:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/30 16:49:42 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/30 18:09:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	choose_algoritm(t_stack *stack, int flag)
 		two_elements(stack);
 	else if (stack->size_a == 3)
 		three_elements(stack);
-	else if (stack->size_a == 4)
+	/*else if (stack->size_a == 4)
 		four_elements(stack);
 	else if (stack->size_a == 5)
 		five_elements(stack);
 	else if (stack->size_a == 6)
 		six_elements(stack);
 	else if (stack->size_a <= 15)
-		low_numbers_generic(stack);
+		low_numbers_generic(stack);*/
 	else
 		high_numbers_generic(stack);
 	return (0);

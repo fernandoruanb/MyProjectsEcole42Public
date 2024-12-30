@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:40:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/30 16:48:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:58:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static void	max_b_to_top(t_stack *stack)
 	if (moves == 1)
 	{
 		while (stack->stack_b[0] != stack->max_b)
-			ft_rb(stack, 1);
+			ft_rrb(stack, 1);
 	}
 	else if (moves == 0)
 	{
 		while (stack->stack_b[0] != stack->max_b)
-			ft_rrb(stack, 1);
+			ft_rb(stack, 1);
 	}
 }
 
