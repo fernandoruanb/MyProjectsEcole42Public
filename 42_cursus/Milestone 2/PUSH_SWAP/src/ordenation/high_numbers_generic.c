@@ -6,21 +6,11 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:40:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/30 16:58:09 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/31 20:27:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-
-static void	max_b_to_top_operation(t_stack *stack)
-{
-	int		index;
-	int		moves;
-
-	index = find_location_max_b(stack);
-	moves = get_least_moves_b(stack, index);
-	choose_best_movement(stack, stack->max_b, moves);
-}
 
 static void	max_b_to_top(t_stack *stack)
 {
@@ -41,52 +31,49 @@ static void	max_b_to_top(t_stack *stack)
 	}
 }
 
-static void	organize_stack_a(t_stack *stack)
+/*static void	organize_stack_a(t_stack *stack)
 {
 	int	max;
+	int	index;
+	int	target;
+	int	moves;
 
-	max = max_a_determine(stack);
-	while (stack->elements_b != 0)
+	while (stack->elements_b > 0)
 	{
-		if (stack->stack_b[0] == stack->stack_a[0] - 1)
-			ft_pa(stack, 1);
-		else if (stack->stack_b[0] > stack->stack_a[stack->size_a - 1])
-			ft_pa(stack, 1);
-		else if (stack->stack_b[0] < stack->stack_a[stack->size_a - 1])
-			ft_rra(stack, 1);
+		max = max_a_determine(stack);
+		index = closest_biggest_a(stack);
+		if (index == -1)
+			index = find_location_max_a(stack, max);
+		target = stack->stack_a[index];
+		moves = get_least_moves(stack, &index);
+		choose_best_movement_a(stack, target, moves);
+		ft_pa(stack, 1);
 	}
-}
+}*/
 
 static void	sort_stack_b(t_stack *stack)
 {
-	if (stack->stack_a[0] > stack->max_b
-		|| stack->stack_a[0] < stack->min_b)
-	{
-		if (stack->elements_b == 2
-			&& stack->stack_b[0] != stack->max_b)
-		{
-			ft_sb(stack, 1);
-			ft_pb(stack, 1);
-			return ;
-		}
-		max_b_to_top_operation(stack);
-	}
-	else
-	{
-		while (!(stack->stack_a[0] > stack->stack_b[0]
-				&& stack->stack_a[0]
-				< stack->stack_b[stack->elements_b - 1]))
-			ft_rb(stack, 1);
-		ft_pb(stack, 1);
-	}
+	int	index;
+	int	moves;
+	int	target;
+
+	index = closest_smallest_b(stack);
+	if (index == -1 || stack->stack_a[0] > stack->max_b)
+		index = find_location_max_b(stack);
+	moves = get_least_moves_b(stack, index);
+	target = stack->stack_b[index];
+	choose_best_movement(stack, target, moves);
 }
 
 void	high_numbers_generic(t_stack *stack)
 {
-	int	sorted_b;
-
-	ft_pb(stack, 1);
-	ft_pb(stack, 1);
+	if (stack->size_a == 4)
+		ft_pb(stack, 1);
+	else if (stack->size_a >= 5)
+	{
+		ft_pb(stack, 1);
+		ft_pb(stack, 1);
+	}
 	while (stack->size_a != 3)
 	{
 		stack->max_b = max_b_determine(stack);
@@ -95,10 +82,9 @@ void	high_numbers_generic(t_stack *stack)
 	}
 	three_elements(stack);
 	max_b_to_top(stack);
-	sorted_b = check_sorted_b(stack);
-	if (sorted_b == 1)
-		ft_printf("YES!!!!\n");
-	organize_stack_a(stack);
-	while (!check_sorted(stack))
-		ft_rra(stack, 1);
+	if (check_sorted_b(stack))
+		ft_printf("YES!!!\n");
+	//organize_stack_a(stack);
+	/*while (!check_sorted(stack))
+		ft_rra(stack, 1);*/
 }
