@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   closest_biggest_a.c                                :+:      :+:    :+:   */
+/*   free_stacks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 18:44:33 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/31 19:55:59 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/02 15:36:33 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/02 15:39:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/push_swap.h"
+#include "push_swap.h"
 
-int	closest_biggest_a(t_stack *stack)
+void	free_stacks(t_stack **stack)
 {
-	int	index;
-	int	top_b;
+	t_stack	*tmp;
+	t_stack	*stack_now;
 
-	index = 0;
-	top_b = stack->stack_b[0];
-	while (index < stack->size_a)
+	if (!stack)
+		return ;
+	stack_now = *stack;
+	while (stack_now)
 	{
-		if (stack->stack_a[index] > top_b)
-			return (index);
-		index++;
+		tmp = stack_now->next;
+		free(stack_now);
+		stack_now = tmp;
 	}
-	return (-1);
+	*stack = NULL;
 }

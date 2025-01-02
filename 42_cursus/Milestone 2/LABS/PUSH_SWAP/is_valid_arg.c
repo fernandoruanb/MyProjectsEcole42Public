@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   closest_smallest_b.c                               :+:      :+:    :+:   */
+/*   is_valid_arg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 18:26:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/31 18:57:49 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/02 14:44:03 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/02 14:51:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/push_swap.h"
+#include "push_swap.h"
 
-int	closest_smallest_b(t_stack *stack)
+int	is_valid_arg(char *arg)
 {
-	int	top_a;
 	int	index;
 
-	top_a = stack->stack_a[0];
 	index = 0;
-	while (index < stack->elements_b)
+	if (!(arg[index] == '-' || arg[index] >= '0'
+			&& arg[index] <= '9'))
+		return (0);
+	index++;
+	if (!(arg[index] == '-' || arg[index] >= '0'
+			&& arg[index] <= '9'))
+		return (0);
+	index++;
+	while (arg[index])
 	{
-		if (stack->stack_b[index] < top_a)
-			return (index);
+		if (!(arg[index] >= '0' && arg[index] <= '9'))
+			return (0);
 		index++;
 	}
-	return (-1);
+	return (1);
 }

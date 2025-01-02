@@ -6,63 +6,67 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:40:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/31 20:27:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:44:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-static void	max_b_to_top(t_stack *stack)
+static int	find_target_index(t_stack *stack, int target_number)
 {
+	int	index;
+
+	index = 0;
+	while (stack->stack_b[index] != target_number
+		&& index < stack->elements_b)
+		index++;
+	return (index);
+}
+
+static int	find_best_match_b(t_stack *stack)
+{
+	int	index;
+	long	match;
+
+	match = LONG_MIN;
+	if (stack->stack_a[0] > stack->max_b
+		|| stack->stack_a[0] < stack->min_b)
+		match = max_b_determine(stack);
+	else
+	{
+		index = 0;
+		while (index < stack->elements_b)
+		{
+			if (stack->stack_b[index] > match
+				&& stack->stack_b[index]
+				< stack->stack_a[0])
+				match = stack->stack_b[index];
+			index++;
+		}
+	}
+	return ((int)match);
+}
+
+static void	sort_b(t_stack *stack)
+{
+	int	target_number;
 	int	index;
 	int	moves;
 
-	index = find_location_max_b(stack);
+	target_number = find_best_match_b(stack);
+	index = find_target_index(stack, target_number);
 	moves = get_least_moves_b(stack, index);
-	if (moves == 1)
+	if (moves)
 	{
-		while (stack->stack_b[0] != stack->max_b)
+		while (stack->stack_b[0] != target_number)
 			ft_rrb(stack, 1);
 	}
 	else if (moves == 0)
 	{
-		while (stack->stack_b[0] != stack->max_b)
+		while (stack->stack_b[0] != target_number)
 			ft_rb(stack, 1);
 	}
-}
-
-/*static void	organize_stack_a(t_stack *stack)
-{
-	int	max;
-	int	index;
-	int	target;
-	int	moves;
-
-	while (stack->elements_b > 0)
-	{
-		max = max_a_determine(stack);
-		index = closest_biggest_a(stack);
-		if (index == -1)
-			index = find_location_max_a(stack, max);
-		target = stack->stack_a[index];
-		moves = get_least_moves(stack, &index);
-		choose_best_movement_a(stack, target, moves);
-		ft_pa(stack, 1);
-	}
-}*/
-
-static void	sort_stack_b(t_stack *stack)
-{
-	int	index;
-	int	moves;
-	int	target;
-
-	index = closest_smallest_b(stack);
-	if (index == -1 || stack->stack_a[0] > stack->max_b)
-		index = find_location_max_b(stack);
-	moves = get_least_moves_b(stack, index);
-	target = stack->stack_b[index];
-	choose_best_movement(stack, target, moves);
+	ft_pb(stack, 1);
 }
 
 void	high_numbers_generic(t_stack *stack)
@@ -74,17 +78,17 @@ void	high_numbers_generic(t_stack *stack)
 		ft_pb(stack, 1);
 		ft_pb(stack, 1);
 	}
-	while (stack->size_a != 3)
+	while (stack->size_a > 3)
 	{
 		stack->max_b = max_b_determine(stack);
 		stack->min_b = min_b_determine(stack);
-		sort_stack_b(stack);
+		sort_b(stack);
 	}
 	three_elements(stack);
-	max_b_to_top(stack);
+	stack->max_b = max_b_determine(stack);
+	while (stack->stack_b[0] != stack->max_b)
+		ft_rb(stack, 1);
 	if (check_sorted_b(stack))
 		ft_printf("YES!!!\n");
-	//organize_stack_a(stack);
-	/*while (!check_sorted(stack))
-		ft_rra(stack, 1);*/
+	sort_a(stack);
 }

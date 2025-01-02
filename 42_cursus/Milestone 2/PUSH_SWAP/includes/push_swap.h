@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/31 19:54:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:19:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ int		closest_smallest_b(t_stack *stack);
 int		closest_biggest_a(t_stack *stack);
 int		find_location_max_a(t_stack *stack, int max);
 void	choose_best_movement_a(t_stack *stack, int target, int moves);
+void	sort_a(t_stack *stack);
 
 #endif /* PUSH_SWAP_H */

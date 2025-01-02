@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 09:14:54 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/02 13:03:09 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/02 15:14:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ t_stack	*find_last_node(t_stack *stack);
 bool	check_sorted(t_stack *stack);
 t_stack	*find_min_node(t_stack *stack);
 t_stack	*find_max_node(t_stack *stack);
+int	is_valid_arg(const char *arg);
+int	has_duplicates(t_stack *stack, int num);
+void	clean_program(t_stack **stack);
 
 #endif /* PUSH_SWAP_H */

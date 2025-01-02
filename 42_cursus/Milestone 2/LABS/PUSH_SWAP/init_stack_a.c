@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 10:31:52 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/02 11:42:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/02 14:43:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_stack_a(t_stack **a, char **argv)
 	index = 1;
 	while (argv[index])
 	{
-		if (!valid_arg(argv[index]))
+		if (!is_valid_arg(argv[index]))
 			clean_program(a);
 		num = ft_atol(argv[index]);
 		if (num < INT_MIN || num > INT_MAX)

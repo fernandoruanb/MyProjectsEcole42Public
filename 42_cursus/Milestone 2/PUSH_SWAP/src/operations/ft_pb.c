@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:14:46 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/25 10:41:32 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:36:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,24 @@ static int	move_all_elements(t_stack *stack, int temp)
 	int	index;
 	int	*new_arr;
 
-	stack->size_b++;
 	if (stack->elements_b == 0)
 	{
 		stack->stack_b[0] = temp;
 		return (1);
 	}
-	new_arr = (int *)ft_calloc(stack->size_b, sizeof(int));
+	new_arr = (int *)ft_calloc(stack->size_b + 1, sizeof(int));
 	if (!new_arr)
 		return (ft_putendl_fd_0("Failed allocating new_arr pb", 2));
-	else
+	stack->size_b++;
+	index = 1;
+	while (index < stack->size_b)
 	{
-		index = 1;
-		while (index < stack->size_b)
-		{
-			new_arr[index] = stack->stack_b[index - 1];
-			index++;
-		}
-		new_arr[0] = temp;
-		free(stack->stack_b);
-		stack->stack_b = new_arr;
+		new_arr[index] = stack->stack_b[index - 1];
+		index++;
 	}
+	new_arr[0] = temp;
+	free(stack->stack_b);
+	stack->stack_b = new_arr;
 	return (1);
 }
 
@@ -56,7 +53,7 @@ void	ft_pb(t_stack *stack, int flag)
 	int	*new_arr;
 	int	index;
 
-	if (stack->size_a <= 0)
+	if (stack->size_a <= 1)
 		return ;
 	new_arr = (int *)ft_calloc(stack->size_a - 1, sizeof(int));
 	if (!new_arr)
