@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 13:24:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/22 11:12:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:58:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	count_all_numbers(int argc, char **argv)
 	{
 		result = ft_split(argv[index], ' ');
 		if (!result)
-			return (ft_putendl_fd_0("Mistake splitting.", 2));
+			return (0);
 		s_index = 0;
 		while (result[s_index] != NULL)
 		{

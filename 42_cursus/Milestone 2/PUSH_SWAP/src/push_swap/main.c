@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 09:08:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/27 10:33:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/03 17:30:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,12 @@ int	main(int argc, char **argv)
 	t_stack	stack;
 
 	if (argc < 2)
-		return (ft_putendl_fd_1("Too few arguments.", 2));
+		return (1);
 	total_numbers = count_all_numbers(argc, argv);
 	if (!init_stack(&stack, total_numbers))
-		return (ft_putendl_fd_1("Failed init stacks", 2));
+		return (ft_putendl_fd_1("Error", 2));
 	if (!parse_args(argc, argv, &stack))
-		return (1);
-	//ft_pb(&stack, 1);
-	//ft_pb(&stack, 1);
-	//ft_pb(&stack, 1);
-	//ft_pa(&stack, 1);
-	//ft_pa(&stack, 1);
-	//ft_ra(&stack, 1);
-	//ft_rb(&stack, 1);
-	//ft_rr(&stack);
-	//ft_rra(&stack, 1);
-	//ft_rrb(&stack, 1);
-	//ft_rrr(&stack);
+		return (ft_putendl_fd_1("Error", 2));
 	index = 0;
 	while (index < stack.size_a)
 		ft_printf("%d ", stack.stack_a[index++]);

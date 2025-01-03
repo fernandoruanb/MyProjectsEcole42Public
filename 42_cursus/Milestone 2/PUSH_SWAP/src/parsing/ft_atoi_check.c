@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:34:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/23 10:13:12 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:56:17 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	is_valid_limit(long result, int sig, int *error)
 	if (signed_result < (long)INT_MIN || signed_result > (long)INT_MAX)
 	{
 		*error = 1;
-		return (ft_putendl_fd_0("INT_MIN/MAX Error.", 2));
+		return (0);
 	}
 	else
 		return ((int)signed_result);

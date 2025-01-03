@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:17:06 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/24 10:42:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:58:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	has_duplicates(t_stack *stack)
 		while (s_index < stack->count)
 		{
 			if (stack->stack_a[index] == stack->stack_a[s_index])
-				return (ft_putendl_fd_1("Has duplicates!!!", 2));
+				return (1);
 			else
 				s_index++;
 		}
@@ -36,7 +36,7 @@ static int	has_duplicates(t_stack *stack)
 static int	append_stack(int value, t_stack *stack)
 {
 	if (stack->size_a < stack->count || stack->count < 0)
-		return (ft_putendl_fd_0("Over/Underflow attempt detected", 2));
+		return (0);
 	else
 		stack->stack_a[stack->count] = value;
 	return (1);
@@ -98,12 +98,12 @@ int	parse_args(int argc, char **argv, t_stack *stack)
 	{
 		result = ft_split(argv[index], ' ');
 		if (!result)
-			return (ft_putendl_fd_0("Error allocating split", 2));
+			return (0);
 		s_index = 0;
 		while (result[s_index] != NULL)
 		{
 			if (!check_str(result[s_index], result, stack))
-				return (ft_putendl_fd_0("Invalid things found", 2));
+				return (0);
 			s_index++;
 		}
 		erase_split_stack(result, NULL);

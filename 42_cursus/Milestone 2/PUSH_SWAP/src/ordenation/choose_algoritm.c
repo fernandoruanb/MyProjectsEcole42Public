@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 08:49:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/02 16:46:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:47:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	choose_algoritm(t_stack *stack, int flag)
 		five_elements(stack);
 	else if (stack->size_a == 6)
 		six_elements(stack);
-	else 
-		high_numbers_generic(stack);
+	else
+		new_high_numbers_generic(stack);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 08:39:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/24 10:37:05 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:56:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	is_nothing(char **result)
 		if (ft_strcmp(result[index], str_check) == 0
 			|| result[index][0] == '\0'
 			|| ft_strlen_check(result[index]) == 0)
-			return (ft_putendl_fd_1("There is nothing at least", 2));
+			return (1);
 		index++;
 	}
 	return (0);

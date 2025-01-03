@@ -25,7 +25,7 @@ static int	find_target_index(t_stack *stack, int target_number)
 
 static int	find_best_match_b(t_stack *stack)
 {
-	int	index;
+	int		index;
 	long	match;
 
 	match = LONG_MIN;

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:34:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/22 15:35:25 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/03 15:57:50 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ int	is_number(const char *str)
 	index = 0;
 	error = 0;
 	if (str[index] == '+')
-		return (ft_putendl_fd_0("You cannot put + signal.", 2));
+		return (0);
 	if (str[index] == '-')
 		index++;
 	if (str[index] == '\0')
-		return (ft_putendl_fd_0("There is/are not numbers.", 2));
+		return (0);
 	while (str[index] != '\0')
 	{
 		if (!ft_isdigit(str[index]))
-			return (ft_putendl_fd_0("Ops! Invalid char!", 2));
+			return (0);
 		index++;
 	}
 	ft_atoi_check(str, &error);
