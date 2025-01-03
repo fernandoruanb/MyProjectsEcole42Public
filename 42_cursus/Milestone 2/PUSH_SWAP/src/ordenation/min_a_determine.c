@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_a.c                                           :+:      :+:    :+:   */
+/*   min_a_determine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 18:45:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 11:58:39 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/03 09:21:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/03 09:42:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	sort_a(t_stack *stack)
+int	min_a_determine(t_stack *stack)
 {
-	stack->max_b = max_b_determine(stack);
-	if (stack->stack_a[2] > stack->max_b)
-		ft_rra(stack, 1);
-	while (stack->elements_b > 0)
+	long	min;
+	int	index;
+
+	min = LONG_MAX;
+	index = 0;
+	while (index < stack->size_a)
 	{
-		stack->max_a = max_a_determine(stack);
-		stack->min_a = min_a_determine(stack);
-		if (stack->stack_a[stack->size_a - 1] > stack->stack_b[0]
-			&& stack->stack_a[stack->size_a - 1] != stack->max_a)
-			ft_rra(stack, 1);
-		else
-			ft_pa(stack, 1);
+		if (stack->stack_a[index] < min)
+			min = stack->stack_a[index];
+		index++;
 	}
-	while (!check_sorted(stack))
-		ft_rra(stack, 1);
+	return ((int)min);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/02 19:19:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/03 10:48:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_stack
 	int		count;
 	int		max_b;
 	int		min_b;
+	int		max_a;
+	int		min_a;
 }	t_stack;
 
 int		ft_putendl_fd_0(const char *str, int fd);
@@ -78,5 +80,6 @@ int		closest_biggest_a(t_stack *stack);
 int		find_location_max_a(t_stack *stack, int max);
 void	choose_best_movement_a(t_stack *stack, int target, int moves);
 void	sort_a(t_stack *stack);
+int	min_a_determine(t_stack *stack);
 
 #endif /* PUSH_SWAP_H */
