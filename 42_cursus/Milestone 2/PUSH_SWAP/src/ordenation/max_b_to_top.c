@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_a.c                                           :+:      :+:    :+:   */
+/*   max_b_to_top.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 18:45:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 13:32:27 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/03 14:35:00 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/03 14:38:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	sort_a(t_stack *stack)
+void	max_b_to_top(t_stack *stack)
 {
-	stack->max_b = max_b_determine(stack);
-	if (stack->stack_a[2] > stack->max_b)
-		ft_rra(stack, 1);
-	while (stack->elements_b > 0)
+	int	index;
+	int	moves;
+
+	index = 0;
+	while (stack->stack_b[index] != stack->max_b)
+		index++;
+	moves = get_least_moves_b(stack, index);
+	if (moves == 1)
 	{
-		stack->max_a = max_a_determine(stack);
-		stack->min_a = min_a_determine(stack);
-		if (stack->stack_a[stack->size_a - 1] > stack->stack_b[0]
-			&& stack->stack_a[stack->size_a - 1] != stack->max_a)
-			ft_rra(stack, 1);
-		else
-			ft_pa(stack, 1);
+		while (stack->stack_b[0] != stack->max_b)
+			ft_rrb(stack, 1);
 	}
-	while (!check_sorted(stack))
-		ft_rra(stack, 1);
+	else if (moves == 0)
+	{
+		while (stack->stack_b[0] != stack->max_b)
+			ft_rb(stack, 1);
+	}
 }

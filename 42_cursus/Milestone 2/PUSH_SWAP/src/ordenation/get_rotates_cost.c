@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_a.c                                           :+:      :+:    :+:   */
+/*   get_rotates_cost.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 18:45:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 13:32:27 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/03 13:09:52 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/03 13:44:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	sort_a(t_stack *stack)
+int	get_rotates_cost(t_stack *stack, int index, char c)
 {
-	stack->max_b = max_b_determine(stack);
-	if (stack->stack_a[2] > stack->max_b)
-		ft_rra(stack, 1);
-	while (stack->elements_b > 0)
+	if (c == 'a')
 	{
-		stack->max_a = max_a_determine(stack);
-		stack->min_a = min_a_determine(stack);
-		if (stack->stack_a[stack->size_a - 1] > stack->stack_b[0]
-			&& stack->stack_a[stack->size_a - 1] != stack->max_a)
-			ft_rra(stack, 1);
-		else
-			ft_pa(stack, 1);
+		if ((stack->size_a - index) < index)
+			return (stack->size_a - index);
+		return (index);
 	}
-	while (!check_sorted(stack))
-		ft_rra(stack, 1);
+	else if (c == 'b')
+	{
+		if (stack->elements_b - index < index)
+			return (stack->elements_b - index);
+		return (index);
+	}
+	return (-1);
 }
