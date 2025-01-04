@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 18:20:19 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/04 15:58:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ int	min_a_determine(t_stack *stack);
 int	get_rotates_cost(t_stack *stack, int index, char c);
 void	max_b_to_top(t_stack *stack);
 void	new_high_numbers_generic(t_stack *stack);
+int	check_pre_sorted(t_stack *stack);
 
 #endif /* PUSH_SWAP_H */

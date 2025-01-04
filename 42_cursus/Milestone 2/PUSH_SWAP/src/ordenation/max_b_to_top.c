@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 14:35:00 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 14:38:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/04 16:55:13 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	max_b_to_top(t_stack *stack)
 	int	moves;
 
 	index = 0;
+	stack->max_b = max_b_determine(stack);
 	while (stack->stack_b[index] != stack->max_b)
 		index++;
 	moves = get_least_moves_b(stack, index);

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 13:09:52 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 13:44:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/04 17:19:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_rotates_cost(t_stack *stack, int index, char c)
 	}
 	else if (c == 'b')
 	{
-		if (stack->elements_b - index < index)
+		if ((stack->elements_b - index) < index)
 			return (stack->elements_b - index);
 		return (index);
 	}

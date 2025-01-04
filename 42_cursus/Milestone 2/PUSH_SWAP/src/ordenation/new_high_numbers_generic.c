@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 13:09:00 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 19:42:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/04 20:25:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ static void	get_action(t_stack *stack)
 {
 	int	number_a;
 	int	number_b;
+	int	index;
 
+	index = 0;
+	while (index < stack->elements_b)
+		ft_printf("%d ", stack->stack_b[index++]);
+	ft_printf("\n");
 	number_a = stack->stack_a[stack->index_a];
 	number_b = stack->stack_b[stack->index_b];
 	if (get_rotates_cost(stack, stack->index_a, 'a') == stack->index_a)
@@ -36,7 +41,7 @@ static void	get_action(t_stack *stack)
 	}
 	else
 	{
-		while (stack->stack_a[0] != number_b)
+		while (stack->stack_b[0] != number_b)
 			ft_rrb(stack, 1);
 	}
 }
@@ -58,7 +63,7 @@ static int	get_target_b(t_stack *stack, int number)
 
 	match = LONG_MIN;
 	if (stack->stack_a[number] > stack->max_b
-		|| stack->stack_b[number] < stack->min_b)
+		|| stack->stack_a[number] < stack->min_b)
 		return (find_location_max_b(stack));
 	index = 0;
 	while (index < stack->elements_b)
@@ -80,11 +85,13 @@ static void	find_low_cost(t_stack *stack)
 	int	index;
 	int	target_index;
 
+	init_cost(stack);
 	index = 0;
 	while (index < stack->size_a)
 	{
 		stack->cost_a = get_rotates_cost(stack, index, 'a');
 		target_index = get_target_b(stack, index);
+		ft_printf("O index A %d tem o target index é: %d\n", index, target_index);
 		stack->cost_b = get_rotates_cost(stack, target_index, 'b');
 		if (stack->cost_a + stack->cost_b + 1 < stack->push_cost)
 		{
@@ -94,10 +101,14 @@ static void	find_low_cost(t_stack *stack)
 		}
 		index++;
 	}
+	ft_printf("Push, index_a e index_b: %d %d %d\n", stack->push_cost, stack->index_a, stack->index_b);
+	ft_printf("Cost A e Cost B: %d %d\n", stack->cost_a, stack->cost_b);
 }
 
 void	new_high_numbers_generic(t_stack *stack)
 {
+	if (check_pre_sorted(stack))
+		return ;
 	if (stack->size_a == 4)
 		ft_pb(stack, 1);
 	else if (stack->size_a >= 5)
@@ -105,13 +116,21 @@ void	new_high_numbers_generic(t_stack *stack)
 		ft_pb(stack, 1);
 		ft_pb(stack, 1);
 	}
-	init_cost(stack);
 	while (stack->size_a != 3)
 	{
+		stack->max_b = max_b_determine(stack);
+		stack->min_b = min_b_determine(stack);
 		find_low_cost(stack);
 		get_action(stack);
 		ft_pb(stack, 1);
 	}
+	int	index = 0;
+	while (index < stack->elements_b)
+		ft_printf("%d ", stack->stack_b[index++]);
+	ft_printf("\n");
 	three_elements(stack);
-	sort_a(stack);
+	max_b_to_top(stack);
+	if (check_sorted_b(stack))
+		ft_printf("YES!!!\n");
+	//sort_a(stack);
 }
