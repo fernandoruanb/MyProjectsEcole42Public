@@ -31,7 +31,6 @@ SRCS =  $(SRCDIR)/operations/ft_pa.c\
 	$(SRCDIR)/operations/ft_sa.c\
 	$(SRCDIR)/operations/ft_sb.c\
 	$(SRCDIR)/operations/ft_ss.c\
-	$(SRCDIR)/ordenation/check_pre_sorted.c\
 	$(SRCDIR)/ordenation/check_rr.c\
 	$(SRCDIR)/ordenation/check_rrr.c\
 	$(SRCDIR)/ordenation/check_sorted_b.c\

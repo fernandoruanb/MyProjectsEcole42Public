@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd_n.c                                  :+:      :+:    :+:   */
+/*   ft_putendl_fd_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/20 21:22:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/20 21:22:45 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/20 20:47:04 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/05 15:02:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../includes/push_swap.h"
 
-char	**ft_putendl_fd_n(const char *str, int fd)
+int	ft_putendl_fd_1(const char *str, int fd)
 {
 	int	index;
 
@@ -23,5 +23,5 @@ char	**ft_putendl_fd_n(const char *str, int fd)
 		index++;
 	}
 	write(fd, "\n", 1);
-	return (NULL);
+	return (1);
 }

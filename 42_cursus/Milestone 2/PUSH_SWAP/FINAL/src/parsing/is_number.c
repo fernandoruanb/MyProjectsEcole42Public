@@ -1,50 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_all_numbers.c                                :+:      :+:    :+:   */
+/*   is_number.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/21 13:24:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 15:58:11 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/22 15:34:24 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/05 15:01:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../includes/push_swap.h"
 
-int	count_all_numbers(int argc, char **argv)
+int	is_number(const char *str)
 {
-	int		index;
-	int		s_index;
-	int		count;
-	char	**result;
+	int	index;
+	int	error;
 
-	index = 1;
-	s_index = 0;
-	count = 0;
-	while (index < argc)
+	index = 0;
+	error = 0;
+	if (str[index] == '+')
+		return (0);
+	if (str[index] == '-')
+		index++;
+	if (str[index] == '\0')
+		return (0);
+	while (str[index] != '\0')
 	{
-		result = ft_split(argv[index], ' ');
-		if (!result)
+		if (!ft_isdigit(str[index]))
 			return (0);
-		s_index = 0;
-		while (result[s_index] != NULL)
-		{
-			free(result[s_index]);
-			s_index++;
-			count++;
-		}
-		free(result);
 		index++;
 	}
-	return (count);
+	ft_atoi_check(str, &error);
+	if (error == 1)
+		return (0);
+	return (1);
 }
 
 /*int	main(int argc, char **argv)
 {
 	int	result;
 
-	result = count_all_numbers(argc, argv);
-	printf("The amount of numbers are: %d\n", result);
+	if (argc != 2)
+		return (1);
+	result = is_valid_number(argv[1]);
+	printf("The result is: %d\n", result);
 	return (0);
 }*/

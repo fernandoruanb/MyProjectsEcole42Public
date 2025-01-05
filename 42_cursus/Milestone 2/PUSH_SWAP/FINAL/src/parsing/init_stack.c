@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd_0.c                                  :+:      :+:    :+:   */
+/*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/20 20:41:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/20 20:41:26 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/22 15:20:12 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/05 15:16:08 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../includes/push_swap.h"
 
-int	ft_putendl_fd_0(const char *str, int fd)
+int	init_stack(t_stack *stack, int total)
 {
-	int	index;
-
-	index = 0;
-	while (str[index] != '\0')
-	{
-		write(fd, &str[index], 1);
-		index++;
-	}
-	write(fd, "\n", 1);
-	return (0);
+	if (!stack)
+		return (0);
+	stack->stack_a = (int *)malloc(total * sizeof(int));
+	if (!stack->stack_a)
+		return (0);
+	stack->size_a = total;
+	stack->stack_b = (int *)malloc(1 * sizeof(int));
+	if (!stack->stack_b)
+		return (0);
+	stack->size_b = 1;
+	stack->elements_b = 0;
+	stack->operations = 0;
+	stack->count = 0;
+	return (1);
 }

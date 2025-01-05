@@ -6,11 +6,11 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:17:06 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 15:58:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/05 15:01:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../includes/push_swap.h"
 
 static int	has_duplicates(t_stack *stack)
 {

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack.c                                       :+:      :+:    :+:   */
+/*   ft_putendl_fd_n.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/22 15:20:12 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 15:57:16 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/20 21:22:45 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/05 15:02:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../includes/push_swap.h"
 
-int	init_stack(t_stack *stack, int total)
+char	**ft_putendl_fd_n(const char *str, int fd)
 {
-	if (!stack)
-		return (0);
-	stack->stack_a = (int *)malloc(total * sizeof(int));
-	if (!stack->stack_a)
-		return (0);
-	stack->size_a = total;
-	stack->stack_b = (int *)malloc(1 * sizeof(int));
-	if (!stack->stack_b)
-		return (0);
-	stack->size_b = 1;
-	stack->elements_b = 0;
-	stack->operations = 0;
-	stack->count = 0;
-	return (1);
+	int	index;
+
+	index = 0;
+	while (str[index] != '\0')
+	{
+		write(fd, &str[index], 1);
+		index++;
+	}
+	write(fd, "\n", 1);
+	return (NULL);
 }

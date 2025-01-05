@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 09:08:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/05 13:02:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/05 15:57:53 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int	main(int argc, char **argv)
 	if (!parse_args(argc, argv, &stack))
 		return (ft_putendl_fd_1("Error", 2));
 	if (is_sorted(&stack, stack.size_a, 0))
+	{
+		free(stack.stack_a);
+		free(stack.stack_b);
 		return (0);
+	}
 	free(stack.stack_a);
 	free(stack.stack_b);
 	return (0);

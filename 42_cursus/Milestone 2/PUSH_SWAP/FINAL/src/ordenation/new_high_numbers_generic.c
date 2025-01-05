@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_high_numbers_generic_v2.c                      :+:      :+:    :+:   */
+/*   new_high_numbers_generic.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 13:09:00 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/05 12:54:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/05 15:59:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,8 @@ static void	find_low_cost(t_stack *stack)
 	}
 }
 
-void	new_high_numbers_generic_v2(t_stack *stack)
+void	new_high_numbers_generic(t_stack *stack)
 {
-	if (check_pre_sorted(stack))
-		return ;
 	if (stack->size_a == 4)
 		ft_pb(stack, 1);
 	else if (stack->size_a >= 5)
@@ -84,11 +82,7 @@ void	new_high_numbers_generic_v2(t_stack *stack)
 		stack->max_b = max_b_determine(stack);
 		stack->min_b = min_b_determine(stack);
 		find_low_cost(stack);
-		if (!check_rr(stack))
-		{
-			if (!check_rrr(stack))
-				get_action(stack);
-		}
+		get_action(stack);
 		ft_pb(stack, 1);
 	}
 	three_elements(stack);
