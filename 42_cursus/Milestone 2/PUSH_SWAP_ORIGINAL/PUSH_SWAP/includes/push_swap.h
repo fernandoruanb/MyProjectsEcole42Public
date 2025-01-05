@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 21:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/05 09:46:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/05 12:05:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,9 @@ void	max_b_to_top(t_stack *stack);
 void	new_high_numbers_generic(t_stack *stack);
 int		check_pre_sorted(t_stack *stack);
 void	show_stacks(t_stack *stack, char flag);
+int	check_rr(t_stack *stack);
+void	get_action(t_stack *stack);
+int	check_rrr(t_stack *stack);
+void	new_high_numbers_generic_v2(t_stack *stack);
 
 #endif /* PUSH_SWAP_H */
