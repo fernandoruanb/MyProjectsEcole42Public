@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:40:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 16:18:17 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/03 14:39:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	find_target_index(t_stack *stack, int target_number)
 
 static int	find_best_match_b(t_stack *stack)
 {
-	int	index;
+	int		index;
 	long	match;
 
 	match = LONG_MIN;
@@ -88,5 +88,7 @@ void	high_numbers_generic(t_stack *stack)
 	stack->max_b = max_b_determine(stack);
 	if (stack->stack_b[0] != stack->max_b)
 		max_b_to_top(stack);
+	if (check_sorted_b(stack))
+		ft_printf("YES!!!\n");
 	sort_a(stack);
 }

@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min_a_determine.c                                  :+:      :+:    :+:   */
+/*   get_rotates_cost.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/03 09:21:43 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 09:42:38 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/03 13:09:52 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/04 17:19:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	min_a_determine(t_stack *stack)
+int	get_rotates_cost(t_stack *stack, int index, char c)
 {
-	long	min;
-	int	index;
-
-	min = LONG_MAX;
-	index = 0;
-	while (index < stack->size_a)
+	if (c == 'a')
 	{
-		if (stack->stack_a[index] < min)
-			min = stack->stack_a[index];
-		index++;
+		if ((stack->size_a - index) < index)
+			return (stack->size_a - index);
+		return (index);
 	}
-	return ((int)min);
+	else if (c == 'b')
+	{
+		if ((stack->elements_b - index) < index)
+			return (stack->elements_b - index);
+		return (index);
+	}
+	return (-1);
 }

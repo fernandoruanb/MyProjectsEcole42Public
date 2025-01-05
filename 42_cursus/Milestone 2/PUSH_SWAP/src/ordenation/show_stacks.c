@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_a.c                                           :+:      :+:    :+:   */
+/*   show_stacks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 18:45:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 13:32:27 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/05 09:40:51 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/05 09:46:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	sort_a(t_stack *stack)
+void	show_stacks(t_stack *stack, char flag)
 {
-	stack->max_b = max_b_determine(stack);
-	if (stack->stack_a[2] > stack->max_b)
-		ft_rra(stack, 1);
-	while (stack->elements_b > 0)
+	int	index;
+
+	if (flag == 'a')
 	{
-		stack->max_a = max_a_determine(stack);
-		stack->min_a = min_a_determine(stack);
-		if (stack->stack_a[stack->size_a - 1] > stack->stack_b[0]
-			&& stack->stack_a[stack->size_a - 1] != stack->max_a)
-			ft_rra(stack, 1);
-		else
-			ft_pa(stack, 1);
+		index = 0;
+		while (index < stack->size_a)
+			ft_printf("%d ", stack->stack_a[index++]);
+		ft_printf("\n");
 	}
-	while (!check_sorted(stack))
-		ft_rra(stack, 1);
+	else if (flag == 'b')
+	{
+		index = 0;
+		while (index < stack->elements_b)
+			ft_printf("%d ", stack->stack_b[index++]);
+		ft_printf("\n");
+	}
+	return ;
 }

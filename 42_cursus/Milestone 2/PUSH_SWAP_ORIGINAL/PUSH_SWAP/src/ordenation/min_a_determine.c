@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_location_max_b.c                              :+:      :+:    :+:   */
+/*   min_a_determine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 08:21:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/05 10:19:38 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/03 09:21:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/03 09:42:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	find_location_max_b(t_stack *stack)
+int	min_a_determine(t_stack *stack)
 {
-	int	index;
+	long	min;
+	int		index;
 
+	min = LONG_MAX;
 	index = 0;
-	stack->max_b = max_b_determine(stack);
-	while (stack->stack_b[index] != stack->max_b
-		&& index < stack->size_a)
+	while (index < stack->size_a)
+	{
+		if (stack->stack_a[index] < min)
+			min = stack->stack_a[index];
 		index++;
-	while (stack->stack_b[index] != stack->max_b)
-		index++;
-	return (index);
+	}
+	return ((int)min);
 }

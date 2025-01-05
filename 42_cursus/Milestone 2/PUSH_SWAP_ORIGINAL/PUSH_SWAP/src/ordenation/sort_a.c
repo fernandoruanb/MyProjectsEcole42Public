@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_location_max_b.c                              :+:      :+:    :+:   */
+/*   sort_a.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 08:21:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/05 10:19:38 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/02 18:45:04 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/04 20:09:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	find_location_max_b(t_stack *stack)
+void	sort_a(t_stack *stack)
 {
-	int	index;
-
-	index = 0;
 	stack->max_b = max_b_determine(stack);
-	while (stack->stack_b[index] != stack->max_b
-		&& index < stack->size_a)
-		index++;
-	while (stack->stack_b[index] != stack->max_b)
-		index++;
-	return (index);
+	if (stack->stack_a[2] > stack->max_b)
+		ft_rra(stack, 1);
+	while (stack->elements_b > 0)
+	{
+		stack->max_a = max_a_determine(stack);
+		stack->min_a = min_a_determine(stack);
+		if (stack->stack_a[stack->size_a - 1] > stack->stack_b[0]
+			&& stack->stack_a[stack->size_a - 1] != stack->max_a)
+			ft_rra(stack, 1);
+		else
+			ft_pa(stack, 1);
+	}
+	while (!check_sorted(stack))
+		ft_rra(stack, 1);
 }

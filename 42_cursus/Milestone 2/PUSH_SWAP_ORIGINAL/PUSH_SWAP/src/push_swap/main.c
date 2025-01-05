@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   max_b_to_top.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/03 14:35:00 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/03 14:38:11 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/12/22 09:08:01 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/05 10:29:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	max_b_to_top(t_stack *stack)
+int	main(int argc, char **argv)
 {
-	int	index;
-	int	moves;
+	int		total_numbers;
+	t_stack	stack;
 
-	index = 0;
-	while (stack->stack_b[index] != stack->max_b)
-		index++;
-	moves = get_least_moves_b(stack, index);
-	if (moves == 1)
-	{
-		while (stack->stack_b[0] != stack->max_b)
-			ft_rrb(stack, 1);
-	}
-	else if (moves == 0)
-	{
-		while (stack->stack_b[0] != stack->max_b)
-			ft_rb(stack, 1);
-	}
+	if (argc < 2)
+		return (1);
+	total_numbers = count_all_numbers(argc, argv);
+	if (!init_stack(&stack, total_numbers))
+		return (ft_putendl_fd_1("Error", 2));
+	if (!parse_args(argc, argv, &stack))
+		return (ft_putendl_fd_1("Error", 2));
+	if (is_sorted(&stack, stack.size_a, 0))
+		return (0);
+	free(stack.stack_a);
+	free(stack.stack_b);
+	return (0);
 }

@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_location_max_b.c                              :+:      :+:    :+:   */
+/*   check_pre_sorted.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 08:21:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/30 12:33:18 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/04 15:53:53 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/04 16:47:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	find_location_max_b(t_stack *stack)
+int	check_pre_sorted(t_stack *stack)
 {
 	int	index;
+	int	flag;
 
 	index = 0;
-	stack->max_b = max_b_determine(stack);
-	while (stack->stack_b[index] != stack->max_b
-		&& stack->stack_b[index] <= stack->size_a)
+	while (stack->stack_a[index] < stack->stack_a[index + 1]
+		&& index < stack->size_a)
 		index++;
-	return (index);
+	flag = index;
+	index++;
+	while (stack->stack_a[index] < stack->stack_a[index + 1]
+		&& stack->stack_a[index] < stack->stack_a[0]
+		&& index < stack->size_a)
+		index++;
+	if (index == stack->size_a - 1)
+		index++;
+	flag = index - flag - 1;
+	if (index == stack->size_a)
+	{
+		while (flag-- != 0)
+			ft_rra(stack, 1);
+		return (1);
+	}
+	return (0);
 }
