@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   choose_algoritm.c                                  :+:      :+:    :+:   */
+/*   check_rr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 08:49:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/05 12:07:50 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/05 11:22:10 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/05 11:27:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	choose_algoritm(t_stack *stack, int flag)
+int	check_rr(t_stack *stack)
 {
-	if (flag == 1)
-		return (ft_putendl_fd_0("Isn't sorted!", 2));
-	if (stack->size_a == 2)
-		two_elements(stack);
-	else if (stack->size_a == 3)
-		three_elements(stack);
-	else if (stack->size_a == 4)
-		four_elements(stack);
-	else if (stack->size_a == 5)
-		five_elements(stack);
-	else if (stack->size_a == 6)
-		six_elements(stack);
-	else
-		new_high_numbers_generic_v2(stack);
+	int	number_a;
+
+	number_a = stack->stack_a[stack->index_a];
+	if (get_rotates_cost(stack, stack->index_a, 'a') == stack->index_a)
+	{
+		if (get_rotates_cost(stack, stack->index_b, 'b') == stack->index_b)
+		{
+			if (stack->index_a == stack->index_b)
+			{
+				while (number_a != stack->stack_a[0])
+					ft_rr(stack);
+				return (1);
+			}
+		}
+	}
 	return (0);
 }
