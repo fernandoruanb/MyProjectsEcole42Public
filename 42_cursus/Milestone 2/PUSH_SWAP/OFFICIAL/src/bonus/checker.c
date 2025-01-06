@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 16:42:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/06 12:42:49 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/06 13:31:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ static void	divine_checker(t_stack *stack)
 		}
 		index++;
 	}
-	ft_printf("OK\n");
+	if (stack->elements_b == 0)
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
 }
 
 static void	get_args_and_do(t_stack *stack)
