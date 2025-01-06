@@ -15,6 +15,8 @@ INCDIR = .
 # Archives .c
 
 SRCS =  $(SRCDIR)/ft_isalpha.c\
+	$(SRCDIR)/get_next_line_flag.c\
+	$(SRCDIR)/get_next_line_utils.c\
 	$(SRCDIR)/ft_isdigit.c\
 	$(SRCDIR)/ft_isalnum.c\
 	$(SRCDIR)/ft_isprint.c\
@@ -112,7 +114,6 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/fprime.c\
 	$(SRCDIR)/tab_mult.c\
 	$(SRCDIR)/str_capitalizer.c\
-	$(SRCDIR)/get_next_line_utils.c\
 	$(SRCDIR)/ft_strcmp.c
 
 # BONUS SRCS

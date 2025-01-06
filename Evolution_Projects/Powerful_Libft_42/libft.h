@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/06 10:37:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:45:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ void		fprime(int number);
 void		tab_mult(int number);
 void		str_capitalizer(char *str);
 int			ft_strcmp(const char *s1, const char *s2);
+char		*get_next_line_flag(int fd, int flag);
 
 #endif /* LIBFT_H */
