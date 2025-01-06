@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_format.c                                     :+:      :+:    :+:   */
+/*   first_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 13:04:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/19 12:19:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/16 23:27:59 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/17 08:32:30 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	parse_format(const char *format, va_list args)
+/*void	first_word(int argc, char **argv);
+
+int	main(int argc, char **argv)
 {
-	int	temp;
-	int	total;
+	first_word(argc, argv);
+	return (0);
+}*/
+
+void	first_word(int argc, char **argv)
+{
 	int	index;
 
-	total = 0;
-	index = 0;
-	while (format[index] != '\0')
+	if (argc < 2 || argc > 2)
 	{
-		if (format[index] == '%' && format[index + 1] != '\0')
-		{
-			index++;
-			temp = handle_specifier(format[index], args);
-			if (temp == -1)
-				return (-1);
-			total += temp;
-		}
-		else
-		{
-			write(1, &format[index], 1);
-			total++;
-		}
+		write(1, "\n", 1);
+		return ;
+	}
+	index = 0;
+	while ((argv[1][index] == ' ' || argv[1][index] == '\t'))
+		index++;
+	while ((argv[1][index] != ' ' && argv[1][index] != '\t')
+		&& argv[1][index] != '\0')
+	{
+		write(1, &argv[1][index], 1);
 		index++;
 	}
-	return (total);
+	write(1, "\n", 1);
 }

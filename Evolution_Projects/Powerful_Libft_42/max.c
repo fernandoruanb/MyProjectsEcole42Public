@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_format.c                                     :+:      :+:    :+:   */
+/*   max.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 13:04:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/19 12:19:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/20 15:51:02 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/20 16:27:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+/*#include <stdio.h>
 
-int	parse_format(const char *format, va_list args)
+int	max(int *tab, unsigned int len);
+
+int	main(void)
 {
-	int	temp;
-	int	total;
-	int	index;
+	int	tab[] = {0, 1, 2, 3, 4, 5, 42};
+	unsigned int	len;
+	int	result;
 
-	total = 0;
+	len = 7;
+	result = max(tab, len);
+	printf("%d\n", result);
+	return (0);
+}*/
+
+int	max(int *tab, unsigned int len)
+{
+	int				result;
+	unsigned int	index;
+
 	index = 0;
-	while (format[index] != '\0')
+	result = 0;
+	while (index < len)
 	{
-		if (format[index] == '%' && format[index + 1] != '\0')
-		{
-			index++;
-			temp = handle_specifier(format[index], args);
-			if (temp == -1)
-				return (-1);
-			total += temp;
-		}
-		else
-		{
-			write(1, &format[index], 1);
-			total++;
-		}
+		if (tab[index] > result)
+			result = tab[index];
 		index++;
 	}
-	return (total);
+	return (result);
 }

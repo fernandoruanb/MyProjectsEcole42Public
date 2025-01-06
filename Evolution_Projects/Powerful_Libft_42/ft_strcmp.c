@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_format.c                                     :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 13:04:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/19 12:19:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/06 10:34:44 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/06 10:36:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int	parse_format(const char *format, va_list args)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	temp;
-	int	total;
 	int	index;
 
-	total = 0;
 	index = 0;
-	while (format[index] != '\0')
+	while (s1[index] != '\0' && s2[index] != '\0')
 	{
-		if (format[index] == '%' && format[index + 1] != '\0')
-		{
-			index++;
-			temp = handle_specifier(format[index], args);
-			if (temp == -1)
-				return (-1);
-			total += temp;
-		}
-		else
-		{
-			write(1, &format[index], 1);
-			total++;
-		}
+		if (s1[index] != s2[index])
+			return ((unsigned char)s1[index] - (unsigned char)s2[index]);
 		index++;
 	}
-	return (total);
+	return ((unsigned char)s1[index] - (unsigned char)s2[index]);
 }

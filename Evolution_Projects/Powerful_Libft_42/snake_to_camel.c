@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_format.c                                     :+:      :+:    :+:   */
+/*   snake_to_camel.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 13:04:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/19 12:19:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/20 19:11:13 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/20 19:31:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <unistd.h>
 
-int	parse_format(const char *format, va_list args)
+/*void	snake_to_camel(char *s);
+
+int	main(int argc, char **argv)
 {
-	int	temp;
-	int	total;
+	(void)argc;
+	snake_to_camel(argv[1]);
+	write(1, "\n", 1);
+	return (0);
+}*/
+
+void	snake_to_camel(char *s)
+{
 	int	index;
 
-	total = 0;
 	index = 0;
-	while (format[index] != '\0')
+	while (s[index] != '\0')
 	{
-		if (format[index] == '%' && format[index + 1] != '\0')
+		if (index != 0 && s[index - 1] == '_')
 		{
-			index++;
-			temp = handle_specifier(format[index], args);
-			if (temp == -1)
-				return (-1);
-			total += temp;
+			if (s[index] >= 'a' && s[index] <= 'z')
+				s[index] = s[index] - 32;
+			write(1, &s[index], 1);
 		}
-		else
-		{
-			write(1, &format[index], 1);
-			total++;
-		}
+		else if (s[index] != '_')
+			write(1, &s[index], 1);
 		index++;
 	}
-	return (total);
 }

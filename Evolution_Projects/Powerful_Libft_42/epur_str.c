@@ -1,41 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_format.c                                     :+:      :+:    :+:   */
+/*   epur_str.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 13:04:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/19 12:19:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/21 17:32:02 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/21 17:49:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	parse_format(const char *format, va_list args)
+/*void	epur_str(const char *str);
+
+int	main(int argc, char **argv)
 {
-	int	temp;
-	int	total;
+	if (argc < 2)
+	{
+		write(1, "\n", 1);
+		return (1);
+	}
+	epur_str(argv[1]);
+	write(1, "\n", 1);
+	return (0);
+}*/
+
+void	epur_str(const char *str)
+{
 	int	index;
 
-	total = 0;
 	index = 0;
-	while (format[index] != '\0')
+	while (str[index] != '\0')
 	{
-		if (format[index] == '%' && format[index + 1] != '\0')
-		{
+		if (index == 0 && str[index] == ' ')
 			index++;
-			temp = handle_specifier(format[index], args);
-			if (temp == -1)
-				return (-1);
-			total += temp;
-		}
-		else
-		{
-			write(1, &format[index], 1);
-			total++;
-		}
+		if (str[index] == ' ' && str[index + 1] != ' ')
+			write(1, &str[index], 1);
+		else if (str[index] != ' ')
+			write(1, &str[index], 1);
 		index++;
 	}
-	return (total);
 }
