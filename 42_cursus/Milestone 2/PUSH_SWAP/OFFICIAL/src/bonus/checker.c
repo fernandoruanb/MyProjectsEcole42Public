@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 16:42:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/06 13:31:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:50:32 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-static void	execute_commands(t_stack *stack, const char *str)
+static int	execute_commands(t_stack *stack, const char *str)
 {
 	if (ft_strcmp(str, "pa\n") == 0)
 		ft_pa(stack, 1);
@@ -22,8 +22,6 @@ static void	execute_commands(t_stack *stack, const char *str)
 		ft_sa(stack, 1);
 	else if (ft_strcmp(str, "sb\n") == 0)
 		ft_sb(stack, 1);
-	else if (ft_strcmp(str, "pa\n") == 0)
-		ft_pa(stack, 1);
 	else if (ft_strcmp(str, "ss\n") == 0)
 		ft_ss(stack);
 	else if (ft_strcmp(str, "ra\n") == 0)
@@ -38,6 +36,9 @@ static void	execute_commands(t_stack *stack, const char *str)
 		ft_rra(stack, 1);
 	else if (ft_strcmp(str, "rrb\n") == 0)
 		ft_rrb(stack, 1);
+	else
+		return (1);
+	return (0);
 }
 
 static void	divine_checker(t_stack *stack)
@@ -75,7 +76,19 @@ static void	get_args_and_do(t_stack *stack)
 	{
 		if (line == NULL)
 			break ;
-		execute_commands(stack, line);
+		if (execute_commands(stack, line))
+		{
+			while (line != NULL)
+			{
+				free(line);
+				line = get_next_line(0);
+			}
+			free(get_next_line(0));
+			free(stack->stack_a);
+			free(stack->stack_b);
+			ft_putendl_fd_1("Error", 2);
+			exit(1);
+		}
 		free(line);
 		line = get_next_line(0);
 	}
