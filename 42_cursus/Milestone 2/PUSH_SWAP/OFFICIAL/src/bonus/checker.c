@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 16:42:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/06 10:43:05 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:42:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int	main(int argc, char **argv)
 		return (1);
 	total_numbers = count_all_numbers(argc, argv);
 	if (!init_stack(&stack, total_numbers))
-		return (ft_putendl_fd_1("Error", 2));
+		return (1);
 	if (!parse_args(argc, argv, &stack))
-		return (ft_putendl_fd_1("Error", 2));
+		return (1);
 	get_args_and_do(&stack);
 	divine_checker(&stack);
 	free(stack.stack_a);
