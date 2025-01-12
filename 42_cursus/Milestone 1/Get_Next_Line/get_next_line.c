@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 10:05:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/07 13:44:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/12 10:39:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = extract_line(&buffer);
 	if (!line)
-	{
-		free_buffer(&buffer, NULL);
-		return (NULL);
-	}
+		return (free_buffer(&buffer, NULL));
 	return (line);
 }

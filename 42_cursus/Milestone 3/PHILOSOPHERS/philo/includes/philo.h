@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/11 19:16:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/12 10:01:08 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@
 typedef struct s_philo
 {
 	pthread_mutex_t	mutex;
-	int				philosophers;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				must_eat_time;
-	int				forks;
+	long				id;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	long				meals_eaten;
+	long				philosophers;
+	long				time_to_die;
+	long				time_to_eat;
+	long				time_to_sleep;
+	long				must_eat_time;
+	long				forks;
 }	t_philo;
 
 int		ft_putendl_fd_1(const char *s, int fd);

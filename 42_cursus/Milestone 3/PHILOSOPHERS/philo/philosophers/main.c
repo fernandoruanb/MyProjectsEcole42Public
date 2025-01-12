@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:03:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/11 18:38:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/12 10:13:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ int	main(int argc, char **argv)
 	if (!parse_args(argc, argv, &philosophers))
 		return (ft_putendl_fd_1("Invalid arguments.", 2));
 	show_philo_struct(&philosophers);
+	if (!get_action(&philosophers))
+		return (ft_putendl_fd_1("Philosophers crashed!!!", 2));
 	return (0);
 }
