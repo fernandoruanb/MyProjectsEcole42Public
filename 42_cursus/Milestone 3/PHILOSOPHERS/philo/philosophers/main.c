@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/10 22:54:31 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/10 23:03:16 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/11 18:38:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
- 
-#ifndef PHILO_H
-# define PHILO_H
 
-# include <pthread.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
+#include "../includes/philo.h"
 
-typedef struct s_philo
+int	main(int argc, char **argv)
 {
-	int	philosophers;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	must_eat_count;
-}	t_philo;
+	t_philo	philosophers;
 
-#endif /* PHILO_H */
+	if (argc < 6)
+		return (ft_putendl_fd_1("How to use: num_philosophers,\
+ die_time(ms), eat_time(ms), sleep_time(ms), number_must_eat[optional]", 2));
+	if (!parse_args(argc, argv, &philosophers))
+		return (ft_putendl_fd_1("Invalid arguments.", 2));
+	show_philo_struct(&philosophers);
+	return (0);
+}
