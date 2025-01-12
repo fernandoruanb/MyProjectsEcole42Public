@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/12 19:23:32 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/12 19:34:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static long	get_time(t_philo *philo)
 static int	try_catch_fork(t_philo *philo)
 {
 	printf("Philosopher %ld is thinking.\n", philo->id);
-	show_philo_struct(philo);
 	if (check_died(philo))
 		return (ft_putendl_fd_1("Philosopher %ld died.", 2));
 	if (philo->id == philo->philosophers - 1)
