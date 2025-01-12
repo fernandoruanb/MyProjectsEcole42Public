@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_on_struct.c                                    :+:      :+:    :+:   */
+/*   clean_forks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 17:28:18 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/12 14:16:26 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/12 12:49:48 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/12 14:26:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	put_on_struct(int index, int captured_number, t_philo *philo)
+int	clean_forks(t_philo *philo)
 {
-	if (index == 1)
-		philo->philosophers = captured_number;
-	else if (index == 2)
-		philo->time_to_die = captured_number;
-	else if (index == 3)
-		philo->time_to_eat = captured_number;
-	else if (index == 4)
-		philo->time_to_sleep = captured_number;
-	else if (index == 5)
-		philo->must_eat_time = captured_number;
+	int	index;
+
+	index = 0;
+	while (index < philo->philosophers)
+		pthread_mutex_destroy(&philo->forks[index++]);
+	free(philo->forks);
+	return (1);
 }

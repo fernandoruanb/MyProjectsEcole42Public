@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_on_struct.c                                    :+:      :+:    :+:   */
+/*   init_each_philo_struct.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 17:28:18 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/12 14:16:26 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/12 12:24:48 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/12 13:23:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	put_on_struct(int index, int captured_number, t_philo *philo)
+int	init_each_philo_struct(t_philo *philo)
 {
-	if (index == 1)
-		philo->philosophers = captured_number;
-	else if (index == 2)
-		philo->time_to_die = captured_number;
-	else if (index == 3)
-		philo->time_to_eat = captured_number;
-	else if (index == 4)
-		philo->time_to_sleep = captured_number;
-	else if (index == 5)
-		philo->must_eat_time = captured_number;
+	int		id;
+	t_philo	*philo_ids;
+
+	philo_ids = malloc(philo->philosophers * sizeof(t_philo));
+	if (!philo_ids)
+		return (0);
+	id = 0;
+	while (id < philo->philosophers)
+	{
+		philo_ids[id].id = id;
+		id++;
+	}
+	philo->philo_ids = philo_ids;
+	return (1);
 }

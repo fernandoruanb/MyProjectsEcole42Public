@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/12 10:01:08 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:17:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ typedef struct s_philo
 	long				id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	long				time_last_meal;
 	long				meals_eaten;
 	long				philosophers;
 	long				time_to_die;
 	long				time_to_eat;
 	long				time_to_sleep;
 	long				must_eat_time;
-	long				forks;
+	pthread_mutex_t	*forks;
+	struct s_philo	*philo_ids;
 }	t_philo;
 
 int		ft_putendl_fd_1(const char *s, int fd);
@@ -43,5 +45,9 @@ long	ft_atol(const char *nptr);
 void	put_on_struct(int index, int captured_number, t_philo *philo);
 int		ft_isdigit(char c);
 void	show_philo_struct(t_philo *philo);
+int	init_each_philo_fork(t_philo *philo);
+int	init_each_philo_struct(t_philo *philo);
+int	clean_forks(t_philo *philo);
+int	clean_philo_struct(t_philo *philo);
 
 #endif /* PHILO_H */
