@@ -22,7 +22,7 @@
 
 typedef struct s_philo
 {
-	pthread_mutex_t	mutex;
+	pthread_mutex_t		mutex;
 	long				id;
 	long				lost_time;
 	long				time_last_meal;
@@ -32,9 +32,9 @@ typedef struct s_philo
 	long				time_to_eat;
 	long				time_to_sleep;
 	long				must_eat_time;
-	pthread_mutex_t	*forks;
-	struct s_philo	*philo_ids;
-	struct timeval	time;
+	pthread_mutex_t		*forks;
+	struct s_philo		*philo_ids;
+	struct timeval		time;
 }	t_philo;
 
 int		ft_putendl_fd_1(const char *s, int fd);
@@ -46,10 +46,10 @@ long	ft_atol(const char *nptr);
 void	put_on_struct(int index, int captured_number, t_philo *philo);
 int		ft_isdigit(char c);
 void	show_philo_struct(t_philo *philo);
-int	init_each_philo_fork(t_philo *philo);
-int	init_each_philo_struct(t_philo *philo);
-int	clean_forks(t_philo *philo);
-int	clean_philo_struct(t_philo *philo);
-int	lets_go(t_philo *philo);
+int		init_each_philo_fork(t_philo *philo);
+int		init_each_philo_struct(t_philo *philo);
+int		clean_forks(t_philo *philo);
+int		clean_philo_struct(t_philo *philo);
+int		lets_go(t_philo *philo);
 
 #endif /* PHILO_H */
