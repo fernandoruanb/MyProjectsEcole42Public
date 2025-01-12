@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/12 19:02:50 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/12 20:40:46 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 typedef struct s_philo
 {
 	pthread_mutex_t		mutex;
+	int				args;
+	long				number;
 	long				id;
 	long				lost_time;
 	long				time_last_meal;

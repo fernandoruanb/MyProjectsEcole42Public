@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/12 19:34:56 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/12 20:20:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,30 @@ static long	get_time(t_philo *philo)
 
 static int	try_catch_fork(t_philo *philo)
 {
-	printf("Philosopher %ld is thinking.\n", philo->id);
+	printf("Philosopher %ld is thinking...\n", philo->number);
+	//show_philo_struct(philo);
 	if (check_died(philo))
-		return (ft_putendl_fd_1("Philosopher %ld died.", 2));
+	{
+		printf("Philosopher %ld is died!\n", philo->number);
+		return (1);
+	}
 	if (philo->id == philo->philosophers - 1)
 		pthread_mutex_lock(&philo->forks[philo->id + 1 % philo->philosophers]);
 	else
 		pthread_mutex_lock(&philo->forks[philo->id % philo->philosophers]);
-	printf("Philosopher %ld has taken a fork.\n", philo->id);
+	printf("Philosopher %ld has taken a fork.\n", philo->number);
 	if (philo->id == philo->philosophers - 1)
 		pthread_mutex_lock(&philo->forks[philo->id % philo->philosophers]);
 	else
 		pthread_mutex_lock(&philo->forks[philo->id + 1 % philo->philosophers]);
-	if (check_died(philo))
-		return (ft_putendl_fd_1("Philosopher %ld died.", 2));
-	printf("Philosopher %ld has taken a fork.\n", philo->id);
+	printf("Philosopher %ld has taken a fork.\n", philo->number);
 	philo->time_last_meal = get_time(philo);
-	printf("Philosopher %ld is eating...\n", philo->id);
+	printf("Philosopher %ld is eating...\n", philo->number);
 	usleep(philo->time_to_eat * 1000);
 	pthread_mutex_unlock(&philo->forks[philo->id % philo->philosophers]);
 	pthread_mutex_unlock(&philo->forks[(philo->id + 1) % philo->philosophers]);
 	philo->meals_eaten++;
-	printf("Philosopher %ld is sleeping..\n", philo->id);
+	printf("Philosopher %ld is sleeping..\n", philo->number);
 	usleep(philo->time_to_sleep * 1000);
 	return (0);
 }
@@ -67,12 +69,13 @@ static void	*p(void *arg)
 		if (try_catch_fork(philo))
 			break ;
 	}
-	return (NULL);
+	return ((void *)(long)1);
 }
 
 int	lets_go(t_philo *philo)
 {
 	int			i;
+	void			*get;
 	pthread_t	*t;
 
 	i = 0;
@@ -88,8 +91,10 @@ int	lets_go(t_philo *philo)
 	i = 0;
 	while (i < philo->philosophers)
 	{
-		if (pthread_join(t[i], NULL) != 0)
+		if (pthread_join(t[i], &get) != 0)
 			return (0);
+		if ((int)(long)get == 1)
+			return (1);
 		i++;
 	}
 	return (1);
