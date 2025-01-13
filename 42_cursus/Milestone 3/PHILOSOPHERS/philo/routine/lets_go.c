@@ -6,30 +6,11 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/13 11:11:09 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/13 14:26:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-static int	check_died(t_philo *philo, int *died)
-{
-	if (philo->time_last_meal == 0)
-		return (0);
-	gettimeofday(&philo->time, NULL);
-	philo->lost_time = philo->time.tv_sec * 1000000 + philo->time.tv_usec;
-	if ((philo->lost_time - philo->time_last_meal) > philo->time_to_die)
-	{
-		if (philo->died == 0)
-		{
-			printf("Philosopher %ld is dead.\n", philo->number);
-			philo->died = 1;
-		}
-		*died = 1;
-		return (1);
-	}
-	return (0);
-}
 
 static long	get_time(t_philo *philo)
 {
@@ -65,22 +46,18 @@ static void	try_catch_fork(t_philo *philo)
 static void	*p(void *arg)
 {
 	t_philo	*philo;
-	int	died;
 
 	philo = (t_philo *)arg;
-	died = 0;
-	while (!died && !philo->died)
+	while (1)
 	{
-		try_catch_fork(philo);
 		pthread_mutex_lock(philo->mutex);
-		if (check_died(philo, &died))
-			break ;
 		if (philo->died)
 		{
 			pthread_mutex_unlock(philo->mutex);
 			break ;
 		}
 		pthread_mutex_unlock(philo->mutex);
+		try_catch_fork(philo);
 	}
 	return ((void *)(long)1);
 }
@@ -101,6 +78,8 @@ int	lets_go(t_philo *philo)
 			return (0);
 		i++;
 	}
+	//if (monitor(philo))
+	//	return (1);
 	i = 0;
 	while (i < philo->philosophers)
 	{
