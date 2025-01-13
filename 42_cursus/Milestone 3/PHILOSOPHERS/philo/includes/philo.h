@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/13 13:11:09 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:09:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ int		clean_philo_struct(t_philo *philo);
 int		lets_go(t_philo *philo);
 int		init_each_philo_die_mutex(t_philo *philo);
 void		clean_die_mutexes(t_philo *philo);
-int		monitor(t_philo *philo);
+void		monitor(t_philo *philo);
 
 #endif /* PHILO_H */

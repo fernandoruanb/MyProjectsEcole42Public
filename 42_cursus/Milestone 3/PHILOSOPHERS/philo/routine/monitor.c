@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 12:00:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/13 15:29:12 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:09:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int      check_died(t_philo *philo)
 {
+	pthread_mutex_lock(philo->mutex);
 	if (philo->time_last_meal == 0)
 		return (0);
 	gettimeofday(&(philo->time), NULL);
@@ -25,8 +26,10 @@ static int      check_died(t_philo *philo)
 			printf("Philosopher %ld is dead.\n", philo->number);
 			philo->died = 1;
 		}
+		pthread_mutex_unlock(philo->mutex);
 		return (1);
 	}
+	pthread_mutex_unlock(philo->mutex);
 	return (0);
 }
 
@@ -48,15 +51,14 @@ static void	*monitoring(void *arg)
 	return (NULL);
 }
 
-int	monitor(t_philo *philo)
+void	monitor(t_philo *philo)
 {
 	pthread_t	mon;
 
 	if (!philo)
-		return (0);
+		return ;
 	if (pthread_create(&mon, NULL, &monitoring, (void *)&philo) != 0)
-		return (0);
+		return ;
 	if (pthread_join(mon, NULL) != 0)
-		return (0);
-	return (1);
+		return ;
 }

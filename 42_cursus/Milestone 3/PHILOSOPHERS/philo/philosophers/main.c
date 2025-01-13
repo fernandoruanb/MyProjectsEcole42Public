@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:03:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/13 15:46:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:14:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static int	finish_problem(t_philo *philosophers)
 {
-	printf("Philosopher 1 is thinking...\n");
+	printf("Philosopher 1 is thinking\n");
 	usleep(1000);
-	printf("Philosopher 1 has taken a fork.\n");
+	printf("Philosopher 1 has taken a fork\n");
 	usleep(philosophers->time_to_die * 1000);
-	printf("Philosopher 1 is died.\n");
+	printf("Philosopher 1 is died\n");
 	clean_forks(philosophers);
 	clean_philo_struct(philosophers);
 	return (0);
