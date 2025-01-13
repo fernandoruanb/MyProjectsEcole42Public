@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:03:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/13 09:58:20 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/12 20:41:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ int	main(int argc, char **argv)
 		return (ft_putendl_fd_1("Invalid arguments.", 2));
 	philosophers.meals_eaten = 0;
 	philosophers.number = 0;
-	philosophers.died = 0;
 	philosophers.time_last_meal = 0;
 	philosophers.args = argc - 1;
+	//show_philo_struct(&philosophers);
 	if (!init_each_philo_fork(&philosophers))
 		return (ft_putendl_fd_1("Failed init forks.", 2));
-	if (!init_each_philo_die_mutex(&philosophers))
-		return (ft_putendl_fd_1("Failed init die mutex.", 2));
 	if (!init_each_philo_struct(&philosophers))
 		ft_putendl_fd_1("Failed to init Philosophers structs", 2);
 	if (philosophers.philosophers == 1)

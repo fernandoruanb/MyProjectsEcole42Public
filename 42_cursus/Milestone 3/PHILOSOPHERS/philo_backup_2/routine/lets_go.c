@@ -6,29 +6,25 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/13 11:11:09 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/13 08:17:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static int	check_died(t_philo *philo, int *died)
+static void	check_died(t_philo *philo, int *died)
 {
+	*died = 0;
 	if (philo->time_last_meal == 0)
-		return (0);
+		return ;
 	gettimeofday(&philo->time, NULL);
 	philo->lost_time = philo->time.tv_sec * 1000000 + philo->time.tv_usec;
 	if ((philo->lost_time - philo->time_last_meal) > philo->time_to_die)
 	{
-		if (philo->died == 0)
-		{
-			printf("Philosopher %ld is dead.\n", philo->number);
-			philo->died = 1;
-		}
+		printf("Philosopher %ld is died.\n", philo->number);
 		*died = 1;
-		return (1);
+		return ;
 	}
-	return (0);
 }
 
 static long	get_time(t_philo *philo)
@@ -37,7 +33,7 @@ static long	get_time(t_philo *philo)
 	return (philo->time.tv_sec * 1000000 + philo->time.tv_usec);
 }
 
-static void	try_catch_fork(t_philo *philo)
+static void	try_catch_fork(t_philo *philo, int died)
 {
 	printf("Philosopher %ld is thinking...\n", philo->number);
 	if (philo->id == philo->philosophers - 1)
@@ -54,12 +50,16 @@ static void	try_catch_fork(t_philo *philo)
 	philo->meals_eaten++;
 	printf("Philosopher %ld is eating...\n", philo->number);
 	usleep(philo->time_to_eat * 1000);
+	check_died(philo, &died);
 	pthread_mutex_unlock(&philo->forks[philo->id % philo->philosophers]);
 	printf("Philosopher %ld has released a fork.\n", philo->number);
 	pthread_mutex_unlock(&philo->forks[(philo->id + 1) % philo->philosophers]);
 	printf("Philosopher %ld has released a fork.\n", philo->number);
 	printf("Philosopher %ld is sleeping...\n", philo->number);
 	usleep(philo->time_to_sleep * 1000);
+	check_died(philo, &died);
+	if (died == 1)
+		return ;
 }
 
 static void	*p(void *arg)
@@ -69,18 +69,12 @@ static void	*p(void *arg)
 
 	philo = (t_philo *)arg;
 	died = 0;
-	while (!died && !philo->died)
+	while (1)
 	{
-		try_catch_fork(philo);
-		pthread_mutex_lock(philo->mutex);
-		if (check_died(philo, &died))
+		try_catch_fork(philo, died);
+		check_died(philo, &died);
+		if (died == 1)
 			break ;
-		if (philo->died)
-		{
-			pthread_mutex_unlock(philo->mutex);
-			break ;
-		}
-		pthread_mutex_unlock(philo->mutex);
 	}
 	return ((void *)(long)1);
 }

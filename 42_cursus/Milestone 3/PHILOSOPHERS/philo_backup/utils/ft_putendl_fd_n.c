@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_philo_struct.c                               :+:      :+:    :+:   */
+/*   ft_putendl_fd_n.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 13:05:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/13 10:01:41 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/11 14:59:15 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/11 15:03:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	clean_philo_struct(t_philo *philo)
+char	*ft_putendl_fd_n(const char *s, int fd)
 {
-	if (philo->philo_ids)
-		free(philo->philo_ids);
-	philo->philo_ids = NULL;
-	clean_die_mutexes(philo);
-	return (ft_putendl_fd_0("Succeed to clean philosophers' struct", 1));
+	int	index;
+
+	if (!s)
+		return (NULL);
+	index = 0;
+	while (s[index] != '\0')
+	{
+		write(fd, &s[index], 1);
+		index++;
+	}
+	write(1, "\n", 1);
+	return (NULL);
 }

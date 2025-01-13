@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/13 10:01:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/12 20:40:46 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <sys/time.h>
 
 typedef struct s_philo
 {
-	pthread_mutex_t		*mutex;
+	pthread_mutex_t		mutex;
 	int				args;
 	long				number;
-	int				died;
 	long				id;
 	long				lost_time;
 	long				time_last_meal;
@@ -53,7 +53,5 @@ int		init_each_philo_struct(t_philo *philo);
 int		clean_forks(t_philo *philo);
 int		clean_philo_struct(t_philo *philo);
 int		lets_go(t_philo *philo);
-int		init_each_philo_die_mutex(t_philo *philo);
-void		clean_die_mutexes(t_philo *philo);
 
 #endif /* PHILO_H */
