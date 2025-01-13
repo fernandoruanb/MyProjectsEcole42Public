@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_philo_struct.c                               :+:      :+:    :+:   */
+/*   clean_die_mutexes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 13:05:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/13 10:01:41 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/13 09:54:04 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/13 10:10:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	clean_philo_struct(t_philo *philo)
+void	clean_die_mutexes(t_philo *philo)
 {
-	if (philo->philo_ids)
-		free(philo->philo_ids);
-	philo->philo_ids = NULL;
-	clean_die_mutexes(philo);
-	return (ft_putendl_fd_0("Succeed to clean philosophers' struct", 1));
+	int	index;
+
+	index = 0;
+	while (index < philo->philosophers)
+	{
+		pthread_mutex_destroy(&philo->mutex[index]);
+		index++;
+	}
+	free(philo->mutex);
 }

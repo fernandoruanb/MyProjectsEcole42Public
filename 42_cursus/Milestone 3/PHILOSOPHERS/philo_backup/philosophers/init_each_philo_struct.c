@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 12:24:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/12 19:43:26 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/13 09:58:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	init_each_philo_struct(t_philo *philo)
 		philo_ids[id].meals_eaten = philo->meals_eaten;
 		philo_ids[id].forks = philo->forks;
 		philo_ids[id].time = philo->time;
+		philo_ids[id].died = philo->died;
+		philo_ids[id].mutex = &philo->mutex[id];
 		id++;
 	}
 	philo->philo_ids = philo_ids;
