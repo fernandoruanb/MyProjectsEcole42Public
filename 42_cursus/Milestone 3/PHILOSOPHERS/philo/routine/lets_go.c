@@ -6,115 +6,109 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/13 18:11:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/14 09:04:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static int      check_died(t_philo *philo)
+static int	check_died(t_philo *ph)
 {
 	static int	count = 0;
+	static int	died = 0;
 
-	pthread_mutex_lock(philo->mutex);
-	if (philo->time_last_meal == 0)
+	pthread_mutex_lock(ph->mutex);
+	if (ph->tl_meal == 0)
 	{
-		pthread_mutex_unlock(philo->mutex);
+		pthread_mutex_unlock(ph->mutex);
 		return (0);
 	}
-	gettimeofday(&(philo->time), NULL);
-	philo->lost_time = philo->time.tv_sec * 1000000 + philo->time.tv_usec;
-	if ((philo->lost_time - philo->time_last_meal) > philo->time_to_die)
+	gettimeofday(&(ph->time), NULL);
+	ph->l_time = ph->time.tv_sec * 1000000 + ph->time.tv_usec;
+	if ((ph->l_time - ph->tl_meal) > ph->t_die)
 	{
-		if (philo->died == 0 && count == 0)
+		died = 1;
+		if (died == 1 && count == 0)
 		{
-			printf("Philo %ld died\n", philo->number);
-			philo->died = 1;
+			printf("Philo %ld died\n", ph->num);
 			count++;
 		}
-		pthread_mutex_unlock(philo->mutex);
+		pthread_mutex_unlock(ph->mutex);
 		return (1);
 	}
-	pthread_mutex_unlock(philo->mutex);
+	pthread_mutex_unlock(ph->mutex);
 	return (0);
 }
 
-static long	get_time(t_philo *philo)
+static long	get_time(t_philo *ph)
 {
-	pthread_mutex_lock(philo->mutex);
-	gettimeofday(&philo->time, NULL);
-	pthread_mutex_unlock(philo->mutex);
-	return (philo->time.tv_sec * 1000000 + philo->time.tv_usec);
+	pthread_mutex_lock(ph->mutex);
+	gettimeofday(&ph->time, NULL);
+	pthread_mutex_unlock(ph->mutex);
+	return (ph->time.tv_sec * 1000000 + ph->time.tv_usec);
 }
 
-static void	try_catch_fork(t_philo *philo)
+static void	try_catch_fork(t_philo *ph)
 {
-	printf("%ld Philo %ld is thinking\n", get_time(philo) / 1000,  philo->number);
-	if (philo->id == philo->philosophers - 1)
-		pthread_mutex_lock(&philo->forks[(philo->id + 1) % philo->philosophers]);
+	printf("%ld Philo %ld is thinking\n", get_time(ph) / 1000, ph->num);
+	if (ph->id == ph->c_ph - 1)
+		pthread_mutex_lock(&ph->forks[(ph->id + 1) % ph->c_ph]);
 	else
-		pthread_mutex_lock(&philo->forks[philo->id % philo->philosophers]);
-	printf("%ld Philo %ld has taken a fork\n", get_time(philo) / 1000, philo->number);
-	if (philo->id == philo->philosophers - 1)
-		pthread_mutex_lock(&philo->forks[philo->id % philo->philosophers]);
+		pthread_mutex_lock(&ph->forks[ph->id % ph->c_ph]);
+	printf("%ld Philo %ld has taken a fork\n", get_time(ph) / 1000, ph->num);
+	if (ph->id == ph->c_ph - 1)
+		pthread_mutex_lock(&ph->forks[ph->id % ph->c_ph]);
 	else
-		pthread_mutex_lock(&philo->forks[(philo->id + 1) % philo->philosophers]);
-	printf("%ld Philo %ld has taken a fork\n", get_time(philo) / 1000, philo->number);
-	if (check_died(philo))
+		pthread_mutex_lock(&ph->forks[(ph->id + 1) % ph->c_ph]);
+	printf("%ld Philo %ld has taken a fork\n", get_time(ph) / 1000, ph->num);
+	if (check_died(ph))
 		return ;
-	philo->time_last_meal = get_time(philo);
-	philo->meals_eaten++;
-	printf("%ld Philo %ld is eating\n", get_time(philo) / 1000, philo->number);
-	usleep(philo->time_to_eat * 1000);
-	if (check_died(philo))
+	ph->tl_meal = get_time(ph);
+	ph->m_eaten++;
+	printf("%ld Philo %ld is eating\n", get_time(ph) / 1000, ph->num);
+	usleep(ph->t_eat * 1000);
+	if (check_died(ph))
 		return ;
-	pthread_mutex_unlock(&philo->forks[philo->id % philo->philosophers]);
-	pthread_mutex_unlock(&philo->forks[(philo->id + 1) % philo->philosophers]);
-	printf("%ld Philo %ld is sleeping\n", get_time(philo) / 1000, philo->number);
-	usleep(philo->time_to_sleep * 1000);
-	if (check_died(philo))
+	pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
+	pthread_mutex_unlock(&ph->forks[(ph->id + 1) % ph->c_ph]);
+	printf("%ld Philo %ld is sleeping\n", get_time(ph) / 1000, ph->num);
+	usleep(ph->t_sleep * 1000);
+	if (check_died(ph))
 		return ;
 }
 
 static void	*p(void *arg)
 {
-	t_philo	*philo;
+	t_philo	*ph;
 
-	philo = (t_philo *)arg;
+	ph = (t_philo *)arg;
 	while (1)
 	{
-		if (check_died(philo))
+		if (check_died(ph))
 			break ;
-		pthread_mutex_lock(philo->mutex);
-		if (philo->died)
-		{
-			pthread_mutex_unlock(philo->mutex);
-			break ;
-		}
-		pthread_mutex_unlock(philo->mutex);
-		try_catch_fork(philo);
+		try_catch_fork(ph);
 	}
 	return ((void *)(long)1);
 }
 
-int	lets_go(t_philo *philo)
+int	lets_go(t_philo *ph)
 {
 	int			i;
-	void			*get;
+	void		*get;
 	pthread_t	*t;
 
 	i = 0;
-	t = malloc(philo->philosophers * sizeof(pthread_t));
+	t = malloc(ph->c_ph * sizeof(pthread_t));
 	if (!t)
 		return (0);
-	while (i < philo->philosophers)
+	while (i < ph->c_ph)
 	{
-		if (pthread_create(&t[i], NULL, &p, (void *)&philo->philo_ids[i]) != 0)
+		if (pthread_create(&t[i], NULL, &p, (void *)&ph->philo_ids[i]) != 0)
 			return (0);
 		i++;
 	}
 	i = 0;
-	while (i < philo->philosophers)
+	while (i < ph->c_ph)
 	{
 		if (pthread_join(t[i], &get) != 0)
 			return (0);
