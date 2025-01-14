@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/14 17:15:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:43:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	check_died(t_philo *ph, int *died)
 		if (get_time(ph) - ph->clock > ph->t_die && *died == 0)
 		{
 			*died = 1;
-			printf("%ld Philo %ld died\n", get_time(ph) / 1000, ph->num);
+			printf("%ld Philo %ld died\n", new_time(ph) / 1000, ph->num);
 			pthread_mutex_unlock(ph->mutex);
 			return (1);
 		}
@@ -58,26 +58,26 @@ static void	try_catch_fork(t_philo *ph, int *died)
 {
 	if (check_died(ph, died))
 		return ;
-	printf("%ld Philo %ld is thinking\n", get_time(ph) / 1000, ph->num);
+	printf("%ld Philo %ld is thinking\n", new_time(ph) / 1000, ph->num);
 	if (ph->id == ph->c_ph - 1)
 		pthread_mutex_lock(&ph->forks[(ph->id + 1) % ph->c_ph]);
 	else
 		pthread_mutex_lock(&ph->forks[ph->id % ph->c_ph]);
-	printf("%ld Philo %ld has taken a fork\n", get_time(ph) / 1000, ph->num);
+	printf("%ld Philo %ld has taken a fork\n", new_time(ph) / 1000, ph->num);
 	if (ph->id == ph->c_ph - 1)
 		pthread_mutex_lock(&ph->forks[ph->id % ph->c_ph]);
 	else
 		pthread_mutex_lock(&ph->forks[(ph->id + 1) % ph->c_ph]);
-	printf("%ld Philo %ld has taken a fork\n", get_time(ph) / 1000, ph->num);
+	printf("%ld Philo %ld has taken a fork\n", new_time(ph) / 1000, ph->num);
 	ph->tl_meal = get_time(ph);
 	ph->m_eaten++;
-	printf("%ld Philo %ld is eating\n", get_time(ph) / 1000, ph->num);
+	printf("%ld Philo %ld is eating\n", new_time(ph) / 1000, ph->num);
 	usleep(ph->t_eat * 1000);
 	pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
 	pthread_mutex_unlock(&ph->forks[(ph->id + 1) % ph->c_ph]);
 	if (check_died(ph, died))
 		return ;
-	printf("%ld Philo %ld is sleeping\n", get_time(ph) / 1000, ph->num);
+	printf("%ld Philo %ld is sleeping\n", new_time(ph) / 1000, ph->num);
 	usleep(ph->t_sleep * 1000);
 }
 
