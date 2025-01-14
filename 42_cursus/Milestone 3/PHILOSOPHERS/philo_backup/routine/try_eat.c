@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_forks.c                                      :+:      :+:    :+:   */
+/*   try_eat.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 12:49:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/14 08:37:39 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/14 12:20:11 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/14 12:24:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	clean_forks(t_philo *philo)
+void	try_eat(t_philo *ph)
 {
-	int	index;
-
-	index = 0;
-	while (index < philo->c_ph)
-		pthread_mutex_destroy(&philo->forks[index++]);
-	free(philo->forks);
-	return (1);
+	ph->tl_meal = get_time(ph);
+	ph->m_eaten++;
+	printf("%ld Philo %ld is eating\n", get_time(ph) / 1000, ph->num);
+	usleep(ph->t_eat * 1000);
+	pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
+        pthread_mutex_unlock(&ph->forks[(ph->id + 1) % ph->c_ph]);
 }

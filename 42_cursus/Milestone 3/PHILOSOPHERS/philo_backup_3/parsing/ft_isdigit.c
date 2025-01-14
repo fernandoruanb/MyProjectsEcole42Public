@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_forks.c                                      :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 12:49:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/14 08:37:39 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/11 16:21:34 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/11 18:10:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	clean_forks(t_philo *philo)
+int	ft_isdigit(char c)
 {
-	int	index;
-
-	index = 0;
-	while (index < philo->c_ph)
-		pthread_mutex_destroy(&philo->forks[index++]);
-	free(philo->forks);
-	return (1);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
