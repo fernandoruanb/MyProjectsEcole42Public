@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/14 17:43:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/14 18:07:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	check_time(t_philo *ph, int *died)
 		*died = 1;
 		if (*died == 1 && count == 0)
 		{
-			printf("%ld Philo %ld died\n", get_time(ph) / 1000, ph->num);
+			printf("%ld Philo %ld died\n", new_time(ph) / 1000, ph->num);
 			count++;
 		}
 		pthread_mutex_unlock(ph->mutex);
