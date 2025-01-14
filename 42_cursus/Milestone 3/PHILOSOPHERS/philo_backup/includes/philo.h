@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/14 08:54:49 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:32:13 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_philo
 {
 	pthread_mutex_t		*mutex;
 	int					args;
+	long				clock;
 	long				num;
 	long				id;
 	long				l_time;
@@ -54,5 +55,7 @@ int		clean_philo_struct(t_philo *philo);
 int		lets_go(t_philo *ph);
 int		init_each_philo_die_mutex(t_philo *philo);
 void	clean_die_mutexes(t_philo *philo);
+long	get_time(t_philo *philo);
+long	new_time(t_philo *ph);
 
 #endif /* PHILO_H */
