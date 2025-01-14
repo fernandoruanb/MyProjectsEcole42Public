@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:03:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/14 16:29:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:44:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(int argc, char **argv)
  die_time(ms), eat_time(ms), sleep_time(ms), number_must_eat[optional]", 2));
 	philo.args = argc - 1;
 	philo.m_eaten = 0;
+	philo.clock = get_time(&philo);
 	philo.num = 0;
-	//philo.clock = get_time(&philo);
 	philo.tl_meal = 0;
 	if (!parse_args(argc, argv, &philo))
 		return (ft_putendl_fd_1("Invalid arguments.", 2));
