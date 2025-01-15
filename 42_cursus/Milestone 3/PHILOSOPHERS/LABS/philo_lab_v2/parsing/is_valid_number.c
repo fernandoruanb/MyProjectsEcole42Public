@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_philo_struct.c                               :+:      :+:    :+:   */
+/*   is_valid_number.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 13:05:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/15 11:52:48 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/11 16:12:41 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/11 18:15:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	clean_philo_struct(t_philo *philo)
+int	is_valid_number(const char *s)
 {
-	if (philo->philo_ids)
-		free(philo->philo_ids);
-	philo->philo_ids = NULL;
-	clean_die_mutexes(philo);
-	free(philo->flag);
-	return (ft_putendl_fd_0("Succeed to clean philosophers' struct", 1));
+	int	index;
+
+	if (!s)
+		return (0);
+	index = 0;
+	while (s[index] != '\0')
+	{
+		if (!ft_isdigit(s[index]))
+			return (0);
+		index++;
+	}
+	return (1);
 }
