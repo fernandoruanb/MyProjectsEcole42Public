@@ -6,26 +6,18 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:03:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/15 11:50:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:49:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static long	see_time(t_philo *ph)
-{
-	pthread_mutex_lock(ph->mutex);
-	gettimeofday(&ph->time, NULL);
-	pthread_mutex_unlock(ph->mutex);
-	return (ph->time.tv_sec * 1000000 + ph->time.tv_usec);
-}
-
 static int	finish_problem(t_philo *philo)
 {
-	printf("%ld Philosopher 1 is thinking\n", see_time(philo) / 1000);
-	usleep(1000);
+	printf("%ld Philo 1 is thinking\n", new_time(philo) / 1000);
+	printf("%ld Philo 1 has taken a fork\n", new_time(philo) / 1000);
 	usleep(philo->t_die * 1000);
-	printf("%ld Philosopher 1 died\n", see_time(philo) / 1000);
+	printf("%ld Philosopher 1 died\n", new_time(philo) / 1000);
 	clean_forks(philo);
 	clean_philo_struct(philo);
 	return (0);
