@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/14 17:32:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:48:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ typedef struct s_philo
 	pthread_mutex_t		*forks;
 	struct s_philo		*philo_ids;
 	struct timeval		time;
+	struct s_monitor	*flag;
 }	t_philo;
+
+typedef struct s_monitor
+{
+	int	died;
+}	t_monitor;
 
 int		ft_putendl_fd_1(const char *s, int fd);
 int		ft_putendl_fd_0(const char *s, int fd);
@@ -57,5 +63,9 @@ int		init_each_philo_die_mutex(t_philo *philo);
 void	clean_die_mutexes(t_philo *philo);
 long	get_time(t_philo *philo);
 long	new_time(t_philo *ph);
+int		anyone_death(t_philo *ph);
+void	try_fork_1(t_philo *ph);
+void	try_fork_2(t_philo *ph);
+int		has_eaten_every(t_philo *ph);
 
 #endif /* PHILO_H */

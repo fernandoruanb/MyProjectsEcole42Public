@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/15 16:06:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:48:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ long	new_time(t_philo *ph);
 int		anyone_death(t_philo *ph);
 void	try_fork_1(t_philo *ph);
 void	try_fork_2(t_philo *ph);
+int		has_eaten_every(t_philo *ph);
 
 #endif /* PHILO_H */

@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_philo_struct.c                                :+:      :+:    :+:   */
+/*   anyone_death.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 18:11:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/14 19:26:46 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/15 13:55:34 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/15 16:39:53 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	show_philo_struct(t_philo *philo)
+int	anyone_death(t_philo *ph)
 {
-	printf("Philosophers's number: %ld\n", philo->num);
-	printf("Philosophers: %ld\n", philo->c_ph);
-	printf("Time to die: %ld\n", philo->t_die);
-	printf("Time to eat: %ld\n", philo->t_eat);
-	printf("Time to sleep: %ld\n", philo->t_sleep);
-	printf("Must eat times: %ld\n", philo->me_time);
-	printf("Meals eaten: %ld\n", philo->m_eaten);
-	printf("Time last meal: %ld\n", philo->tl_meal);
+	if (ph->tl_meal == 0)
+	{
+		if ((get_time(ph) - ph->clock) > ph->t_die * 1000)
+		{
+			printf("%ld Philo %ld died\n", new_time(ph) / 1000, ph->num);
+			ph->flag->died = 1;
+			return (1);
+		}
+	}
+	else
+	{
+		if ((get_time(ph) - ph->tl_meal) > ph->t_die * 1000)
+		{
+			printf("%ld Philo %ld died\n", new_time(ph) / 1000, ph->num);
+			ph->flag->died = 1;
+			return (1);
+		}
+	}
+	return (0);
 }
