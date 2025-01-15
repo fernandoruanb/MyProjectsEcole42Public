@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/15 11:43:46 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:06:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,8 @@ int		init_each_philo_die_mutex(t_philo *philo);
 void	clean_die_mutexes(t_philo *philo);
 long	get_time(t_philo *philo);
 long	new_time(t_philo *ph);
+int		anyone_death(t_philo *ph);
+void	try_fork_1(t_philo *ph);
+void	try_fork_2(t_philo *ph);
 
 #endif /* PHILO_H */
