@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/15 18:24:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:14:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,8 @@ static void	try_sleep(t_philo *ph)
 static void	*p(void *arg)
 {
 	t_philo		*ph;
-	int			count;
 
 	ph = (t_philo *)arg;
-	count = 0;
 	while (1)
 	{
 		if (ph->flag->died || has_eaten_every(ph))
@@ -82,7 +80,6 @@ static void	*p(void *arg)
 			break ;
 		else
 			try_sleep(ph);
-		count++;
 	}
 	return (NULL);
 }
