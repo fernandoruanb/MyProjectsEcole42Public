@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_each_philo_die_mutex.c                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 09:47:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 18:23:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/11 16:21:34 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/11 18:10:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	init_each_philo_die_mutex(t_philo *philo)
+int	ft_isdigit(char c)
 {
-	int				index;
-	pthread_mutex_t	*mutex;
-
-	index = 0;
-	mutex = malloc(sizeof(pthread_mutex_t));
-	if (!mutex)
-		return (0);
-	pthread_mutex_init(mutex, NULL);
-	philo->mutex = mutex;
-	return (1);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

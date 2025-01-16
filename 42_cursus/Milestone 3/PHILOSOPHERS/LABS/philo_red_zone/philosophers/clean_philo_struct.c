@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_each_philo_die_mutex.c                        :+:      :+:    :+:   */
+/*   clean_philo_struct.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 09:47:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 18:23:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/12 13:05:45 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/16 16:38:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	init_each_philo_die_mutex(t_philo *philo)
+int	clean_philo_struct(t_philo *philo)
 {
-	int				index;
-	pthread_mutex_t	*mutex;
-
-	index = 0;
-	mutex = malloc(sizeof(pthread_mutex_t));
-	if (!mutex)
-		return (0);
-	pthread_mutex_init(mutex, NULL);
-	philo->mutex = mutex;
-	return (1);
+	if (philo->philo_ids)
+		free(philo->philo_ids);
+	philo->philo_ids = NULL;
+	//clean_die_mutexes(philo);
+	free(philo->flag);
+	return (0);
 }

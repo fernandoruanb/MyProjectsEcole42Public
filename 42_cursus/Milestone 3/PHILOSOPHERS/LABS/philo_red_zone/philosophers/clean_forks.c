@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_each_philo_die_mutex.c                        :+:      :+:    :+:   */
+/*   clean_forks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 09:47:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 18:23:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/12 12:49:48 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/14 08:37:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	init_each_philo_die_mutex(t_philo *philo)
+int	clean_forks(t_philo *philo)
 {
-	int				index;
-	pthread_mutex_t	*mutex;
+	int	index;
 
 	index = 0;
-	mutex = malloc(sizeof(pthread_mutex_t));
-	if (!mutex)
-		return (0);
-	pthread_mutex_init(mutex, NULL);
-	philo->mutex = mutex;
+	while (index < philo->c_ph)
+		pthread_mutex_destroy(&philo->forks[index++]);
+	free(philo->forks);
 	return (1);
 }

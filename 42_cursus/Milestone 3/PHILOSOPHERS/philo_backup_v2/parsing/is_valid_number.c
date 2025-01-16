@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_each_philo_die_mutex.c                        :+:      :+:    :+:   */
+/*   is_valid_number.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 09:47:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 18:23:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/11 16:12:41 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/11 18:15:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	init_each_philo_die_mutex(t_philo *philo)
+int	is_valid_number(const char *s)
 {
-	int				index;
-	pthread_mutex_t	*mutex;
+	int	index;
 
-	index = 0;
-	mutex = malloc(sizeof(pthread_mutex_t));
-	if (!mutex)
+	if (!s)
 		return (0);
-	pthread_mutex_init(mutex, NULL);
-	philo->mutex = mutex;
+	index = 0;
+	while (s[index] != '\0')
+	{
+		if (!ft_isdigit(s[index]))
+			return (0);
+		index++;
+	}
 	return (1);
 }

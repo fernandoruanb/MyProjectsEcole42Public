@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 09:47:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 18:23:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:25:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 int	init_each_philo_die_mutex(t_philo *philo)
 {
 	int				index;
-	pthread_mutex_t	*mutex;
+	int				count;
+	pthread_mutex_t	*mutexes;
 
 	index = 0;
-	mutex = malloc(sizeof(pthread_mutex_t));
-	if (!mutex)
+	count = 0;
+	mutexes = malloc(sizeof(pthread_mutex_t));
+	if (!mutexes)
 		return (0);
-	pthread_mutex_init(mutex, NULL);
-	philo->mutex = mutex;
+	philo->mutex = mutexes;
 	return (1);
 }

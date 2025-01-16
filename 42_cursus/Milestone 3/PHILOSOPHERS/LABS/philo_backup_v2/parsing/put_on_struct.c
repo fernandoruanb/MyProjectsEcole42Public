@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_each_philo_die_mutex.c                        :+:      :+:    :+:   */
+/*   put_on_struct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 09:47:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 18:23:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/11 17:28:18 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/14 08:35:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	init_each_philo_die_mutex(t_philo *philo)
+void	put_on_struct(int index, int captured_number, t_philo *philo)
 {
-	int				index;
-	pthread_mutex_t	*mutex;
-
-	index = 0;
-	mutex = malloc(sizeof(pthread_mutex_t));
-	if (!mutex)
-		return (0);
-	pthread_mutex_init(mutex, NULL);
-	philo->mutex = mutex;
-	return (1);
+	if (index == 1)
+		philo->c_ph = captured_number;
+	else if (index == 2)
+		philo->t_die = captured_number;
+	else if (index == 3)
+		philo->t_eat = captured_number;
+	else if (index == 4)
+		philo->t_sleep = captured_number;
+	else if (index == 5)
+		philo->me_time = captured_number;
+	if (philo->args < 5)
+		philo->me_time = -1;
+	philo->tl_meal = 0;
 }

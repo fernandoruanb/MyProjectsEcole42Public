@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_each_philo_die_mutex.c                        :+:      :+:    :+:   */
+/*   init_each_philo_fork.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 09:47:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 18:23:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/12 11:39:41 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/14 09:09:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	init_each_philo_die_mutex(t_philo *philo)
+int	init_each_philo_fork(t_philo *philo)
 {
 	int				index;
-	pthread_mutex_t	*mutex;
+	int				count;
+	pthread_mutex_t	*forks;
 
-	index = 0;
-	mutex = malloc(sizeof(pthread_mutex_t));
-	if (!mutex)
+	forks = malloc(sizeof(pthread_mutex_t) * philo->c_ph);
+	if (!forks)
 		return (0);
-	pthread_mutex_init(mutex, NULL);
-	philo->mutex = mutex;
+	index = 0;
+	while (index < philo->c_ph)
+	{
+		if (pthread_mutex_init(&forks[index], NULL) != 0)
+		{
+			count = 0;
+			while (count < index)
+				pthread_mutex_destroy(&forks[count++]);
+			free(forks);
+			return (0);
+		}
+		index++;
+	}
+	philo->forks = forks;
 	return (1);
 }
