@@ -14,7 +14,29 @@ INCDIR = includes
 
 # SRCS
 
-SRCS = $(shell find . -type f -name "*.c")
+SRCS = $(SRCDIR)/parsing/ft_atol.c\
+       $(SRCDIR)/parsing/ft_isdigit.c\
+       $(SRCDIR)/parsing/is_valid_number.c\
+       $(SRCDIR)/parsing/parse_args.c\
+       $(SRCDIR)/parsing/put_on_struct.c\
+       $(SRCDIR)/philosophers/clean_die_mutexes.c\
+       $(SRCDIR)/philosophers/clean_forks.c\
+       $(SRCDIR)/philosophers/clean_philo_struct.c\
+       $(SRCDIR)/philosophers/init_each_philo_die_mutex.c\
+       $(SRCDIR)/philosophers/init_each_philo_fork.c\
+       $(SRCDIR)/philosophers/init_each_philo_struct.c\
+       $(SRCDIR)/philosophers/main.c\
+       $(SRCDIR)/routine/anyone_death.c\
+       $(SRCDIR)/routine/get_time.c\
+       $(SRCDIR)/routine/has_eaten_every.c\
+       $(SRCDIR)/routine/lets_go.c\
+       $(SRCDIR)/routine/new_time.c\
+       $(SRCDIR)/routine/try_fork_1.c\
+       $(SRCDIR)/routine/try_fork_2.c\
+       $(SRCDIR)/utils/ft_putendl_fd_0.c\
+       $(SRCDIR)/utils/ft_putendl_fd_1.c\
+       $(SRCDIR)/utils/ft_putendl_fd_n.c\
+       $(SRCDIR)/utils/show_philo_struct.c
 
 # OBJS
 
