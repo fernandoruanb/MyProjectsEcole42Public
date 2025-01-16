@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 11:14:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:52:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static void	*monitoring(void *arg)
+/*static void	*monitoring(void *arg)
 {
 	t_philo	*philo;
 	int		index;
@@ -44,17 +44,12 @@ static void	monitor(t_philo *ph)
 	if (pthread_join(m, NULL) != 0)
 		return ;
 	return ;
-}
+}*/
 
 static void	try_sleep(t_philo *ph)
 {
-	pthread_mutex_lock(ph->mutex);
-	if (ph->flag->died || has_eaten_every(ph))
-	{
-		pthread_mutex_unlock(ph->mutex);
+	if (anyone_death(ph) || has_eaten_every(ph))
 		return ;
-	}
-	pthread_mutex_unlock(ph->mutex);
 	printf("%ld Philo %ld is sleeping\n", new_time(ph) / 1000, ph->num);
 	usleep(ph->t_sleep * 1000);
 	if (has_eaten_every(ph))
@@ -68,18 +63,22 @@ static void	*p(void *arg)
 	ph = (t_philo *)arg;
 	while (1)
 	{
-		if (ph->flag->died || has_eaten_every(ph))
+		pthread_mutex_lock(ph->mutex);
+		if (anyone_death(ph) || has_eaten_every(ph))
+		{
+			pthread_mutex_unlock(ph->mutex);
 			break ;
+		}
 		else
 			try_fork_1(ph);
-		if (ph->flag->died || has_eaten_every(ph))
+		if (anyone_death(ph) || has_eaten_every(ph))
+		{
+			pthread_mutex_unlock(ph->mutex);
 			break ;
-		else
-			try_fork_2(ph);
-		if (ph->flag->died || has_eaten_every(ph))
-			break ;
+		}
 		else
 			try_sleep(ph);
+		pthread_mutex_unlock(ph->mutex);
 	}
 	return (NULL);
 }
@@ -99,7 +98,7 @@ int	lets_go(t_philo *ph)
 			return (0);
 		i++;
 	}
-	monitor(ph);
+	//monitor(ph);
 	i = 0;
 	while (i < ph->c_ph)
 	{

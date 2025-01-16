@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:50:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/15 16:20:20 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:33:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ void	try_fork_2(t_philo *ph)
 		return ;
 	}
 	printf("%ld Philo %ld has taken a fork\n", new_time(ph) / 1000, ph->num);
-	pthread_mutex_lock(ph->mutex);
 	ph->tl_meal = get_time(ph);
 	ph->m_eaten++;
-	pthread_mutex_unlock(ph->mutex);
 	if (ph->flag->died == 1)
 	{
 		pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);

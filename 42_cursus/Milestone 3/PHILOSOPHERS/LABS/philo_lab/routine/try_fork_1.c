@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:49:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/15 16:07:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/16 14:47:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	try_fork_1(t_philo *ph)
 	}
 	else
 		printf("%ld Philo %ld has taken a fork\n", new_time(ph) / 1000, ph->num);
+	try_fork_2(ph);
 }
