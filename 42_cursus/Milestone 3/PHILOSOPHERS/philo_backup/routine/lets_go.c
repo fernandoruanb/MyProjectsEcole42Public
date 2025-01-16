@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 11:14:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:07:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,17 @@ static void	*monitoring(void *arg)
 	count = 0;
 	while (1)
 	{
-		index = (index - 1 + philo->c_ph) % philo->c_ph;
-		if (has_eaten_every(&philo->philo_ids[index]))
+		if (index >= philo->c_ph)
+			index = 0;
+		if (has_eaten_every(&philo->philo_ids[index])
+			&& philo->philo_ids[index].e != 1)
+		{
+			philo->philo_ids->e = 1;
 			count++;
-		if (count == philo->c_ph)
+		}
+		if (count >= philo->c_ph)
 			break ;
-		else if (anyone_death(&philo->philo_ids[index]))
+		else if (anyone_death(&philo->philo_ids[index]) && count != philo->c_ph)
 			break ;
 		index++;
 	}

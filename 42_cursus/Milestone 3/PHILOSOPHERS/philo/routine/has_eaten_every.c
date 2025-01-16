@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:40:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/15 16:44:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:09:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	has_eaten_every(t_philo *ph)
 {
-	if (ph->m_eaten == ph->me_time)
+	if (ph->m_eaten >= ph->me_time)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 18:13:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:38:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_philo
 	pthread_mutex_t		*mutex;
 	int					args;
 	long				clock;
+	long				e;
 	long				num;
 	long				id;
 	long				l_time;
