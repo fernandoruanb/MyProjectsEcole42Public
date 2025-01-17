@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 19:07:26 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:43:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static void	*monitoring(void *arg)
 		if (index >= philo->c_ph)
 			index = 0;
 		if (has_eaten_every(&philo->philo_ids[index])
-			&& philo->philo_ids[index].e != 1)
+			&& philo->philo_ids[index].mark != 1)
 		{
-			philo->philo_ids->e = 1;
+			philo->philo_ids[index].mark = 1;
 			count++;
 		}
-		if (count >= philo->c_ph)
+		if (count == philo->c_ph)
 			break ;
-		else if (anyone_death(&philo->philo_ids[index]) && count != philo->c_ph)
+		else if (anyone_death(&philo->philo_ids[index]))
 			break ;
 		index++;
 	}
@@ -62,8 +62,13 @@ static void	try_sleep(t_philo *ph)
 	pthread_mutex_unlock(ph->mutex);
 	printf("%ld Philo %ld is sleeping\n", new_time(ph) / 1000, ph->num);
 	usleep(ph->t_sleep * 1000);
+	pthread_mutex_lock(ph->mutex);
 	if (has_eaten_every(ph))
+	{
+		pthread_mutex_unlock(ph->mutex);
 		return ;
+	}
+	pthread_mutex_unlock(ph->mutex);
 }
 
 static void	*p(void *arg)

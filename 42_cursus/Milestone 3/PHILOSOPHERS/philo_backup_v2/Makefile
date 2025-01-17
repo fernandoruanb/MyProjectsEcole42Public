@@ -19,6 +19,7 @@ SRCS = $(SRCDIR)/parsing/ft_atol.c\
        $(SRCDIR)/parsing/is_valid_number.c\
        $(SRCDIR)/parsing/parse_args.c\
        $(SRCDIR)/parsing/put_on_struct.c\
+       $(SRCDIR)/philosophers/clean_die_mutexes.c\
        $(SRCDIR)/philosophers/clean_forks.c\
        $(SRCDIR)/philosophers/clean_philo_struct.c\
        $(SRCDIR)/philosophers/init_each_philo_die_mutex.c\

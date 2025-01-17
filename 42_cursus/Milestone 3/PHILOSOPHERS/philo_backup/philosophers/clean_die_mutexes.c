@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 09:54:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/14 08:37:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/17 09:26:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ void	clean_die_mutexes(t_philo *philo)
 		pthread_mutex_destroy(&philo->mutex[index]);
 		index++;
 	}
+	pthread_mutex_destroy(philo->se);
+	free(philo->se);
 	free(philo->mutex);
 }
