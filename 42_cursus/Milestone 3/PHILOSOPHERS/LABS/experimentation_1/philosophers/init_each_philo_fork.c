@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_args.c                                       :+:      :+:    :+:   */
+/*   init_each_philo_fork.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 22:52:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 16:55:52 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/12 11:39:41 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/14 09:09:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	parse_args(int argc, char **argv, t_philo *philosophers)
+int	init_each_philo_fork(t_philo *philo)
 {
-	int		index;
-	long	capture_number;
+	int				index;
+	int				count;
+	pthread_mutex_t	*forks;
 
-	index = 1;
-	while (index < argc)
+	forks = malloc(sizeof(pthread_mutex_t) * philo->c_ph);
+	if (!forks)
+		return (0);
+	index = 0;
+	while (index < philo->c_ph)
 	{
-		if (!is_valid_number(argv[index]))
+		if (pthread_mutex_init(&forks[index], NULL) != 0)
+		{
+			count = 0;
+			while (count < index)
+				pthread_mutex_destroy(&forks[count++]);
+			free(forks);
 			return (0);
-		capture_number = ft_atol(argv[index]);
-		if (capture_number <= 0)
-			return (0);
-		if (!put_on_struct(index, capture_number, philosophers))
-			return (0);
+		}
 		index++;
 	}
+	philo->forks = forks;
 	return (1);
 }

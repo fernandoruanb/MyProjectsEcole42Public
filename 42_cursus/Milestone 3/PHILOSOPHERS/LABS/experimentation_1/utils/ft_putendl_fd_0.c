@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_args.c                                       :+:      :+:    :+:   */
+/*   ft_putendl_fd_0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 22:52:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 16:55:52 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/11 14:59:15 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/11 15:03:05 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	parse_args(int argc, char **argv, t_philo *philosophers)
+int	ft_putendl_fd_0(const char *s, int fd)
 {
-	int		index;
-	long	capture_number;
+	int	index;
 
-	index = 1;
-	while (index < argc)
+	if (!s)
+		return (0);
+	index = 0;
+	while (s[index] != '\0')
 	{
-		if (!is_valid_number(argv[index]))
-			return (0);
-		capture_number = ft_atol(argv[index]);
-		if (capture_number <= 0)
-			return (0);
-		if (!put_on_struct(index, capture_number, philosophers))
-			return (0);
+		write(fd, &s[index], 1);
 		index++;
 	}
-	return (1);
+	write(1, "\n", 1);
+	return (0);
 }

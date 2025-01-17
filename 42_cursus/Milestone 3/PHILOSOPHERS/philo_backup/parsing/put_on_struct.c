@@ -6,14 +6,16 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 17:28:18 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/14 08:35:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:59:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	put_on_struct(int index, int captured_number, t_philo *philo)
+int	put_on_struct(int index, int captured_number, t_philo *philo)
 {
+	if (index == 1 && captured_number > 200)
+		return (0);
 	if (index == 1)
 		philo->c_ph = captured_number;
 	else if (index == 2)
@@ -27,4 +29,5 @@ void	put_on_struct(int index, int captured_number, t_philo *philo)
 	if (philo->args < 5)
 		philo->me_time = -1;
 	philo->tl_meal = 0;
+	return (1);
 }

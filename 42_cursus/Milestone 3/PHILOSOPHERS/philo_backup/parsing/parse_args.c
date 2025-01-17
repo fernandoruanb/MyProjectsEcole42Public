@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:52:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/12 19:20:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:55:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	parse_args(int argc, char **argv, t_philo *philosophers)
 		capture_number = ft_atol(argv[index]);
 		if (capture_number <= 0)
 			return (0);
-		put_on_struct(index, capture_number, philosophers);
+		if (!put_on_struct(index, capture_number, philosophers))
+			return (0);
 		index++;
 	}
 	return (1);

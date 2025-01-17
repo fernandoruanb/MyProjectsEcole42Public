@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_args.c                                       :+:      :+:    :+:   */
+/*   eat_sleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 22:52:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 16:55:52 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/17 11:44:27 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/17 11:47:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	parse_args(int argc, char **argv, t_philo *philosophers)
+void	eat_sleep(t_philo *ph, int flag)
 {
-	int		index;
-	long	capture_number;
+	long	start;
 
-	index = 1;
-	while (index < argc)
+	start = get_time(ph);
+	if (flag == 0)
 	{
-		if (!is_valid_number(argv[index]))
-			return (0);
-		capture_number = ft_atol(argv[index]);
-		if (capture_number <= 0)
-			return (0);
-		if (!put_on_struct(index, capture_number, philosophers))
-			return (0);
-		index++;
+		while ((get_time(ph) - start) < ph->t_eat * 1000)
+		{
+			if (die(ph))
+				break ;
+			usleep(100);
+		}
 	}
-	return (1);
+	else if (flag == 1)
+	{
+		while ((get_time(ph) - start) < ph->t_sleep * 1000)
+		{
+			if (die(ph))
+				break ;
+			usleep(100);
+		}
+	}
 }

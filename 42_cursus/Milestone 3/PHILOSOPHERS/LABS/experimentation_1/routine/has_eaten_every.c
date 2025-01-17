@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_args.c                                       :+:      :+:    :+:   */
+/*   has_eaten_every.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 22:52:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 16:55:52 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/15 16:40:09 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/17 11:51:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	parse_args(int argc, char **argv, t_philo *philosophers)
+int	has_eaten_every(t_philo *ph)
 {
-	int		index;
-	long	capture_number;
+	int	result;
 
-	index = 1;
-	while (index < argc)
-	{
-		if (!is_valid_number(argv[index]))
-			return (0);
-		capture_number = ft_atol(argv[index]);
-		if (capture_number <= 0)
-			return (0);
-		if (!put_on_struct(index, capture_number, philosophers))
-			return (0);
-		index++;
-	}
-	return (1);
+	pthread_mutex_lock(ph->mutex);
+	result = ph->m_eaten == ph->me_time;
+	pthread_mutex_unlock(ph->mutex);
+	return (result);
 }

@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_args.c                                       :+:      :+:    :+:   */
+/*   clean_philo_struct.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 22:52:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 16:55:52 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/12 13:05:45 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/17 09:30:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	parse_args(int argc, char **argv, t_philo *philosophers)
+int	clean_philo_struct(t_philo *philo)
 {
-	int		index;
-	long	capture_number;
-
-	index = 1;
-	while (index < argc)
-	{
-		if (!is_valid_number(argv[index]))
-			return (0);
-		capture_number = ft_atol(argv[index]);
-		if (capture_number <= 0)
-			return (0);
-		if (!put_on_struct(index, capture_number, philosophers))
-			return (0);
-		index++;
-	}
-	return (1);
+	if (philo->philo_ids)
+		free(philo->philo_ids);
+	philo->philo_ids = NULL;
+	clean_die_mutexes(philo);
+	clean_forks(philo);
+	free(philo->flag);
+	return (0);
 }
