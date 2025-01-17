@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:50:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 18:08:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:42:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	try_fork_2(t_philo *ph)
 			pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
 		return ;
 	}
-	usleep(10);
+	if (ph->me_time == -1)
+                usleep(8);
 	if ((ph->id % 2) == 0)
 		pthread_mutex_lock(&ph->forks[ph->id % ph->c_ph]);
 	else
