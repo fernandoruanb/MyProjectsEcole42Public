@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   has_eaten_every.c                                  :+:      :+:    :+:   */
+/*   die.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/15 16:40:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 10:39:44 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/17 10:34:42 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/17 10:40:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	has_eaten_every(t_philo *ph)
+int	die(t_philo *ph)
 {
 	int	result;
 
-	pthread_mutex_lock(ph->mutex);
-	result = (ph->m_eaten == ph->me_time);
-	pthread_mutex_unlock(ph->mutex);
+	pthread_mutex_lock(ph->se);
+	result = ph->flag->died;
+	pthread_mutex_unlock(ph->se);
 	return (result);
 }

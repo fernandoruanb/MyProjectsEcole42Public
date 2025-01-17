@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 19:43:52 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:48:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,14 @@ static void	monitor(t_philo *ph)
 
 static void	try_sleep(t_philo *ph)
 {
-	pthread_mutex_lock(ph->mutex);
-	if (ph->flag->died || has_eaten_every(ph))
-	{
-		pthread_mutex_unlock(ph->mutex);
+	if (die(ph) || has_eaten_every(ph))
 		return ;
-	}
-	pthread_mutex_unlock(ph->mutex);
+	pthread_mutex_lock(ph->mutex)
 	printf("%ld Philo %ld is sleeping\n", new_time(ph) / 1000, ph->num);
-	usleep(ph->t_sleep * 1000);
-	pthread_mutex_lock(ph->mutex);
-	if (has_eaten_every(ph))
-	{
-		pthread_mutex_unlock(ph->mutex);
-		return ;
-	}
 	pthread_mutex_unlock(ph->mutex);
+	usleep(ph->t_sleep * 1000);
+	if (has_eaten_every(ph))
+		return ;
 }
 
 static void	*p(void *arg)
@@ -78,15 +70,11 @@ static void	*p(void *arg)
 	ph = (t_philo *)arg;
 	while (1)
 	{
-		if (ph->flag->died || has_eaten_every(ph))
+		if (die(ph) || has_eaten_every(ph))
 			break ;
 		else
 			try_fork_1(ph);
-		if (ph->flag->died || has_eaten_every(ph))
-			break ;
-		else
-			try_fork_2(ph);
-		if (ph->flag->died || has_eaten_every(ph))
+		if (die(ph) || has_eaten_every(ph))
 			break ;
 		else
 			try_sleep(ph);

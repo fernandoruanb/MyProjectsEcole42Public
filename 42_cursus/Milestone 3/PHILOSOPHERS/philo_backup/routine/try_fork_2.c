@@ -6,37 +6,54 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:50:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/15 16:20:20 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:01:46 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	try_fork_2(t_philo *ph)
+static void	check_other_things(t_philo *ph)
 {
-	if (ph->id == ph->c_ph - 1)
-		pthread_mutex_lock(&ph->forks[ph->id % ph->c_ph]);
-	else
-		pthread_mutex_lock(&ph->forks[(ph->id + 1) % ph->c_ph]);
-	if (ph->flag->died == 1)
-	{
-		pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
-		pthread_mutex_unlock(&ph->forks[(ph->id + 1) % ph->c_ph]);
-		return ;
-	}
+	pthread_mutex_lock(ph->se);
 	printf("%ld Philo %ld has taken a fork\n", new_time(ph) / 1000, ph->num);
+	pthread_mutex_unlock(ph->se);
 	pthread_mutex_lock(ph->mutex);
 	ph->tl_meal = get_time(ph);
 	ph->m_eaten++;
 	pthread_mutex_unlock(ph->mutex);
-	if (ph->flag->died == 1)
+	if (die(ph))
 	{
 		pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
 		pthread_mutex_unlock(&ph->forks[(ph->id + 1) % ph->c_ph]);
 		return ;
 	}
+	pthread_mutex_lock(ph->se);
 	printf("%ld Philo %ld is eating\n", new_time(ph) / 1000, ph->num);
-	usleep(ph->t_eat * 1000);
+	pthread_mutex_unlock(ph->se);
+	eat_sleep(ph, 0);
 	pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
 	pthread_mutex_unlock(&ph->forks[(ph->id + 1) % ph->c_ph]);
+}
+
+void	try_fork_2(t_philo *ph)
+{
+	if (die(ph))
+	{
+		if (ph->id == ph->c_ph - 1)
+			pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
+		else
+			pthread_mutex_unlock(&ph->forks[(ph->id + 1) % ph->c_ph]);
+		return ;
+	}
+	if (ph->id == ph->c_ph - 1)
+		pthread_mutex_lock(&ph->forks[ph->id % ph->c_ph]);
+	else
+		pthread_mutex_lock(&ph->forks[(ph->id + 1) % ph->c_ph]);
+	if (die(ph))
+	{
+		pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
+		pthread_mutex_unlock(&ph->forks[(ph->id + 1) % ph->c_ph]);
+		return ;
+	}
+	check_other_things(ph);
 }

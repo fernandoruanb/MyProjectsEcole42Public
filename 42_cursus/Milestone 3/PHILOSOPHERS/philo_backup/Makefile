@@ -36,7 +36,9 @@ SRCS = $(SRCDIR)/parsing/ft_atol.c\
        $(SRCDIR)/utils/ft_putendl_fd_0.c\
        $(SRCDIR)/utils/ft_putendl_fd_1.c\
        $(SRCDIR)/utils/ft_putendl_fd_n.c\
-       $(SRCDIR)/utils/show_philo_struct.c
+       $(SRCDIR)/utils/show_philo_struct.c\
+       $(SRCDIR)/routine/eat_sleep.c\
+       $(SRCDIR)/routine/die.c
 
 # OBJS
 
