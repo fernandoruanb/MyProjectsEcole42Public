@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:55:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/16 12:09:22 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:16:50 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int	anyone_death(t_philo *ph)
 	{
 		if ((get_time(ph) - ph->clock) >= ph->t_die * 1000)
 		{
+			pthread_mutex_lock(ph->se);
 			printf("%ld Philo %ld died\n", new_time(ph) / 1000, ph->num);
 			ph->flag->died = 1;
+			pthread_mutex_unlock(ph->se);
 			return (1);
 		}
 	}
@@ -27,8 +29,10 @@ int	anyone_death(t_philo *ph)
 	{
 		if ((get_time(ph) - ph->tl_meal) >= ph->t_die * 1000)
 		{
+			pthread_mutex_lock(ph->se);
 			printf("%ld Philo %ld died\n", new_time(ph) / 1000, ph->num);
 			ph->flag->died = 1;
+			pthread_mutex_unlock(ph->se);
 			return (1);
 		}
 	}
