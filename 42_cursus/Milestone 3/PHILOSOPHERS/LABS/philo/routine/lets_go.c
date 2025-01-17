@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:35:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 10:48:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:02:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static void	try_sleep(t_philo *ph)
 {
 	if (die(ph) || has_eaten_every(ph))
 		return ;
-	pthread_mutex_lock(ph->mutex)
+	pthread_mutex_lock(ph->se);
 	printf("%ld Philo %ld is sleeping\n", new_time(ph) / 1000, ph->num);
-	pthread_mutex_unlock(ph->mutex);
-	usleep(ph->t_sleep * 1000);
+	pthread_mutex_unlock(ph->se);
+	eat_sleep(ph, 1);
 	if (has_eaten_every(ph))
 		return ;
 }
