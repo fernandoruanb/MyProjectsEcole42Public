@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 16:57:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:56:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_putendl_fd_n(const char *s, int fd);
 int		is_valid_number(const char *s);
 int		parse_args(int argc, char **argv, t_philo *philosophers);
 long	ft_atol(const char *nptr);
-int		put_on_struct(int index, int captured_number, t_philo *philo);
+void	put_on_struct(int index, int captured_number, t_philo *philo);
 int		ft_isdigit(char c);
 void	show_philo_struct(t_philo *philo);
 int		init_each_philo_fork(t_philo *philo);
