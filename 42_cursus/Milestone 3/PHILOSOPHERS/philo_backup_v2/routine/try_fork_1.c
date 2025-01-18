@@ -6,36 +6,42 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:49:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 12:02:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:23:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+static void	do_action(t_philo *ph)
+{
+	pthread_mutex_lock(ph->se);
+	if (!ph->flag->died)
+		printf("%ld Philo %ld has taken a fork\n", new_time(ph) / 1000, ph->num);
+	pthread_mutex_unlock(ph->se);
+}
 
 void	try_fork_1(t_philo *ph)
 {
 	if (die(ph))
 		return ;
 	pthread_mutex_lock(ph->se);
-	printf("%ld Philo %ld is thinking\n", new_time(ph) / 1000, ph->num);
+	if (!ph->flag->died)
+		printf("%ld Philo %ld is thinking\n", new_time(ph) / 1000, ph->num);
 	pthread_mutex_unlock(ph->se);
-	if (ph->id == ph->c_ph - 1)
+	usleep(600);
+	if ((ph->id % 2) == 0)
 		pthread_mutex_lock(&ph->forks[(ph->id + 1) % ph->c_ph]);
 	else
 		pthread_mutex_lock(&ph->forks[ph->id % ph->c_ph]);
 	if (die(ph))
 	{
-		if (ph->id == ph->c_ph - 1)
+		if ((ph->id) % 2 == 0)
 			pthread_mutex_unlock(&ph->forks[(ph->id + 1) % ph->c_ph]);
 		else
 			pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
 		return ;
 	}
 	else
-	{
-		pthread_mutex_lock(ph->se);
-		printf("%ld Philo %ld has taken a fork\n", new_time(ph) / 1000, ph->num);
-		pthread_mutex_unlock(ph->se);
-	}
+		do_action(ph);
 	try_fork_2(ph);
 }

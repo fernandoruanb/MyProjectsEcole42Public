@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 13:55:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 13:55:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:32:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 static int	second_case(t_philo *ph)
 {
 	int	result;
+	int	die;
 	int	time;
 
 	pthread_mutex_lock(ph->mutex);
 	result = ph->tl_meal;
+	die = ph->t_die;
 	time = get_time(ph);
 	pthread_mutex_unlock(ph->mutex);
-	if ((time - result) >= ph->t_die * 1000)
+	if ((time - result) >= die * 1000)
 	{
 		pthread_mutex_lock(ph->se);
 		printf("%ld Philo %ld died\n", new_time(ph) / 1000, ph->num);

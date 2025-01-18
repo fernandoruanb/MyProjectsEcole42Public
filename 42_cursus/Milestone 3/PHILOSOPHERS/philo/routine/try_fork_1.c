@@ -6,18 +6,27 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:49:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/18 14:50:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:23:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+static void	do_action(t_philo *ph)
+{
+	pthread_mutex_lock(ph->se);
+	if (!ph->flag->died)
+		printf("%ld Philo %ld has taken a fork\n", new_time(ph) / 1000, ph->num);
+	pthread_mutex_unlock(ph->se);
+}
 
 void	try_fork_1(t_philo *ph)
 {
 	if (die(ph))
 		return ;
 	pthread_mutex_lock(ph->se);
-	printf("%ld Philo %ld is thinking\n", new_time(ph) / 1000, ph->num);
+	if (!ph->flag->died)
+		printf("%ld Philo %ld is thinking\n", new_time(ph) / 1000, ph->num);
 	pthread_mutex_unlock(ph->se);
 	usleep(600);
 	if ((ph->id % 2) == 0)
@@ -33,10 +42,6 @@ void	try_fork_1(t_philo *ph)
 		return ;
 	}
 	else
-	{
-		pthread_mutex_lock(ph->se);
-		printf("%ld Philo %ld has taken a fork\n", new_time(ph) / 1000, ph->num);
-		pthread_mutex_unlock(ph->se);
-	}
+		do_action(ph);
 	try_fork_2(ph);
 }
