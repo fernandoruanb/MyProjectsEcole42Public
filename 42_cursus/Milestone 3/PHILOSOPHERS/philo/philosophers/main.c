@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:03:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 09:30:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:24:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	finish_problem(t_philo *philo)
 	printf("%ld Philo 1 has taken a fork\n", new_time(philo) / 1000);
 	usleep(philo->t_die * 1000);
 	printf("%ld Philosopher 1 died\n", new_time(philo) / 1000);
-	clean_forks(philo);
 	clean_philo_struct(philo);
 	return (0);
 }
