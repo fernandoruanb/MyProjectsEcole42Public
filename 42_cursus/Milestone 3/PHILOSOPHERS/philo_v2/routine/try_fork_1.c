@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:49:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 20:42:56 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:23:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	try_fork_1(t_philo *ph)
 	printf("%ld Philo %ld is thinking\n", new_time(ph) / 1000, ph->num);
 	pthread_mutex_unlock(ph->se);
 	if (ph->me_time == -1)
-		usleep(4);
+		usleep(100);
 	if ((ph->id % 2) == 0)
 		pthread_mutex_lock(&ph->forks[(ph->id + 1) % ph->c_ph]);
 	else
