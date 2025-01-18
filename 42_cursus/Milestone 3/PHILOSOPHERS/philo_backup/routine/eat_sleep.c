@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:44:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/18 14:53:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:53:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	eat_sleep(t_philo *ph, int flag)
 		{
 			if (die(ph))
 				break ;
-			usleep(1000);
+			usleep(100);
 		}
 	}
 	else if (flag == 1)
@@ -34,7 +34,7 @@ void	eat_sleep(t_philo *ph, int flag)
 		{
 			if (die(ph))
 				break ;
-			usleep(1000);
+			usleep(100);
 		}
 	}
 }
