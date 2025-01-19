@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:50:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/19 10:14:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:25:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ void	try_fork_2(t_philo *ph)
 {
 	if (die(ph))
 	{
-		if ((ph->id % 2) == 0)
+		if ((ph->id % 2) == 0 && ph->ate_last != ph->id)
 			pthread_mutex_unlock(&ph->forks[(ph->id + 1) % ph->c_ph]);
-		else
+		else if (ph->ate_last != ph->id)
 			pthread_mutex_unlock(&ph->forks[ph->id % ph->c_ph]);
 		return ;
 	}
-	if ((ph->id % 2) == 0 && ph->ate_last != ph->id)
+	if ((ph->id % 2) == 0)
 		pthread_mutex_lock(&ph->forks[ph->id % ph->c_ph]);
-	else if (ph->ate_last != ph->id)
+	else
 		pthread_mutex_lock(&ph->forks[(ph->id + 1) % ph->c_ph]);
 	if (die(ph))
 	{
