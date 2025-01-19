@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 12:24:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/17 13:40:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:21:42 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	init_each_philo_struct(t_philo *philo)
 	{
 		philo_ids[id].num = id + 1;
 		philo_ids[id].id = id;
+		philo_ids[id].ate_last = -1;
 		philo_ids[id].c_ph = philo->c_ph;
 		philo_ids[id].clock = philo->clock;
 		philo_ids[id].tl_meal = 0;

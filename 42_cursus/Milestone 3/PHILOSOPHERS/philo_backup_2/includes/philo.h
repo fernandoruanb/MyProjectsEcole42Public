@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 22:54:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/18 14:56:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:21:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_philo
 	long				num;
 	long				id;
 	long				mark;
+	long				ate_last;
 	long				l_time;
 	long				tl_meal;
 	long				m_eaten;
