@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   int_ft_strlen.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:03:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/23 18:16:20 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/24 09:24:03 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/24 09:31:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+/*#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+int	int_ft_strlen(const char *str);
 
-char	*is_valid_cmd(char *cmd, char **paths);
-int	free_splits(char **split1, char **split2, char **split3);
-int	close_descriptors(int *pipefd);
+int	main(int argc, char **argv)
+{
+	int	result;
 
-#endif /* PIPEX_H */
+	if (argc < 2)
+		return (1);
+	result = int_ft_strlen(argv[1]);
+	ft_printf("%d\n", result);
+	return (0);
+}*/
+
+int	int_ft_strlen(const char *str)
+{
+	int	length;
+
+	if (!str)
+		return (0);
+	length = 0;
+	while (str[length] != '\0')
+		length++;
+	return (length);
+}

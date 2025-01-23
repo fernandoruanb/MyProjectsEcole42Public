@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   to_lower.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:03:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/23 18:16:20 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/22 10:43:59 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/22 10:47:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+/*#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+char	to_lower(const char c);
 
-char	*is_valid_cmd(char *cmd, char **paths);
-int	free_splits(char **split1, char **split2, char **split3);
-int	close_descriptors(int *pipefd);
+int	main(int argc, char **argv)
+{
+	char	c;
 
-#endif /* PIPEX_H */
+	if (argc < 2)
+		return (1);
+	c = to_lower(argv[1][0]);
+	ft_printf("%c\n", c);
+	return (0);
+}*/
+
+char	to_lower(const char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (c + ('a' - 'A'));
+	return (c);
+}

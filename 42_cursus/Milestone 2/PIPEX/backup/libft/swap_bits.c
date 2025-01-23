@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   swap_bits.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:03:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/23 18:16:20 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/21 08:29:38 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/21 08:40:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+/*char	swap_bits(char octet);
 
-char	*is_valid_cmd(char *cmd, char **paths);
-int	free_splits(char **split1, char **split2, char **split3);
-int	close_descriptors(int *pipefd);
+int	main(void)
+{
+	char	result;
 
-#endif /* PIPEX_H */
+	result = swap_bits(255);
+	ft_printf("%c\n", result);
+	return (0);
+}*/
+
+char	swap_bits(char octet)
+{
+	return (octet << 4 | octet >> 4);
+}

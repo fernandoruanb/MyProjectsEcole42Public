@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:03:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/23 18:16:20 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/06 10:34:44 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/06 10:36:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	index;
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
-
-char	*is_valid_cmd(char *cmd, char **paths);
-int	free_splits(char **split1, char **split2, char **split3);
-int	close_descriptors(int *pipefd);
-
-#endif /* PIPEX_H */
+	index = 0;
+	while (s1[index] != '\0' && s2[index] != '\0')
+	{
+		if (s1[index] != s2[index])
+			return ((unsigned char)s1[index] - (unsigned char)s2[index]);
+		index++;
+	}
+	return ((unsigned char)s1[index] - (unsigned char)s2[index]);
+}

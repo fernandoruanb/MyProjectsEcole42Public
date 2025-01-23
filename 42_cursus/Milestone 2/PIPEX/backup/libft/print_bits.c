@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   print_bits.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:03:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/23 18:16:20 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/20 16:50:27 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/20 17:23:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include <unistd.h>
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+/*void	print_bits(unsigned char octet);
 
-char	*is_valid_cmd(char *cmd, char **paths);
-int	free_splits(char **split1, char **split2, char **split3);
-int	close_descriptors(int *pipefd);
+int	main(void)
+{
+	print_bits(2);
+	return (0);
+}*/
 
-#endif /* PIPEX_H */
+void	print_bits(unsigned char octet)
+{
+	int		index;
+	char	bit;
+
+	index = 8;
+	while (index--)
+	{
+		bit = (((octet >> index) & 1) + '0');
+		write(1, &bit, 1);
+	}
+}

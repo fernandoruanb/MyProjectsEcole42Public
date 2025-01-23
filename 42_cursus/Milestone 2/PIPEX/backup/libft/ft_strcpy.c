@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:03:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/23 18:16:20 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/17 09:52:41 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/17 09:58:53 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+/*char	*ft_strcpy(char *s1, char *s2);
 
-char	*is_valid_cmd(char *cmd, char **paths);
-int	free_splits(char **split1, char **split2, char **split3);
-int	close_descriptors(int *pipefd);
+int	main(int argc, char **argv)
+{
+	char	dest[50];
+	char	*result;
+	result = ft_strcpy(dest, argv[1]);
+	ft_printf("%s\n", result);
+	return (0);
+}*/
 
-#endif /* PIPEX_H */
+char	*ft_strcpy(char *s1, char *s2)
+{
+	int	index;
+
+	index = 0;
+	while (s2[index] != '\0')
+	{
+		s1[index] = s2[index];
+		index++;
+	}
+	s1[index] = '\0';
+	return (s1);
+}

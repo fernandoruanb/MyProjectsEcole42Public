@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   print_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:03:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/23 18:16:20 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/23 14:19:54 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/23 14:28:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include "../libft/libft.h"
+/*void	print_hex(int n);
 
-char	*is_valid_cmd(char *cmd, char **paths);
-int	free_splits(char **split1, char **split2, char **split3);
-int	close_descriptors(int *pipefd);
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+		print_hex(ft_atoi(argv[1]));
+	write(1, "\n", 1);
+	return (0);
+}*/
 
-#endif /* PIPEX_H */
+void	print_hex(int n)
+{
+	char	*hex_digits;
+
+	hex_digits = "0123456789abcdef";
+	if (n >= 16)
+		print_hex(n / 16);
+	write(1, &hex_digits[n % 16], 1);
+}
