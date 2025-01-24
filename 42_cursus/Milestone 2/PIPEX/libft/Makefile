@@ -16,6 +16,10 @@ INCDIR = .
 
 SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/ft_putendl_fd_1.c\
+	$(SRCDIR)/find_path.c\
+	$(SRCDIR)/close_descriptors.c\
+	$(SRCDIR)/free_splits.c\
+	$(SRCDIR)/execute_command.c\
 	$(SRCDIR)/ft_putendl_fd_0.c\
 	$(SRCDIR)/ft_putendl_fd_n.c\
 	$(SRCDIR)/get_next_line_flag.c\

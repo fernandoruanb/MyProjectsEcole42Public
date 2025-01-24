@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/22 10:18:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:13:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,9 @@ char		*get_next_line_flag(int fd, int flag);
 int			ft_putendl_fd_1(const char *s, int fd);
 int			ft_putendl_fd_0(const char *s, int fd);
 char		*ft_putendl_fd_n(const char *s, int fd);
+char		*find_path(char *cmd, char **paths);
+int			free_splits(char **split1, char **split2, char **split3);
+int			execute_command(char *cmd, char **envp);
+int			close_descriptors(int *pipefd, int *pipefd2);
 
 #endif /* LIBFT_H */

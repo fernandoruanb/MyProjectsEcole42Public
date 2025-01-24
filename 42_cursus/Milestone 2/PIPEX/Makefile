@@ -20,9 +20,7 @@ LIBFT = libft/libft.a
 # SRCS
 
 SRCS =  $(SRCDIR)/pipex.c\
-	$(SRCDIR)/free_splits.c\
 	$(SRCDIR)/is_valid_cmd.c\
-	$(SRCDIR)/close_descriptors.c
 
 # OBJS
 

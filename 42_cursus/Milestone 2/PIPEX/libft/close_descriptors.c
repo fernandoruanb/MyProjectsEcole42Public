@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_splits.c                                      :+:      :+:    :+:   */
+/*   close_descriptors.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 17:43:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/23 17:51:02 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "libft.h"
 
-int	free_splits(char **split1, char **split2, char **split3)
+int	close_descriptors(int *pipefd, int *pipefd2)
 {
-	int	index;
-
-	if (split1)
+	if (pipefd)
 	{
-		index = 0;
-		while (split1[index])
-			free(split1[index++]);
-		free(split1);
+		close(pipefd[1]);
+		close(pipefd[0]);
 	}
-	if (split2)
+	if (pipefd2)
 	{
-		index = 0;
-		while (split2[index])
-			free(split2[index++]);
-		free(split2);
-	}
-	if (split3)
-	{
-		index = 0;
-		while (split3[index])
-			free(split3[index++]);
-		free(split3);
+		close(pipefd2[1]);
+		close(pipefd2[0]);
 	}
 	return (1);
 }
+
