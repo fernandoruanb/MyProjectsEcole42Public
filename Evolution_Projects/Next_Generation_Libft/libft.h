@@ -6,13 +6,15 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/28 14:09:32 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/25 20:30:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <sys/wait.h>
+# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
@@ -130,9 +132,24 @@ void		ft_list_remove_if(t_list **begin_list, char data_ref, int (*cmp)());
 int			int_ft_strlen(const char *s);
 void		rev_wstr(const char *str);
 void		rostring(const char *str, int index);
-void		sort_int_tab(int *tab, unsigned int size);
+int			*sort_int_tab(int *tab, unsigned int size);
 void		fprime(int number);
 void		tab_mult(int number);
 void		str_capitalizer(char *str);
+int			ft_strcmp(const char *s1, const char *s2);
+char		*get_next_line_flag(int fd, int flag);
+int			ft_putendl_fd_1(const char *s, int fd);
+int			ft_putendl_fd_0(const char *s, int fd);
+char		**ft_putendl_fd_n(const char *s, int fd);
+char		*find_path(char *cmd, char **paths);
+int			free_splits(char **split1, char **split2, char **split3);
+int			execute_command(char *cmd, char **envp);
+int			close_descriptors(int *pipefd, int *pipefd2);
+int			create_pipes(int argc, int pipefds[][2]);
+int			create_fork(void);
+int			clean_all_pipes_also_fd(int argc, int pipefds[][2], int fd);
+char		**split_path(int argc, char **argv, char **envp);
+void		execute_each_command(int i, int p[][2], char **a, char **e);
+int			count_args(char **argv);
 
 #endif /* LIBFT_H */

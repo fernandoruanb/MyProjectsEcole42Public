@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_all_pipes.c                                  :+:      :+:    :+:   */
+/*   clean_all_pipes_also_fd.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/25 17:05:12 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 18:50:44 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/25 20:28:25 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/25 20:28:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	clean_all_pipes(int argc, int pipefds[][2])
+int	clean_all_pipes_also_fd(int argc, int pipefds[][2], int fd)
 {
 	int	index;
 
@@ -22,5 +22,7 @@ int	clean_all_pipes(int argc, int pipefds[][2])
 		close_descriptors(pipefds[index], NULL);
 		index++;
 	}
+	if (fd > 2)
+		close(fd);
 	return (1);
 }

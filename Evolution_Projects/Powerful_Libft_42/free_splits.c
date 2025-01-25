@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd_n.c                                  :+:      :+:    :+:   */
+/*   free_splits.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 10:10:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 19:37:01 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/24 15:02:04 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/24 15:02:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_putendl_fd_n(const char *s, int fd)
+int	free_splits(char **split1, char **split2, char **split3)
 {
 	int	index;
 
-	index = 0;
-	while (s[index] != '\0')
+	if (split1)
 	{
-		write(fd, &s[index], 1);
-		index++;
+		index = 0;
+		while (split1[index])
+			free(split1[index++]);
+		free(split1);
 	}
-	write(fd, "\n", 1);
-	return (NULL);
+	if (split2)
+	{
+		index = 0;
+		while (split2[index])
+			free(split2[index++]);
+		free(split2);
+	}
+	if (split3)
+	{
+		index = 0;
+		while (split3[index])
+			free(split3[index++]);
+		free(split3);
+	}
+	return (1);
 }

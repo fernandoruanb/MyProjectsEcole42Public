@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd_n.c                                  :+:      :+:    :+:   */
+/*   ft_putendl_fd_0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 10:10:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 19:37:01 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/22 10:09:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/22 10:46:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_putendl_fd_n(const char *s, int fd)
+int	ft_putendl_fd_0(const char *s, int fd)
 {
 	int	index;
 
@@ -23,5 +23,5 @@ char	**ft_putendl_fd_n(const char *s, int fd)
 		index++;
 	}
 	write(fd, "\n", 1);
-	return (NULL);
+	return (0);
 }

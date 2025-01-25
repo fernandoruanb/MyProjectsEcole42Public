@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:14:22 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 19:06:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/25 19:17:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int argc, char **argv, char **envp)
 		if (pid == -1)
 			exit(clean_all_pipes(argc, pipefds));
 		if (pid == 0)
-			execute_each_command(index, pipefds, argv, envp);
+			execute_each_command(index, pipefds, argv, envp, argc);
 		pids[index] = pid;
 		index++;
 	}

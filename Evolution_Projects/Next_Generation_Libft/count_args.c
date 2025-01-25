@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd_n.c                                  :+:      :+:    :+:   */
+/*   count_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 10:10:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 19:37:01 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/25 20:21:36 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/25 20:24:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	**ft_putendl_fd_n(const char *s, int fd)
+int	count_args(char **argv)
 {
-	int	index;
+	int	params;
 
-	index = 0;
-	while (s[index] != '\0')
-	{
-		write(fd, &s[index], 1);
-		index++;
-	}
-	write(fd, "\n", 1);
-	return (NULL);
+	params = 1;
+	while (argv[params])
+		params++;
+	return (params);
 }

@@ -48,7 +48,7 @@ void	str_capitalizer(char *str)
 			str[index] += 32;
 		if ((str[index] >= 'a' && str[index] <= 'z')
 			&& (str[index - 1] == ' ' || str[index - 1] == '\t'))
-		       str[index] -= 32;
+			str[index] -= 32;
 		write(1, &str[index], 1);
 		index++;
 	}

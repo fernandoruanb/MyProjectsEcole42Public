@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd_n.c                                  :+:      :+:    :+:   */
+/*   create_fork.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 10:10:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 19:37:01 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/25 16:40:33 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/25 16:41:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_putendl_fd_n(const char *s, int fd)
+int	create_fork(void)
 {
-	int	index;
+	pid_t	pid;
 
-	index = 0;
-	while (s[index] != '\0')
-	{
-		write(fd, &s[index], 1);
-		index++;
-	}
-	write(fd, "\n", 1);
-	return (NULL);
+	pid = fork();
+	if (pid == -1)
+		return (ft_putendl_fd_0("Error creating forks.", 2));
+	return (pid);
 }

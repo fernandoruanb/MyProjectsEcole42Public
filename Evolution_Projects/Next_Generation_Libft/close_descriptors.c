@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd_n.c                                  :+:      :+:    :+:   */
+/*   close_descriptors.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 10:10:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 19:37:01 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_putendl_fd_n(const char *s, int fd)
+int	close_descriptors(int *pipefd, int *pipefd2)
 {
-	int	index;
-
-	index = 0;
-	while (s[index] != '\0')
+	if (pipefd)
 	{
-		write(fd, &s[index], 1);
-		index++;
+		close(pipefd[1]);
+		close(pipefd[0]);
 	}
-	write(fd, "\n", 1);
-	return (NULL);
+	if (pipefd2)
+	{
+		close(pipefd2[1]);
+		close(pipefd2[0]);
+	}
+	return (1);
 }

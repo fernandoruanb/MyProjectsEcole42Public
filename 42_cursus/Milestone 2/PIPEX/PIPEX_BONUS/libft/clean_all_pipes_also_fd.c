@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd_n.c                                  :+:      :+:    :+:   */
+/*   clean_all_pipes_also_fd.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 10:10:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 19:37:01 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/25 20:28:25 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/25 20:28:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_putendl_fd_n(const char *s, int fd)
+int	clean_all_pipes_also_fd(int argc, int pipefds[][2], int fd)
 {
 	int	index;
 
 	index = 0;
-	while (s[index] != '\0')
+	while (index < argc - 1)
 	{
-		write(fd, &s[index], 1);
+		close_descriptors(pipefds[index], NULL);
 		index++;
 	}
-	write(fd, "\n", 1);
-	return (NULL);
+	if (fd > 2)
+		close(fd);
+	return (1);
 }

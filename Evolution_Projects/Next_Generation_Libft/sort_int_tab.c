@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:15:25 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/24 13:48:43 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/27 19:45:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(void)
 	return (0);
 }*/
 
-void	sort_int_tab(int *tab, unsigned int size)
+int	*sort_int_tab(int *tab, unsigned int size)
 {
 	unsigned int	index;
 	unsigned int	temp;
@@ -50,4 +50,5 @@ void	sort_int_tab(int *tab, unsigned int size)
 		else
 			index++;
 	}
+	return (tab);
 }
