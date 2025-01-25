@@ -1,28 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   is_prime.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/21 16:12:42 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/21 16:25:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+/*int	is_prime(int n);
+
+int	main(int argc, char **argv)
 {
-	if (pipefd)
+	int	number;
+	int	result;
+
+	if (argc < 2)
+		return (1);
+	number = ft_atoi(argv[1]);
+	result = is_prime(number);
+	ft_printf("O resultado é: %d\n", result);
+	return (0);
+}*/
+
+int	is_prime(int n)
+{
+	int	attempt;
+
+	if (n <= 1)
+		return (0);
+	attempt = 2;
+	while (attempt * attempt <= n)
 	{
-		close(pipefd[1]);
-		close(pipefd[0]);
-	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
+		if (n % attempt == 0)
+			return (0);
+		attempt++;
 	}
 	return (1);
 }

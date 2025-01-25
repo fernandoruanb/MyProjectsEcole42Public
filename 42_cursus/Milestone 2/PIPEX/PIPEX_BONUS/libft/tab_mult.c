@@ -1,41 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_splits.c                                      :+:      :+:    :+:   */
+/*   tab_mult.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:02:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:02:18 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/28 08:48:32 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/28 08:56:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	free_splits(char **split1, char **split2, char **split3)
+/*void	tab_mult(int number);
+
+int	main(int argc, char **argv)
 {
 	int	index;
+	int	result;
+	int	number;
 
-	if (split1)
+	if (argc < 2)
 	{
-		index = 0;
-		while (split1[index])
-			free(split1[index++]);
-		free(split1);
+		write(1, "\n", 1);
+		return (1);
 	}
-	if (split2)
+	number = ft_atoi(argv[1]);
+	tab_mult(number);
+	return (0);
+}*/
+
+void	tab_mult(int number)
+{
+	int	result;
+	int	index;
+
+	index = 1;
+	while (index < 10)
 	{
-		index = 0;
-		while (split2[index])
-			free(split2[index++]);
-		free(split2);
+		result = number * index;
+		ft_putnbr(index);
+		write(1, " x ", 3);
+		ft_putnbr(number);
+		write(1, " = ", 3);
+		ft_putnbr(result);
+		write(1, "\n", 1);
+		index++;
 	}
-	if (split3)
-	{
-		index = 0;
-		while (split3[index])
-			free(split3[index++]);
-		free(split3);
-	}
-	return (1);
 }

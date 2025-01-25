@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   int_ft_strlen.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/24 09:24:03 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/24 09:31:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+/*#include "libft.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+int	int_ft_strlen(const char *str);
+
+int	main(int argc, char **argv)
 {
-	if (pipefd)
-	{
-		close(pipefd[1]);
-		close(pipefd[0]);
-	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
+	int	result;
+
+	if (argc < 2)
+		return (1);
+	result = int_ft_strlen(argv[1]);
+	ft_printf("%d\n", result);
+	return (0);
+}*/
+
+int	int_ft_strlen(const char *str)
+{
+	int	length;
+
+	if (!str)
+		return (0);
+	length = 0;
+	while (str[length] != '\0')
+		length++;
+	return (length);
 }

@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   to_lower.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/22 10:43:59 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/22 10:47:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+/*#include "libft.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+char	to_lower(const char c);
+
+int	main(int argc, char **argv)
 {
-	if (pipefd)
-	{
-		close(pipefd[1]);
-		close(pipefd[0]);
-	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
+	char	c;
+
+	if (argc < 2)
+		return (1);
+	c = to_lower(argv[1][0]);
+	ft_printf("%c\n", c);
+	return (0);
+}*/
+
+char	to_lower(const char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (c + ('a' - 'A'));
+	return (c);
 }

@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/22 14:41:47 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/22 14:49:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+/*#include "libft.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+int	ft_abs(int n);
+
+int	main(int argc, char **argv)
 {
-	if (pipefd)
+	int	result;
+
+	if (argc < 2)
 	{
-		close(pipefd[1]);
-		close(pipefd[0]);
+		write(1, "\n", 1);
+		return (1);
 	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
+	result = ft_abs(ft_atoi(argv[1]));
+	ft_printf("%d\n", result);
+	return (0);
+}*/
+
+int	ft_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
 }

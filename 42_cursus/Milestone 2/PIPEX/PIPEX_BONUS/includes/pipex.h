@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/23 18:03:44 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/24 15:15:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PIPEX_H
+# define PIPEX_H
 
-int	close_descriptors(int *pipefd, int *pipefd2)
-{
-	if (pipefd)
-	{
-		close(pipefd[1]);
-		close(pipefd[0]);
-	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
-}
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+# include "../libft/libft.h"
+
+char	*is_valid_cmd(char *cmd, char **paths);
+
+#endif /* PIPEX_H */

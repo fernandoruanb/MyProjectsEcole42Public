@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   swap_bits.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/21 08:29:38 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/21 08:40:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+/*char	swap_bits(char octet);
+
+int	main(void)
 {
-	if (pipefd)
-	{
-		close(pipefd[1]);
-		close(pipefd[0]);
-	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
+	char	result;
+
+	result = swap_bits(255);
+	ft_printf("%c\n", result);
+	return (0);
+}*/
+
+char	swap_bits(char octet)
+{
+	return (octet << 4 | octet >> 4);
 }

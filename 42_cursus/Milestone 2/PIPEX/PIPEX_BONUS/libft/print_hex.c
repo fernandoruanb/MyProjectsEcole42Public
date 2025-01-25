@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   print_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/23 14:19:54 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/23 14:28:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+/*void	print_hex(int n);
+
+int	main(int argc, char **argv)
 {
-	if (pipefd)
-	{
-		close(pipefd[1]);
-		close(pipefd[0]);
-	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
+	if (argc == 2)
+		print_hex(ft_atoi(argv[1]));
+	write(1, "\n", 1);
+	return (0);
+}*/
+
+void	print_hex(int n)
+{
+	char	*hex_digits;
+
+	hex_digits = "0123456789abcdef";
+	if (n >= 16)
+		print_hex(n / 16);
+	write(1, &hex_digits[n % 16], 1);
 }

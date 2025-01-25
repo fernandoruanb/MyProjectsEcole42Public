@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   clean_all_pipes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/25 17:05:12 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/25 17:29:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+void	clean_all_pipes(int argc, int pipefds[][2])
 {
-	if (pipefd)
+	int	index;
+
+	index = 0;
+	while (index < argc - 1)
 	{
-		close(pipefd[1]);
-		close(pipefd[0]);
+		close_descriptors(pipefds[index], NULL);
+		index++;
 	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
 }

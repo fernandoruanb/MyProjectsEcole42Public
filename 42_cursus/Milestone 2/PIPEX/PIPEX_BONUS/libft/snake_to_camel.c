@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_path.c                                        :+:      :+:    :+:   */
+/*   snake_to_camel.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 14:58:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 14:58:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/20 19:11:13 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/20 19:31:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
-char	*find_path(char *cmd, char **paths)
+/*void	snake_to_camel(char *s);
+
+int	main(int argc, char **argv)
 {
-	char	*true_temp;
-	char	*true_path;
-	int		index;
+	(void)argc;
+	snake_to_camel(argv[1]);
+	write(1, "\n", 1);
+	return (0);
+}*/
+
+void	snake_to_camel(char *s)
+{
+	int	index;
 
 	index = 0;
-	while (paths[index])
+	while (s[index] != '\0')
 	{
-		true_temp = ft_strjoin(paths[index], "/");
-		if (!true_temp)
-			return (NULL);
-		true_path = ft_strjoin(true_temp, cmd);
-		if (!true_path)
-			return (NULL);
-		if (access(true_path, F_OK | R_OK) == 0)
-			return (true_path);
+		if (index != 0 && s[index - 1] == '_')
+		{
+			if (s[index] >= 'a' && s[index] <= 'z')
+				s[index] = s[index] - 32;
+			write(1, &s[index], 1);
+		}
+		else if (s[index] != '_')
+			write(1, &s[index], 1);
 		index++;
 	}
-	return (NULL);
 }

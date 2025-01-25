@@ -1,28 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   add_prime_num.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/21 16:26:01 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/21 16:37:17 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+/*void	add_prime_number(int argc, char **argv);
+
+int	main(int argc, char **argv)
 {
-	if (pipefd)
+	add_prime_number(argc, argv);
+	return (0);
+}*/
+
+void	add_prime_number(int argc, char **argv)
+{
+	int	total;
+	int	num;
+
+	if (argc < 2)
 	{
-		close(pipefd[1]);
-		close(pipefd[0]);
+		write(1, "0\n", 2);
+		return ;
 	}
-	if (pipefd2)
+	num = ft_atoi(argv[1]);
+	if (num <= 0)
 	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
+		write(1, "0\n", 2);
+		return ;
 	}
-	return (1);
+	total = 0;
+	while (num > 0)
+	{
+		if (is_prime(num))
+			total += num;
+		num--;
+	}
+	ft_putnbr(total);
+	write(1, "\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 17:30:01 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/25 18:51:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,6 @@ int			execute_command(char *cmd, char **envp);
 int			close_descriptors(int *pipefd, int *pipefd2);
 int			create_pipes(int argc, int pipefds[][2]);
 int			create_fork(void);
-void		clean_all_pipes(int argc, int pipefds[][2]);
+int			clean_all_pipes(int argc, int pipefds[][2]);
 
 #endif /* LIBFT_H */

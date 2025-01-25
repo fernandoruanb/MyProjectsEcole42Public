@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_splits.c                                      :+:      :+:    :+:   */
+/*   parse_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:02:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:02:18 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/10 13:04:27 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/19 12:19:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	free_splits(char **split1, char **split2, char **split3)
+int	parse_format(const char *format, va_list args)
 {
+	int	temp;
+	int	total;
 	int	index;
 
-	if (split1)
+	total = 0;
+	index = 0;
+	while (format[index] != '\0')
 	{
-		index = 0;
-		while (split1[index])
-			free(split1[index++]);
-		free(split1);
+		if (format[index] == '%' && format[index + 1] != '\0')
+		{
+			index++;
+			temp = handle_specifier(format[index], args);
+			if (temp == -1)
+				return (-1);
+			total += temp;
+		}
+		else
+		{
+			write(1, &format[index], 1);
+			total++;
+		}
+		index++;
 	}
-	if (split2)
-	{
-		index = 0;
-		while (split2[index])
-			free(split2[index++]);
-		free(split2);
-	}
-	if (split3)
-	{
-		index = 0;
-		while (split3[index])
-			free(split3[index++]);
-		free(split3);
-	}
-	return (1);
+	return (total);
 }

@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_path.c                                        :+:      :+:    :+:   */
+/*   is_valid_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 14:58:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 14:58:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/23 17:52:17 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/24 15:14:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/pipex.h"
 
-char	*find_path(char *cmd, char **paths)
+char	*is_valid_cmd(char *cmd, char **paths)
 {
-	char	*true_temp;
-	char	*true_path;
 	int		index;
+	char	*true_temp;
+	char	*true_cmd;
 
 	index = 0;
 	while (paths[index])
 	{
 		true_temp = ft_strjoin(paths[index], "/");
-		if (!true_temp)
-			return (NULL);
-		true_path = ft_strjoin(true_temp, cmd);
-		if (!true_path)
-			return (NULL);
-		if (access(true_path, F_OK | R_OK) == 0)
-			return (true_path);
+		true_cmd = ft_strjoin(true_temp, cmd);
+		if (access(true_cmd, F_OK | X_OK) == 0)
+		{
+			free(true_temp);
+			return (true_cmd);
+		}
+		else
+		{
+			free(true_cmd);
+			free(true_temp);
+		}
+		free(true_temp);
+		free(true_cmd);
 		index++;
 	}
 	return (NULL);

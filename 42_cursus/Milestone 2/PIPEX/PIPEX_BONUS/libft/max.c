@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_path.c                                        :+:      :+:    :+:   */
+/*   max.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 14:58:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 14:58:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/20 15:51:02 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/20 16:27:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+/*#include <stdio.h>
 
-char	*find_path(char *cmd, char **paths)
+int	max(int *tab, unsigned int len);
+
+int	main(void)
 {
-	char	*true_temp;
-	char	*true_path;
-	int		index;
+	int	tab[] = {0, 1, 2, 3, 4, 5, 42};
+	unsigned int	len;
+	int	result;
+
+	len = 7;
+	result = max(tab, len);
+	printf("%d\n", result);
+	return (0);
+}*/
+
+int	max(int *tab, unsigned int len)
+{
+	int				result;
+	unsigned int	index;
 
 	index = 0;
-	while (paths[index])
+	result = 0;
+	while (index < len)
 	{
-		true_temp = ft_strjoin(paths[index], "/");
-		if (!true_temp)
-			return (NULL);
-		true_path = ft_strjoin(true_temp, cmd);
-		if (!true_path)
-			return (NULL);
-		if (access(true_path, F_OK | R_OK) == 0)
-			return (true_path);
+		if (tab[index] > result)
+			result = tab[index];
 		index++;
 	}
-	return (NULL);
+	return (result);
 }

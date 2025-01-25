@@ -1,28 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/21 15:54:37 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/21 16:11:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+/*void	ft_putnbr(int n);
+
+int	main(int argc, char **argv)
 {
-	if (pipefd)
+	int	number;
+
+	if (argc < 2)
+		return (1);
+	number = ft_atoi(argv[1]);
+	ft_putnbr(number);
+	write(1, "\n", 1);
+	return (0);
+}*/
+
+void	ft_putnbr(int n)
+{
+	long	number;
+	char	digit;
+
+	number = n;
+	if (n < 0)
 	{
-		close(pipefd[1]);
-		close(pipefd[0]);
+		write(1, "-", 1);
+		number = -number;
 	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
+	if (number >= 10)
+		ft_putnbr(number / 10);
+	digit = (number % 10) + '0';
+	write(1, &digit, 1);
 }

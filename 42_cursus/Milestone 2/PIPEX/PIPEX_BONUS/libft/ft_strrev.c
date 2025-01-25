@@ -1,35 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_path.c                                        :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 14:58:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 14:58:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/18 22:01:26 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/19 09:24:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*find_path(char *cmd, char **paths)
+/*char	*ft_strrev(char *str);
+
+int	main(void)
 {
-	char	*true_temp;
-	char	*true_path;
-	int		index;
+	char	str[8] = "Hello";
+	char	*result;
+
+	ft_printf("A string bonita para teste: %s\n", str);
+	result = ft_strrev(str);
+	ft_printf("Resultado: %s\n", result);
+	return (0);
+}*/
+
+char	*ft_strrev(char *str)
+{
+	size_t	index;
+	size_t	length;
+	char	temp;
 
 	index = 0;
-	while (paths[index])
+	length = ft_strlen(str);
+	while (index < length)
 	{
-		true_temp = ft_strjoin(paths[index], "/");
-		if (!true_temp)
-			return (NULL);
-		true_path = ft_strjoin(true_temp, cmd);
-		if (!true_path)
-			return (NULL);
-		if (access(true_path, F_OK | R_OK) == 0)
-			return (true_path);
+		temp = str[index];
+		str[index] = str[length - 1];
+		str[length - 1] = temp;
 		index++;
+		length--;
 	}
-	return (NULL);
+	return (str);
 }

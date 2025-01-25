@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   reverse_bits.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/20 18:28:47 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/20 18:53:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+/*#include <stdio.h>
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+char	reverse_bits(char octet);
+
+int	main(void)
 {
-	if (pipefd)
+	char	result;
+
+	result = reverse_bits(2);
+	printf("%d\n", result);
+	return (0);
+}*/
+
+char	reverse_bits(char octet)
+{
+	int		index;
+	char	result;
+
+	index = 8;
+	result = 0;
+	while (index--)
 	{
-		close(pipefd[1]);
-		close(pipefd[0]);
+		result = (result << 1) | (octet & 1);
+		octet >>= 1;
 	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
+	return (result);
 }

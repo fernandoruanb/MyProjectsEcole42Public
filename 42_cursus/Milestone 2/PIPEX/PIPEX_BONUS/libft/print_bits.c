@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   print_bits.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/20 16:50:27 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/20 17:23:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+/*void	print_bits(unsigned char octet);
+
+int	main(void)
 {
-	if (pipefd)
+	print_bits(2);
+	return (0);
+}*/
+
+void	print_bits(unsigned char octet)
+{
+	int		index;
+	char	bit;
+
+	index = 8;
+	while (index--)
 	{
-		close(pipefd[1]);
-		close(pipefd[0]);
+		bit = (((octet >> index) & 1) + '0');
+		write(1, &bit, 1);
 	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
 }

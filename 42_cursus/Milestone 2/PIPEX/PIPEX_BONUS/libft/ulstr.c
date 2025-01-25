@@ -1,28 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   ulstr.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2024/11/17 17:45:29 by fruan-ba          #+#    #+#             */
+/*   Updated: 2024/11/18 14:57:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+/*void	ulstr(char *str);
+
+int	main(int argc, char **argv)
 {
-	if (pipefd)
+	size_t	length;
+
+	if (argc < 2)
 	{
-		close(pipefd[1]);
-		close(pipefd[0]);
+		write(1, "\n", 1);
+		return (1);
 	}
-	if (pipefd2)
+	length = ft_strlen(argv[1]);
+	ulstr(argv[1]);
+	return (0);
+}*/
+
+void	ulstr(char *str)
+{
+	size_t	index;
+
+	index = 0;
+	while (str[index] != '\0')
 	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
+		if (str[index] >= 'a' && str[index] <= 'z')
+			str[index] -= 32;
+		else if (str[index] >= 'A' && str[index] <= 'Z')
+			str[index] += 32;
+		index++;
 	}
-	return (1);
 }

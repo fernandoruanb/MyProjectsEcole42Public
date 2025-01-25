@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/06 10:34:44 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/06 10:36:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	close_descriptors(int *pipefd, int *pipefd2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (pipefd)
+	int	index;
+
+	index = 0;
+	while (s1[index] != '\0' && s2[index] != '\0')
 	{
-		close(pipefd[1]);
-		close(pipefd[0]);
+		if (s1[index] != s2[index])
+			return ((unsigned char)s1[index] - (unsigned char)s2[index]);
+		index++;
 	}
-	if (pipefd2)
-	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
-	}
-	return (1);
+	return ((unsigned char)s1[index] - (unsigned char)s2[index]);
 }
