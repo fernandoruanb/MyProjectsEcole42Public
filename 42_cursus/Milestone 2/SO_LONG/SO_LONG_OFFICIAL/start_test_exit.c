@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:50:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 18:09:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:16:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ void	start_test_exit(char **map_copy, int x, int y, t_game *game)
 	start_test_exit(map_copy, x, y + 1, game);
 	start_test_exit(map_copy, x, y - 1, game);
 }
-

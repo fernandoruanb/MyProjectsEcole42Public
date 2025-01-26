@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:07:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 18:08:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:17:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ char	*ft_strdup(const char *s)
 	buffer[index] = '\0';
 	return (buffer);
 }
-

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:55:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 17:55:25 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:16:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ char	**get_map(t_game *game)
 	map_copy[index] = NULL;
 	return (map_copy);
 }
-
