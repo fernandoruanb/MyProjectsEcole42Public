@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:52:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:14:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 10:58:05 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ char	*is_valid_cmd(char *cmd, char **paths)
 			free(true_cmd);
 			free(true_temp);
 		}
-		free(true_temp);
-		free(true_cmd);
 		index++;
 	}
 	return (NULL);

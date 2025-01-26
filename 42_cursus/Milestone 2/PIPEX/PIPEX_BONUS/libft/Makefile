@@ -124,9 +124,9 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/create_pipes.c\
 	$(SRCDIR)/create_fork.c\
 	$(SRCDIR)/clean_all_pipes_also_fd.c\
-	$(SRCDIR)/split_path.c\
 	$(SRCDIR)/execute_each_command.c\
 	$(SRCDIR)/count_args.c\
+	$(SRCDIR)/split_path.c\
 	$(SRCDIR)/ft_strcmp.c
 
 # BONUS SRCS

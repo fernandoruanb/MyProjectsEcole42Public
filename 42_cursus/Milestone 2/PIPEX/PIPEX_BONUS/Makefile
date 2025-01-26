@@ -1,6 +1,6 @@
 # Name of the program or the library
 
-NAME = pipex
+NAME = pipex_bonus
 
 # Compilers and flags
 
@@ -19,8 +19,7 @@ LIBFT = libft/libft.a
 
 # SRCS
 
-SRCS =  $(SRCDIR)/pipex.c\
-	$(SRCDIR)/is_valid_cmd.c\
+SRCS =  $(SRCDIR)/pipex_bonus.c
 
 # OBJS
 

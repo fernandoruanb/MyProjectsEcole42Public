@@ -6,46 +6,11 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:14:22 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 19:17:26 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 09:30:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-#include "../libft/libft.h"
-
-static void	parent_process(char **argv, char **envp, int *pipefd)
-{
-	int	file_output;
-
-	close(pipefd[1]);
-	file_output = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (file_output == -1)
-		return ;
-	if (dup2(file_output, STDOUT_FILENO) == -1)
-		return ;
-	if (dup2(pipefd[0], STDIN_FILENO) == -1)
-		return ;
-	close(pipefd[0]);
-	close(file_output);
-	execute_command(argv[3], envp);
-}
-
-static void	child_process(char **argv, char **envp, int *pipefd)
-{
-	int	file_input;
-
-	close(pipefd[0]);
-	file_input = open(argv[1], O_RDONLY);
-	if (file_input == -1)
-		return ;
-	if (dup2(pipefd[1], STDOUT_FILENO) == -1)
-		return ;
-	if (dup2(file_input, STDIN_FILENO) == -1)
-		return ;
-	close(pipefd[1]);
-	close(file_input);
-	execute_command(argv[2], envp);
-}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -61,15 +26,15 @@ int	main(int argc, char **argv, char **envp)
 	index = 0;
 	while (index < argc - 1)
 	{
-		pid = create_fork(argc);
+		pid = create_fork();
 		if (pid == -1)
-			exit(clean_all_pipes(argc, pipefds));
+			exit(clean_all_pipes_also_fd(argc, pipefds, 0));
 		if (pid == 0)
-			execute_each_command(index, pipefds, argv, envp, argc);
+			execute_each_command(index, pipefds, argv, envp);
 		pids[index] = pid;
 		index++;
 	}
-	clean_all_pipes(argc, pipefds);
+	clean_all_pipes_also_fd(argc, pipefds, 0);
 	index = 0;
 	while (index < argc - 1)
 		waitpid(pids[index++], NULL, 0);

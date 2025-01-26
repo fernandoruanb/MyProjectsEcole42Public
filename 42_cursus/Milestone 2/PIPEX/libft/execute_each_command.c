@@ -6,12 +6,11 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 19:08:54 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 10:31:21 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 09:21:53 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static void	last_command(int pipefds[][2], char **argv, char **envp)
 {
@@ -22,7 +21,7 @@ static void	last_command(int pipefds[][2], char **argv, char **envp)
 
 	argc = count_args(argv);
 	close(pipefds[argc - 1][1]);
-	output = open(argv[argc], O_WRONLY, O_CREAT, O_TRUNC, 0644);
+	output = open(argv[1], O_WRONLY, O_CREAT, O_TRUNC, 0644);
 	if (output == -1)
 		exit((clean_all_pipes_also_fd(argc, pipefds, 0)) * -1);
 	if (dup2(output, STDOUT_FILENO) == -1)
@@ -96,7 +95,6 @@ void	execute_each_command(int index, int pipes[][2], char **argv, char **e)
 	int	args;
 
 	args = count_args(argv);
-	printf("%d %d\n", args, index);
 	if (index == 0)
 		first_command(pipes, argv, e);
 	else if (index > 0 && index < args)

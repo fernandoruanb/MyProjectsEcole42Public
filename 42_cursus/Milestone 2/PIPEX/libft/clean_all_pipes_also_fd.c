@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_cmd.c                                     :+:      :+:    :+:   */
+/*   clean_all_pipes_also_fd.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 17:52:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:14:44 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/25 20:28:25 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/25 20:28:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "libft.h"
 
-char	*is_valid_cmd(char *cmd, char **paths)
+int	clean_all_pipes_also_fd(int argc, int pipefds[][2], int fd)
 {
-	int		index;
-	char	*true_temp;
-	char	*true_cmd;
+	int	index;
 
 	index = 0;
-	while (paths[index])
+	while (index < argc - 1)
 	{
-		true_temp = ft_strjoin(paths[index], "/");
-		true_cmd = ft_strjoin(true_temp, cmd);
-		if (access(true_cmd, F_OK | X_OK) == 0)
-		{
-			free(true_temp);
-			return (true_cmd);
-		}
-		else
-		{
-			free(true_cmd);
-			free(true_temp);
-		}
-		free(true_temp);
-		free(true_cmd);
+		close_descriptors(pipefds[index], NULL);
 		index++;
 	}
-	return (NULL);
+	if (fd > 2)
+		close(fd);
+	return (1);
 }

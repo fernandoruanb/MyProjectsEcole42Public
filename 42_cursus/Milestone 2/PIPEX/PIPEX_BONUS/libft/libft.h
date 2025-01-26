@@ -6,15 +6,15 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/25 20:30:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 10:19:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <sys/wait.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
@@ -148,8 +148,8 @@ int			close_descriptors(int *pipefd, int *pipefd2);
 int			create_pipes(int argc, int pipefds[][2]);
 int			create_fork(void);
 int			clean_all_pipes_also_fd(int argc, int pipefds[][2], int fd);
+void		execute_each_command(int index, int pipes[][2], char **argv, char **e);
 char		**split_path(int argc, char **argv, char **envp);
-void		execute_each_command(int i, int p[][2], char **a, char **e);
 int			count_args(char **argv);
 
 #endif /* LIBFT_H */

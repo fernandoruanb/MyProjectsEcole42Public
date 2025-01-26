@@ -123,7 +123,6 @@ SRCS =  $(SRCDIR)/ft_isalpha.c\
 	$(SRCDIR)/str_capitalizer.c\
 	$(SRCDIR)/create_pipes.c\
 	$(SRCDIR)/create_fork.c\
-	$(SRCDIR)/clean_all_pipes.c\
 	$(SRCDIR)/ft_strcmp.c
 
 # BONUS SRCS
