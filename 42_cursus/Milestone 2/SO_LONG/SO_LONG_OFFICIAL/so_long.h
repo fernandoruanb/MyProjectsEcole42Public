@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/14 14:26:01 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:45:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,18 @@ typedef struct s_game
 	int		collectible;
 	int		player;
 	int		exit;
+	int		lines;
+	int		length;
 	int		moves;
 	void	*player_img;
 	void	*wall_img;
 	void	*collectible_img;
 	void	*exit_img;
 	void	*floor_img;
+	int		x;
+	int		y;
+	int		exit_t;
+	int		collectibles;
 	int		mlx_flag;
 	int		win_flag;
 	int		floor_flag;
@@ -76,5 +82,6 @@ char	*ft_strchr_v3(const char *s, int c);
 int		load_image(void **img, char *path, t_game *game);
 void	initialize_heap_variables(t_game *game);
 int		check_ber(const char *filename);
+int		flood_fill(t_game *game);
 
 #endif /* SO_LONG_H */

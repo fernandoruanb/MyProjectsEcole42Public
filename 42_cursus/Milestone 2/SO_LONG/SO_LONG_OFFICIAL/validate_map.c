@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:44:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/13 09:42:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:47:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,7 @@ int	validate_map(char **map, t_game *game)
 		return (ft_putstr_fd_0("The map isn't surrounded by walls.\n", 2));
 	if (!check_els(map, game))
 		return (ft_putstr_fd_0("You need to check the elements.\n", 2));
+	if (!flood_fill(game))
+		return (ft_putstr_fd_0("The map isn't playable.\n", 2));
 	return (1);
 }
