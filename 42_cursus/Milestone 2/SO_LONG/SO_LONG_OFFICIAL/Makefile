@@ -45,7 +45,10 @@ SRCS =  $(SRCDIR)/main.c\
 	$(SRCDIR)/load_image.c\
 	$(SRCDIR)/initialize_heap_variables.c\
 	$(SRCDIR)/check_ber.c\
-	$(SRCDIR)/flood_fill.c
+	$(SRCDIR)/flood_fill.c\
+	$(SRCDIR)/get_map.c\
+	$(SRCDIR)/ft_strdup.c\
+	$(SRCDIR)/start_test_exit.c
 
 # OBJS
 

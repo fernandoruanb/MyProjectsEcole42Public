@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 16:45:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:08:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,9 @@ int		load_image(void **img, char *path, t_game *game);
 void	initialize_heap_variables(t_game *game);
 int		check_ber(const char *filename);
 int		flood_fill(t_game *game);
+char	**get_map(t_game *game);
+void	start_test_exit(char **map_copy, int x, int y, t_game *game);
+char	*ft_strjoin(const char *s);
+char	*ft_strdup(const char *s);
 
 #endif /* SO_LONG_H */
