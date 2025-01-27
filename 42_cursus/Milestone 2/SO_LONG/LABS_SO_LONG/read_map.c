@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:45:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/10 16:00:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:27:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static char	**fill_map(char **map, int lines, int fd, t_game *game)
 		if (!map[index])
 		{
 			close(fd);
+			ft_putstr_fd_0("Error filling map.\n", 2);
 			free_game(game);
 		}
 		index++;
 	}
 	free(get_next_line(fd));
 	free(get_next_line(fd));
-	close(fd);
 	return (map);
 }
 
@@ -65,6 +65,8 @@ char	**read_map(char *filename, t_game *game)
 		return (ft_putstr_fd_n("There was a mistake opening file\n", 2));
 	lines = count_lines(file_descriptor);
 	close(file_descriptor);
+	if (lines == 0 || check_ber(filename) != 0)
+		return (ft_putstr_fd_n("Empty file/Directory or isn't .ber\n", 2));
 	file_descriptor = open(filename, O_RDONLY);
 	if (file_descriptor == -1)
 		return (ft_putstr_fd_n("There was a mistake reopen file.\n", 2));

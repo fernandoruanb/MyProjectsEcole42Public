@@ -6,34 +6,32 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:44:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/10 10:34:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:47:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	check_each_el(char el, t_game *game)
+static int	check_each_el(char el, t_game *game, int x, int y)
 {
-	static int	count_p;
-	static int	count_e;
 	char		*set;
 
-	if (!count_p)
-		count_p = 0;
-	if (!count_e)
-		count_e = 0;
 	set = "PCE01\n";
 	if (el == 'P')
-		count_p++;
-	if (el == 'P' && count_p > 1)
-		return (0);
-	if (el == 'E')
+		game->player++;
+	if (el == 'P' && game->player > 1)
+		return (ft_putstr_fd_0("Too many players!\n", 2));
+	if (el == 'P')
 	{
-		count_e++;
-		game->exit = 1;
+		game->player_x = x;
+		game->player_y = y;
 	}
-	if (el == 'E' && count_e > 1)
-		return (0);
+	if (el == 'E')
+		game->exit++;
+	if (el == 'E' && game->exit > 1)
+		return (ft_putstr_fd_0("Too many exits.\n", 2));
+	if (el == 'C')
+		game->collectible++;
 	if (!ft_strchr_v3(set, el))
 		return (0);
 	return (1);
@@ -50,21 +48,18 @@ static int	check_els(char **map, t_game *game)
 		s_index = 0;
 		while (map[index][s_index] != '\0')
 		{
-			if (!check_each_el(map[index][s_index], game))
+			if (!check_each_el(map[index][s_index], game, index, s_index))
 				return (ft_putstr_fd_0("Invalid element!\n", 2));
-			if (map[index][s_index] == 'P')
-			{
-				game->player_x = index;
-				game->player_y = s_index;
-			}
-			if (map[index][s_index] == 'C')
-				game->collectible++;
 			s_index++;
 		}
 		index++;
 	}
+	if (game->player == 0)
+		return (ft_putstr_fd_0("There aren't players on the map.\n", 2));
+	if (game->collectible == 0)
+		return (ft_putstr_fd_0("There aren't collectibles on the map.\n", 2));
 	if (game->exit == 0)
-		return (ft_putstr_fd_0("There isn't a valid exit!\n", 2));
+		return (ft_putstr_fd_0("There isn't an exit on the map!\n", 2));
 	return (1);
 }
 
@@ -122,8 +117,8 @@ int	validate_map(char **map, t_game *game)
 	if (!is_surrounded_by_walls(map))
 		return (ft_putstr_fd_0("The map isn't surrounded by walls.\n", 2));
 	if (!check_els(map, game))
-		return (ft_putstr_fd_0("There is/are invalid els on map.\n", 2));
-	if (!check_cosplay(map, game))
-		return (ft_putstr_fd_0("Invalid number collectibles or players.\n", 2));
+		return (ft_putstr_fd_0("You need to check the elements.\n", 2));
+	if (!flood_fill(game))
+		return (ft_putstr_fd_0("The map isn't playable.\n", 2));
 	return (1);
 }

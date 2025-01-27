@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/12 17:36:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:08:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,18 @@ typedef struct s_game
 	int		collectible;
 	int		player;
 	int		exit;
+	int		lines;
+	int		length;
 	int		moves;
 	void	*player_img;
 	void	*wall_img;
 	void	*collectible_img;
 	void	*exit_img;
 	void	*floor_img;
+	int		x;
+	int		y;
+	int		exit_t;
+	int		collectibles;
 	int		mlx_flag;
 	int		win_flag;
 	int		floor_flag;
@@ -68,11 +74,18 @@ char	**ft_putstr_fd_n(const char *s, int fd);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	**read_map(char *filename, t_game *game);
 int		validate_map(char **map, t_game *game);
-void	render_map(char **map, t_game *game);
+int		render_map(t_game *game);
 int		load_textures(t_game *game);
 int		free_game(t_game *game);
 int		key_press(int keycode, t_game *game);
 char	*ft_strchr_v3(const char *s, int c);
-int		check_cosplay(char **map, t_game *game);
+int		load_image(void **img, char *path, t_game *game);
+void	initialize_heap_variables(t_game *game);
+int		check_ber(const char *filename);
+int		flood_fill(t_game *game);
+char	**get_map(t_game *game);
+void	start_test_exit(char **map_copy, int x, int y, t_game *game);
+char	*ft_strjoin(const char *s);
+char	*ft_strdup(const char *s);
 
 #endif /* SO_LONG_H */

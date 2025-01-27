@@ -1,45 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_cosplay.c                                    :+:      :+:    :+:   */
+/*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 10:55:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/08 12:00:58 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/26 17:55:07 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/26 18:16:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	check_collectible(t_game *game)
+char	**get_map(t_game *game)
 {
-	if (game->collectible == 0)
-		return (0);
-	return (1);
-}
+	int		index;
+	char	**map_copy;
 
-int	check_cosplay(char **map, t_game *game)
-{
-	int	index;
-	int	s_index;
-
+	map_copy = (char **)malloc((game->lines + 1) * sizeof(char *));
+	if (!map_copy)
+		return (NULL);
 	index = 0;
-	s_index = 0;
-	while (map[index] != NULL)
+	while (index < game->lines)
 	{
-		s_index = 0;
-		while (map[index][s_index] != '\0')
+		map_copy[index] = ft_strdup(game->map[index]);
+		if (!map_copy[index])
 		{
-			if (map[index][s_index] == 'P')
-				game->player++;
-			if (game->player > 1)
-				return (0);
-			s_index++;
+			index--;
+			while (index >= 0)
+				free(map_copy[index--]);
+			free(map_copy);
+			return (NULL);
 		}
 		index++;
 	}
-	if (game->player == 0 || !(check_collectible(game)))
-		return (0);
-	return (1);
+	map_copy[index] = NULL;
+	return (map_copy);
 }
