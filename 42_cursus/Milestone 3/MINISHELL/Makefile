@@ -23,6 +23,7 @@ LIBFT = libft/libft.a
 SRCS =  $(SRCDIR)/minishell.c\
 	$(SRCDIR)/execute.c\
 	$(SRCDIR)/ft_cd.c\
+	$(SRCDIR)/ft_env.c\
 	$(SRCDIR)/builtins.c
 
 # OBJS
