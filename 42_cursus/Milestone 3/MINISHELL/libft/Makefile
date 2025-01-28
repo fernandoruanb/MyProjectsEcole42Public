@@ -15,6 +15,7 @@ INCDIR = .
 # Archives .c
 
 SRCS =  $(SRCDIR)/ft_isalpha.c\
+	$(SRCDIR)/execute_command_m.c\
 	$(SRCDIR)/ft_putendl_fd_1.c\
 	$(SRCDIR)/find_path.c\
 	$(SRCDIR)/close_descriptors.c\

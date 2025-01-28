@@ -20,7 +20,8 @@ LIBFT = libft/libft.a
 
 # SRCS
 
-SRCS =  $(SRCDIR)/minishell.c
+SRCS =  $(SRCDIR)/minishell.c\
+	$(SRCDIR)/execute.c
 
 # OBJS
 

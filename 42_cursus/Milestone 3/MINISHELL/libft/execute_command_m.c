@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_command.c                                  :+:      :+:    :+:   */
+/*   execute_command_m.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:00:38 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/28 13:26:22 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/28 13:11:33 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/28 13:25:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	execute_command(char *cmd, char **envp)
+int	execute_command_m(char *cmd, char **envp)
 {
 	char	*paths_temp;
 	char	**paths;

@@ -6,16 +6,23 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:02:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:02:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:15:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	free_splits(char **split1, char **split2, char **split3)
+static void	check_line(char *line)
+{
+	if (line)
+		free(line);
+}
+
+int	free_splits(char *l, char **split1, char **split2, char **split3)
 {
 	int	index;
 
+	check_line(l);
 	if (split1)
 	{
 		index = 0;
