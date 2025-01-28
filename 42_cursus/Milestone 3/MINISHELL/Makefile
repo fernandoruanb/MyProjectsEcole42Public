@@ -6,6 +6,7 @@ NAME = minishell
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
+READLINEFLAGS = -lreadline
 
 # Directories
 
@@ -33,7 +34,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
-	$(CC) $(CFLAGS) -I $(INCDIR) -I $(LIBFT_DIR) -o $(NAME) $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -I $(INCDIR) -I $(LIBFT_DIR) -o $(NAME) $(OBJS) $(LIBFT) $(READLINEFLAGS)
 
 # clean
 
