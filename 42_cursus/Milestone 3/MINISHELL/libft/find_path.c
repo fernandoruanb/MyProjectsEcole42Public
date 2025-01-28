@@ -16,7 +16,7 @@ char	*find_path(char *cmd, char **paths)
 {
 	char	*true_temp;
 	char	*true_path;
-	int	index;
+	int		index;
 
 	index = 0;
 	while (paths[index])
@@ -33,4 +33,3 @@ char	*find_path(char *cmd, char **paths)
 	}
 	return (NULL);
 }
-

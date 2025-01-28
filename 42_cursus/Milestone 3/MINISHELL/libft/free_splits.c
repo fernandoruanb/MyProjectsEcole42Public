@@ -46,4 +46,3 @@ int	free_splits(char *l, char **split1, char **split2, char **split3)
 	}
 	return (1);
 }
-

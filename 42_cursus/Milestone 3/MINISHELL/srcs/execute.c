@@ -6,20 +6,20 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:26:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/28 13:56:50 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:45:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	find_pipes(char *line, t_data *data)
+static void	find_pipes(t_data *data)
 {
 	int	index;
 
 	index = 0;
-	while (line[index] != '\0')
+	while (data->line[index] != '\0')
 	{
-		if (line[index] == '|')
+		if (data->line[index] == '|')
 			data->pipes++;
 		index++;
 	}
@@ -51,7 +51,7 @@ static void	find_pipes(char *line, t_data *data)
 
 }*/
 
-static void	central_control(char *line, char **s_l, t_data *data, char **envp)
+static void	central_control(char **s_l, t_data *data, char **envp)
 {
 	int	pid;
 
@@ -63,20 +63,20 @@ static void	central_control(char *line, char **s_l, t_data *data, char **envp)
 		if (data->pipes == 0)
 		{
 			free_splits(NULL, s_l, NULL, NULL);
-			execute_command(line, envp);
+			execute_command(data->line, envp);
 			exit(EXIT_SUCCESS);
 		}
 	}
 	waitpid(pid, &data->status, 0);
 }
 
-void	execute(char *line, t_data *data, char **envp)
+void	execute(t_data *data, char **envp)
 {
 	char	**split_line;
 
-	split_line = ft_split(line, ' ');
+	split_line = ft_split(data->line, ' ');
 	if (!split_line)
 		return ;
-	find_pipes(line, data);
-	central_control(line, split_line, data, envp);
+	find_pipes(data);
+	central_control(split_line, data, envp);
 }

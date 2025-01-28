@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:07:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/28 14:07:54 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:18:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,22 @@
 
 typedef struct s_data
 {
-	int	file_stdin;
-	int	file_stdout;
-	int	file_stderr;
-	int	pipes;
-	int	status;
-	int	redirect_in;
-	int	redirect_out;
-	int	redirect_out_append;
-	int	redirect_in_heredoc;
-	int	redirect_in_triple;
-	int	redirect_out_triple;
+	char	*line;
+	int		file_stdin;
+	int		file_stdout;
+	int		file_stderr;
+	int		pipes;
+	int		status;
+	int		redirect_in;
+	int		redirect_out;
+	int		redirect_out_append;
+	int		redirect_in_heredoc;
+	int		redirect_in_triple;
+	int		redirect_out_triple;
 }	t_data;
 
-void	execute(char *line, t_data *data, char **envp);
+void	execute(t_data *data, char **envp);
+int		builtins(t_data *data);
+void	ft_cd(t_data *data);
 
 #endif /* MINISHELL_H */

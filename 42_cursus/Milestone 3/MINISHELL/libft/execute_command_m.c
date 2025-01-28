@@ -17,7 +17,7 @@ int	execute_command_m(char *cmd, char **envp)
 	char	*paths_temp;
 	char	**paths;
 	char	*path;
-	int	index;
+	int		index;
 	char	**commands;
 
 	index = 0;
@@ -39,4 +39,3 @@ int	execute_command_m(char *cmd, char **envp)
 		exit(EXIT_FAILURE);
 	return (1);
 }
-

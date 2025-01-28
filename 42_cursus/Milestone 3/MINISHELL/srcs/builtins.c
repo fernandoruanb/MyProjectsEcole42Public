@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_descriptors.c                                :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 15:10:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/24 15:12:43 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/28 18:03:49 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/28 18:17:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-int	close_descriptors(int *pipefd, int *pipefd2)
+int	builtins(t_data *data)
 {
-	if (pipefd)
+	if (ft_strnstr(data->line, "cd", 2))
 	{
-		close(pipefd[1]);
-		close(pipefd[0]);
+		ft_cd(data);
+		return (1);
 	}
-	if (pipefd2)
+	else if (ft_strnstr(data->line, "clear", 5))
 	{
-		close(pipefd2[1]);
-		close(pipefd2[0]);
+		write(1, "\033[H\033[J", 7);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
