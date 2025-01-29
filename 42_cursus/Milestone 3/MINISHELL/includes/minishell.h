@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:07:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/29 16:45:20 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:07:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_data
 	int		redirect_in_heredoc;
 	int		redirect_in_triple;
 	int		redirect_out_triple;
-	struct s_utils	*utils;
 }	t_data;
 
 void	execute(t_data *data, char **envp);
@@ -49,5 +48,6 @@ void	ft_cd(t_data *data);
 void	ft_env(t_data *data);
 void	ft_echo(t_data *data);
 void	free_shell(t_data *data);
+int		is_only_spaces(t_data *data);
 
 #endif /* MINISHELL_H */

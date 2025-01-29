@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:53:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/29 16:25:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:02:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ void	ft_cd(t_data *data)
 	size_t	length;
 
 	length = ft_strlen(data->line);
-	if (ft_strncmp(data->line, "cd ~", 4) == 0)
+	if ((ft_strncmp(data->line, "cd", 2) == 0) && is_only_spaces(data))
+		path = get_home(data, length);
+	else if (ft_strncmp(data->line, "cd ~", 4) == 0)
 		path = get_home(data, length);
 	else if (ft_strncmp(data->line, "cd -", 4) == 0)
 		path = get_oldpwd(data);

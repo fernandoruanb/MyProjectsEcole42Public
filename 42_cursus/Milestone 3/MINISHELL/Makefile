@@ -26,6 +26,7 @@ SRCS =  $(SRCDIR)/minishell/minishell.c\
 	$(SRCDIR)/builtins/ft_env.c\
 	$(SRCDIR)/builtins/ft_echo.c\
 	$(SRCDIR)/builtins/builtins.c\
+	$(SRCDIR)/builtins/is_only_spaces.c\
 	$(SRCDIR)/minishell/free_shell.c
 
 # OBJS

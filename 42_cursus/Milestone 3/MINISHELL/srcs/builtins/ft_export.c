@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_shell.c                                       :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 16:34:25 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/29 18:47:17 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/29 17:49:14 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/29 19:01:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	free_shell(t_data *data)
+static void	print_variables(t_data *data)
 {
-	if (data->oldpwd != NULL)
-		free(data->oldpwd);
-	if (data->newpwd != NULL)
-		free(data->newpwd);
-	if (data->line != NULL)
-		free(data->line);
-	rl_clear_history();
+	int	index;
+
+	index = 0;
+	while (data->envp[index])
+	{
+		ft_printf("declare -x %s\n", envp[index]);
+		index++;
+	}
+}
+
+void	ft_export(t_data *data)
+{
+	size_t	length;
+
+	length = ft_strlen(length);
+	if (length == 6)
+		print_variables(data);
 }

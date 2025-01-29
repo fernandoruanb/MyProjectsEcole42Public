@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 08:13:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/29 16:48:56 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:47:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void	display_prompt(t_data *data, char **envp)
 		{
 			if (data->line == NULL)
 				ft_printf("exit\n");
-			rl_clear_history();
 			break ;
 		}
 		add_history(data->line);

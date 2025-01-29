@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_shell.c                                       :+:      :+:    :+:   */
+/*   is_only_spaces.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 16:34:25 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/29 18:47:17 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/29 19:02:21 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/29 19:48:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	free_shell(t_data *data)
+int	is_only_spaces(t_data *data)
 {
-	if (data->oldpwd != NULL)
-		free(data->oldpwd);
-	if (data->newpwd != NULL)
-		free(data->newpwd);
-	if (data->line != NULL)
-		free(data->line);
-	rl_clear_history();
+	int	index;
+
+	if (data->line[2] == '\0')
+		return (1);
+	index = 2;
+	while (data->line[index] != '\0')
+	{
+		if (data->line[index] != ' ')
+			return (0);
+		index++;
+	}
+	return (1);
 }
