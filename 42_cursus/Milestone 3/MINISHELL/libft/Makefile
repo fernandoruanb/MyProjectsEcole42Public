@@ -157,7 +157,7 @@ all: $(NAME)
 # Main rule
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 # Main bonus
 
@@ -166,17 +166,17 @@ bonus: $(NAME)
 # .c -> .o
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
 
 # Clear archives
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	@rm -f $(OBJS) $(BONUS_OBJS)
 
 # Full clean
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 # Restart
 

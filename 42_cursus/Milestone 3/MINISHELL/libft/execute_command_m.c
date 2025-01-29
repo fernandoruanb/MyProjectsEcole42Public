@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:11:33 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/28 13:25:54 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/01/29 10:22:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	execute_command_m(char *cmd, char **envp)
 	path = find_path(commands[0], paths);
 	if (!path)
 		return (free_splits(paths_temp, paths, commands, NULL));
-	if (execve(path, commands, NULL) == -1)
+	if (execve(path, commands, envp) == -1)
 		exit(EXIT_FAILURE);
 	return (1);
 }

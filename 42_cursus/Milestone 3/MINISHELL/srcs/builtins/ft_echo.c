@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 18:03:49 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/28 19:16:26 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/29 13:11:49 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/29 13:18:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int	builtins(t_data *data)
+void	ft_echo(t_data *data)
 {
-	if (ft_strnstr(data->line, "cd", 2))
-	{
-		ft_cd(data);
-		return (1);
-	}
-	else if (ft_strnstr(data->line, "clear", 5))
-	{
-		write(1, "\033[H\033[J", 7);
-		return (1);
-	}
-	else if (ft_strnstr(data->line, "env", 3))
-	{
-		ft_env(data);
-		return (1);
-	}
-	return (0);
+	execute(data, data->envp);
 }

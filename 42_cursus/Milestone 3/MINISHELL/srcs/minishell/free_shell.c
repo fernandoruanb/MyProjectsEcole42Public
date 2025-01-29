@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   free_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 19:12:43 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/28 19:20:08 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/29 16:34:25 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/29 16:36:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	ft_env(t_data *data)
+void	free_shell(t_data *data)
 {
-	int	index;
-
-	index = 0;
-	while (data->envp[index] != NULL)
-	{
-		ft_printf("%s\n", data->envp[index]);
-		index++;
-	}
+	if (data->oldpwd != NULL)
+		free(data->oldpwd);
+	if (data->newpwd != NULL)
+		free(data->newpwd);
+	if (data->line != NULL)
+		free(data->line);
 }

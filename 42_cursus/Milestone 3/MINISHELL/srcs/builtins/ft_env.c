@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 17:53:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/28 19:26:04 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/01/28 19:12:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/01/29 13:17:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	ft_cd(t_data *data)
+void	ft_env(t_data *data)
 {
-	char	*path;
+	int	index;
 
-	if (data->line[3] == '~')
-		path = getenv("HOME");
-	else if (data->line[3] == '-')
-		path = getenv("OLDPWD");
-	else
-		path = data->line + 3;
-	chdir(path);
+	index = 0;
+	while (data->envp[index] != NULL)
+	{
+		ft_printf("%s\n", data->envp[index]);
+		index++;
+	}
+	data->status = 0;
 }
