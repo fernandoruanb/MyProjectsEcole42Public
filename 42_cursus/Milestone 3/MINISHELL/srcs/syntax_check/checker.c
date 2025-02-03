@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/02 19:53:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:00:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,13 +275,25 @@ int	case_pipe(t_tokens *root, t_utils *data)
 	return (1);
 }
 
-int	case_redirect(t_tokens *root, t_utils *data)
+int	heredoc_or_append(t_tokens *root, t_utils *data)
 {
 	if (root->type == HEREDOC && root->next != NULL && root->next->type == LIMITER)
 	{
 		data->status = 2;
 		return (1);
 	}
+	if (root->type == APPEND && root->next != NULL && root->next->type == FD)
+		return (1);
+	if (root->type == HEREDOC && root->next != NULL 
+		&& root->next->type == LIMITER && root->previous->type == CMD)
+		return (1);
+	return (show_error_fd("Invalid case of heredoc or append", 0, data, 0));
+}
+
+int	case_redirect(t_tokens *root, t_utils *data)
+{
+	if (root->type == HEREDOC || root->type == APPEND)
+		return (heredoc_or_append(root, data));
 	if (data->status == 0)
 		return (show_error_fd("An invalid redirect first position", 0, data, 0));
 	data->status = 2;
@@ -290,9 +302,6 @@ int	case_redirect(t_tokens *root, t_utils *data)
 		return (1);
 	if (root->type == REDIRECT_IN && root->next != NULL
 		&& root->next->type == FD)
-		return (1);
-	if (root->type == HEREDOC && root->next->type == LIMITER
-		&& root->previous->type == CMD)
 		return (1);
 	if (root->type == REDIRECT_OUT && root->next == NULL)
 		return (show_error_fd("Forgot a file after red_out", 0, data, 0));
@@ -497,14 +506,12 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 2)
 		return (1);
 	init_utils(&data);
-	root = create_token("(", BRACKET_O);
+	root = create_token("echo", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, "(", BRACKET_O);
-	add_token(&root, "ls", CMD);
-	add_token(&root, "-l", ARG);
-	add_token(&root, ")", BRACKET_C);
-	add_token(&root, ")", BRACKET_C);
+	add_token(&root, "hi", ARG);
+	add_token(&root, ">>", APPEND);
+	add_token(&root, "log.txt", FD);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
