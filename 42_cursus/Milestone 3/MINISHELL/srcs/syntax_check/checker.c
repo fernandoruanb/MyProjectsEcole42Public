@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/03 18:03:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:18:53 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ typedef struct s_utils
 	int	status;
 	int	redirects;
 	int	files;
+	int	commands;
+	int	pipes;
+	int	args;
 	int	brackets_c;
 	int	brackets_o;
 }	t_utils;
@@ -511,8 +514,18 @@ int	final_case(t_tokens *root, t_utils *data)
 		data->redirects++;
 	if (root->type == FD)
 		data->files++;
+	if (root->type == CMD)
+		data->commands++;
+	if (root->type == ARG)
+		data->args++;
+	if (root->type == PIPE)
+		data->pipes++;
 	if (root->next == NULL && data->redirects != data->files)
 		return (1);
+	if (root->next == NULL && data->commands == 0 && data->args > 0)
+		return (show_error_fd("You put args but never a command", 1, data, 0));
+	if (root->next == NULL && data->commands < data->pipes)
+	       return (show_error_fd("You have so many pipes than commands.", 1, data, 0));	
 	return (0);
 }
 
@@ -587,6 +600,9 @@ void	init_utils(t_utils *data)
 	data->temp = NULL;
 	data->status = 0;
 	data->redirects = 0;
+	data->pipes = 0;
+	data->args = 0;
+	data->commands = 0;
 	data->files = 0;
 }
 
