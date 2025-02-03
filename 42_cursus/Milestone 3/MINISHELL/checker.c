@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/03 18:03:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:30:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ typedef struct s_utils
 	char	*path;
 	char	**paths;
 	int	status;
-	int	redirects;
-	int	files;
 	int	brackets_c;
 	int	brackets_o;
 }	t_utils;
@@ -299,24 +297,12 @@ int	heredoc_or_append(t_tokens *root, t_utils *data)
 	return (show_error_fd("Invalid case of heredoc, append", 0, data, 0));
 }
 
-int	extra_redirect_cases(t_tokens *root, t_utils *data)
-{
-	if ((root->type == REDIRECT_IN || root->type == REDIRECT_OUT || root->type == APPEND)
-		&& root->next != NULL && root->next->type == ARG)
-		return (1);
-	return (show_error_fd("Invalid case of redirects", 0, data, 0));
-}
-
 int	case_redirect(t_tokens *root, t_utils *data)
 {
 	if (root->type == HEREDOC || root->type == APPEND)
 		return (heredoc_or_append(root, data));
-	if (data->status == 0 && (root->type == REDIRECT_IN || root->type == REDIRECT_OUT
-		|| root->type == APPEND) && root->next != NULL && root->next->type == FD)
-	{
-		data->status = 2;
-		return (1);
-	}
+	if (data->status == 0)
+		return (show_error_fd("An invalid redirect first position", 0, data, 0));
 	data->status = 2;
 	if (root->type == REDIRECT_IN && root->previous->type == CMD
 		&& root->next != NULL && root->next->type == FD)
@@ -326,12 +312,11 @@ int	case_redirect(t_tokens *root, t_utils *data)
 		return (1);
 	if (root->type == REDIRECT_OUT && root->next == NULL)
 		return (show_error_fd("Forgot a file after red_out", 0, data, 0));
-	if (root->type == REDIRECT_OUT && root->next != NULL 
-		&& root->next->type != FD && root->next->type != ARG)
+	if (root->type == REDIRECT_OUT && root->next->type != FD)
 		return (show_error_fd("Forgot a file after red_out", 0, data, 0));
 	if (root->type == REDIRECT_OUT && root->next->type == FD)
 		return (1);
-	return (extra_redirect_cases(root, data));
+	return (show_error_fd("Invalid case of redirects", 0, data, 0));
 }
 
 int	is_number(t_tokens *root)
@@ -370,8 +355,6 @@ int	case_fd(t_tokens *root, t_utils *data)
 	else if ((root->type == FD) && (root->previous != NULL)
 		&& (root->previous->type == REDIRECT_OUT
 		|| root->previous->type == APPEND || root->previous->type == REDIRECT_IN))
-		return (1);
-	else if (root->previous != NULL && root->previous->type == ARG)
 		return (1);
 	return (show_error_fd("Invalid case of files", 0, data, 0));
 }
@@ -491,35 +474,8 @@ int	case_limiter(t_tokens *root, t_utils *data)
 	return (show_error_fd("Invalid LIMITER Case", 0, data, 0));
 }
 
-int	case_arg(t_tokens *root, t_utils *data)
-{
-	if (root->type == ARG && data->status == 1)
-		return (1);
-	else if (root->type == ARG && root->previous != NULL && (root->previous->type == FD
-		|| root->previous->type == REDIRECT_OUT || root->previous->type == REDIRECT_IN
-		|| root->previous->type == APPEND))
-		return (1);
-	else if (root->type == ARG && root->next != NULL && (root->next->type == ARG
-			|| root->next->type == FD))
-		return (1);
-	return (show_error_fd("Invalid case of args", 0, data, 0));
-}
-
-int	final_case(t_tokens *root, t_utils *data)
-{
-	if (root->type == REDIRECT_IN || root->type == APPEND || root->type == REDIRECT_OUT)
-		data->redirects++;
-	if (root->type == FD)
-		data->files++;
-	if (root->next == NULL && data->redirects != data->files)
-		return (1);
-	return (0);
-}
-
 int	get_command(t_tokens *root, t_utils *data)
 {
-	if (final_case(root, data))
-		return (show_error_fd("You forgot redirects or files", 0, data, 0));
 	if (root->type == PIPE)
 		return (case_pipe(root, data));
 	else if (root->type == LIMITER)
@@ -536,10 +492,8 @@ int	get_command(t_tokens *root, t_utils *data)
 		return (case_command(root, data));
 	else if (root->type != CMD && data->status == 0)
 		return (show_error_fd("The first argument isn't a CMD", 0, data, 0));
-	if (root->next == NULL && data->brackets_o != data->brackets_c)
-		return (show_error_fd("You forgot to close brackets", 0, data, 0));
-	if (root->type == ARG)
-		return (case_arg(root, data));
+	else if (root->type == ARG && data->status == 1)
+		return (1);
 	return (show_error_fd("Unfortunately, we don't know what we need to do", 0, data, 0));
 }
 
@@ -586,8 +540,6 @@ void	init_utils(t_utils *data)
 	data->paths = NULL;
 	data->temp = NULL;
 	data->status = 0;
-	data->redirects = 0;
-	data->files = 0;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -600,23 +552,11 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("<", REDIRECT_IN);
+	root = create_token("cat", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, "infile", FD);
-	add_token(&root, "cat", CMD);
-	add_token(&root, ">", REDIRECT_OUT);
-	add_token(&root, "outfile", FD);
-	add_token(&root, "-e", ARG);
-	add_token(&root, "&&", OPERATOR_AND);
-	add_token(&root, "ls", CMD);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "infile", FD);
-	add_token(&root, ">", REDIRECT_OUT);
-	add_token(&root, "-a", ARG);
-	add_token(&root, "-b", ARG);
-	add_token(&root, "outfile", FD);
-	add_token(&root, "-l", ARG);
+	add_token(&root, "<<", HEREDOC);
+	add_token(&root, "EOF", LIMITER);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
