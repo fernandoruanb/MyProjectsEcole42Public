@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/03 19:18:53 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:10:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -631,6 +631,7 @@ int	main(int argc, char **argv, char **envp)
 	add_token(&root, ">", REDIRECT_OUT);
 	add_token(&root, "-a", ARG);
 	add_token(&root, "-b", ARG);
+	add_token(&root, "-c", ARG);
 	add_token(&root, "outfile", FD);
 	add_token(&root, "-l", ARG);
 	show_tokens(root);
