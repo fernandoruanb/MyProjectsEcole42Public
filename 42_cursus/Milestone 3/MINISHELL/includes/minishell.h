@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:07:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/29 19:07:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:37:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <signal.h>
 # include "../libft/libft.h"
 

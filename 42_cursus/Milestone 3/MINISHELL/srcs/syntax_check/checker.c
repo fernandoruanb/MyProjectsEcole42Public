@@ -6,11 +6,11 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/04 14:04:43 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:19:36 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 typedef struct s_utils
 {
@@ -27,6 +27,7 @@ typedef struct s_utils
 	int	brackets_o;
 	int	index_bra_c;
 	int	index_bra_o;
+	struct stat	stat_check;
 }	t_utils;
 
 typedef enum e_id
@@ -329,8 +330,9 @@ int	case_redirect(t_tokens *root, t_utils *data)
 		return (1);
 	}
 	data->status = 2;
-	if (root->type == REDIRECT_IN && root->previous->type == CMD
-		&& root->next != NULL && root->next->type == FD)
+	if (root->type == REDIRECT_IN && root->previous != NULL 
+		&& root->previous->type == CMD && root->next != NULL 
+		&& root->next->type == FD)
 		return (1);
 	if (root->type == REDIRECT_IN && root->next != NULL
 		&& root->next->type == FD)
@@ -345,7 +347,7 @@ int	case_redirect(t_tokens *root, t_utils *data)
 	return (extra_redirect_cases(root, data));
 }
 
-int	is_number(t_tokens *root)
+int	is_number(t_tokens *root, t_utils *data)
 {
 	int	index;
 
@@ -356,23 +358,40 @@ int	is_number(t_tokens *root)
 			return (0);
 		index++;
 	}
+	data->files--;
 	return (1);
+}
+
+int	check_is_valid_pid(t_tokens *root, t_utils *data)
+{
+	int	check_fd;
+
+	check_fd = ft_atoi(root->value);
+	if (check_fd > 4194304)
+		return (show_error_fd("Too extreme file descriptor", 0, data, 0));
+	return (1);
+}
+
+int	check_is_directory(t_tokens *root, t_utils *data)
+{
+
+	if (stat(root->value, &data->stat_check) == -1)
+		return (0);
+	if (S_ISDIR(data->stat_check.st_mode))
+		return (1);
+	return (0);
 }
 
 int	case_fd(t_tokens *root, t_utils *data)
 {
-	int	check_fd;
-
-	if (is_number(root))
-	{
-		check_fd = ft_atoi(root->value);
-		if (check_fd > 4194304)
-			return (show_error_fd("Too extreme file descriptor", 0, data, 0));
-	}
-	if ((data->status == 0) && (!is_number(root)))
+	if (is_number(root, data))
+		return (check_is_valid_pid(root, data));
+	if (check_is_directory(root, data))
+		return (show_error_fd("You put a directory as file", 0, data, 0));
+	if ((data->status == 0) && (!is_number(root, data)))
 		return (show_error_fd("Isolated fd", 0, data, 0));
 	data->status = 2;
-	if (is_number(root) && root->next != NULL && root->next->type == REDIRECT_IN)
+	if (is_number(root, data) && root->next != NULL && root->next->type == REDIRECT_IN)
 		return (1);
 	if (root->type == FD && root->next != NULL && root->next->type == REDIRECT_OUT)
 		return (1);
@@ -512,6 +531,21 @@ int	case_arg(t_tokens *root, t_utils *data)
 	return (show_error_fd("Invalid case of args", 0, data, 0));
 }
 
+int	check_invalid_brackets_position(t_utils *data)
+{
+	if (data->index_bra_o != -1 && data->index_bra_c != -1)
+	{
+		if (data->index_bra_o > data->index_bra_c)
+			return (1);
+		else
+		{
+			data->index_bra_o = -1;
+			data->index_bra_c = -1;
+		}
+	}
+	return (0);
+}
+
 int	final_case(t_tokens *root, t_utils *data)
 {
 	if (root->type == REDIRECT_IN || root->type == APPEND || root->type == REDIRECT_OUT)
@@ -534,9 +568,8 @@ int	final_case(t_tokens *root, t_utils *data)
 		return (show_error_fd("You put args but never a command", 1, data, 0));
 	if (root->next == NULL && data->commands < data->pipes)
 	       return (show_error_fd("You have so many pipes than commands.", 1, data, 0));
-	if (data->index_bra_c != -1 && data->index_bra_o != -1 && data->index_bra_o > data->index_bra_c
-		&& data->brackets_o == data->brackets_c)
-		return (show_error_fd("You inverted the brackets order", 1, data, 0));
+	if (check_invalid_brackets_position(data))
+		return (show_error_fd("You inverted the position of brackets", 1, data, 0));
 	return (0);
 }
 
@@ -629,23 +662,12 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("echo", CMD);
+	root = create_token("2", FD);
 	if (!root)
 		return (1);
-	add_token(&root, "hi", ARG);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "(", BRACKET_O);
+	add_token(&root, ">", REDIRECT_IN);
+	add_token(&root, "infile", FD);
 	add_token(&root, "cat", CMD);
-	add_token(&root, "-e", ARG);
-	add_token(&root, ")", BRACKET_C);
-	add_token(&root, ">", REDIRECT_OUT);
-	add_token(&root, "outfile", FD);
-	add_token(&root, "&&", OPERATOR_AND);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "infile1", FD);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "cat", CMD);
-	add_token(&root, "-e", ARG);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
