@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/04 14:04:43 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:59:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ typedef struct s_utils
 	int	args;
 	int	brackets_c;
 	int	brackets_o;
-	int	index_bra_c;
-	int	index_bra_o;
 }	t_utils;
 
 typedef enum e_id
@@ -274,8 +272,6 @@ int	case_pipe(t_tokens *root, t_utils *data)
 	if (data->status == 0)
 		return (show_error_fd("Pipe is the first to appear.", 0, data, 0));
 	data->status = 2;
-	if (root->next != NULL && root->next->type == BRACKET_O)
-		return (1);
 	if (root->next != NULL && (root->next->type == REDIRECT_OUT 
 		|| root->next->type == REDIRECT_IN || root->next->type == APPEND 
 		|| root->next->type == HEREDOC))
@@ -524,26 +520,19 @@ int	final_case(t_tokens *root, t_utils *data)
 		data->args++;
 	if (root->type == PIPE)
 		data->pipes++;
-	if (root->type == BRACKET_C)
-		data->index_bra_c = root->index;
-	if (root->type == BRACKET_O)
-		data->index_bra_o = root->index;
 	if (root->next == NULL && data->redirects != data->files)
 		return (1);
 	if (root->next == NULL && data->commands == 0 && data->args > 0)
 		return (show_error_fd("You put args but never a command", 1, data, 0));
 	if (root->next == NULL && data->commands < data->pipes)
-	       return (show_error_fd("You have so many pipes than commands.", 1, data, 0));
-	if (data->index_bra_c != -1 && data->index_bra_o != -1 && data->index_bra_o > data->index_bra_c
-		&& data->brackets_o == data->brackets_c)
-		return (show_error_fd("You inverted the brackets order", 1, data, 0));
+	       return (show_error_fd("You have so many pipes than commands.", 1, data, 0));	
 	return (0);
 }
 
 int	get_command(t_tokens *root, t_utils *data)
 {
 	if (final_case(root, data))
-		return (show_error_fd("Final case Error", 0, data, 0));
+		return (show_error_fd("You forgot redirects or files", 0, data, 0));
 	if (root->type == PIPE)
 		return (case_pipe(root, data));
 	else if (root->type == LIMITER)
@@ -577,7 +566,7 @@ int	check_syntax(t_tokens *root, char **envp, t_utils *data)
 	flag = 1;
 	while (root)
 	{
-		//printf("TOKEN PASSED: %d\n", root->index);
+		printf("TOKEN PASSED: %d\n", root->index);
 		if (get_command(root, data))
 			root = root->next;
 		else
@@ -604,8 +593,6 @@ void	clean_program(t_tokens *root, t_utils *data)
 
 void	init_utils(t_utils *data)
 {
-	data->index_bra_c = -1;
-	data->index_bra_o = -1;
 	data->brackets_o = 0;
 	data->brackets_c = 0;
 	data->path = NULL;
@@ -629,23 +616,49 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("echo", CMD);
+	root = create_token("<", REDIRECT_IN);
 	if (!root)
 		return (1);
-	add_token(&root, "hi", ARG);
-	add_token(&root, "|", PIPE);
+	add_token(&root, "todo", FD);
 	add_token(&root, "(", BRACKET_O);
-	add_token(&root, "cat", CMD);
-	add_token(&root, "-e", ARG);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "todo", FD);
+	add_token(&root, "/bin/ls", CMD);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "infile", FD);
 	add_token(&root, ")", BRACKET_C);
-	add_token(&root, ">", REDIRECT_OUT);
-	add_token(&root, "outfile", FD);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "infile", FD);
+	add_token(&root, "|", PIPE);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "infile", FD);
+	add_token(&root, "/bin/cat", CMD);
+	add_token(&root, "-e", ARG);
 	add_token(&root, "&&", OPERATOR_AND);
 	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "infile1", FD);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "cat", CMD);
+	add_token(&root, "infile", FD);
+	add_token(&root, "(", BRACKET_O);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "infile", FD);
+	add_token(&root, "(", BRACKET_O);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "infile", FD);
+	add_token(&root, "(", BRACKET_O);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "infile", FD);
+	add_token(&root, "/bin/cat", CMD);
 	add_token(&root, "-e", ARG);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "todo", FD);
+	add_token(&root, ")", BRACKET_C);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "todo", FD);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "todo", FD);
+	add_token(&root, ")", BRACKET_C);
+	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, "todo", FD);
+	add_token(&root, ")", BRACKET_C);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
