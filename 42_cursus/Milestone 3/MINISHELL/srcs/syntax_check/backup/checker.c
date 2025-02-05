@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/05 10:07:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:59:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,8 +302,12 @@ int	heredoc_or_append(t_tokens *root, t_utils *data)
 	if (root->type == HEREDOC && root->previous != NULL && root->previous->type == ARG
 		&& root->next != NULL && root->next->type == LIMITER)
 		return (1);
-	if (root->type == APPEND && root->next != NULL && root->next->type == FD)
+	if (root->type == APPEND && root->next != NULL && (root->next->type == FD
+		|| root->next->type == ARG))
+	{
+		data->status = 2;
 		return (1);
+	}
 	if (root->type == HEREDOC && root->next != NULL 
 		&& root->next->type == LIMITER && root->previous != NULL
 		&& root->previous->type == CMD)
@@ -610,7 +614,7 @@ int	check_syntax(t_tokens *root, char **envp, t_utils *data)
 	flag = 1;
 	while (root)
 	{
-		//printf("TOKEN PASSED: %d\n", root->index);
+	//	printf("TOKEN PASSED: %d\n", root->index);
 		if (get_command(root, data))
 			root = root->next;
 		else
@@ -662,22 +666,11 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("echo", CMD);
+	root = create_token("cat", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, "hi", ARG);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "(", BRACKET_O);
-	add_token(&root, "echo", CMD);
-	add_token(&root, "hello", ARG);
-	add_token(&root, "&&", OPERATOR_AND);
-	add_token(&root, "echo", CMD);
-	add_token(&root, "bye", ARG);
-	add_token(&root, ")", BRACKET_C);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "cat", CMD);
-	add_token(&root, "-e", ARG);
-	add_token(&root, ">", REDIRECT_OUT);
+	add_token(&root, ">>", APPEND);
+	add_token(&root, "-a", ARG);
 	add_token(&root, "-n", ARG);
 	add_token(&root, "infile", FD);
 	show_tokens(root);
