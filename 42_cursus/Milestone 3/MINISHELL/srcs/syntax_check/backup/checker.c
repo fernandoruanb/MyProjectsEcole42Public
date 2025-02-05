@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/04 17:06:12 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:07:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -376,7 +376,7 @@ int	check_is_directory(t_tokens *root, t_utils *data)
 {
 
 	if (stat(root->value, &data->stat_check) == -1)
-		return (show_error_fd("Error trying to check directory", 0, data, 0));
+		return (0);
 	if (S_ISDIR(data->stat_check.st_mode))
 		return (1);
 	return (0);
@@ -662,12 +662,24 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("2", FD);
+	root = create_token("echo", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, ">", REDIRECT_IN);
-	add_token(&root, "infile", FD);
+	add_token(&root, "hi", ARG);
+	add_token(&root, "|", PIPE);
+	add_token(&root, "(", BRACKET_O);
+	add_token(&root, "echo", CMD);
+	add_token(&root, "hello", ARG);
+	add_token(&root, "&&", OPERATOR_AND);
+	add_token(&root, "echo", CMD);
+	add_token(&root, "bye", ARG);
+	add_token(&root, ")", BRACKET_C);
+	add_token(&root, "|", PIPE);
 	add_token(&root, "cat", CMD);
+	add_token(&root, "-e", ARG);
+	add_token(&root, ">", REDIRECT_OUT);
+	add_token(&root, "-n", ARG);
+	add_token(&root, "infile", FD);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
