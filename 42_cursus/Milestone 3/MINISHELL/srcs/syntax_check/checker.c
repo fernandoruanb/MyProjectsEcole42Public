@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/05 15:45:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:59:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -670,9 +670,9 @@ int	main(int argc, char **argv, char **envp)
 	root = create_token("cat", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, "<<", HEREDOC);
-	add_token(&root, "a", LIMITER);
-	add_token(&root, "infile", ARG);
+	add_token(&root, ">>", APPEND);
+	add_token(&root, "infile", FD);
+	add_token(&root, "-n", ARG);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
