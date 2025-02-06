@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/06 15:57:12 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:37:42 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_utils
 	int	brackets_o;
 	int	index_bra_c;
 	int	index_bra_o;
+	char	*new_str;
 	struct stat	stat_check;
 }	t_utils;
 
@@ -487,12 +488,89 @@ int	is_environment(t_tokens *root)
 	return (0);
 }
 
+int	case_builtins_quotes(t_utils *data)
+{
+	if (ft_strcmp(data->new_str, "cd") == 0)
+		return (1);
+	else if (ft_strcmp(data->new_str, "export") == 0)
+		return (1);
+	else if (ft_strcmp(data->new_str, "unset") == 0)
+		return (1);
+	else if (ft_strcmp(data->new_str, "pwd") == 0)
+		return (1);
+	else if (ft_strcmp(data->new_str, "env") == 0)
+		return (1);
+	else if (ft_strcmp(data->new_str, "echo") == 0)
+		return (1);
+	else if (ft_strcmp(data->new_str, "exit") == 0)
+		return (1);
+	else if (ft_strcmp(data->new_str, "clear") == 0)
+		return (1);
+	return (0);
+}
+
+int	is_absolute_path_quotes(t_utils *data)
+{
+	if (access(data->new_str, F_OK | X_OK) == 0)
+		return (1);
+	return (0);
+}
+
+int	test_all_paths(t_utils *data)
+{
+	int	index;
+
+	index = 0;
+	while (data->paths[index] != NULL)
+	{
+		if (data->temp)
+			free(data->temp);
+		if (data->path)
+			free(data->path);
+		data->temp = ft_strjoin(data->paths[index], "/");
+		if (!data->temp)
+			return (0);
+		data->path = ft_strjoin(data->temp, data->new_str);
+		if (!data->path)
+			return (0);
+		if (access(data->path, F_OK | X_OK) == 0)
+			return (1);
+		index++;
+	}
+	if (case_builtins_quotes(data))
+		return (1);
+	if (is_absolute_path_quotes(data))
+		return (1);
+	return (0);
+}
+
+int	is_insider_quotes(t_tokens *root, t_utils *data)
+{
+	size_t	length;
+
+	if (!root)
+		return (0);
+	length = ft_strlen(root->value);
+	if ((root->value[0] == '\'' && root->value[length - 1] == '\'')
+		|| (root->value[0] == '\"' && root->value[length - 1] == '\"'))
+	{
+		data->new_str = ft_substr(root->value, 1, length - 2);
+		if (!data->new_str)
+			return (0);
+		ft_printf("A new_str: %s\n", data->new_str);
+		if (test_all_paths(data))
+			return (1);
+	}
+	return (0);
+}
+
 int	case_command(t_tokens *root, t_utils *data)
 {
 	if ((root->type == CMD && data->status > 1) && (exist_command(root, data)
 			|| check_absolute_path(root, data)))
 		return (decrement_status(data));
-	else if (case_builtins(root) || is_environment(root))
+	else if (case_builtins(root) || is_environment(root)
+			|| is_insider_quotes(root, data))
 	{
 		data->status = 1;
 		return (1);
@@ -644,6 +722,8 @@ void	clean_program(t_tokens *root, t_utils *data)
 		free(data->path);
 	if (data->paths)
 		free_splits(NULL, data->paths, NULL, NULL);
+	if (data->new_str)
+		free(data->new_str);
 	free_tokens(root);
 }
 
@@ -656,6 +736,7 @@ void	init_utils(t_utils *data)
 	data->path = NULL;
 	data->paths = NULL;
 	data->temp = NULL;
+	data->new_str = NULL;
 	data->status = 0;
 	data->redirects = 0;
 	data->pipes = 0;
@@ -674,12 +755,9 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("$var", CMD);
+	root = create_token("\'echo\'", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, ">>", APPEND);
-	add_token(&root, "infile", FD);
-	add_token(&root, "-n", ARG);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
