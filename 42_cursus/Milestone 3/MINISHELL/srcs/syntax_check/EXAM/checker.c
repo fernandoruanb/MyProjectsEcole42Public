@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/06 15:08:49 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:57:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,12 +480,19 @@ int	case_builtins(t_tokens *root)
 	return (0);
 }
 
+int	is_environment(t_tokens *root)
+{
+	if (ft_strncmp(root->value, "$", 1) == 0)
+		return (1);
+	return (0);
+}
+
 int	case_command(t_tokens *root, t_utils *data)
 {
 	if ((root->type == CMD && data->status > 1) && (exist_command(root, data)
 			|| check_absolute_path(root, data)))
 		return (decrement_status(data));
-	else if (case_builtins(root))
+	else if (case_builtins(root) || is_environment(root))
 	{
 		data->status = 1;
 		return (1);
@@ -667,7 +674,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("cat", CMD);
+	root = create_token("$var", CMD);
 	if (!root)
 		return (1);
 	add_token(&root, ">>", APPEND);
