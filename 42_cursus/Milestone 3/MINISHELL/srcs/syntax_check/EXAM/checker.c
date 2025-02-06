@@ -6,11 +6,11 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/05 15:48:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:08:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 typedef struct s_utils
 {
@@ -526,7 +526,7 @@ int	case_arg(t_tokens *root, t_utils *data)
 		return (1);
 	else if (root->type == ARG && root->previous != NULL && (root->previous->type == FD
 		|| root->previous->type == REDIRECT_OUT || root->previous->type == REDIRECT_IN
-		|| root->previous->type == APPEND))
+		|| root->previous->type == APPEND || root->previous->type == ARG))
 		return (1);
 	else if (root->type == ARG && root->next != NULL && (root->next->type == ARG
 			|| root->next->type == FD))
@@ -667,49 +667,12 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("<", REDIRECT_IN);
+	root = create_token("cat", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, "todo", FD);
-	add_token(&root, "(", BRACKET_O);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "todo", FD);
-	add_token(&root, "/bin/ls", CMD);
-	add_token(&root, "<", REDIRECT_IN);
+	add_token(&root, ">>", APPEND);
 	add_token(&root, "infile", FD);
-	add_token(&root, ")", BRACKET_C);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "infile", FD);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "infile", FD);
-	add_token(&root, "/bin/cat", CMD);
-	add_token(&root, "-e", ARG);
-	add_token(&root, "&&", OPERATOR_AND);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "infile", FD);
-	add_token(&root, "(", BRACKET_O);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "infile", FD);
-	add_token(&root, "(", BRACKET_O);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "infile", FD);
-	add_token(&root, "(", BRACKET_O);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "infile", FD);
-	add_token(&root, "/bin/cat", CMD);
-	add_token(&root, "-e", ARG);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "todo", FD);
-	add_token(&root, ")", BRACKET_C);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "todo", FD);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "todo", FD);
-	add_token(&root, ")", BRACKET_C);
-	add_token(&root, "<", REDIRECT_IN);
-	add_token(&root, "todo", FD);
-	add_token(&root, ")", BRACKET_C);
+	add_token(&root, "-n", ARG);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");

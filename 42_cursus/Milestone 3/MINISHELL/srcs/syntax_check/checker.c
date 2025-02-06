@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/05 15:59:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:08:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -526,7 +526,7 @@ int	case_arg(t_tokens *root, t_utils *data)
 		return (1);
 	else if (root->type == ARG && root->previous != NULL && (root->previous->type == FD
 		|| root->previous->type == REDIRECT_OUT || root->previous->type == REDIRECT_IN
-		|| root->previous->type == APPEND))
+		|| root->previous->type == APPEND || root->previous->type == ARG))
 		return (1);
 	else if (root->type == ARG && root->next != NULL && (root->next->type == ARG
 			|| root->next->type == FD))
