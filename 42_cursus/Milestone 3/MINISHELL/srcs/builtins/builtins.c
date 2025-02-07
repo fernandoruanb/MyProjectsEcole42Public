@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:03:49 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/29 14:39:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:58:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int	builtins(t_data *data)
 	else if (ft_strncmp(data->line, "echo", 4) == 0)
 	{
 		ft_echo(data);
+		return (1);
+	}
+	else if (ft_strncmp(data->line, "unset", 5) == 0)
+	{
+		ft_unset(data);
 		return (1);
 	}
 	return (0);

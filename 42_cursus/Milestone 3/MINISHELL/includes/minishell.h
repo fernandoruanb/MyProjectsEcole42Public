@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:07:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/04 16:37:20 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:03:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef struct s_data
 	char	**envp;
 	char	*oldpwd;
 	char	*newpwd;
+	char	**temp_env;
+	char	*variable;
+	int		env;
 	int		file_stdin;
 	int		file_stdout;
 	int		file_stderr;
@@ -50,5 +53,6 @@ void	ft_env(t_data *data);
 void	ft_echo(t_data *data);
 void	free_shell(t_data *data);
 int		is_only_spaces(t_data *data);
+int		ft_unset(t_data *data);
 
 #endif /* MINISHELL_H */

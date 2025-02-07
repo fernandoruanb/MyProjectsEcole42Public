@@ -6,7 +6,7 @@
 /*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/06 17:55:49 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:51:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -746,6 +746,8 @@ int	is_insider_quotes(t_token *root, t_utils *data)
 {
 	size_t	length;
 
+	if (data->new_str)
+		free(data->new_str);
 	if (!root)
 		return (0);
 	length = ft_strlen(root->str);

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 08:13:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/29 18:47:49 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:50:05 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ static void	init_data(t_data *data, char **envp)
 {
 	data->oldpwd = NULL;
 	data->newpwd = NULL;
+	data->env = 0;
+	data->variable = NULL;
+	data->temp_env = NULL;
 	data->status = 0;
 	data->envp = envp;
 	data->pipes = 0;
