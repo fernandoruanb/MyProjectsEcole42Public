@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/08 20:09:07 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/09 09:46:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -625,6 +625,27 @@ void	create_variables_order(t_tokens *root, int *index, int *flag)
 		*index = 1;
 }
 
+int	case_quotes_syntax(char	*quote, int marker, int *flag)
+{
+	static char	buffer[2];
+	static int	index = 0;
+
+	if (index > 1)
+		index = 0;
+	if (index == 0)
+		buffer[0] = quote[marker];
+	else if (index == 1)
+		buffer[1] = quote[marker];
+	if (index == 1 || quote[marker + 1] == '\0')
+	{
+		if (buffer[0] != buffer[1])
+			return (0);
+	}
+	index++;
+	*flag = 0;
+	return (1);
+}
+
 int	check_order_letters_quotes(t_tokens *root, t_utils *data)
 {
 	int	index;
@@ -641,10 +662,11 @@ int	check_order_letters_quotes(t_tokens *root, t_utils *data)
 			flag = 1;
 			index++;
 		}
-		else if ((root->value[index] == '\'' || root->value[index] == '\"') 
+		else if ((root->value[index] == '\'' || root->value[index] == '\"')
 			&& flag == 1)
 		{
-			flag = 0;
+			if (!case_quotes_syntax(root->value, index, &flag))
+				return (0);
 			index++;
 		}
 		else
@@ -841,7 +863,7 @@ int	check_syntax(t_tokens *root, char **envp, t_utils *data)
 	flag = 1;
 	while (root)
 	{
-	//	ft_printf("TOKEN PASSED: %d\n", root->index);
+//		ft_printf("TOKEN PASSED: %d\n", root->index);
 		if (get_command(root, data))
 			root = root->next;
 		else
@@ -903,11 +925,13 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	add_token(&root, "-l", ARG);
 	add_token(&root, "|", PIPE);
-	add_token(&root, "e\'c\'h\'o\'", CMD);
+	add_token(&root, "e\"c\"h\'o\'", CMD);
 	add_token(&root, "oi", ARG);
 	add_token(&root, "|", PIPE);
 	add_token(&root, "\'x\'a\'r\'g\'s\'", CMD);
 	add_token(&root, "s\'o\'r\'t\'", CMD);
+	add_token(&root, "|", PIPE);
+	add_token(&root, "\'echo\'", CMD);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");

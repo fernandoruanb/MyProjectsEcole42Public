@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/07 10:39:35 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/09 13:04:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_utils
 	int	files;
 	int	commands;
 	int	pipes;
+	int	simple_quotes;
+	int	double_quotes;
 	int	args;
 	int	brackets_c;
 	int	brackets_o;
@@ -56,6 +58,15 @@ typedef struct s_tokens
 	struct s_tokens	*next;
 	struct s_tokens *previous;
 }	t_tokens;
+
+typedef struct	s_tree
+{
+	char	*value;
+	t_id	type;
+	struct s_tree	*parent;
+	struct s_tree	*left;
+	struct s_tree	*right;
+}	t_tree;
 
 t_tokens	*create_token(char *value, t_id type)
 {
@@ -140,16 +151,16 @@ void	show_tokens(t_tokens *root)
 	index = 1;
 	while (root)
 	{
-		printf("TOKEN %d\n", root->index);
-		printf("Value: %s\ntype: %s\n", root->value, get_token(root->type));
+		ft_printf("TOKEN %d\n", root->index);
+		ft_printf("Value: %s\nType: %s\n", root->value, get_token(root->type));
 		if (root->next)
-			printf("Next: %s\n", root->next->value);
+			ft_printf("Next: %s\n", root->next->value);
 		else
-			printf("Next: NULL\n");
+			ft_printf("Next: NULL\n");
 		if (root->previous)
-			printf("Previous: %s\n", root->previous->value);
+			ft_printf("Previous: %s\n", root->previous->value);
 		else
-			printf("Previous: NULL\n");
+			ft_printf("Previous: NULL\n");
 		root = root->next;
 	}
 }
@@ -549,7 +560,10 @@ int	is_insider_quotes(t_tokens *root, t_utils *data)
 	size_t	length;
 
 	if (data->new_str)
+	{
 		free(data->new_str);
+		data->new_str = NULL;
+	}
 	if (!root)
 		return (0);
 	length = ft_strlen(root->value);
@@ -559,11 +573,167 @@ int	is_insider_quotes(t_tokens *root, t_utils *data)
 		data->new_str = ft_substr(root->value, 1, length - 2);
 		if (!data->new_str)
 			return (0);
-		ft_printf("A new_str: %s\n", data->new_str);
 		if (test_all_paths(data))
 			return (1);
 	}
 	return (0);
+}
+
+int	ft_isalpha_special(char letter)
+{
+	return (letter >= 'a' && letter <= 'z');
+}
+
+int	ft_isalpha_special_2(char letter)
+{
+	return (ft_isalpha_special(letter) || letter == '/');
+}
+
+int	how_many_quotes(t_tokens *root, t_utils *data, int letters)
+{
+	if (root->value[0] == '/')
+		letters--;
+	if (root->value[0] == '\'' || root->value[0] == '\"')
+		letters++;
+	if (data->simple_quotes % 2 != 0 || data->double_quotes % 2 != 0)
+		return (0);
+	if (letters == (data->simple_quotes + data->double_quotes))
+		return (1);
+	else
+		return (show_error_fd("letters != quotes", 0, data, 0));
+}
+
+int	special_check_letters_quotes(t_tokens *root, t_utils *data)
+{
+	int	letters;
+	int	index;
+
+	letters = 0;
+	index = 0;
+	while (root->value[index] != '\0')
+	{
+		if (ft_isalpha_special(root->value[index]))
+			letters++;
+		else if ((root->value[index] == '\'' || root->value[index] == '\"'))
+		{
+			if (root->value[index] == '\'')
+				data->simple_quotes++;
+			else
+				data->double_quotes++;
+		}
+		index++;
+	}
+	return (how_many_quotes(root, data, letters));
+}
+
+void	create_variables_order(t_tokens *root, int *index, int *flag)
+{
+	*index = 0;
+	*flag = 0;
+	if (root->value[0] == '\'' || root->value[0] == '\"')
+		*index = 1;
+}
+
+int	case_quotes_syntax(char	*quote, int marker, int *flag)
+{
+	static char	buffer[2];
+	static int	index = 0;
+
+	if (index > 1)
+		index = 0;
+	if (index == 0)
+		buffer[0] = quote[marker];
+	else if (index == 1)
+		buffer[1] = quote[marker];
+	if (index == 1 || quote[marker + 1] == '\0')
+	{
+		if (buffer[0] != buffer[1])
+			return (0);
+	}
+	index++;
+	*flag = 0;
+	return (1);
+}
+
+int	check_order_letters_quotes(t_tokens *root, t_utils *data)
+{
+	int	index;
+	int	flag;
+
+	create_variables_order(root, &index, &flag);
+	while (root->value[index] != '\0')
+	{
+		if (root->value[index - 1] == '/')
+			flag = 0;
+		if (ft_isalpha_special_2(root->value[index])
+			&& flag == 0)
+		{
+			flag = 1;
+			index++;
+		}
+		else if ((root->value[index] == '\'' || root->value[index] == '\"')
+			&& flag == 1)
+		{
+			if (!case_quotes_syntax(root->value, index, &flag))
+				return (0);
+			index++;
+		}
+		else
+			return (show_error_fd("Invalid character", 0, data, 0));
+	}
+	return (1);
+}
+
+int	final_check(t_utils *data)
+{
+	if (is_absolute_path_quotes(data) || test_all_paths(data)
+		|| case_builtins_quotes(data))
+		return (1);
+	return (show_error_fd("Invalid thing", 0, data, 0));
+}
+
+int	get_check_command(t_tokens *root, t_utils *data)
+{
+	char	buffer[4096];
+	int	index;
+	int	count;
+
+	index = 0;
+	count = 0;
+	while (root->value[index] != '\0')
+	{
+		if (ft_isalpha_special_2(root->value[index]))
+		{
+			buffer[count] = root->value[index];
+			count++;
+		}
+		index++;
+	}
+	buffer[count] = '\0';
+	data->new_str = ft_strdup(buffer);
+	if (!data->new_str)
+		return (0);
+	if (!final_check(data))
+		return (0);
+	return (1);
+}
+
+int	special(t_tokens *root, t_utils *data)
+{
+	if (data->new_str)
+	{
+		free(data->new_str);
+		data->new_str = NULL;
+	}
+	data->simple_quotes = 0;
+	data->double_quotes = 0;
+	if (!special_check_letters_quotes(root, data))
+		return (0);
+	if (!check_order_letters_quotes(root, data))
+		return (0);
+	if (!get_check_command(root, data))
+		return (0);
+	return (1);
 }
 
 int	case_command(t_tokens *root, t_utils *data)
@@ -572,7 +742,7 @@ int	case_command(t_tokens *root, t_utils *data)
 			|| check_absolute_path(root, data)))
 		return (decrement_status(data));
 	else if (case_builtins(root) || is_environment(root)
-			|| is_insider_quotes(root, data))
+			|| is_insider_quotes(root, data) || special(root, data))
 	{
 		data->status = 1;
 		return (1);
@@ -702,7 +872,7 @@ int	check_syntax(t_tokens *root, char **envp, t_utils *data)
 	flag = 1;
 	while (root)
 	{
-	//	printf("TOKEN PASSED: %d\n", root->index);
+//		ft_printf("TOKEN PASSED: %d\n", root->index);
 		if (get_command(root, data))
 			root = root->next;
 		else
@@ -729,6 +899,84 @@ void	clean_program(t_tokens *root, t_utils *data)
 	free_tokens(root);
 }
 
+t_tree	*create_branch(t_tokens *root)
+{
+	t_tree	*branch;
+
+	branch = malloc(sizeof(t_tree));
+	if (!branch)
+		return (NULL);
+	branch->value = ft_strdup(root->value);
+	if (!branch->value)
+	{
+		free(branch);
+		return (NULL);
+	}
+	branch->type = root->type;
+	branch->parent = NULL;
+	branch->left = NULL;
+	branch->right = NULL;
+	return (branch);
+}
+
+void  add_branch(t_tokens *root, t_tree **tree)
+{
+	if ((*tree)->type == CMD && root->type == ARG)
+		(*tree)->left = create_branch(root);
+}
+
+void	show_tree(t_tree *tree)
+{
+	if (tree == NULL)
+		return ;
+	show_tree(tree->left);
+	show_tree(tree->right);
+	if (tree->parent)
+		printf("%s\n", tree->parent->value);
+	printf("%s\n", tree->value);
+	printf("  /    \\\n");
+	if (tree->left)
+		printf("%s\n", tree->left->value);
+	else
+		printf("NULL   ");
+	if (tree->right)
+		printf("%s\n", tree->right->value);
+	else
+		printf("NULL\n");
+}
+
+void	clean_tree(t_tree **tree)
+{
+	if (*tree != NULL)
+	{
+		clean_tree(&(*tree)->left);
+		clean_tree(&(*tree)->right);
+		free((*tree)->value);
+		free(*tree);
+		*tree = NULL;
+	}
+}
+
+int	ft_tree(t_tokens *root)
+{
+	t_tree	*tree;
+
+	tree = create_branch(root);
+	root = root->next;
+	while (root)
+	{
+		add_branch(root, &tree);
+		break ;
+		root = root->next;
+	}
+	printf("----------------\n");
+	printf("\\ BINARY TREE /\n");
+	printf("----------------\n");
+	show_tree(tree);
+	clean_tree(&tree);
+	return (1);
+}
+
 void	init_utils(t_utils *data)
 {
 	data->index_bra_c = -1;
@@ -736,6 +984,8 @@ void	init_utils(t_utils *data)
 	data->brackets_o = 0;
 	data->brackets_c = 0;
 	data->path = NULL;
+	data->simple_quotes = 0;
+	data->double_quotes = 0;
 	data->paths = NULL;
 	data->temp = NULL;
 	data->new_str = NULL;
@@ -757,18 +1007,16 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("\"echo\"", CMD);
+	root = create_token("/b\'i\'n\'/l\'s", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, "\"hello\"", ARG);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "<<", HEREDOC);
-	add_token(&root, "jonas'", LIMITER);
-	add_token(&root, "\'/bin/cat\'", CMD);
-	add_token(&root, "-e", ARG);
+	add_token(&root, "-l", ARG);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
+	{
 		printf("OK\n");
+		ft_tree(root);
+	}
 	else
 		printf("KO\n");
 	clean_program(root, &data);
