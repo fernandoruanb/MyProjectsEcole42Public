@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/09 09:46:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:08:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -580,32 +580,23 @@ int	ft_isalpha_special_2(char letter)
 	return (ft_isalpha_special(letter) || letter == '/');
 }
 
-int	how_many_quotes(t_tokens *root, t_utils *data, int letters)
+int	how_many_quotes(t_utils *data)
 {
-	if (root->value[0] == '/')
-		letters--;
-	if (root->value[0] == '\'' || root->value[0] == '\"')
-		letters++;
 	if (data->simple_quotes % 2 != 0 || data->double_quotes % 2 != 0)
-		return (0);
-	if (letters == (data->simple_quotes + data->double_quotes))
-		return (1);
-	else
-		return (show_error_fd("letters != quotes", 0, data, 0));
+		return (show_error_fd("Quotes open/close error", 0, data, 0));
+	return (1);
 }
 
-int	special_check_letters_quotes(t_tokens *root, t_utils *data)
+int	special_check_quotes(t_tokens *root, t_utils *data)
 {
-	int	letters;
 	int	index;
 
-	letters = 0;
+	data->simple_quotes = 0;
+	data->double_quotes = 0;
 	index = 0;
 	while (root->value[index] != '\0')
 	{
-		if (ft_isalpha_special(root->value[index]))
-			letters++;
-		else if ((root->value[index] == '\'' || root->value[index] == '\"'))
+		if ((root->value[index] == '\'' || root->value[index] == '\"'))
 		{
 			if (root->value[index] == '\'')
 				data->simple_quotes++;
@@ -614,65 +605,7 @@ int	special_check_letters_quotes(t_tokens *root, t_utils *data)
 		}
 		index++;
 	}
-	return (how_many_quotes(root, data, letters));
-}
-
-void	create_variables_order(t_tokens *root, int *index, int *flag)
-{
-	*index = 0;
-	*flag = 0;
-	if (root->value[0] == '\'' || root->value[0] == '\"')
-		*index = 1;
-}
-
-int	case_quotes_syntax(char	*quote, int marker, int *flag)
-{
-	static char	buffer[2];
-	static int	index = 0;
-
-	if (index > 1)
-		index = 0;
-	if (index == 0)
-		buffer[0] = quote[marker];
-	else if (index == 1)
-		buffer[1] = quote[marker];
-	if (index == 1 || quote[marker + 1] == '\0')
-	{
-		if (buffer[0] != buffer[1])
-			return (0);
-	}
-	index++;
-	*flag = 0;
-	return (1);
-}
-
-int	check_order_letters_quotes(t_tokens *root, t_utils *data)
-{
-	int	index;
-	int	flag;
-
-	create_variables_order(root, &index, &flag);
-	while (root->value[index] != '\0')
-	{
-		if (root->value[index - 1] == '/')
-			flag = 0;
-		if (ft_isalpha_special_2(root->value[index])
-			&& flag == 0)
-		{
-			flag = 1;
-			index++;
-		}
-		else if ((root->value[index] == '\'' || root->value[index] == '\"')
-			&& flag == 1)
-		{
-			if (!case_quotes_syntax(root->value, index, &flag))
-				return (0);
-			index++;
-		}
-		else
-			return (show_error_fd("Invalid character", 0, data, 0));
-	}
-	return (1);
+	return (how_many_quotes(data));
 }
 
 int	final_check(t_utils *data)
@@ -680,7 +613,7 @@ int	final_check(t_utils *data)
 	if (is_absolute_path_quotes(data) || test_all_paths(data)
 		|| case_builtins_quotes(data))
 		return (1);
-	return (show_error_fd("Invalid thing", 0, data, 0));
+	return (0);
 }
 
 int	get_check_command(t_tokens *root, t_utils *data)
@@ -709,6 +642,32 @@ int	get_check_command(t_tokens *root, t_utils *data)
 	return (1);
 }
 
+int	check_quotes(t_tokens *root)
+{
+	int	index;
+	char	quote;
+	int	flag;
+
+	index = 0;
+	flag = 0;
+	while (root->value[index] != '\0')
+	{
+		if ((flag == 1) && (root->value[index] == '\'' || root->value[index] == '\"'))
+		{
+			if (quote != root->value[index])
+				return (0);
+			flag = 0;
+		}
+		else if (root->value[index] == '\'' || root->value[index] == '\"')
+		{
+			flag = 1;
+			quote = root->value[index];
+		}
+		index++;
+	}
+	return (1);
+}
+
 int	special(t_tokens *root, t_utils *data)
 {
 	if (data->new_str)
@@ -718,9 +677,9 @@ int	special(t_tokens *root, t_utils *data)
 	}
 	data->simple_quotes = 0;
 	data->double_quotes = 0;
-	if (!special_check_letters_quotes(root, data))
+	if (!special_check_quotes(root, data))
 		return (0);
-	if (!check_order_letters_quotes(root, data))
+	if (!check_quotes(root))
 		return (0);
 	if (!get_check_command(root, data))
 		return (0);
@@ -770,6 +729,8 @@ int	case_limiter(t_tokens *root, t_utils *data)
 
 int	case_arg(t_tokens *root, t_utils *data)
 {
+	if (!special_check_quotes(root, data))
+		return (0);
 	if (root->type == ARG && data->status == 1)
 		return (1);
 	else if (root->type == ARG && root->previous != NULL && (root->previous->type == FD
@@ -863,7 +824,7 @@ int	check_syntax(t_tokens *root, char **envp, t_utils *data)
 	flag = 1;
 	while (root)
 	{
-//		ft_printf("TOKEN PASSED: %d\n", root->index);
+		//ft_printf("TOKEN PASSED: %d\n", root->index);
 		if (get_command(root, data))
 			root = root->next;
 		else
@@ -920,18 +881,21 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("/b\'i\'n\'/l\'s", CMD);
+	root = create_token("/b\"i\"n\'/l\'s", CMD);
 	if (!root)
 		return (1);
 	add_token(&root, "-l", ARG);
 	add_token(&root, "|", PIPE);
-	add_token(&root, "e\"c\"h\'o\'", CMD);
+	add_token(&root, "\'\'\'\'echo", CMD);
 	add_token(&root, "oi", ARG);
 	add_token(&root, "|", PIPE);
-	add_token(&root, "\'x\'a\'r\'g\'s\'", CMD);
+	add_token(&root, "\"x\"a\'r\'g\'s\'", CMD);
 	add_token(&root, "s\'o\'r\'t\'", CMD);
 	add_token(&root, "|", PIPE);
 	add_token(&root, "\'echo\'", CMD);
+	add_token(&root, "oie", ARG);
+	add_token(&root, "|", PIPE);
+	add_token(&root, "\"echo\"", CMD);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
