@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/11 17:42:45 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:10:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -866,6 +866,8 @@ int	check_syntax(t_tokens *root, char **envp, t_utils *data)
 	}
 	if (flag != 1)
 		return (0);
+	if (data->brackets_o != data->brackets_c)
+		return (show_error_fd("Brackets opened", 0, data, 0));
 	return (1);
 }
 
