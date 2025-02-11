@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/11 13:25:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:06:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_tokens
 	struct s_tokens	*next;
 	struct s_tokens *previous;
 }	t_tokens;
+
+void    check_copy_new(t_utils *data);
 
 t_tokens	*create_token(char *value, t_id type)
 {
@@ -493,28 +495,28 @@ int	is_environment(t_tokens *root)
 
 int	case_builtins_quotes(t_utils *data)
 {
-	if (ft_strcmp(data->new_str, "cd") == 0)
+	if (ft_strcmp(data->copy_new, "cd") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "export") == 0)
+	else if (ft_strcmp(data->copy_new, "export") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "unset") == 0)
+	else if (ft_strcmp(data->copy_new, "unset") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "pwd") == 0)
+	else if (ft_strcmp(data->copy_new, "pwd") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "env") == 0)
+	else if (ft_strcmp(data->copy_new, "env") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "echo") == 0)
+	else if (ft_strcmp(data->copy_new, "echo") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "exit") == 0)
+	else if (ft_strcmp(data->copy_new, "exit") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "clear") == 0)
+	else if (ft_strcmp(data->copy_new, "clear") == 0)
 		return (1);
 	return (0);
 }
 
 int	is_absolute_path_quotes(t_utils *data)
 {
-	if (access(data->new_str, F_OK | X_OK) == 0)
+	if (access(data->copy_new, F_OK | X_OK) == 0)
 		return (1);
 	return (0);
 }
@@ -549,6 +551,11 @@ int	test_all_paths(t_utils *data)
 
 void	check_copy_new(t_utils *data)
 {
+	if (data->new_str)
+	{
+		free(data->new_str);
+		data->new_str = NULL;
+	}
 	if (data->copy_new)
 	{
 		free(data->copy_new);
@@ -560,11 +567,6 @@ int	is_insider_quotes(t_tokens *root, t_utils *data)
 {
 	size_t	length;
 
-	if (data->new_str)
-	{
-		free(data->new_str);
-		data->new_str = NULL;
-	}
 	check_copy_new(data);
 	if (!root)
 		return (0);
@@ -577,7 +579,7 @@ int	is_insider_quotes(t_tokens *root, t_utils *data)
 			return (0);
 		data->copy_new = ft_strdup(data->new_str);
 		if (!data->copy_new)
-			return (1);
+			return (0);
 		if (test_all_paths(data))
 			return (1);
 	}
@@ -625,7 +627,8 @@ int	special_check_quotes(t_tokens *root, t_utils *data)
 
 int	final_check(t_utils *data)
 {
-	if (test_all_paths(data))
+	if (case_builtins_quotes(data) || test_all_paths(data)
+		|| is_absolute_path_quotes(data))
 		return (1);
 	return (0);
 }
@@ -648,11 +651,12 @@ int	get_check_command(t_tokens *root, t_utils *data)
 		index++;
 	}
 	buffer[count] = '\0';
-	data->new_str = ft_strdup(buffer);
-	if (!data->new_str)
+	check_copy_new(data);
+	data->copy_new = ft_strdup(buffer);
+	if (!data->copy_new)
 		return (0);
 	if (!final_check(data))
-		return (0);
+		return (ft_putendl_fd_0("Error at final check", 2));
 	return (1);
 }
 
@@ -669,7 +673,7 @@ int	check_quotes(t_tokens *root)
 		if ((flag == 1) && (root->value[index] == '\'' || root->value[index] == '\"'))
 		{
 			if (quote != root->value[index])
-				return (0);
+				return (ft_putendl_fd_0("Invalid quotes", 2));
 			flag = 0;
 		}
 		else if (root->value[index] == '\'' || root->value[index] == '\"')
@@ -692,19 +696,31 @@ int	special(t_tokens *root, t_utils *data)
 	data->simple_quotes = 0;
 	data->double_quotes = 0;
 	if (!special_check_quotes(root, data))
-		return (0);
+		return (ft_putendl_fd_0("Special quotes Error", 2));
 	if (!check_quotes(root))
-		return (0);
+		return (ft_putendl_fd_0("Error here check quotes", 2));
 	if (!get_check_command(root, data))
-		return (0);
+		return (ft_putendl_fd_0("We can't check command.", 2));
 	return (1);
+}
+
+int	extra_case_commands(t_tokens *root, t_utils *data)
+{
+	if ((root->type == CMD) && (exist_command(root,data)
+			|| check_absolute_path(root, data)
+			|| is_insider_quotes(root, data) || special(root, data)))
+	{
+		data->status = 1;
+		return (1);
+	}
+	return (0);
 }
 
 int	case_command(t_tokens *root, t_utils *data)
 {
-	if ((root->type == CMD && data->status > 1) && ((exist_command(root, data)
-			|| check_absolute_path(root, data)) || is_insider_quotes(root, data)
-			|| special(root,data)))
+	if ((root->type == CMD && data->status > 1) && (exist_command(root, data)
+			|| check_absolute_path(root, data) || is_insider_quotes(root, data)
+			|| special(root, data)))
 		return (decrement_status(data));
 	else if (case_builtins(root) || is_environment(root)
 			|| is_insider_quotes(root, data) || special(root, data))
@@ -722,6 +738,8 @@ int	case_command(t_tokens *root, t_utils *data)
 		return (1);
 	else if (root->type == CMD && data->status == 1)
 		return (show_error_fd("CMD received in ARG mode", 0, data, 0));
+	else if (extra_case_commands(root, data))
+		return (1);
 	return (show_error_fd("Unknown CMD syntax", 0, data, 0));
 }
 
@@ -896,13 +914,14 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("echo", CMD);
+	root = create_token("\'\'ls\'\'", CMD);
 	if (!root)
 		return (1);
 	add_token(&root, "\\\'", ARG);
 	add_token(&root, "\\\'", ARG);
 	add_token(&root, ">", REDIRECT_OUT);
 	add_token(&root, "infile.txt", FD);
+	add_token(&root, "\'\'\'\'echo", CMD);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
