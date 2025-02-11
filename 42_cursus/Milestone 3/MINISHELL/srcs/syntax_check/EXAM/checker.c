@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/11 17:06:45 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:42:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -524,7 +524,6 @@ int	is_absolute_path_quotes(t_utils *data)
 int	test_all_paths(t_utils *data)
 {
 	int	index;
-
 	index = 0;
 	while (data->paths[index] != NULL)
 	{
@@ -536,7 +535,7 @@ int	test_all_paths(t_utils *data)
 		if (!data->temp)
 			return (0);
 		data->path = ft_strjoin(data->temp, data->copy_new);
-		if (!data->path)
+		if (!data->path || ft_strcmp(data->path, data->temp) == 0)
 			return (0);
 		if (access(data->path, F_OK | X_OK) == 0)
 			return (1);
@@ -583,6 +582,8 @@ int	is_insider_quotes(t_tokens *root, t_utils *data)
 		if (test_all_paths(data))
 			return (1);
 	}
+	if (!data->copy_new)
+		data->copy_new = ft_strdup(root->value);
 	return (0);
 }
 
@@ -914,7 +915,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("\'\'ls\'\'", CMD);
+	root = create_token("2", CMD);
 	if (!root)
 		return (1);
 	add_token(&root, "\\\'", ARG);
