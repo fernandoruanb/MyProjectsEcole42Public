@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   8_Search_a_value.c                                 :+:      :+:    :+:   */
+/*   9_Delete_Empty_Node.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 09:37:21 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/10 16:19:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:19:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,17 @@ t_tree	*get_value(t_tree *tree, int target)
 	return (NULL);
 }
 
+void	delete_empty_node(t_tree *tree)
+{
+	if (tree)
+	{
+		if (flag == 1)
+		{
+			last = tree;
+			while (
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	int	index;
@@ -145,6 +156,10 @@ int	main(int argc, char **argv)
 		printf("I found the target!!!, %d!!!\n", target->value);
 	else
 		printf("Unfortunately, I can't find the value.\n");
+	printf("DELETE YOU CAN GO NOW!!!\n");
+	delete_empty_node(tree);
+	printf("AFTER THE END!!!\n");
+	show_tree(tree);
 	clean_tree(&tree);
 	return (1);
 }

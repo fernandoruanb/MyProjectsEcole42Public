@@ -1,0 +1,230 @@
+# Mini Curso Prático: Construindo a Árvore Binária do Minishell
+
+Este documento apresenta uma sequência de LABs pensada para desenvolver, passo a passo, a árvore binária que servirá de base para o minishell. Ao final, você deverá ter um sistema capaz de:
+- Criar nós para comandos e operadores;
+- Inserir nós na árvore de acordo com a precedência e a posição na linha de comando;
+- Visualizar a árvore para depuração;
+- Executar a árvore (ou pelo menos, simular a execução com base na estrutura construída).
+
+---
+
+## LAB 1: Estrutura Básica de Nó para o Minishell
+
+**Objetivo:**  
+Definir a `struct` do nó da árvore para armazenar informações relevantes para o minishell.
+
+**Tarefas:**
+- Crie uma estrutura (ex.: `t_tree`) com os seguintes campos:
+  - `value`: uma string com o comando ou operador.
+  - `type`: um enumerador (`t_type`) para identificar se o nó representa um comando ou um operador (por exemplo, `CMD`, `PIPE`, `REDIRECT`, etc.).
+  - Ponteiros `left` e `right` para os filhos.
+- Implemente uma função para criar e inicializar um nó, fazendo cópia profunda do valor.
+
+**Dicas:**
+- Já que a tokenização e a análise léxica estão prontas, use os tokens como base para preencher os nós.
+
+---
+
+## LAB 2: Integração com Tokens – Criação de Nós a partir de Tokens
+
+**Objetivo:**  
+Transformar os tokens já analisados em nós da árvore.
+
+**Tarefas:**
+- Crie uma função que receba um token (estrutura já criada no minishell) e retorne um nó (`t_tree`) usando a função do LAB 1.
+- Garanta que, para cada token, o nó contenha o valor e o tipo corretos.
+
+**Dicas:**
+- Verifique o tratamento de erros (por exemplo, em caso de falha de alocação).
+
+---
+
+## LAB 3: Conectando Nós Simples – Comando Simples sem Operadores
+
+**Objetivo:**  
+Montar uma árvore que representa um comando simples sem operadores.
+
+**Tarefas:**
+- Crie nós para comandos simples (ex.: `ls`, `pwd`, etc.).
+- Monte uma árvore onde cada comando seja um nó isolado (ainda sem relação de operadores).
+- Implemente uma função de impressão (por exemplo, pré-ordem) para visualizar a árvore.
+
+**Dicas:**
+- Esse exercício serve para garantir que os nós estão sendo criados e conectados corretamente.
+
+---
+
+## LAB 4: Inserção de Operadores – Primeira Abordagem
+
+**Objetivo:**  
+Inserir um operador simples (como o pipe `|`) entre dois comandos.
+
+**Tarefas:**
+- Crie nós para dois comandos e um nó para o operador pipe.
+- Desenvolva uma função que, dada a existência de um operador, faça o seguinte:
+  - Posicione o comando anterior como filho esquerdo do operador.
+  - Posicione o comando seguinte como filho direito.
+- Teste a montagem para a expressão: `comando1 | comando2`.
+
+**Dicas:**
+- Esse LAB ajuda a entender a montagem de subárvores onde o operador “une” dois comandos.
+
+---
+
+## LAB 5: Definindo Regras de Precedência
+
+**Objetivo:**  
+Introduzir a ideia de precedência entre operadores (por exemplo, diferenciar entre pipe e redirecionamento).
+
+**Tarefas:**
+- Defina valores para a precedência dos operadores (por exemplo, pipe pode ter uma precedência diferente de redirecionamento).
+- Atualize a função de inserção para comparar a precedência do novo nó com o nó atual da árvore.
+- Construa exemplos com dois ou três operadores na mesma linha de comando.
+
+**Dicas:**
+- Pense na árvore como refletindo a ordem de execução: nós com menor precedência podem se tornar “mais externos” na árvore.
+
+---
+
+## LAB 6: Função de Inserção Recursiva na Árvore
+
+**Objetivo:**  
+Implementar uma função que insere um novo nó na árvore já existente de acordo com regras de precedência.
+
+**Tarefas:**
+- Desenvolva uma função (ex.: `insert_node`) que receba a árvore atual e um novo nó, e retorne a árvore atualizada.
+- A lógica deve ser:
+  - Se a árvore estiver vazia, o novo nó se torna a raiz.
+  - Se o novo nó for um operador e tiver precedência menor ou igual ao nó atual, ele se torna a nova raiz da subárvore, com a árvore atual sendo anexada como filho esquerdo.
+  - Caso contrário, o novo nó é inserido recursivamente no ramo direito.
+- Teste com casos simples e depois com uma cadeia de comandos e operadores.
+
+**Dicas:**
+- Utilize pseudocódigo para estruturar sua lógica antes de implementá-la.
+
+---
+
+## LAB 7: Visualização da Árvore de Comandos
+
+**Objetivo:**  
+Criar uma função para imprimir a árvore de forma visual, facilitando a depuração.
+
+**Tarefas:**
+- Implemente uma função que imprima a árvore “sideways” ou com indentação para mostrar os níveis.
+- Teste a função após inserir diversos nós (comandos e operadores) e verifique se a estrutura condiz com a ordem de execução.
+
+**Dicas:**
+- Um método é imprimir a árvore em ordem pré, in ou pós-ordem com uma variável de nível que controla a indentação.
+
+---
+
+## LAB 8: Montagem Completa da Linha de Comando
+
+**Objetivo:**  
+Integrar a criação e inserção de nós para montar a árvore completa a partir de uma linha de comando já tokenizada.
+
+**Tarefas:**
+- Dado um array/lista de tokens (resultado da tokenização e análise sintática), itere sobre os tokens e insira-os na árvore usando a função do LAB 6.
+- Garanta que a árvore resultante reflita corretamente a precedência e a ordem dos comandos.
+- Implemente uma rotina de teste que simule a entrada de uma linha de comando complexa (por exemplo, `cmd1 | cmd2 > out.txt`).
+
+**Dicas:**
+- Esse LAB une as funcionalidades anteriores e é o ponto de verificação de que a árvore está sendo montada conforme o esperado.
+
+---
+
+## LAB 9: Tratamento de Erros na Montagem da Árvore
+
+**Objetivo:**  
+Garantir que a árvore possa tratar erros de sintaxe ou inconsistências.
+
+**Tarefas:**
+- Implemente verificações durante a inserção: por exemplo, se dois operadores consecutivos são inseridos sem comando entre eles, a função deve detectar e sinalizar erro.
+- Adicione mensagens de erro (ou retorno de código de erro) para casos inválidos.
+- Teste com entradas incorretas para confirmar que o minishell não montará uma árvore inválida.
+
+**Dicas:**
+- Esse LAB é essencial para integrar com a análise sintática que você já fez, garantindo consistência.
+
+---
+
+## LAB 10: Simulação de Execução – Traversal da Árvore para Execução
+
+**Objetivo:**  
+Desenvolver uma função que percorra a árvore e “execute” os comandos de forma simulada.
+
+**Tarefas:**
+- Implemente uma função recursiva que percorra a árvore e, para cada nó:
+  - Se for um comando, imprima “Executando comando: [valor]”.
+  - Se for um operador, imprima “Aplicando operador: [valor]” e, depois, processe seus filhos conforme a ordem de execução.
+- Teste a função para visualizar a ordem de execução dos comandos conforme a estrutura da árvore.
+
+**Dicas:**
+- Esse LAB prepara o terreno para a execução real, ajudando a visualizar como a árvore direciona a ordem de execução.
+
+---
+
+## LAB 11: Integração com Execução Real (Mock-up)
+
+**Objetivo:**  
+Expandir a simulação para chamar funções reais (ou chamadas de sistema) para comandos simples.
+
+**Tarefas:**
+- Crie “mocks” de execução: para cada comando, ao invés de somente imprimir, invoque uma função que simule a execução (pode ser uma chamada simples ao `system()` para testes ou uma função de simulação).
+- Garanta que a ordem de execução siga a árvore (por exemplo, um pipe entre dois comandos deve fazer com que o output de um seja direcionado como input do outro – nesse LAB, simule esse comportamento).
+- Teste com exemplos reais ou simulados.
+
+**Dicas:**
+- Lembre-se: a execução real do minishell envolverá forks e redirecionamento de file descriptors; aqui, a ideia é simular a lógica de execução baseada na árvore.
+
+---
+
+## LAB 12: Refatoração e Integração Final
+
+**Objetivo:**  
+Integrar todos os LABs anteriores em um módulo coeso que seja o “núcleo” da montagem e execução do minishell.
+
+**Tarefas:**
+- Organize o código em módulos (por exemplo, um módulo para a árvore, outro para a execução, etc.).
+- Realize testes integrados: desde a tokenização (já existente) até a execução via a árvore.
+- Refatore funções para facilitar a manutenção e adicione comentários para documentar a lógica de precedência e inserção.
+
+**Dicas:**
+- Documente cada função e teste casos de borda.
+- Revise a lógica de inserção e execução, garantindo que a árvore esteja “pronta” para atender a todos os casos de entrada.
+
+---
+
+## LAB 13 (Opcional): Implementação de Recursos Avançados
+
+**Objetivo:**  
+Explorar extensões e funcionalidades avançadas para a árvore do minishell.
+
+**Tarefas:**
+- Implemente a remoção ou substituição dinâmica de nós (por exemplo, para comandos “built-in” ou ajustes em tempo real).
+- Adicione suporte a operadores adicionais (como redirecionamento, concatenação, etc.) e ajuste a lógica de precedência.
+- Crie testes unitários para as funções de inserção, busca e execução da árvore.
+
+**Dicas:**
+- Essa etapa é para aperfeiçoar e refinar o sistema, preparando-o para um cenário mais complexo e real.
+
+---
+
+# Conclusão
+
+Após completar esses LABs, você deverá ter:
+- Uma estrutura de árvore binária adequada para representar comandos e operadores do minishell.
+- Funções para criar, inserir, visualizar, limpar e simular a execução da árvore.
+- Uma base robusta para evoluir o minishell com novas funcionalidades.
+
+---
+
+# Instruções para Download
+
+1. Copie todo o conteúdo deste documento.
+2. Abra seu editor de texto favorito.
+3. Cole o conteúdo e salve como `minishell_tree_labs.txt`.
+4. Utilize este arquivo como guia e referência para desenvolver cada LAB em seu ambiente de desenvolvimento.
+
+Boa sorte e divirta-se experimentando – esse processo passo a passo lhe dará total domínio sobre a árvore binária para o minishell!
+

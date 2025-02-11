@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/10 14:08:16 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:25:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_utils
 	int	index_bra_c;
 	int	index_bra_o;
 	char	*new_str;
+	char	*copy_new;
 	struct stat	stat_check;
 }	t_utils;
 
@@ -532,7 +533,7 @@ int	test_all_paths(t_utils *data)
 		data->temp = ft_strjoin(data->paths[index], "/");
 		if (!data->temp)
 			return (0);
-		data->path = ft_strjoin(data->temp, data->new_str);
+		data->path = ft_strjoin(data->temp, data->copy_new);
 		if (!data->path)
 			return (0);
 		if (access(data->path, F_OK | X_OK) == 0)
@@ -546,6 +547,15 @@ int	test_all_paths(t_utils *data)
 	return (0);
 }
 
+void	check_copy_new(t_utils *data)
+{
+	if (data->copy_new)
+	{
+		free(data->copy_new);
+		data->copy_new = NULL;
+	}
+}
+
 int	is_insider_quotes(t_tokens *root, t_utils *data)
 {
 	size_t	length;
@@ -555,6 +565,7 @@ int	is_insider_quotes(t_tokens *root, t_utils *data)
 		free(data->new_str);
 		data->new_str = NULL;
 	}
+	check_copy_new(data);
 	if (!root)
 		return (0);
 	length = ft_strlen(root->value);
@@ -564,6 +575,9 @@ int	is_insider_quotes(t_tokens *root, t_utils *data)
 		data->new_str = ft_substr(root->value, 1, length - 2);
 		if (!data->new_str)
 			return (0);
+		data->copy_new = ft_strdup(data->new_str);
+		if (!data->copy_new)
+			return (1);
 		if (test_all_paths(data))
 			return (1);
 	}
@@ -598,9 +612,10 @@ int	special_check_quotes(t_tokens *root, t_utils *data)
 	{
 		if ((root->value[index] == '\'' || root->value[index] == '\"'))
 		{
-			if (root->value[index] == '\'')
+			if (root->value[index] == '\'' && 
+				root->value[index - 1] != '\\')
 				data->simple_quotes++;
-			else
+			else if (root->value[index - 1] != '\\')
 				data->double_quotes++;
 		}
 		index++;
@@ -610,8 +625,7 @@ int	special_check_quotes(t_tokens *root, t_utils *data)
 
 int	final_check(t_utils *data)
 {
-	if (is_absolute_path_quotes(data) || test_all_paths(data)
-		|| case_builtins_quotes(data))
+	if (test_all_paths(data))
 		return (1);
 	return (0);
 }
@@ -688,8 +702,9 @@ int	special(t_tokens *root, t_utils *data)
 
 int	case_command(t_tokens *root, t_utils *data)
 {
-	if ((root->type == CMD && data->status > 1) && (exist_command(root, data)
-			|| check_absolute_path(root, data)))
+	if ((root->type == CMD && data->status > 1) && ((exist_command(root, data)
+			|| check_absolute_path(root, data)) || is_insider_quotes(root, data)
+			|| special(root,data)))
 		return (decrement_status(data));
 	else if (case_builtins(root) || is_environment(root)
 			|| is_insider_quotes(root, data) || special(root, data))
@@ -707,9 +722,6 @@ int	case_command(t_tokens *root, t_utils *data)
 		return (1);
 	else if (root->type == CMD && data->status == 1)
 		return (show_error_fd("CMD received in ARG mode", 0, data, 0));
-	else if ((root->type == CMD && exist_command(root, data))
-		|| check_absolute_path(root, data))
-		return (1);
 	return (show_error_fd("Unknown CMD syntax", 0, data, 0));
 }
 
@@ -844,6 +856,8 @@ void	clean_program(t_tokens *root, t_utils *data)
 		free(data->temp);
 	if (data->path)
 		free(data->path);
+	if (data->copy_new)
+		free(data->copy_new);
 	if (data->paths)
 		free_splits(NULL, data->paths, NULL, NULL);
 	if (data->new_str)
@@ -859,6 +873,7 @@ void	init_utils(t_utils *data)
 	data->brackets_c = 0;
 	data->path = NULL;
 	data->simple_quotes = 0;
+	data->copy_new = NULL;
 	data->double_quotes = 0;
 	data->paths = NULL;
 	data->temp = NULL;
@@ -881,21 +896,13 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("/b\"i\"n\'/l\'s", CMD);
+	root = create_token("echo", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, "-l", ARG);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "\'\'\'\'echo", CMD);
-	add_token(&root, "oi", ARG);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "\"x\"a\'r\'g\'s\'", CMD);
-	add_token(&root, "s\'o\'r\'t\'", CMD);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "\'echo\'", CMD);
-	add_token(&root, "oie", ARG);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "\"echo\"", CMD);
+	add_token(&root, "\\\'", ARG);
+	add_token(&root, "\\\'", ARG);
+	add_token(&root, ">", REDIRECT_OUT);
+	add_token(&root, "infile.txt", FD);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
