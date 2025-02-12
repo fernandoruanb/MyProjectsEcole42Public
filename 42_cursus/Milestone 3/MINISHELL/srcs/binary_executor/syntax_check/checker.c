@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/11 10:04:20 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:10:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_utils
 	int	index_bra_c;
 	int	index_bra_o;
 	char	*new_str;
+	char	*copy_new;
 	struct stat	stat_check;
 }	t_utils;
 
@@ -59,14 +60,7 @@ typedef struct s_tokens
 	struct s_tokens *previous;
 }	t_tokens;
 
-typedef struct s_tree
-{
-	char	*value;
-	t_id	type;
-	struct s_tree	*parent;
-	struct s_tree	*left;
-	struct s_tree	*right;
-}	t_tree;
+void    check_copy_new(t_utils *data);
 
 t_tokens	*create_token(char *value, t_id type)
 {
@@ -501,28 +495,28 @@ int	is_environment(t_tokens *root)
 
 int	case_builtins_quotes(t_utils *data)
 {
-	if (ft_strcmp(data->new_str, "cd") == 0)
+	if (ft_strcmp(data->copy_new, "cd") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "export") == 0)
+	else if (ft_strcmp(data->copy_new, "export") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "unset") == 0)
+	else if (ft_strcmp(data->copy_new, "unset") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "pwd") == 0)
+	else if (ft_strcmp(data->copy_new, "pwd") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "env") == 0)
+	else if (ft_strcmp(data->copy_new, "env") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "echo") == 0)
+	else if (ft_strcmp(data->copy_new, "echo") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "exit") == 0)
+	else if (ft_strcmp(data->copy_new, "exit") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "clear") == 0)
+	else if (ft_strcmp(data->copy_new, "clear") == 0)
 		return (1);
 	return (0);
 }
 
 int	is_absolute_path_quotes(t_utils *data)
 {
-	if (access(data->new_str, F_OK | X_OK) == 0)
+	if (access(data->copy_new, F_OK | X_OK) == 0)
 		return (1);
 	return (0);
 }
@@ -530,7 +524,6 @@ int	is_absolute_path_quotes(t_utils *data)
 int	test_all_paths(t_utils *data)
 {
 	int	index;
-
 	index = 0;
 	while (data->paths[index] != NULL)
 	{
@@ -541,8 +534,8 @@ int	test_all_paths(t_utils *data)
 		data->temp = ft_strjoin(data->paths[index], "/");
 		if (!data->temp)
 			return (0);
-		data->path = ft_strjoin(data->temp, data->new_str);
-		if (!data->path)
+		data->path = ft_strjoin(data->temp, data->copy_new);
+		if (!data->path || ft_strcmp(data->path, data->temp) == 0)
 			return (0);
 		if (access(data->path, F_OK | X_OK) == 0)
 			return (1);
@@ -555,15 +548,25 @@ int	test_all_paths(t_utils *data)
 	return (0);
 }
 
-int	is_insider_quotes(t_tokens *root, t_utils *data)
+void	check_copy_new(t_utils *data)
 {
-	size_t	length;
-
 	if (data->new_str)
 	{
 		free(data->new_str);
 		data->new_str = NULL;
 	}
+	if (data->copy_new)
+	{
+		free(data->copy_new);
+		data->copy_new = NULL;
+	}
+}
+
+int	is_insider_quotes(t_tokens *root, t_utils *data)
+{
+	size_t	length;
+
+	check_copy_new(data);
 	if (!root)
 		return (0);
 	length = ft_strlen(root->value);
@@ -573,9 +576,14 @@ int	is_insider_quotes(t_tokens *root, t_utils *data)
 		data->new_str = ft_substr(root->value, 1, length - 2);
 		if (!data->new_str)
 			return (0);
+		data->copy_new = ft_strdup(data->new_str);
+		if (!data->copy_new)
+			return (0);
 		if (test_all_paths(data))
 			return (1);
 	}
+	if (!data->copy_new)
+		data->copy_new = ft_strdup(root->value);
 	return (0);
 }
 
@@ -607,9 +615,10 @@ int	special_check_quotes(t_tokens *root, t_utils *data)
 	{
 		if ((root->value[index] == '\'' || root->value[index] == '\"'))
 		{
-			if (root->value[index] == '\'')
+			if (root->value[index] == '\'' && 
+				root->value[index - 1] != '\\')
 				data->simple_quotes++;
-			else
+			else if (root->value[index - 1] != '\\')
 				data->double_quotes++;
 		}
 		index++;
@@ -619,8 +628,8 @@ int	special_check_quotes(t_tokens *root, t_utils *data)
 
 int	final_check(t_utils *data)
 {
-	if (is_absolute_path_quotes(data) || test_all_paths(data)
-		|| case_builtins_quotes(data))
+	if (case_builtins_quotes(data) || test_all_paths(data)
+		|| is_absolute_path_quotes(data))
 		return (1);
 	return (0);
 }
@@ -643,11 +652,12 @@ int	get_check_command(t_tokens *root, t_utils *data)
 		index++;
 	}
 	buffer[count] = '\0';
-	data->new_str = ft_strdup(buffer);
-	if (!data->new_str)
+	check_copy_new(data);
+	data->copy_new = ft_strdup(buffer);
+	if (!data->copy_new)
 		return (0);
 	if (!final_check(data))
-		return (0);
+		return (ft_putendl_fd_0("Error at final check", 2));
 	return (1);
 }
 
@@ -664,7 +674,7 @@ int	check_quotes(t_tokens *root)
 		if ((flag == 1) && (root->value[index] == '\'' || root->value[index] == '\"'))
 		{
 			if (quote != root->value[index])
-				return (0);
+				return (ft_putendl_fd_0("Invalid quotes", 2));
 			flag = 0;
 		}
 		else if (root->value[index] == '\'' || root->value[index] == '\"')
@@ -687,18 +697,31 @@ int	special(t_tokens *root, t_utils *data)
 	data->simple_quotes = 0;
 	data->double_quotes = 0;
 	if (!special_check_quotes(root, data))
-		return (0);
+		return (ft_putendl_fd_0("Special quotes Error", 2));
 	if (!check_quotes(root))
-		return (0);
+		return (ft_putendl_fd_0("Error here check quotes", 2));
 	if (!get_check_command(root, data))
-		return (0);
+		return (ft_putendl_fd_0("We can't check command.", 2));
 	return (1);
+}
+
+int	extra_case_commands(t_tokens *root, t_utils *data)
+{
+	if ((root->type == CMD) && (exist_command(root,data)
+			|| check_absolute_path(root, data)
+			|| is_insider_quotes(root, data) || special(root, data)))
+	{
+		data->status = 1;
+		return (1);
+	}
+	return (0);
 }
 
 int	case_command(t_tokens *root, t_utils *data)
 {
 	if ((root->type == CMD && data->status > 1) && (exist_command(root, data)
-			|| check_absolute_path(root, data)))
+			|| check_absolute_path(root, data) || is_insider_quotes(root, data)
+			|| special(root, data)))
 		return (decrement_status(data));
 	else if (case_builtins(root) || is_environment(root)
 			|| is_insider_quotes(root, data) || special(root, data))
@@ -716,8 +739,7 @@ int	case_command(t_tokens *root, t_utils *data)
 		return (1);
 	else if (root->type == CMD && data->status == 1)
 		return (show_error_fd("CMD received in ARG mode", 0, data, 0));
-	else if ((root->type == CMD && exist_command(root, data))
-		|| check_absolute_path(root, data))
+	else if (extra_case_commands(root, data))
 		return (1);
 	return (show_error_fd("Unknown CMD syntax", 0, data, 0));
 }
@@ -844,6 +866,8 @@ int	check_syntax(t_tokens *root, char **envp, t_utils *data)
 	}
 	if (flag != 1)
 		return (0);
+	if (data->brackets_o != data->brackets_c)
+		return (show_error_fd("Brackets opened", 0, data, 0));
 	return (1);
 }
 
@@ -853,6 +877,8 @@ void	clean_program(t_tokens *root, t_utils *data)
 		free(data->temp);
 	if (data->path)
 		free(data->path);
+	if (data->copy_new)
+		free(data->copy_new);
 	if (data->paths)
 		free_splits(NULL, data->paths, NULL, NULL);
 	if (data->new_str)
@@ -868,6 +894,7 @@ void	init_utils(t_utils *data)
 	data->brackets_c = 0;
 	data->path = NULL;
 	data->simple_quotes = 0;
+	data->copy_new = NULL;
 	data->double_quotes = 0;
 	data->paths = NULL;
 	data->temp = NULL;
@@ -880,123 +907,29 @@ void	init_utils(t_utils *data)
 	data->files = 0;
 }
 
-t_tree	*create_new_branch(char *value)
-{
-	t_tree	*branch;
-
-	branch = malloc(sizeof(t_tree));
-	if (!branch)
-		return (NULL);
-	branch->value = value;
-	branch->left = NULL;
-	branch->right = NULL;
-	branch->parent = NULL;
-	return (branch);
-}
-
-void	clean_tree(t_tree **tree)
-{
-	if (*tree == NULL)
-		return ;
-	clean_tree(&(*tree)->left);
-	clean_tree(&(*tree)->right);
-	(*tree)->left = NULL;
-	(*tree)->right = NULL;
-	(*tree)->parent = NULL;
-	free(*tree);
-	*tree = NULL;
-}
-
-int	ft_tree(t_tokens *root, t_tree **tree)
-{
-	int	index;
-	t_tree	*last;
-
-	if (*tree == NULL)
-	{
-		*tree = create_new_branch(root->value);
-		root = root->next;
-	}
-	index = 0;
-	while (root)
-	{
-		last = *tree;
-		if (index % 2 == 0)
-		{
-			while (last->left)
-				last = last->left;
-			last->left = create_new_branch(root->value);
-		}
-		else
-		{
-			while (last->right)
-				last = last->right;
-			last->right = create_new_branch(root->value);
-		}
-		root = root->next;
-		index++;
-	}
-	return (1);
-}
-
-void	show_tree(t_tree *tree, int level)
-{
-	int	index;
-
-	if (tree == NULL)
-		return ;
-	show_tree(tree->left, level + 1);
-	index = 0;
-	while (index++ < level)
-		ft_printf("    ");
-	ft_printf("%s   \n", tree->value);
-	show_tree(tree->right, level + 1);
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_utils	data;
-	t_tree		*tree;
 	t_tokens	*root;
 
 	(void)argv;
 	if (argc < 1)
 		return (1);
 	root = NULL;
-	tree = NULL;
 	init_utils(&data);
-	root = create_token("/b\"i\"n\'/l\'s", CMD);
+	root = create_token("2", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, "-l", ARG);
-	add_token(&root, "|", PIPE);
+	add_token(&root, "\\\'", ARG);
+	add_token(&root, "\\\'", ARG);
+	add_token(&root, ">", REDIRECT_OUT);
+	add_token(&root, "infile.txt", FD);
 	add_token(&root, "\'\'\'\'echo", CMD);
-	add_token(&root, "oi", ARG);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "\"x\"a\'r\'g\'s\'", CMD);
-	add_token(&root, "s\'o\'r\'t\'", CMD);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "\'echo\'", CMD);
-	add_token(&root, "oie", ARG);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "\"echo\"", CMD);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
-	{
 		printf("OK\n");
-		if (!ft_tree(root, &tree))
-			return (ft_putendl_fd_1("Error opening the binary tree.", 2));
-	}
 	else
 		printf("KO\n");
-	printf("\n------------------------\n");
-	printf("------BINARY TREE-------\n");
-	printf("------------------------\n");
-	if (tree)
-	{
-		show_tree(tree, 0);
-		clean_tree(&tree);
-	}
 	clean_program(root, &data);
 	return (0);
 }

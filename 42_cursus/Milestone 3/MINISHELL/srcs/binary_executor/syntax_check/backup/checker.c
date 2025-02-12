@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/07 10:39:35 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:10:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ typedef struct s_utils
 	int	files;
 	int	commands;
 	int	pipes;
+	int	simple_quotes;
+	int	double_quotes;
 	int	args;
 	int	brackets_c;
 	int	brackets_o;
 	int	index_bra_c;
 	int	index_bra_o;
 	char	*new_str;
+	char	*copy_new;
 	struct stat	stat_check;
 }	t_utils;
 
@@ -56,6 +59,8 @@ typedef struct s_tokens
 	struct s_tokens	*next;
 	struct s_tokens *previous;
 }	t_tokens;
+
+void    check_copy_new(t_utils *data);
 
 t_tokens	*create_token(char *value, t_id type)
 {
@@ -140,16 +145,16 @@ void	show_tokens(t_tokens *root)
 	index = 1;
 	while (root)
 	{
-		printf("TOKEN %d\n", root->index);
-		printf("Value: %s\ntype: %s\n", root->value, get_token(root->type));
+		ft_printf("TOKEN %d\n", root->index);
+		ft_printf("Value: %s\nType: %s\n", root->value, get_token(root->type));
 		if (root->next)
-			printf("Next: %s\n", root->next->value);
+			ft_printf("Next: %s\n", root->next->value);
 		else
-			printf("Next: NULL\n");
+			ft_printf("Next: NULL\n");
 		if (root->previous)
-			printf("Previous: %s\n", root->previous->value);
+			ft_printf("Previous: %s\n", root->previous->value);
 		else
-			printf("Previous: NULL\n");
+			ft_printf("Previous: NULL\n");
 		root = root->next;
 	}
 }
@@ -490,28 +495,28 @@ int	is_environment(t_tokens *root)
 
 int	case_builtins_quotes(t_utils *data)
 {
-	if (ft_strcmp(data->new_str, "cd") == 0)
+	if (ft_strcmp(data->copy_new, "cd") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "export") == 0)
+	else if (ft_strcmp(data->copy_new, "export") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "unset") == 0)
+	else if (ft_strcmp(data->copy_new, "unset") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "pwd") == 0)
+	else if (ft_strcmp(data->copy_new, "pwd") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "env") == 0)
+	else if (ft_strcmp(data->copy_new, "env") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "echo") == 0)
+	else if (ft_strcmp(data->copy_new, "echo") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "exit") == 0)
+	else if (ft_strcmp(data->copy_new, "exit") == 0)
 		return (1);
-	else if (ft_strcmp(data->new_str, "clear") == 0)
+	else if (ft_strcmp(data->copy_new, "clear") == 0)
 		return (1);
 	return (0);
 }
 
 int	is_absolute_path_quotes(t_utils *data)
 {
-	if (access(data->new_str, F_OK | X_OK) == 0)
+	if (access(data->copy_new, F_OK | X_OK) == 0)
 		return (1);
 	return (0);
 }
@@ -519,7 +524,6 @@ int	is_absolute_path_quotes(t_utils *data)
 int	test_all_paths(t_utils *data)
 {
 	int	index;
-
 	index = 0;
 	while (data->paths[index] != NULL)
 	{
@@ -530,8 +534,8 @@ int	test_all_paths(t_utils *data)
 		data->temp = ft_strjoin(data->paths[index], "/");
 		if (!data->temp)
 			return (0);
-		data->path = ft_strjoin(data->temp, data->new_str);
-		if (!data->path)
+		data->path = ft_strjoin(data->temp, data->copy_new);
+		if (!data->path || ft_strcmp(data->path, data->temp) == 0)
 			return (0);
 		if (access(data->path, F_OK | X_OK) == 0)
 			return (1);
@@ -544,12 +548,25 @@ int	test_all_paths(t_utils *data)
 	return (0);
 }
 
+void	check_copy_new(t_utils *data)
+{
+	if (data->new_str)
+	{
+		free(data->new_str);
+		data->new_str = NULL;
+	}
+	if (data->copy_new)
+	{
+		free(data->copy_new);
+		data->copy_new = NULL;
+	}
+}
+
 int	is_insider_quotes(t_tokens *root, t_utils *data)
 {
 	size_t	length;
 
-	if (data->new_str)
-		free(data->new_str);
+	check_copy_new(data);
 	if (!root)
 		return (0);
 	length = ft_strlen(root->value);
@@ -559,9 +576,143 @@ int	is_insider_quotes(t_tokens *root, t_utils *data)
 		data->new_str = ft_substr(root->value, 1, length - 2);
 		if (!data->new_str)
 			return (0);
-		ft_printf("A new_str: %s\n", data->new_str);
+		data->copy_new = ft_strdup(data->new_str);
+		if (!data->copy_new)
+			return (0);
 		if (test_all_paths(data))
 			return (1);
+	}
+	if (!data->copy_new)
+		data->copy_new = ft_strdup(root->value);
+	return (0);
+}
+
+int	ft_isalpha_special(char letter)
+{
+	return (letter >= 'a' && letter <= 'z');
+}
+
+int	ft_isalpha_special_2(char letter)
+{
+	return (ft_isalpha_special(letter) || letter == '/');
+}
+
+int	how_many_quotes(t_utils *data)
+{
+	if (data->simple_quotes % 2 != 0 || data->double_quotes % 2 != 0)
+		return (show_error_fd("Quotes open/close error", 0, data, 0));
+	return (1);
+}
+
+int	special_check_quotes(t_tokens *root, t_utils *data)
+{
+	int	index;
+
+	data->simple_quotes = 0;
+	data->double_quotes = 0;
+	index = 0;
+	while (root->value[index] != '\0')
+	{
+		if ((root->value[index] == '\'' || root->value[index] == '\"'))
+		{
+			if (root->value[index] == '\'' && 
+				root->value[index - 1] != '\\')
+				data->simple_quotes++;
+			else if (root->value[index - 1] != '\\')
+				data->double_quotes++;
+		}
+		index++;
+	}
+	return (how_many_quotes(data));
+}
+
+int	final_check(t_utils *data)
+{
+	if (case_builtins_quotes(data) || test_all_paths(data)
+		|| is_absolute_path_quotes(data))
+		return (1);
+	return (0);
+}
+
+int	get_check_command(t_tokens *root, t_utils *data)
+{
+	char	buffer[4096];
+	int	index;
+	int	count;
+
+	index = 0;
+	count = 0;
+	while (root->value[index] != '\0')
+	{
+		if (ft_isalpha_special_2(root->value[index]))
+		{
+			buffer[count] = root->value[index];
+			count++;
+		}
+		index++;
+	}
+	buffer[count] = '\0';
+	check_copy_new(data);
+	data->copy_new = ft_strdup(buffer);
+	if (!data->copy_new)
+		return (0);
+	if (!final_check(data))
+		return (ft_putendl_fd_0("Error at final check", 2));
+	return (1);
+}
+
+int	check_quotes(t_tokens *root)
+{
+	int	index;
+	char	quote;
+	int	flag;
+
+	index = 0;
+	flag = 0;
+	while (root->value[index] != '\0')
+	{
+		if ((flag == 1) && (root->value[index] == '\'' || root->value[index] == '\"'))
+		{
+			if (quote != root->value[index])
+				return (ft_putendl_fd_0("Invalid quotes", 2));
+			flag = 0;
+		}
+		else if (root->value[index] == '\'' || root->value[index] == '\"')
+		{
+			flag = 1;
+			quote = root->value[index];
+		}
+		index++;
+	}
+	return (1);
+}
+
+int	special(t_tokens *root, t_utils *data)
+{
+	if (data->new_str)
+	{
+		free(data->new_str);
+		data->new_str = NULL;
+	}
+	data->simple_quotes = 0;
+	data->double_quotes = 0;
+	if (!special_check_quotes(root, data))
+		return (ft_putendl_fd_0("Special quotes Error", 2));
+	if (!check_quotes(root))
+		return (ft_putendl_fd_0("Error here check quotes", 2));
+	if (!get_check_command(root, data))
+		return (ft_putendl_fd_0("We can't check command.", 2));
+	return (1);
+}
+
+int	extra_case_commands(t_tokens *root, t_utils *data)
+{
+	if ((root->type == CMD) && (exist_command(root,data)
+			|| check_absolute_path(root, data)
+			|| is_insider_quotes(root, data) || special(root, data)))
+	{
+		data->status = 1;
+		return (1);
 	}
 	return (0);
 }
@@ -569,10 +720,11 @@ int	is_insider_quotes(t_tokens *root, t_utils *data)
 int	case_command(t_tokens *root, t_utils *data)
 {
 	if ((root->type == CMD && data->status > 1) && (exist_command(root, data)
-			|| check_absolute_path(root, data)))
+			|| check_absolute_path(root, data) || is_insider_quotes(root, data)
+			|| special(root, data)))
 		return (decrement_status(data));
 	else if (case_builtins(root) || is_environment(root)
-			|| is_insider_quotes(root, data))
+			|| is_insider_quotes(root, data) || special(root, data))
 	{
 		data->status = 1;
 		return (1);
@@ -587,8 +739,7 @@ int	case_command(t_tokens *root, t_utils *data)
 		return (1);
 	else if (root->type == CMD && data->status == 1)
 		return (show_error_fd("CMD received in ARG mode", 0, data, 0));
-	else if ((root->type == CMD && exist_command(root, data))
-		|| check_absolute_path(root, data))
+	else if (extra_case_commands(root, data))
 		return (1);
 	return (show_error_fd("Unknown CMD syntax", 0, data, 0));
 }
@@ -609,6 +760,8 @@ int	case_limiter(t_tokens *root, t_utils *data)
 
 int	case_arg(t_tokens *root, t_utils *data)
 {
+	if (!special_check_quotes(root, data))
+		return (0);
 	if (root->type == ARG && data->status == 1)
 		return (1);
 	else if (root->type == ARG && root->previous != NULL && (root->previous->type == FD
@@ -702,7 +855,7 @@ int	check_syntax(t_tokens *root, char **envp, t_utils *data)
 	flag = 1;
 	while (root)
 	{
-	//	printf("TOKEN PASSED: %d\n", root->index);
+		//ft_printf("TOKEN PASSED: %d\n", root->index);
 		if (get_command(root, data))
 			root = root->next;
 		else
@@ -713,6 +866,8 @@ int	check_syntax(t_tokens *root, char **envp, t_utils *data)
 	}
 	if (flag != 1)
 		return (0);
+	if (data->brackets_o != data->brackets_c)
+		return (show_error_fd("Brackets opened", 0, data, 0));
 	return (1);
 }
 
@@ -722,6 +877,8 @@ void	clean_program(t_tokens *root, t_utils *data)
 		free(data->temp);
 	if (data->path)
 		free(data->path);
+	if (data->copy_new)
+		free(data->copy_new);
 	if (data->paths)
 		free_splits(NULL, data->paths, NULL, NULL);
 	if (data->new_str)
@@ -736,6 +893,9 @@ void	init_utils(t_utils *data)
 	data->brackets_o = 0;
 	data->brackets_c = 0;
 	data->path = NULL;
+	data->simple_quotes = 0;
+	data->copy_new = NULL;
+	data->double_quotes = 0;
 	data->paths = NULL;
 	data->temp = NULL;
 	data->new_str = NULL;
@@ -757,15 +917,14 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	root = NULL;
 	init_utils(&data);
-	root = create_token("\"echo\"", CMD);
+	root = create_token("2", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, "\"hello\"", ARG);
-	add_token(&root, "|", PIPE);
-	add_token(&root, "<<", HEREDOC);
-	add_token(&root, "jonas'", LIMITER);
-	add_token(&root, "\'/bin/cat\'", CMD);
-	add_token(&root, "-e", ARG);
+	add_token(&root, "\\\'", ARG);
+	add_token(&root, "\\\'", ARG);
+	add_token(&root, ">", REDIRECT_OUT);
+	add_token(&root, "infile.txt", FD);
+	add_token(&root, "\'\'\'\'echo", CMD);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
 		printf("OK\n");
