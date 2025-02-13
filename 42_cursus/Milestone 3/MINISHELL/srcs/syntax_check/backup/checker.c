@@ -6,11 +6,20 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/11 18:10:26 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:24:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+typedef struct s_tree
+{
+	char	*value;
+	int	index;
+	struct s_tree	*left;
+	struct s_tree	*parent;
+	struct s_tree	*right;
+}	t_tree;
 
 typedef struct s_utils
 {
@@ -907,29 +916,158 @@ void	init_utils(t_utils *data)
 	data->files = 0;
 }
 
+t_tree	*create_new_branch(char *value)
+{
+	static int	index = 0;
+	t_tree	*branch;
+
+	if (!value)
+		return (NULL);
+	branch = malloc(sizeof(t_tree));
+	if (!branch)
+		return (NULL);
+	branch->value = value;
+	branch->index = index++;
+	branch->parent = NULL;
+	branch->left = NULL;
+	branch->right = NULL;
+	return (branch);
+}
+
+void	clean_tree(t_tree **tree)
+{
+	if (*tree == NULL)
+		return ;
+	clean_tree(&(*tree)->left);
+	clean_tree(&(*tree)->right);
+	(*tree)->left = NULL;
+	(*tree)->right = NULL;
+	(*tree)->parent = NULL;
+	free(*tree);
+	*tree = NULL;
+}
+
+void	show_tree(t_tree *tree, int level)
+{
+	int	index;
+
+	if (!tree)
+		return ;
+	index = 0;
+	show_tree(tree->left, level + 1);
+	while (index++ < level)
+		ft_printf("    ");
+	ft_printf("%d %s    \n", tree->index, tree->value);
+	show_tree(tree->right, level + 1);
+}
+
+int	is_operator(char *value)
+{
+	if (!value)
+		return (0);
+	if (ft_strcmp(value, "|") == 0
+		|| ft_strcmp(value, ">") == 0
+		|| ft_strcmp(value, "<") == 0
+		|| ft_strcmp(value, ">>") == 0
+		|| ft_strcmp(value, "<<") == 0
+		|| ft_strcmp(value, "&&") == 0
+		|| ft_strcmp(value, "||") == 0)
+		return (1);
+	return (0);
+}
+
+t_tokens	*find_the_last_token(t_tokens *root)
+{
+	t_tokens	*last;
+
+	last = root;
+	while (last->next)
+		last = last->next;
+	return (last);
+}
+
+void	add_pipe(char *value, t_tree **tree)
+{
+	t_tree	*last;
+
+	last = *tree;
+	while (last->left)
+		last = last->left;
+	last->left = create_new_branch(value);
+}
+
+void	add_tree_element(t_tree **tree, char *value)
+{
+	if (*tree == NULL)
+		*tree = create_new_branch(value);
+	if (ft_strcmp(value, "|") == 0)
+		add_pipe(value, tree);
+}
+
+void	add_all_elements(t_tokens *last, t_tree **tree)
+{
+	if (!last)
+		return ;
+	if (last->previous == NULL)
+		add_tree_element(tree, last->value);
+	while (last->previous)
+	{
+		if (is_operator(last->value))
+			add_tree_element(tree, last->value);
+		else if (last->type == CMD)
+			add_tree_element(tree, last->value);
+		last = last->previous;
+	}
+}
+
+void	add_new_branch(t_tokens *root, t_tree **tree)
+{
+	t_tokens	*last;
+
+	last = find_the_last_token(root);
+	add_all_elements(last, tree);
+}
+
+int	ft_tree(t_tokens *root, t_tree **tree)
+{
+	if (!root)
+		return (0);
+	add_new_branch(root, tree);
+	return (1);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_utils	data;
 	t_tokens	*root;
+	t_tree		*tree;
 
 	(void)argv;
 	if (argc < 1)
 		return (1);
 	root = NULL;
+	tree = NULL;
 	init_utils(&data);
-	root = create_token("2", CMD);
+	root = create_token("ls", CMD);
 	if (!root)
 		return (1);
-	add_token(&root, "\\\'", ARG);
-	add_token(&root, "\\\'", ARG);
-	add_token(&root, ">", REDIRECT_OUT);
-	add_token(&root, "infile.txt", FD);
-	add_token(&root, "\'\'\'\'echo", CMD);
 	show_tokens(root);
 	if (check_syntax(root, envp, &data))
+	{
 		printf("OK\n");
+		ft_tree(root, &tree);
+	}
 	else
 		printf("KO\n");
+	if (tree)
+	{
+		ft_printf("\n---------------------\n");
+		ft_printf("-----BINARY-TREE-----\n");
+		ft_printf("---------------------\n");
+		ft_printf("\n");
+		show_tree(tree, 1);
+		clean_tree(&tree);
+	}
 	clean_program(root, &data);
 	return (0);
 }
