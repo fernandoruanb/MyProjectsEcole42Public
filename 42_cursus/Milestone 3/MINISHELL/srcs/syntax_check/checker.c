@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/12 16:24:25 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:51:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ typedef struct s_tree
 {
 	char	*value;
 	int	index;
-	struct s_tree	*left;
-	struct s_tree	*parent;
-	struct s_tree	*right;
+	valueuct s_tree	*left;
+	valueuct s_tree	*parent;
+	valueuct s_tree	*right;
 }	t_tree;
 
 typedef struct s_utils
@@ -38,9 +38,9 @@ typedef struct s_utils
 	int	brackets_o;
 	int	index_bra_c;
 	int	index_bra_o;
-	char	*new_str;
+	char	*new_value;
 	char	*copy_new;
-	struct stat	stat_check;
+	valueuct stat	stat_check;
 }	t_utils;
 
 typedef enum e_id
@@ -60,7 +60,7 @@ typedef enum e_id
 	OPERATOR_AND,
 }	t_id;
 
-typedef struct s_tokens
+typedef valueuct s_tokens
 {
 	char	*value;
 	int	index;
@@ -71,40 +71,42 @@ typedef struct s_tokens
 
 void    check_copy_new(t_utils *data);
 
-t_tokens	*create_token(char *value, t_id type)
+static int	check_file_descriptor(t_tokens *root, char *file);
+
+t_tokens	*create_tokens(char *value, t_value type)
 {
 	static int	index = 0;
-	t_tokens	*new_token;
+	t_tokens	*new_tokens;
 
-	new_token = malloc(sizeof(t_tokens));
-	if (!new_token)
+	new_tokens = malloc(sizeof(t_tokens));
+	if (!new_tokens)
 		return (NULL);
 	index++;
-	new_token->value = value;
-	new_token->index = index;
-	new_token->type = type;
-	new_token->next = NULL;
-	new_token->previous = NULL;
-	return (new_token);
+	new_tokens->value = value;
+	new_tokens->index = index;
+	new_tokens->type = type;
+	new_tokens->next = NULL;
+	new_tokens->previous = NULL;
+	return (new_tokens);
 }
 
-void	add_token(t_tokens **root, char *value, t_id type)
+void	add_tokens(t_tokens **root, char *value, t_value type)
 {
-	t_tokens	*new_token;
+	t_tokens	*new_tokens;
 	t_tokens	*last;
 
-	new_token = create_token(value, type);
-	if (!new_token)
+	new_tokens = create_tokens(value, type);
+	if (!new_tokens)
 		return ;
 	if (*root == NULL)
-		*root = new_token;
+		*root = new_tokens;
 	else
 	{
 		last = *root;
 		while (last->next)
 			last = last->next;
-		last->next = new_token;
-		new_token->previous = last;
+		last->next = new_tokens;
+		new_tokens->previous = last;
 	}
 }
 
@@ -123,9 +125,9 @@ void	free_tokens(t_tokens *root)
 	root = NULL;
 }
 
-char	*get_token(t_id type)
+char	*get_tokens(t_value type)
 {
-	static char	*ids[] =
+	static char	*values[] =
 	{
 		"PIPE",
 		"LIMITER",
@@ -142,7 +144,7 @@ char	*get_token(t_id type)
 		"OPERATOR_AND"
 	};
 	if (type >= 0 && type <= OPERATOR_AND)
-		return (ids[type]);
+		return (values[type]);
 	else
 		return (NULL);
 }
@@ -155,7 +157,7 @@ void	show_tokens(t_tokens *root)
 	while (root)
 	{
 		ft_printf("TOKEN %d\n", root->index);
-		ft_printf("Value: %s\nType: %s\n", root->value, get_token(root->type));
+		ft_printf("Value: %s\nType: %s\n", root->value, get_tokens(root->type));
 		if (root->next)
 			ft_printf("Next: %s\n", root->next->value);
 		else
@@ -168,12 +170,12 @@ void	show_tokens(t_tokens *root)
 	}
 }
 
-int	free_strs_flag(char *str1, char *str2, int flag)
+int	free_types_flag(char *value1, char *value2, int flag)
 {
-	if (str1)
-		free(str1);
-	if (str2)
-		free(str2);
+	if (value1)
+		free(value1);
+	if (value2)
+		free(value2);
 	if (flag == 1)
 		return (1);
 	return (0);
@@ -193,7 +195,7 @@ void	get_paths(char **envp, t_utils *data)
 	int	index;
 
 	index = 0;
-	while (envp[index] && (!ft_strnstr(envp[index], "PATH", 4)))
+	while (envp[index] && (!ft_strncmp(envp[index], "PATH", 4)))
 		index++;
 	data->paths = ft_split(envp[index] + 5, ':');
 	if (!data->paths)
@@ -206,10 +208,10 @@ void	get_full_path(t_tokens *root, int index, t_utils *data)
 		free(data->temp);
 	if (data->path)
 		free(data->path);
-	data->temp = ft_strjoin(data->paths[index], "/");
+	data->temp = ft_ft_strjoin(data->paths[index], "/");
 	if (!data->temp)
 		return ;
-	data->path = ft_strjoin(data->temp, root->value);
+	data->path = ft_ft_strjoin(data->temp, root->value);
 }
 
 int	check_absolute_path(t_tokens *root, t_utils *data)
@@ -326,7 +328,7 @@ int	heredoc_or_append(t_tokens *root, t_utils *data)
 		&& root->next->type == LIMITER && root->previous != NULL
 		&& root->previous->type == CMD)
 		return (1);
-	return (show_error_fd("Invalid case of heredoc, append", 0, data, 0));
+	return (show_error_fd("Invalvalue case of heredoc, append", 0, data, 0));
 }
 
 int	extra_redirect_cases(t_tokens *root, t_utils *data)
@@ -334,7 +336,7 @@ int	extra_redirect_cases(t_tokens *root, t_utils *data)
 	if ((root->type == REDIRECT_IN || root->type == REDIRECT_OUT || root->type == APPEND)
 		&& root->next != NULL && root->next->type == FD)
 		return (1);
-	return (show_error_fd("Invalid case of redirects", 0, data, 0));
+	return (show_error_fd("Invalvalue case of redirects", 0, data, 0));
 }
 
 int	case_redirect(t_tokens *root, t_utils *data)
@@ -380,7 +382,7 @@ int	is_number(t_tokens *root, t_utils *data)
 	return (1);
 }
 
-int	check_is_valid_fd(t_tokens *root, t_utils *data)
+int	check_is_valvalue_fd(t_tokens *root, t_utils *data)
 {
 	long	check_fd;
 
@@ -400,31 +402,43 @@ int	check_is_directory(t_tokens *root, t_utils *data)
 	return (0);
 }
 
-int	case_fd(t_tokens *root, t_utils *data)
+int	invalvalue_fd(t_tokens *root)
 {
-	if (is_number(root, data))
-		return (check_is_valid_fd(root, data));
-	if (check_is_directory(root, data))
-		return (show_error_fd("You put a directory as file", 0, data, 0));
-	if ((data->status == 0) && (!is_number(root, data)))
-		return (show_error_fd("Isolated fd", 0, data, 0));
-	data->status = 2;
-	if (is_number(root, data) && root->next != NULL && root->next->type == REDIRECT_IN)
-		return (1);
-	if (root->type == FD && root->next != NULL && root->next->type == REDIRECT_OUT)
-		return (1);
-	if (root->type == FD && root->previous == NULL)
-	       return (show_error_fd("Isolated FD without redirect", 0, data, 0));
-	else if ((root->type == FD) && (root->previous != NULL)
-		&& (root->previous->type == REDIRECT_OUT
-		|| root->previous->type == APPEND || root->previous->type == REDIRECT_IN))
-		return (1);
-	else if (root->previous != NULL && root->previous->type == ARG)
-		return (1);
-	return (show_error_fd("Invalid case of files", 0, data, 0));
+	if (root->previous != NULL && root->previous->value == REDIRECT_IN)
+		if (access(root->value, F_OK) != 0)
+			return (1);
+	return (0);
 }
 
-int	check_invalid_things(t_tokens *root)
+int	case_fd(t_tokens *root, t_utils *data)
+{
+	if (invalvalue_fd(root))
+		return (show_error_fd("Syntax: FD Error", 0 ,data, 0));
+	if (is_number(root, data))
+		return (check_is_valvalue_fd(root, data));
+	if (check_is_directory(root, data))
+		return (show_error_fd("Syntax: FD Error", 0, data, 0));
+	if ((data->status == 0) && (!is_number(root, data)))
+		return (show_error_fd("Syntax: FD Error", 0, data, 0));
+	data->status = 2;
+	if (is_number(root, data) && root->next != NULL
+		&& root->next->value == REDIRECT_IN)
+		return (1);
+	if (root->value == FD && root->next != NULL && root->next->value == REDIRECT_OUT)
+		return (1);
+	if (root->value == FD && root->previous == NULL)
+		return (show_error_fd("Syntax: FD Error", 0, data, 0));
+	else if ((root->value == FD) && (root->previous != NULL)
+		&& (root->previous->value == REDIRECT_OUT
+			|| root->previous->value == APPEND
+			|| root->previous->value == REDIRECT_IN))
+		return (1);
+	else if (root->previous != NULL && root->previous->value == ARG)
+		return (1);
+	return (show_error_fd("Syntax: FD Error", 0, data, 0));
+}
+
+int	check_invalvalue_things(t_tokens *root)
 {
 	if ((root->type == OPERATOR_AND || root->type == OPERATOR_OR)
 		&& (root->next != NULL) && (root->previous != NULL)
@@ -444,9 +458,9 @@ int	check_brackets(t_tokens *root, t_utils *data)
 	data->status = 2;
 	if (root->type == BRACKET_O && root->next != NULL 
 		&& root->next->type == BRACKET_C)
-		return (show_error_fd("You forgot to put things inside brackets", 0, data, 0));
+		return (show_error_fd("You forgot to put things insvaluee brackets", 0, data, 0));
 	if (root->type == BRACKET_O && root->next != NULL && root->next->type == ARG)
-		return (show_error_fd("You forgot to put a CMD inside BRACKET_O", 0, data, 0));
+		return (show_error_fd("You forgot to put a CMD insvaluee BRACKET_O", 0, data, 0));
 	if (root->type == BRACKET_C && root->next == NULL && data->brackets_o != data->brackets_c)
 		return (show_error_fd("Isolated BRACKET_C", 0, data, 0));
 	return (1);
@@ -463,7 +477,7 @@ int	extra_cases(t_tokens *root, t_utils *data)
 	if (root->type == OPERATOR_OR && data->status == 0)
 		return (show_error_fd("Operator_OR was the first", 0, data, 0));
 	data->status = 2;
-	if (check_invalid_things(root))
+	if (check_invalvalue_things(root))
 		return (show_error_fd("Operators and delimiters are joking", 0, data, 0));
 	if ((root->type == OPERATOR_AND) && (root->previous == NULL
 		|| root->next == NULL))
@@ -497,7 +511,7 @@ int	case_builtins(t_tokens *root)
 
 int	is_environment(t_tokens *root)
 {
-	if (ft_strncmp(root->value, "$", 1) == 0)
+	if (ft_valuencmp(root->value, "$", 1) == 0)
 		return (1);
 	return (0);
 }
@@ -540,10 +554,10 @@ int	test_all_paths(t_utils *data)
 			free(data->temp);
 		if (data->path)
 			free(data->path);
-		data->temp = ft_strjoin(data->paths[index], "/");
+		data->temp = ft_ft_strjoin(data->paths[index], "/");
 		if (!data->temp)
 			return (0);
-		data->path = ft_strjoin(data->temp, data->copy_new);
+		data->path = ft_ft_strjoin(data->temp, data->copy_new);
 		if (!data->path || ft_strcmp(data->path, data->temp) == 0)
 			return (0);
 		if (access(data->path, F_OK | X_OK) == 0)
@@ -559,10 +573,10 @@ int	test_all_paths(t_utils *data)
 
 void	check_copy_new(t_utils *data)
 {
-	if (data->new_str)
+	if (data->new_value)
 	{
-		free(data->new_str);
-		data->new_str = NULL;
+		free(data->new_value);
+		data->new_value = NULL;
 	}
 	if (data->copy_new)
 	{
@@ -571,28 +585,28 @@ void	check_copy_new(t_utils *data)
 	}
 }
 
-int	is_insider_quotes(t_tokens *root, t_utils *data)
+int	is_insvalueer_quotes(t_tokens *root, t_utils *data)
 {
 	size_t	length;
 
 	check_copy_new(data);
 	if (!root)
 		return (0);
-	length = ft_strlen(root->value);
+	length = ft_valuelen(root->value);
 	if ((root->value[0] == '\'' && root->value[length - 1] == '\'')
 		|| (root->value[0] == '\"' && root->value[length - 1] == '\"'))
 	{
-		data->new_str = ft_substr(root->value, 1, length - 2);
-		if (!data->new_str)
+		data->new_value = ft_subvalue(root->value, 1, length - 2);
+		if (!data->new_value)
 			return (0);
-		data->copy_new = ft_strdup(data->new_str);
+		data->copy_new = ft_valuedup(data->new_value);
 		if (!data->copy_new)
 			return (0);
 		if (test_all_paths(data))
 			return (1);
 	}
 	if (!data->copy_new)
-		data->copy_new = ft_strdup(root->value);
+		data->copy_new = ft_valuedup(root->value);
 	return (0);
 }
 
@@ -606,10 +620,34 @@ int	ft_isalpha_special_2(char letter)
 	return (ft_isalpha_special(letter) || letter == '/');
 }
 
-int	how_many_quotes(t_utils *data)
+int	check_final_quotes(t_tokens *root)
 {
+	int		index;
+	char	quote;
+
+	index = 0;
+	while (root->value[index] != '\0')
+	{
+		if (root->value[index] == '\'' || root->value[index] == '\"')
+		{
+			quote = root->value[index];
+			index++;
+			while (root->value[index] != '\0' && root->value[index] != quote)
+				index++;
+			if (root->value[index] == '\0')
+				return (0);
+		}
+		index++;
+	}
+	return (1);
+}
+
+int	how_many_quotes(t_tokens *root, t_utils *data)
+{
+	if (root->value == ARG && check_final_quotes(root))
+		return (1);
 	if (data->simple_quotes % 2 != 0 || data->double_quotes % 2 != 0)
-		return (show_error_fd("Quotes open/close error", 0, data, 0));
+		return (show_error_fd("Syntax: QUOTES Error", 0, data, 0));
 	return (1);
 }
 
@@ -662,7 +700,7 @@ int	get_check_command(t_tokens *root, t_utils *data)
 	}
 	buffer[count] = '\0';
 	check_copy_new(data);
-	data->copy_new = ft_strdup(buffer);
+	data->copy_new = ft_valuedup(buffer);
 	if (!data->copy_new)
 		return (0);
 	if (!final_check(data))
@@ -683,7 +721,7 @@ int	check_quotes(t_tokens *root)
 		if ((flag == 1) && (root->value[index] == '\'' || root->value[index] == '\"'))
 		{
 			if (quote != root->value[index])
-				return (ft_putendl_fd_0("Invalid quotes", 2));
+				return (ft_putendl_fd_0("Invalvalue quotes", 2));
 			flag = 0;
 		}
 		else if (root->value[index] == '\'' || root->value[index] == '\"')
@@ -698,10 +736,10 @@ int	check_quotes(t_tokens *root)
 
 int	special(t_tokens *root, t_utils *data)
 {
-	if (data->new_str)
+	if (data->new_value)
 	{
-		free(data->new_str);
-		data->new_str = NULL;
+		free(data->new_value);
+		data->new_value = NULL;
 	}
 	data->simple_quotes = 0;
 	data->double_quotes = 0;
@@ -714,11 +752,45 @@ int	special(t_tokens *root, t_utils *data)
 	return (1);
 }
 
-int	extra_case_commands(t_tokens *root, t_utils *data)
+static int	get_subvalue(t_tokens *root)
 {
-	if ((root->type == CMD) && (exist_command(root,data)
+	char	*subvalue;
+	int	result;
+
+	subvalue = ft_valuedup(root->value + 2);
+	if (!subvalue)
+		return (0);
+	result = check_file_descriptor(root, subvalue);
+	free(subvalue);
+	return (result);
+}
+
+static int	check_file_descriptor(t_tokens *root, char *file)
+{
+	t_tokens	*last;
+
+	last = root;
+	while (last->previous)
+		last = last->previous;
+	while (last->next)
+	{
+		if (ft_strcmp(last->value, file) == 0)
+				return (1);
+		last = last->next;
+	}
+	return (0);
+}
+
+static int	extra_cases_commands(t_tokens *root, t_utils *data)
+{
+	if ((root->value == CMD) && root->value[0] == '.' && root->value[1] == '/')
+	{
+		return (special_check_quotes(root, data)
+			&& !check_is_directory(root, data) && get_subvalue(root));
+	}
+	else if ((root->value == CMD) && (exist_command(root, data)
 			|| check_absolute_path(root, data)
-			|| is_insider_quotes(root, data) || special(root, data)))
+			|| is_insvalueer_quotes(root, data) || special(root, data)))
 	{
 		data->status = 1;
 		return (1);
@@ -728,29 +800,29 @@ int	extra_case_commands(t_tokens *root, t_utils *data)
 
 int	case_command(t_tokens *root, t_utils *data)
 {
-	if ((root->type == CMD && data->status > 1) && (exist_command(root, data)
-			|| check_absolute_path(root, data) || is_insider_quotes(root, data)
-			|| special(root, data)))
+	if ((root->value == CMD && data->status > 1) && (exist_command(root, data)
+			|| check_absolute_path(root, data)))
 		return (decrement_status(data));
 	else if (case_builtins(root) || is_environment(root)
-			|| is_insider_quotes(root, data) || special(root, data))
+		|| is_insvalueer_quotes(root, data) || special(root, data))
 	{
 		data->status = 1;
 		return (1);
 	}
-	else if (root->previous != NULL && ft_strcmp(root->previous->value, "xargs") == 0)
+	else if (root->previous != NULL
+		&& ft_strcmp(root->previous->value, "xargs") == 0)
 		return (1);
-	else if (root->type == CMD && check_absolute_path(root, data))
+	else if (root->value == CMD && check_absolute_path(root, data))
 		return (1);
-	else if (root->type == CMD && root->next != NULL &&
-		root->previous != NULL && root->previous->type == PIPE
-		&& root->next->type == PIPE)
+	else if (root->value == CMD && root->next != NULL
+		&& root->previous != NULL && root->previous->value == PIPE
+		&& root->next->value == PIPE)
 		return (1);
-	else if (root->type == CMD && data->status == 1)
-		return (show_error_fd("CMD received in ARG mode", 0, data, 0));
-	else if (extra_case_commands(root, data))
+	else if (root->value == CMD && data->status == 1)
+		return (show_error_fd("Syntax: CMD Error", 0, data, 0));
+	else if (extra_cases_commands(root, data))
 		return (1);
-	return (show_error_fd("Unknown CMD syntax", 0, data, 0));
+	return (show_error_fd("Syntax: CMD Error", 0, data, 0));
 }
 
 int	case_limiter(t_tokens *root, t_utils *data)
@@ -764,7 +836,7 @@ int	case_limiter(t_tokens *root, t_utils *data)
 	if (root->type == LIMITER && root->previous != NULL && root->previous->type == HEREDOC
 		&& root->next == NULL)
 		return (1);
-	return (show_error_fd("Invalid LIMITER Case", 0, data, 0));
+	return (show_error_fd("Invalvalue LIMITER Case", 0, data, 0));
 }
 
 int	case_arg(t_tokens *root, t_utils *data)
@@ -782,10 +854,10 @@ int	case_arg(t_tokens *root, t_utils *data)
 		return (1);
 	else if (root->type == ARG && root->previous != NULL && root->previous->type == LIMITER)
 		return (1);
-	return (show_error_fd("Invalid case of args", 0, data, 0));
+	return (show_error_fd("Invalvalue case of args", 0, data, 0));
 }
 
-int	check_invalid_brackets_position(t_utils *data)
+int	check_invalvalue_brackets_position(t_utils *data)
 {
 	if (data->index_bra_o != -1 && data->index_bra_c != -1)
 	{
@@ -800,31 +872,41 @@ int	check_invalid_brackets_position(t_utils *data)
 	return (0);
 }
 
+int	extra_case_cmds(t_tokens *root)
+{
+	if (root->value == CMD && ft_strcmp(root->value, "./") == 0)
+		return (1);
+	if (root->value == CMD && !check_quotes(root))
+		return (1);
+	return (0);
+}
+
 int	final_case(t_tokens *root, t_utils *data)
 {
-	if (root->type == REDIRECT_IN || root->type == APPEND || root->type == REDIRECT_OUT)
+	if (root->value == REDIRECT_IN || root->value == APPEND
+		|| root->value == REDIRECT_OUT)
 		data->redirects++;
-	if (root->type == FD)
+	if (root->value == FD)
 		data->files++;
-	if (root->type == CMD)
+	if (root->value == CMD)
 		data->commands++;
-	if (root->type == ARG)
+	if (root->value == ARG)
 		data->args++;
-	if (root->type == PIPE)
+	if (root->value == PIPE)
 		data->pipes++;
-	if (root->type == BRACKET_C)
+	if (root->value == BRACKET_C)
 		data->index_bra_c = root->index;
-	if (root->type == BRACKET_O)
+	if (root->value == BRACKET_O)
 		data->index_bra_o = root->index;
 	if (root->next == NULL && data->redirects != data->files)
 		return (1);
 	if (root->next == NULL && data->commands == 0 && data->args > 0)
-		return (show_error_fd("You put args but never a command", 1, data, 0));
+		return (0);
 	if (root->next == NULL && data->commands < data->pipes)
-	       return (show_error_fd("You have so many pipes than commands.", 1, data, 0));
-	if (check_invalid_brackets_position(data))
-		return (show_error_fd("You inverted the position of brackets", 1, data, 0));
-	return (0);
+		return (0);
+	if (check_invalvalue_brackets_position(data))
+		return (0);
+	return (extra_case_cmds(root));
 }
 
 int	get_command(t_tokens *root, t_utils *data)
@@ -890,8 +972,8 @@ void	clean_program(t_tokens *root, t_utils *data)
 		free(data->copy_new);
 	if (data->paths)
 		free_splits(NULL, data->paths, NULL, NULL);
-	if (data->new_str)
-		free(data->new_str);
+	if (data->new_value)
+		free(data->new_value);
 	free_tokens(root);
 }
 
@@ -907,7 +989,7 @@ void	init_utils(t_utils *data)
 	data->double_quotes = 0;
 	data->paths = NULL;
 	data->temp = NULL;
-	data->new_str = NULL;
+	data->new_value = NULL;
 	data->status = 0;
 	data->redirects = 0;
 	data->pipes = 0;
@@ -976,7 +1058,7 @@ int	is_operator(char *value)
 	return (0);
 }
 
-t_tokens	*find_the_last_token(t_tokens *root)
+t_tokens	*find_the_last_tokens(t_tokens *root)
 {
 	t_tokens	*last;
 
@@ -1024,7 +1106,7 @@ void	add_new_branch(t_tokens *root, t_tree **tree)
 {
 	t_tokens	*last;
 
-	last = find_the_last_token(root);
+	last = find_the_last_tokens(root);
 	add_all_elements(last, tree);
 }
 
@@ -1048,7 +1130,7 @@ int	main(int argc, char **argv, char **envp)
 	root = NULL;
 	tree = NULL;
 	init_utils(&data);
-	root = create_token("ls", CMD);
+	root = create_tokens("ls", CMD);
 	if (!root)
 		return (1);
 	show_tokens(root);
