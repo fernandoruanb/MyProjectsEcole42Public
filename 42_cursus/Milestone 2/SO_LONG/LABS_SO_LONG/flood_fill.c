@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 12:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 18:12:08 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:15:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ static void	start_test(char **map_copy, int x, int y, t_game *game)
 	if (map_copy[x][y] == '1' || map_copy[x][y] == 'V'
 		|| map_copy[x][y] == 'E')
 		return ;
-	if (map_copy[x][y] == 'C')
+	if (map_copy[x][y] == 'C' || map_copy[x][y] == '0')
 	{
 		if (map_copy[x][y] == 'C')
 			game->collectibles--;
 		map_copy[x][y] = 'V';
 	}
-	if (map_copy[x][y] == '0')
-		map_copy[x][y] = 'V';
 	start_test(map_copy, x + 1, y, game);
 	start_test(map_copy, x - 1, y, game);
 	start_test(map_copy, x, y + 1, game);

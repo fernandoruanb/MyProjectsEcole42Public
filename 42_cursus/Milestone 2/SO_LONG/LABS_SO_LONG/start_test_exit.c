@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:50:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 18:16:56 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:16:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void	start_test_exit(char **map_copy, int x, int y, t_game *game)
 		game->exit_t++;
 		map_copy[x][y] = 'V';
 	}
-	if (map_copy[x][y] == 'C')
-		map_copy[x][y] = 'V';
-	if (map_copy[x][y] == '0')
+	if (map_copy[x][y] == 'C' || map_copy[x][y] == '0')
 		map_copy[x][y] = 'V';
 	start_test_exit(map_copy, x + 1, y, game);
 	start_test_exit(map_copy, x - 1, y, game);
