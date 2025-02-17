@@ -6,18 +6,18 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 13:56:28 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/20 13:56:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:46:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 //#include <stdio.h>
 
-static void	free_memory(char ***str_list, int allocated);
+static int	free_memory(char ***str_list, int allocated);
 
 static int	count_words(const char *s, char c);
 
-static void	fill_arr(int size, const char *s, char c, char ***str_list);
+static int	fill_arr(int size, const char *s, char c, char ***str_list);
 
 /*char	**ft_split(const char *s, char c);
 
@@ -33,8 +33,11 @@ int	main(int argc, char **argv)
 	while (result[index] != NULL)
 	{
 		printf("Array[%i] %s.\n", index, result[index]);
+		free(result[index]);
 		index++;
 	}
+	free(result);
+	result = NULL;
 	return (0);
 }*/
 
@@ -63,7 +66,7 @@ static int	count_words(const char *s, char c)
 	return (count);
 }
 
-static void	fill_arr(int size, const char *s, char c, char ***str_list)
+static int	fill_arr(int size, const char *s, char c, char ***str_list)
 {
 	int		counter;
 	int		index;
@@ -81,15 +84,13 @@ static void	fill_arr(int size, const char *s, char c, char ***str_list)
 			pass++;
 		test = ft_substr(&s[index], 0, pass);
 		if (!test)
-		{
-			free_memory(str_list, counter);
-			return ;
-		}
+			return (free_memory(str_list, counter));
 		(*str_list)[counter] = test;
 		counter++;
 		index += pass;
 	}
 	(*str_list)[size] = 0;
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
@@ -105,16 +106,17 @@ char	**ft_split(char const *s, char c)
 	str_list = (char **) ft_calloc((size + 1), sizeof(char *));
 	if (str_list == 0)
 		return (0);
-	fill_arr(size, s, c, &str_list);
+	if (!fill_arr(size, s, c, &str_list))
+		return (NULL);
 	return (str_list);
 }
 
-static void	free_memory(char ***str_list, int allocated)
+static int	free_memory(char ***str_list, int allocated)
 {
 	int	index;
 
 	if (!str_list || !*str_list)
-		return ;
+		return (0);
 	index = 0;
 	while (index < allocated)
 	{
@@ -123,4 +125,5 @@ static void	free_memory(char ***str_list, int allocated)
 	}
 	free(*str_list);
 	*str_list = NULL;
+	return (0);
 }
