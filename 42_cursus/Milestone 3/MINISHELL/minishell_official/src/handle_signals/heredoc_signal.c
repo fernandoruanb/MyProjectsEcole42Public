@@ -18,7 +18,6 @@ static void	heredoc_sig_cmd(int signal)
 
 	if (signal == SIGINT)
 	{
-		printf("detectei cntrl c\n");
 		ft_putchar_fd('\n', 1);
 		minishell = get_minishell();
 		clean_process(minishell);
