@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:47:20 by jopereir          #+#    #+#             */
-/*   Updated: 2025/03/25 17:28:46 by jonas            ###   ########.fr       */
+/*   Updated: 2025/03/26 19:50:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	is_sig(char c)
 static int	is_all_num(char *str)
 {
 	int	i;
+	size_t	length;
 
 	if (!str)
 		return (0);
@@ -27,6 +28,12 @@ static int	is_all_num(char *str)
 	while (str[++i])
 	{
 		if (!ft_isdigit(str[i]) && !is_sig(str[i]))
+		{
+			ft_putstr_fd(" numeric argument required\n", 2);
+			return (0);
+		}
+		length = ft_strlen(str);
+		if (length > 19)
 		{
 			ft_putstr_fd(" numeric argument required\n", 2);
 			return (0);
