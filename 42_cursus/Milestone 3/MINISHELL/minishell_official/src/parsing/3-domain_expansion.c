@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:24:54 by jonas             #+#    #+#             */
-/*   Updated: 2025/03/23 17:13:07 by jonas            ###   ########.fr       */
+/*   Updated: 2025/03/26 16:53:17 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,18 @@ static char	*make_replacement(char *str, char *expand, int *i)
 	char	*prev;
 	char	*after;
 
-	if (!expand)
-		return (str);
 	prev = ft_strndup(str, *i);
 	after = get_after(str, *i);
-	exp = put_together(prev, expand, after);
+	if (expand)
+		exp = put_together(prev, expand, after);
+	else
+	{
+		exp = ft_strjoin(prev, after);
+		ft_double_free(prev, after);
+	}
 	if (!exp)
 		return (str);
-	*i = 0;
+	*i = -1;
 	free(str);
 	return (exp);
 }
