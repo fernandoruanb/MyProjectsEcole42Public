@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   1-minishell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:24:52 by jopereir          #+#    #+#             */
-/*   Updated: 2025/03/25 16:10:30 by jonas            ###   ########.fr       */
+/*   Updated: 2025/03/26 12:25:07 by jopereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	exec_multi_cmd(t_ast **root, t_data *data)
 	fd[0] = -1;
 	fd[1] = -1;
 	ast = *root;
-	if (isredir(ast->id) && is_cmd(find_cmd(&ast)->cmd[0], data->envp))
+	if (isredir(ast->id) && find_cmd(&ast))
 	{
 		save_origin(fd, data);
 		if (manage_redir(&ast, &data->token, data))
