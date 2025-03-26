@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:47:20 by jopereir          #+#    #+#             */
-/*   Updated: 2025/03/26 19:50:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/03/26 20:22:13 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_sig(char c)
 
 static int	is_all_num(char *str)
 {
-	int	i;
+	int		i;
 	size_t	length;
 
 	if (!str)
@@ -57,7 +57,7 @@ void	ft_exit(t_data *data, char **exit_status)
 			data->prompt->exit_status = 1;
 		}
 		else if (is_all_num(exit_status[1]))
-			data->prompt->exit_status = ft_atoi_but_better(exit_status[1]);
+			data->prompt->exit_status = ft_atoi(exit_status[1]);
 		else
 			data->prompt->exit_status = 2;
 	}
