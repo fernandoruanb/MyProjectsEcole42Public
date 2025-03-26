@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 11:04:10 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/03/26 20:16:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/03/26 20:38:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_atoi(const char *nptr)
 		result += (nptr[index] - '0');
 		index++;
 	}
-	if (result > INT_MAX)
+	if (result > 2147483647)
 		result %= 256;
 	return ((int)result * (int)signal);
 }
