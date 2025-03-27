@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:45:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/03/27 11:42:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:46:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@ void	read_mode(t_ast **root, int *pipefd, t_data *data)
 {
 	int	pid;
 
-	if (check_is_directory_fd((*root)->cmd[0], &data->utils))
-	{
-		if (ft_strcmp((*root)->cmd[0], ".") == 0)
-			data->utils.exec_status = 512;
-		if ((*root)->id == CMD)
-			data->utils.exec_status = 127;
-		close_descriptors(pipefd, 1, data);
-		return ;
-	}
 	pid = fork();
 	if (pid == -1)
 	{

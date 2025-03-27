@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 10:05:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/03/27 11:38:56 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:46:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	ft_read_mode(t_ast **root, int *pipefd, t_data *data)
 
 	ast = *root;
 	handle_command_signal();
-	if (!permission_case(pipefd, root, data, 1))
-		exit(126);
+	permission_case(pipefd, root, data, 1);
 	path = NULL;
 	if (data->utils.can_read)
 		if (dup2(data->utils.fd_backup, STDIN_FILENO) == -1)
