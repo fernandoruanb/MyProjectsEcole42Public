@@ -57,12 +57,7 @@ static int	check_too_many_arguments(char *divine_eye)
 	str = locate_target(divine_eye);
 	if (!str)
 		return (0);
-	if (ft_strcmp(str, "cd") == 0)
-	{
-		free(str);
-		return (0);
-	}
-	index = 3;
+	index = 0;
 	while (str[index] != '\0')
 	{
 		if (str[index] == ' '
@@ -92,7 +87,7 @@ void	ft_cd(char *input)
 	official = get_minishell();
 	if (input == NULL)
 		official->utils.line = getenv("HOME");
-	else if (check_too_many_arguments(official->prompt->input))
+	else if (check_too_many_arguments(input))
 	{
 		official->utils.exec_status = 1;
 		ft_putstr_fd("minishell: cd: too many arguments\n", 2);

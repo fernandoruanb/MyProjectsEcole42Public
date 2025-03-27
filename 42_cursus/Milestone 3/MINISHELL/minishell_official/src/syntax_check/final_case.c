@@ -14,14 +14,14 @@
 
 int	extra_case_cmds(t_token *root, t_utils *data)
 {
-	if (root->id == CMD && !special_check_quotes(root, data))
-		return (1);
 	if (root->next == NULL && data->commands == 0 && data->args > 0)
 		return (0);
 	if (check_invalid_brackets_position(data))
 		return (0);
 	if (root->id == CMD && ft_strcmp(root->str, "./") == 0)
 		return (show_error_fd("Syntax Error: CMD", 1, data, 126));
+	if (root->id == CMD && !special_check_quotes(root, data))
+		return (1);
 	return (0);
 }
 
