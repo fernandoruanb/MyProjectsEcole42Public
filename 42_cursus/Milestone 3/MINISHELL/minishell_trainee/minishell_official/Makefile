@@ -101,6 +101,7 @@ SRCS = main/2-events.c \
 		handle_operators/utils/close_descriptors.c\
 		handle_operators/utils/fulfil_data_fd.c\
 		handle_operators/utils/get_pipes.c\
+		handle_operators/is_filename.c\
 		handle_operators/utils/init_pipes.c\
 		handle_operators/ft_write_read_mode.c\
 		handle_operators/ft_read_mode.c\
@@ -108,6 +109,7 @@ SRCS = main/2-events.c \
 		handle_operators/heredoc_check_mode.c\
 		handle_operators/check_errno.c\
 		handle_operators/translate.c\
+		handle_operators/permission_case.c\
 		handle_operators/single_command.c\
 		handle_operators/ultimate_check.c\
 		handle_operators/the_divine_eye.c\

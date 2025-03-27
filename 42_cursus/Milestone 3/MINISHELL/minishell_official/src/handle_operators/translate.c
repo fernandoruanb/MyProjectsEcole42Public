@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:50:15 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/03/25 16:34:50 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/03/27 11:25:32 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ void	translate(t_data *data)
 	}
 	else if (data->utils.exec_status == 512)
 		data->utils.exec_status = 2;
+	else if (data->utils.exec_status == 10)
+		data->utils.exec_status = 126;
 }

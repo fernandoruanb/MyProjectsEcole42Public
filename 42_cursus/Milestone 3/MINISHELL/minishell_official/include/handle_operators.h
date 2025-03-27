@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 22:21:44 by jonas             #+#    #+#             */
-/*   Updated: 2025/03/25 16:28:53 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/03/27 11:11:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int		handle_redirect_out(char *f, t_utils *data);
 int		check_invalid_permission(char *f, int flag);
 int		append(char *f, t_utils *data);
 int		check_list_stdin(char **cmd);
+int		is_filename(char *cmd, t_utils *data);
+int		permission_case(int *pipefd, t_ast **root, t_data *data, int f);
 int		handle_pipe_op(t_ast **root, int flag, t_data *data);
 int		handle_red_in(char *f, t_utils *data);
 int		heredoc(char *limiter, t_data *data, t_token **token);

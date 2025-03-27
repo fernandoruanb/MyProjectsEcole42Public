@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 17:55:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/03/18 18:02:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:12:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	handle_redirect_out(char *f, t_utils *data)
 	int		fd;
 	char	*detect_dir;
 
+	if (!is_filename(f, data))
+		return (INT_MIN);
 	detect_dir = initialize_directory(f, data);
 	if (check_is_directory_fd(f, data) || check_invalid_permission(f, 1))
 	{

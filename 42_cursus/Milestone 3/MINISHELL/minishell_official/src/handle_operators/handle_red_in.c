@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:20:41 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/03/16 12:46:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:02:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ int	handle_red_in(char *f, t_utils *data)
 
 	true_archive = remove_all_quotes(f);
 	if (!true_archive)
+	{
+		ft_printf("No such file or directory\n");
+		data->exec_status = 1;
 		return (INT_MIN);
+	}
 	f = true_archive;
 	if (!check_file(f, data) || check_is_directory_fd(f, data))
 	{

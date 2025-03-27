@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:57:28 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/03/23 16:29:25 by jonas            ###   ########.fr       */
+/*   Updated: 2025/03/27 11:42:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_write_mode(int *pipefd, t_ast **root, t_data *data)
 
 	ast = *root;
 	handle_command_signal();
+	if (!permission_case(pipefd, root, data, 0))
+		exit(126);
 	path = NULL;
 	if (data->utils.can_write)
 		if (dup2(pipefd[1], STDOUT_FILENO) == -1)
