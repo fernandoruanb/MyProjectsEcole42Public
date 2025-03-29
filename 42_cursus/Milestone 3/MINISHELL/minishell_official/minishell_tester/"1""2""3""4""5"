@@ -1,0 +1,6 @@
+echo $?
+exit
+
+echo $?
+exit
+

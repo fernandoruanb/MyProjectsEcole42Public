@@ -1,0 +1,8 @@
+    PID TTY          TIME CMD
+ 418290 pts/51   00:00:00 fish
+ 427896 pts/51   00:00:00 tester
+ 429227 pts/51   00:00:00 tester
+ 429229 pts/51   00:00:00 bash
+ 429230 pts/51   00:00:00 grep
+ 429231 pts/51   00:00:00 head
+ 429232 pts/51   00:00:00 ps
