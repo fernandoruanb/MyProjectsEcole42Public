@@ -13,12 +13,12 @@
 #ifndef COLOURS_H
 # define COLOURS_H
 
-# define BLUE "\033[0;36m"
-# define FERNANDO_BLUE "<<\033[38;5;39m"
-# define GREEN "\033[32m"
-# define YELLOW "\033[33m"
-# define RED "\033[31m"
-# define RESET	"\033[0m"
-# define RESET_PROMPT "\033[0m>>$ "
+# define BLUE "\001\033[0;36m\002"
+# define FERNANDO_BLUE "\001<<\033[38;5;39m\002"
+# define GREEN "\001\033[32m\002"
+# define YELLOW "\001\033[33m\002"
+# define RED "\001\033[31m\002"
+# define RESET	"\001\033[0m\002"
+# define RESET_PROMPT "\001\033[0m>>$\002 "
 
 #endif
