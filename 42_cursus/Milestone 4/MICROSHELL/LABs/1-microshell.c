@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   microshell.c                                       :+:      :+:    :+:   */
+/*   1-microshell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/30 10:23:52 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/03/30 12:23:31 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/03/30 12:31:10 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/03/30 12:57:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <wait.h>
-#include <stdio.h>
 
-typedef struct s_shell
+typedef struct	s_shell
 {
-	int	isPipe;
 	char	*cmd;
 	char	**cmds;
-	int	pipefd[2];
+	int	isPipe;
 	char	**envp;
+	int	pipefd[2];
 }	t_shell;
 
 static int	ft_strcmp(const char *s1, const char *s2)
@@ -29,7 +28,7 @@ static int	ft_strcmp(const char *s1, const char *s2)
 	int	index;
 
 	index = 0;
-	while (s1[index] != '\0' && s2[index] != '\0')
+	while (s1[index] != '\0' &&  s2[index] != '\0')
 	{
 		if (s1[index] != s2[index])
 			return ((unsigned char)s1[index] - (unsigned char)s2[index]);
@@ -57,7 +56,7 @@ static void	init_pipe(t_shell *shell)
 		return ;
 	if (pipe(shell->pipefd) == -1)
 	{
-		ft_putendl_fd("Error initializing the pipe", 2);
+		ft_putendl_fd("microshell: pipe: ERROR PIPE!", 2);
 		exit(1);
 	}
 }
@@ -69,12 +68,15 @@ static void	execute_command(char **arguments, t_shell *shell)
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(shell->pipefd[1], STDOUT_FILENO);
-		close(shell->pipefd[1]);
-		close(shell->pipefd[0]);
+		if (shell->isPipe)
+		{
+			dup2(shell->pipefd[1], STDOUT_FILENO);
+			close(shell->pipefd[1]);
+			close(shell->pipefd[0]);
+		}
 		if (execve(shell->cmd, shell->cmds, shell->envp) == -1)
 		{
-			ft_putendl_fd("microshell: error executing", 2);
+			ft_putendl_fd("Error execve", 2);
 			exit(1);
 		}
 	}
@@ -90,6 +92,15 @@ static void	execute_command(char **arguments, t_shell *shell)
 	}
 }
 
+static int	cd_command(t_shell *shell)
+{
+	if (ft_strcmp(shell->cmds[0], "cd") || !shell->cmds[1] || shell->cmds[2])
+		return (1);
+	if (chdir(shell->cmds[1]) == -1)
+		ft_putendl_fd("microshell: cd: invalid input\n", 2);
+	return (0);
+}
+
 static void	find_command(char ***arguments, t_shell *shell)
 {
 	int	index;
@@ -103,19 +114,10 @@ static void	find_command(char ***arguments, t_shell *shell)
 		*arguments = &(*arguments)[index];
 		return ;
 	}
-	if (ft_strcmp((*arguments)[index], "|") == 0)
+	if ((ft_strcmp((*arguments)[index], "|") == 0))
 		shell->isPipe = 1;
 	(*arguments)[index] = NULL;
 	*arguments = &(*arguments)[index + 1];
-}
-
-static int	cd_command(t_shell *shell)
-{
-	if (ft_strcmp(shell->cmds[0], "cd") || !shell->cmds[1] || shell->cmds[2])
-		return (1);
-	if (chdir(shell->cmds[1]) == -1)
-		ft_putendl_fd("Cd error", 2);
-	return (0);
 }
 
 static int	microshell(char **arguments, t_shell *shell)
