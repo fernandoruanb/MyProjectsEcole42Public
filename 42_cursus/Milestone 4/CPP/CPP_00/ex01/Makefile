@@ -10,7 +10,7 @@ CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 #Directories
 
 SRCDIR = .
-INCDIR = .
+INCDIR = phonebook.hpp
 
 #SRCS
 
@@ -22,11 +22,11 @@ OBJS = $(SRCDIR/%.c=%.o)
 
 #Main
 
-all: $NAME
+all: $(NAME)
 
 # .c > .o
 
-$NAME: $OBJS
+$NAME: $(OBJS)
 	$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS)
 
 #clean
