@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:47:20 by jopereir          #+#    #+#             */
-/*   Updated: 2025/03/26 20:22:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/03/27 18:33:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	is_all_num(char *str)
 			return (0);
 		}
 		length = ft_strlen(str);
-		if (length > 19)
+		if (length > 18)
 		{
 			ft_putstr_fd(" numeric argument required\n", 2);
 			return (0);
