@@ -6,12 +6,14 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:24:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/03 15:37:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:45:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
+
+#include <iostream>
 
 class Contact
 {
@@ -28,6 +30,11 @@ class Contact
 		void	set_nickname(const std::string &nickname);
 		void	set_phone_number(const std::string &phone_number);
 		void	set_darkest_secret(const std::string &darkest_secret);
+		std::string	get_first_name(void) const;
+		std::string	get_last_name(void) const;
+		std::string	get_nickname(void) const;
+		std::string	get_phone_number(void) const;
+		std::string	get_darkest_secret(void) const;
 };
 
 #endif /* CONTACT_HPP */
