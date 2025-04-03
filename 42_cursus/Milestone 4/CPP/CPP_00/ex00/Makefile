@@ -14,7 +14,7 @@ INCDIR = .
 
 SRCS = megaphone.cpp
 
-OBJS = $(SRCS:$(SRCDIR)/%.c=%.o)
+OBJS = $(SRCS:.cpp=.o)
 
 #Main
 
