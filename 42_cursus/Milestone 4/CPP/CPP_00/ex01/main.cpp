@@ -13,6 +13,23 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
 
+
+static int	check_index(std::string command)
+{
+	long	checker;
+
+	if (command.empty())
+		return (0);
+	checker = 0;
+	while (command[checker] != '\0')
+	{
+		if (command[checker] < '0' || command[checker] > '9')
+			return (0);
+		checker++;
+	}
+	return (1);
+}
+
 int	main(void)
 {
 	std::string	command;
@@ -40,7 +57,13 @@ int	main(void)
 				std::cout << std::endl;
 				std::cout << "Set the index of the contact: ";
 				std::getline(std::cin, command);
-				MyPhoneBook.show_specif_contact(std::stoi(command) - 1);
+				if (check_index(command))
+					MyPhoneBook.show_specif_contact(std::stoi(command) - 1);
+				else
+				{
+					std::cout << std::endl;
+					std::cout << "Invalid index" << std::endl;
+				}
 			}
 			else if (command == "NO" || command == "no")
 				MyPhoneBook.show_all_contacts();

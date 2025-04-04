@@ -52,6 +52,7 @@ void	PhoneBook::add_new_contact(void)
 	Contact	new_contact;
 	std::string	temp;
 
+	std::cout << std::endl;
 	std::cout << "What is the First Name? ";
 	std::getline(std::cin, temp);
 	if (show_add_error("FIRST NAME", temp))
