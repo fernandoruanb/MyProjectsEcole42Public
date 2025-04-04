@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:46:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/03 18:54:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/03 20:56:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,30 @@ PhoneBook::PhoneBook()
 
 bool	PhoneBook::show_add_error(const std::string message, std::string temp) const
 {
+	int	index;
+
 	if (temp.empty())
         {
+		std::cout << std::endl;
                 std::cout << "You need to fill the camp ";
 		std::cout << message << std::endl;
 		return (1);
         }
+	if (message == "PHONE NUMBER")
+	{
+		index = 0;
+		while (temp[index] != '\0')
+		{
+			if (temp[index] >= '0' && temp[index] <= '9')
+				index++;
+			else
+			{
+				std::cout << std::endl;
+				std::cout << "ONLY NUMBERS!!!" << std::endl;
+				return (1);
+			}
+		}
+	}
 	return (0);
 }
 
@@ -99,6 +117,13 @@ void	PhoneBook::show_specif_contact(int index) const
 		std::cout << "The index surpass the total of contacts" << std::endl;
 		return ;
 	}
+	if (total == 0)
+	{
+		std::cout << "Doesn't exist a contact" << std::endl;
+		return ;
+	}
+	std::cout << std::endl;
+	std::cout << "Index: " << index + 1 << std::endl; 
 	std::cout << "First Name: ";
 	std::cout << phonebook[index].get_first_name() << std::endl;
 	std::cout << "Last Name: ";

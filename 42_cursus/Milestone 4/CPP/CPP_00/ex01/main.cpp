@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:32:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/03 18:24:47 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/03 20:47:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ int	main(void)
 		std::cout << "ADD -> add a new contact" << std::endl;
 		std::cout << "SEARCH -> search a contact or show all contacts" << std::endl;
 		std::cout << "EXIT -> exit the PhoneBook program" << std::endl << std::endl;
-		std::cout << "<<phonebook>>$ " << std::endl;
-		std::getline(std::cin, command);
+		std::cout << "<<phonebook>>$ ";
+		if (!std::getline(std::cin, command) || command.empty())
+		{
+			std::cin.clear();
+			clearerr(stdin);
+		}
 		if (command == "ADD")
 			MyPhoneBook.add_new_contact();
 		else if (command == "SEARCH")
@@ -36,15 +40,14 @@ int	main(void)
 				std::cout << std::endl;
 				std::cout << "Set the index of the contact: ";
 				std::getline(std::cin, command);
-				MyPhoneBook.show_specif_contact(std::stoi(command));
+				MyPhoneBook.show_specif_contact(std::stoi(command) - 1);
 			}
 			else if (command == "NO" || command == "no")
 				MyPhoneBook.show_all_contacts();
 		}
 		else if (command == "EXIT")
 			break ;
-		else
-			std::cout << std::endl;
+		std::cout << std::endl;
 	}
 	return (0);
 }
