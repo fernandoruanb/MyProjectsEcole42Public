@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:42:22 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/03 18:54:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/05 18:49:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PHONEBOOK_HPP
 
 # include "Contact.hpp"
+# include <string>
+# include <cstdio>
 
 class PhoneBook
 {

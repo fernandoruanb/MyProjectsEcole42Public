@@ -25,6 +25,11 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS)
 
+#Compilation part
+
+%.o:%.cpp
+	$(CC) $(CFLAGS) -c $? -o $@
+
 #clean
 
 clean:
