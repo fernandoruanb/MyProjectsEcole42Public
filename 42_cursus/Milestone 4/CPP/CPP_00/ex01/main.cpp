@@ -6,13 +6,42 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:32:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/05 18:52:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/05 19:09:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
 
+
+static int	ft_atoi(std::string command)
+{
+	int	index;
+	long	result;
+	int	signal;
+
+	index = 0;
+	result = 0;
+	signal = 1;
+	while (command[index] == ' ' || command[index] == '\t' || command[index] == '\f'
+		|| command[index] == '\v' || command[index] == '\r')
+		index++;
+	if (command[index] == '+' || command[index] == '-')
+	{
+		if (command[index] == '-')
+			signal *= -1;
+		index++;
+	}
+	while (command[index] >= '0' && command[index] <= '9')
+	{
+		result *= 10;
+		result += command[index] - '0';
+		index++;
+	}
+	if (result < 0 || result > 8)
+		return (-1);
+	return ((int)result);
+}
 
 static int	check_index(std::string command)
 {
@@ -33,6 +62,7 @@ static int	check_index(std::string command)
 int	main(void)
 {
 	std::string	command;
+	int	index;
 	PhoneBook	MyPhoneBook;
 
 	while (1)
@@ -59,7 +89,10 @@ int	main(void)
 				std::cout << "Set the index of the contact: ";
 				std::getline(std::cin, command);
 				if (check_index(command))
-					MyPhoneBook.show_specif_contact(std::stoi(command) - 1);
+				{
+					index = ft_atoi(command) - 1;
+					MyPhoneBook.show_specif_contact(index);
+				}
 				else
 				{
 					std::cout << std::endl;

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:46:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/05 16:49:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/05 20:35:32 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 		index = 0;
 		while (temp[index] != '\0')
 		{
-			if (temp[index] >= '0' && temp[index] <= '9')
+			if ((temp[index] >= '0' && temp[index] <= '9'))
 				index++;
 			else
 			{
@@ -55,6 +55,15 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 	return (0);
 }
 
+void	PhoneBook::correct_str(std::string &temp) const
+{
+	std::string	new_temp;
+	if (temp.length() > 10)
+		temp = temp.substr(0,9) + '.';
+	else
+		temp = " " + std::string(10 - temp.length(), ' ') + temp;
+}
+
 void	PhoneBook::add_new_contact(void)
 {
 	Contact	new_contact;
@@ -65,6 +74,7 @@ void	PhoneBook::add_new_contact(void)
 	std::getline(std::cin, temp);
 	if (show_add_error("FIRST NAME", temp))
 		return ;
+	correct_str(temp);
 	new_contact.set_first_name(temp);
 	std::cout << std::endl;
 
@@ -72,6 +82,7 @@ void	PhoneBook::add_new_contact(void)
 	std::getline(std::cin, temp);
 	if (show_add_error("LAST NAME", temp))
                 return ;
+	correct_str(temp);
 	new_contact.set_last_name(temp);
 	std::cout << std::endl;
 
@@ -79,6 +90,7 @@ void	PhoneBook::add_new_contact(void)
 	std::getline(std::cin, temp);
 	if (show_add_error("NICKNAME", temp))
                 return ;
+	correct_str(temp);
 	new_contact.set_nickname(temp);
 	std::cout << std::endl;
 
@@ -86,6 +98,7 @@ void	PhoneBook::add_new_contact(void)
 	std::getline(std::cin, temp);
 	if (show_add_error("PHONE NUMBER", temp))
                 return ;
+	correct_str(temp);
 	new_contact.set_phone_number(temp);
 	std::cout << std::endl;
 
@@ -93,8 +106,8 @@ void	PhoneBook::add_new_contact(void)
 	std::getline(std::cin, temp);
 	if (show_add_error("DARKEST SECRET", temp))
                 return ;
+	correct_str(temp);
 	new_contact.set_darkest_secret(temp);
-	std::cout << std::endl;
 
 	phonebook[index % 8] = new_contact;
 	index = (index + 1) % 8;
@@ -121,7 +134,7 @@ void	PhoneBook::show_specif_contact(int index) const
 		std::cout << "Invalid index" << std::endl;
 		return ;
 	}
-	if (index > total)
+	if (index >= total)
 	{
 		std::cout << "The index surpass the total of contacts" << std::endl;
 		return ;
@@ -132,13 +145,25 @@ void	PhoneBook::show_specif_contact(int index) const
 		return ;
 	}
 	std::cout << std::endl;
-	std::cout << "Index: " << index + 1 << std::endl; 
-	std::cout << "First Name: ";
-	std::cout << phonebook[index].get_first_name() << std::endl;
-	std::cout << "Last Name: ";
-	std::cout << phonebook[index].get_last_name() << std::endl;
-	std::cout << "Nickname: ";
-	std::cout << phonebook[index].get_nickname() << std::endl;
-	std::cout << "Phone Number: ";
-	std::cout << phonebook[index].get_phone_number() << std::endl;
+	std::cout << "--------------------------------------------------------" << std::endl;;
+	std::cout << "|";
+	std::cout << std::setfill(' ') << std::setw(10) << "Index";
+	std::cout << "|";
+	std::cout << std::setfill(' ') << std::setw(10) << "FirstName";
+	std::cout << "|";
+	std::cout << std::setfill(' ') << std::setw(10) << "LastName";
+	std::cout << "|";
+	std::cout << std::setfill(' ') << std::setw(10) << "NickName";
+	std::cout << "|";
+	std::cout << std::setfill(' ') << std::setw(10) << "PhoneNum";
+	std::cout << "|";
+	std::cout << std::endl;
+	std::cout << "--------------------------------------------------------" << std::endl;
+	std::cout << "|" << std::setw(10) << index + 1 << "|" 
+	<< phonebook[index].get_first_name()
+	<< "|" << phonebook[index].get_last_name()
+	<< "|" << phonebook[index].get_nickname()
+	<< "|" << phonebook[index].get_phone_number() << "|" << std::endl;
+	std::cout << "--------------------------------------------------------" << std::endl;
+
 }
