@@ -14,9 +14,9 @@ INCDIR = .
 
 #SRCS
 
-SRCS =  $(SRCDIR)/main.cpp\
-	$(SRCDIR)/PhoneBook.cpp\
-	$(SRCDIR)/Contact.cpp
+SRCS =  main.cpp\
+	PhoneBook.cpp\
+	Contact.cpp
 
 #OBJS
 

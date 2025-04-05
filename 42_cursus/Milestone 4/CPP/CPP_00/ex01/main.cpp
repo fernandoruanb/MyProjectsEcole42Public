@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:32:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/03 20:47:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:28:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(void)
 
 	while (1)
 	{
+		std::cout << std::endl;
 		std::cout << "ADD -> add a new contact" << std::endl;
 		std::cout << "SEARCH -> search a contact or show all contacts" << std::endl;
 		std::cout << "EXIT -> exit the PhoneBook program" << std::endl << std::endl;

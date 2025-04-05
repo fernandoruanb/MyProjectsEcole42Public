@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 09:18:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/05 16:10:33 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:14:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ Account::Account(int initial_deposit)
 	_accountIndex = _nbAccounts;
 	_amount = initial_deposit;
 	_totalAmount += _amount;
-	//_nbDeposits = 1;
 	std::cout << " index:" << _accountIndex << ";" << "amount:" << checkAmount() << ";" << "created" << std::endl;
 	_nbAccounts++;
 }

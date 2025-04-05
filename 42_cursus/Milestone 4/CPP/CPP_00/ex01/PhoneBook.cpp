@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:46:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/03 20:56:07 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:49:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 		std::cout << std::endl;
                 std::cout << "You need to fill the camp ";
 		std::cout << message << std::endl;
+		std::cin.clear();
+		clearerr(stdin);
 		return (1);
         }
 	if (message == "PHONE NUMBER")
@@ -39,9 +41,15 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 			else
 			{
 				std::cout << std::endl;
-				std::cout << "ONLY NUMBERS!!!" << std::endl;
+				std::cout << "ONLY NUMBERS!!!";
 				return (1);
 			}
+		}
+		if (temp.length() > 16)
+		{
+			std::cout << std::endl;
+			std::cout << "16 DIGITS IS THE LIMIT!!!";
+			return (1);
 		}
 	}
 	return (0);
