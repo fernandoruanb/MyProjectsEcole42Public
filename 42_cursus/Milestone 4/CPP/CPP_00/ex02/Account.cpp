@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 09:18:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/05 14:33:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/05 16:10:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Account::Account(int initial_deposit)
 	_accountIndex = _nbAccounts;
 	_amount = initial_deposit;
 	_totalAmount += _amount;
-	_nbDeposits = 1;
+	//_nbDeposits = 1;
 	std::cout << " index:" << _accountIndex << ";" << "amount:" << checkAmount() << ";" << "created" << std::endl;
 	_nbAccounts++;
 }
@@ -41,12 +41,14 @@ Account::~Account(void)
 void	Account:: makeDeposit(int deposit)
 {
 	_displayTimestamp();
-	_amount += deposit;
 	_totalNbDeposits++;
 	_totalAmount += deposit;
 	std::cout << " index:" << _accountIndex << ";";
 	std::cout << "p_amount:" << checkAmount() << ";";
+	_amount += deposit;
+	_nbDeposits++;
 	std::cout << "deposit:" << deposit << ";";
+	std::cout << "amount:" << checkAmount() << ";";
 	std::cout << "nb_deposits:" << _nbDeposits << std::endl;
 }
 
@@ -69,7 +71,8 @@ bool	Account:: makeWithdrawal(int withdrawal)
 		std::cout << " index:" << _accountIndex << ";";
 		std::cout << "p_amount:" << checkAmount() << ";";
 		std::cout << "withdrawal:" << withdrawal << ";";
-		std::cout << "amount:" << checkAmount() - withdrawal << ";";
+		_amount -= withdrawal;
+		std::cout << "amount:" << checkAmount() << ";";
 		std::cout << "nb_withdrawals:" << _nbWithdrawals << std::endl;
 		return (true);
 	}
