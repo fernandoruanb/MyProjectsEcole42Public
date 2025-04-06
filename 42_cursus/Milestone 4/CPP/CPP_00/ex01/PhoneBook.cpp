@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:46:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/05 20:35:32 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/05 23:10:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 		clearerr(stdin);
 		return (1);
         }
+	index = 0;
+	while (temp[index] != '\0')
+	{
+		if (temp[index] < 32 || temp[index] > 126)
+		{
+			std::cout << std::endl;
+			std::cout << "ONLY ASCII CHARACTERS!!!";
+			return (1);
+		}
+		index++;
+	}
 	if (message == "PHONE NUMBER")
 	{
 		index = 0;
@@ -52,16 +63,24 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 			return (1);
 		}
 	}
-	return (0);
+	index = 0;
+	while (temp[index] != '\0')
+	{
+		if (!std::isspace(temp[index]))
+			return (0);
+		index++;
+	}
+	std::cout << std::endl;
+	std::cout << "ONLY SPACES OR TABS!!!" << std::endl;
+	return (1);
 }
 
 void	PhoneBook::correct_str(std::string &temp) const
 {
-	std::string	new_temp;
 	if (temp.length() > 10)
 		temp = temp.substr(0,9) + '.';
 	else
-		temp = " " + std::string(10 - temp.length(), ' ') + temp;
+		temp = std::string(10 - temp.length(), ' ') + temp;
 }
 
 void	PhoneBook::add_new_contact(void)
@@ -159,11 +178,11 @@ void	PhoneBook::show_specif_contact(int index) const
 	std::cout << "|";
 	std::cout << std::endl;
 	std::cout << "--------------------------------------------------------" << std::endl;
-	std::cout << "|" << std::setw(10) << index + 1 << "|" 
+	std::cout << "|" << std::setfill(' ') << std::setw(10) << index + 1 << "|" 
 	<< phonebook[index].get_first_name()
-	<< "|" << phonebook[index].get_last_name()
-	<< "|" << phonebook[index].get_nickname()
-	<< "|" << phonebook[index].get_phone_number() << "|" << std::endl;
+	<< "|" << std::setfill(' ') << std::setw(10) << phonebook[index].get_last_name()
+	<< "|" << std::setfill(' ') << std::setw(10) << phonebook[index].get_nickname()
+	<< "|" << std::setfill(' ') << std::setw(10) << phonebook[index].get_phone_number() << "|" << std::endl;
 	std::cout << "--------------------------------------------------------" << std::endl;
 
 }
