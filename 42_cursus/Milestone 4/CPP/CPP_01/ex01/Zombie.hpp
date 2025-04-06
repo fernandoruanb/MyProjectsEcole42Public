@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 17:25:50 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 18:45:27 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/06 18:03:10 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/06 18:23:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <iostream>
 
-Zombie::~Zombie()
+class Zombie
 {
-	std::cout << "The zombie " << name << " was killed successfully." << std::endl;
-}
-
-Zombie::Zombie(std::string name)
-{
-	this->name = name;
-}
+	private:
+		std::string	name;
+	public:
+		Zombie();
+		Zombie(std::string name);
+		~Zombie();
+		void	set_name(std::string name);
+		static Zombie*	zombieHorde(int N, std::string name);
+};

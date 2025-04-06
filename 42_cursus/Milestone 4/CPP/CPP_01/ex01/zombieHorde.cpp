@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 17:25:50 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 18:45:27 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/06 18:06:39 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/06 19:14:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+#include <sstream>
+#include <string>
 
-Zombie::~Zombie()
+Zombie*	Zombie::zombieHorde(int N, std::string name)
 {
-	std::cout << "The zombie " << name << " was killed successfully." << std::endl;
-}
+	int	index;
+	Zombie*	MyZombieHorde;
 
-Zombie::Zombie(std::string name)
-{
-	this->name = name;
+	if (N < 0)
+		return (NULL);
+	MyZombieHorde = new Zombie[N];
+	index = 0;
+	while (index < N)
+	{
+		std::ostringstream oss;
+		oss << name << "_" << index;
+		MyZombieHorde[index].set_name(oss.str());
+		index++;
+	}
+	return (MyZombieHorde);
 }
