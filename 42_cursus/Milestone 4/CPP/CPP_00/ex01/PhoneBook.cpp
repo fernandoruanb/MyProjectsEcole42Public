@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:46:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 09:50:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:28:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 
 	if (temp.empty())
         {
-		std::cout << std::endl;
+		std::cout << std::endl << std::endl;
                 std::cout << "You need to fill the camp ";
-		std::cout << message << std::endl;
+		std::cout << message;
 		std::cin.clear();
 		clearerr(stdin);
 		return (1);
@@ -71,7 +71,7 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 		index++;
 	}
 	std::cout << std::endl;
-	std::cout << "ONLY SPACES OR TABS!!!" << std::endl;
+	std::cout << "ONLY SPACES IS FORBIDDEN!!!";
 	return (1);
 }
 
@@ -150,7 +150,8 @@ void	PhoneBook::show_specif_contact(int index) const
 {
 	if (index < 0 || index > 7)
 	{
-		std::cout << "Invalid index";
+		std::cout << std::endl;
+		std::cout << "Invalid index. Only from 1 to 8, please!";
 		return ;
 	}
 	if (index >= total)
