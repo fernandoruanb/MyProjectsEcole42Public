@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:32:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 10:36:42 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:50:32 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ int	main(void)
 	while (1)
 	{
 		std::cout << std::endl;
-		std::cout << "ADD -> add a new contact" << std::endl;
-		std::cout << "SEARCH -> search a contact or show all contacts" << std::endl;
-		std::cout << "EXIT -> exit the PhoneBook program" << std::endl << std::endl;
+		std::cout << std::setfill('-') << std::setw(55) << "-" << std::endl;
+		std::cout << "| 1.ADD -> add a new contact =D" << std::endl;
+		std::cout << "| 2.SEARCH -> search a contact or show all contacts :)" << std::endl;
+		std::cout << "| 3.EXIT -> exit the PhoneBook program D=" << std::endl;
+		std::cout << std::setfill('-') << std::setw(55) << "-" << std::endl << std::endl;
 		std::cout << "<<phonebook>>$ ";
 		if (!std::getline(std::cin, command) || command.empty())
 		{

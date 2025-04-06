@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:46:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 10:28:25 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:52:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,6 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 				std::cout << "ONLY NUMBERS!!!";
 				return (1);
 			}
-		}
-		if (temp.length() > 16)
-		{
-			std::cout << std::endl;
-			std::cout << "16 DIGITS IS THE LIMIT!!!";
-			return (1);
 		}
 	}
 	index = 0;
@@ -132,6 +126,10 @@ void	PhoneBook::add_new_contact(void)
 	index = (index + 1) % 8;
 	if (total < 8)
 		total++;
+	std::cout << std::endl;
+	std::cout << std::setfill('-') << std::setw(46) << "-" << std::endl;
+	std::cout << "| Success! New contact added to Phonebook =D |" << std::endl;
+	std::cout << std::setfill('-') << std::setw(46) << "-";
 }
 
 void	PhoneBook::show_all_contacts(void) const
