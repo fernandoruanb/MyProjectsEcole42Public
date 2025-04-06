@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:32:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 10:30:19 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:36:42 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int	main(void)
 		else if (command == "EXIT")
 			break ;
 		std::cout << std::endl;
+		std::cin.clear();
+		clearerr(stdin);
 	}
 	return (0);
 }
