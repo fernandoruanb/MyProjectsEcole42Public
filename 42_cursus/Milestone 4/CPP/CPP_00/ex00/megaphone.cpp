@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 14:24:00 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 13:04:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/06 19:27:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	manage_message(char c, char next)
 		if (next == 'v') {std::cout << '\v'; return ;}
 		if (next == 'f') {std::cout << '\f'; return ;}
 		if (next == 'a') {std::cout << '\a'; return ;}
+		if (next == 'r') {std::cout << '\r'; return ;}
 		if (next == '\\') {std::cout << '\\'; return ;}
 	}
 	else if (c >= 'a' && c <= 'z')
