@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:32:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/05 19:09:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/06 10:30:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	main(void)
 				else
 				{
 					std::cout << std::endl;
-					std::cout << "Invalid index" << std::endl;
+					std::cout << "The index needs to be a number, please!";
 				}
 			}
 			else if (command == "NO" || command == "no")
