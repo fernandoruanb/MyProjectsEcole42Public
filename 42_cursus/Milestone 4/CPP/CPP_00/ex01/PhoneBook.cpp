@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:46:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/05 23:10:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/06 09:50:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,21 +150,23 @@ void	PhoneBook::show_specif_contact(int index) const
 {
 	if (index < 0 || index > 7)
 	{
-		std::cout << "Invalid index" << std::endl;
+		std::cout << "Invalid index";
 		return ;
 	}
 	if (index >= total)
 	{
-		std::cout << "The index surpass the total of contacts" << std::endl;
+		std::cout << std::endl;
+		std::cout << "The index surpass the total of contacts";
 		return ;
 	}
 	if (total == 0)
 	{
-		std::cout << "Doesn't exist a contact" << std::endl;
+		std::cout << std::endl;
+		std::cout << "Doesn't exist a contact";
 		return ;
 	}
 	std::cout << std::endl;
-	std::cout << "--------------------------------------------------------" << std::endl;;
+	std::cout << std::setfill('-') << std::setw(45) << "-" << std::endl;;
 	std::cout << "|";
 	std::cout << std::setfill(' ') << std::setw(10) << "Index";
 	std::cout << "|";
@@ -174,15 +176,12 @@ void	PhoneBook::show_specif_contact(int index) const
 	std::cout << "|";
 	std::cout << std::setfill(' ') << std::setw(10) << "NickName";
 	std::cout << "|";
-	std::cout << std::setfill(' ') << std::setw(10) << "PhoneNum";
-	std::cout << "|";
 	std::cout << std::endl;
-	std::cout << "--------------------------------------------------------" << std::endl;
+	std::cout << std::setfill('-') << std::setw(45) << "-" << std::endl;
 	std::cout << "|" << std::setfill(' ') << std::setw(10) << index + 1 << "|" 
 	<< phonebook[index].get_first_name()
 	<< "|" << std::setfill(' ') << std::setw(10) << phonebook[index].get_last_name()
 	<< "|" << std::setfill(' ') << std::setw(10) << phonebook[index].get_nickname()
-	<< "|" << std::setfill(' ') << std::setw(10) << phonebook[index].get_phone_number() << "|" << std::endl;
-	std::cout << "--------------------------------------------------------" << std::endl;
-
+	<< "|" << std::endl;
+	std::cout << std::setfill('-') << std::setw(45) << "-" << std::endl;
 }
