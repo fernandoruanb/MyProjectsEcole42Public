@@ -5,7 +5,7 @@ NAME = megaphone
 #Flags to compile
 
 CC = c++
-CPPFLAGS = -Wall -Werror -Wextra -std=c++98
+CPPFLAGS = -g3 -Wall -Werror -Wextra -std=c++98
 
 #Directories
 
