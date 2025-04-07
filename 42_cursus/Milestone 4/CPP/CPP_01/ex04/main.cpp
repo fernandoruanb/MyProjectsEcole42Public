@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:59:00 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 13:55:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:10:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	std::string	output;
 	std::string	s1;
 	std::string	s2;
+	Replace	MyReplace;
 
 	if (argc != 4)
 		return (1);
@@ -31,14 +32,12 @@ int	main(int argc, char **argv)
 		std::cout << "The filename needs to be real and with content!!!" << std::endl;
 		return (1);
 	}
-	std::ofstream file_out("output.txt");
+	/*std::ofstream file_out("output.txt");
 	if (!file_out.is_open())
 	{
 		std::cout << "ERROR opening the output file" << std::endl;
 		return (1);
-	}
-	std::cout << input << std::endl;
-	std::cout << s1 << std::endl;
-	std::cout << s2 << std::endl;
+	}*/
+	MyReplace.replace(input, s1, s2);
 	return (0);
 }
