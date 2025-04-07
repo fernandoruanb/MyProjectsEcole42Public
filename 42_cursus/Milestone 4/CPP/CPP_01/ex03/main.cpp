@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 10:36:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 12:02:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:46:30 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(void)
 		jim.attack();
 		club.setType("some other type of club");
 		jim.attack();
+		std::cout << std::endl;
 	}
 	return (0);
 }
