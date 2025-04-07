@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:45:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/03/27 17:46:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:39:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,11 @@ int	handle_pipe_op(t_ast **root, int flag, t_data *data)
 	data->utils.exec_status = 0;
 	if (pipe(pipefd) == -1)
 		return (1);
+	if (data->utils.index > 9000)
+	{
+		wait_all_pids(data);
+		data->utils.index = 0;
+	}
 	if (flag == 1)
 		write_mode(root, pipefd, data);
 	else if (flag == 2)
