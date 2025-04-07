@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   microshell.c                                       :+:      :+:    :+:   */
+/*   microshell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 16:12:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/21 16:28:26 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/02 09:05:08 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/02 09:06:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/microshell.h"
+#ifndef MICROSHELL_H
+# define MICROSHELL_H
 
-int	main(int argc, char **argv, char **envp)
+# include <unistd.h>
+# include <stdlib.h>
+# include <wait.h>
+
+typedef struct s_shell
 {
-	int	index;
+	int	isPipe;
+	char	*cmd;
+	char	**cmds;
+	char	**envp;
+	int	pipefd[2];
+}	t_shell;
 
-	index = 1;
-	while (argv[index])
-	{
-		if (argv[index] && ft_strcmp(argv[index], "|") && ft_strcmp(argv[index], ";"))
-			index++;
-		if (index)
-			status = execute_command(argv, index, envp);
-	}
-	return (status);
-}
+#endif /* MICROSHELL_H */
