@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 09:21:37 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 11:16:22 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/07 10:28:49 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/07 12:35:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANA_HPP
-# define HUMANA_HPP
+#include "HumanB.hpp"
 
-# include "Weapon.hpp"
-# include <iostream>
+HumanB::HumanB(std::string name)
+	: weapon(NULL), name(name) {}
 
-class HumanA
+HumanB::~HumanB() {}
+
+void	HumanB::setWeapon(Weapon* weapon)
 {
-	private:
-		Weapon		&weapon;
-		std::string	type;
-		std::string	name;
-	public:
-		void	attack(void) const;
-		HumanA(std::string name, Weapon &weapon);
-		~HumanA();
-};
+	this->weapon = weapon;
+}
 
-#endif /* HUMANA_HPP */
+void	HumanB::attack(void) const
+{
+	std::cout << std::endl;
+	std::cout << "🧔" << << name << " attacks using " << "🔨" << weapon->getType() << std::endl;
+}

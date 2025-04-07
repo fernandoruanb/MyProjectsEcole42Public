@@ -6,12 +6,14 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 10:06:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 10:17:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:47:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WEAPON_HPP
 # define WEAPON_HPP
+
+# include <iostream>
 
 class Weapon
 {

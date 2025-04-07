@@ -6,22 +6,27 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:33:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 10:12:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:01:32 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HUMANB_HPP
 # define HUMANB_HPP
 
+# include "Weapon.hpp"
+# include <iostream>
+
 class HumanB
 {
 	private:
-		Weapon	weapon;
+		Weapon*	weapon;
 		std::string	type;
 		std::string	name;
 	public:
-		HumanB(name);
+		HumanB(std::string name);
 		~HumanB();
+		void	setWeapon(Weapon* weapon);
+		void	attack(void) const;
 };
 
 #endif /* HUMANB_HPP */
