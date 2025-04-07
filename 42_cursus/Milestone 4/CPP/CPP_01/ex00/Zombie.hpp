@@ -6,11 +6,14 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:23:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 17:40:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/07 09:28:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
+
+# include <iostream>
 
 class Zombie
 {
@@ -23,3 +26,5 @@ class Zombie
 		static Zombie*	newZombie(std::string name);
 		static void	randomChump(std::string name);
 };
+
+#endif /* ZOMBIE_HPP */
