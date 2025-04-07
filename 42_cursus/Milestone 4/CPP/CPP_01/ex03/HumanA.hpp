@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:21:37 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 09:24:36 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:06:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 class HumanA
 {
 	private:
-		std::string	Weapon;
+		Weapon		weapon;
+		std::string	type;
 		std::string	name;
 	public:
-		std::string	getType(void) const;
-		void	setType(std::string);
+		HumanA(std::string name, Weapon);
+		~HumanA();
 };
 
 #endif /* HUMANA_HPP */

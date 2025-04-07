@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:42:22 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/05 20:06:36 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:19:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class PhoneBook
 		bool	show_add_error(const std::string message, const std::string temp) const;
 		void    correct_str(std::string &temp) const;
 	public:
-		PhoneBook();
+		PhoneBook(void);
 		void	add_new_contact(void);
 		void	show_specif_contact(int index) const;
 		void	show_all_contacts(void) const;

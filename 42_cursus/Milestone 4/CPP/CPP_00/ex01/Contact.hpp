@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:24:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 10:07:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:19:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Contact
 		std::string	get_darkest_secret(void) const;
 		std::string	get_phone_number(void) const;
 	public:
-		Contact();
+		Contact(void);
 		void	set_first_name(const std::string &name);
 		void	set_last_name(const std::string &last_name);
 		void	set_nickname(const std::string &nickname);
