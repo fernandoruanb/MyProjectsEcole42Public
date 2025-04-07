@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:25:50 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 18:45:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/06 21:30:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Zombie::~Zombie()
 {
-	std::cout << "The zombie " << name << " was killed successfully." << std::endl;
+	std::cout << "🧟The zombie " << name << " was killed successfully.👮⚔️ 🧟" << std::endl;
 }
 
 Zombie::Zombie(std::string name)
