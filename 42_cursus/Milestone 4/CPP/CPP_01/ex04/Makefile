@@ -1,0 +1,51 @@
+#Name of the program or library
+
+NAME = my_sed
+
+#Compilers and flags
+
+CC = c++
+CFLAGS = -g3 -Wall -Werror -Wextra -std=c++98
+
+#Directories
+
+SRCDIR = .
+INCDIR = .
+
+#SRCS
+
+SRCS =  main.cpp
+
+#OBJS
+
+OBJS = $(SRCS:.cpp=.o)
+
+#Main
+
+all: $(NAME)
+
+#All the magic happens here
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS)
+
+# .cpp -> .o
+
+%.o:%.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+#clean
+
+clean:
+	rm -rf $(OBJS)
+
+#fclean
+
+fclean: clean
+	rm -rf $(NAME)
+
+#restart
+
+re: fclean clean all re
+
+.PHONY: fclean clean all re
