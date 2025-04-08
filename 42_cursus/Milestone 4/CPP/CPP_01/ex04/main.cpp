@@ -6,12 +6,34 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:59:00 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 11:55:49 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 12:42:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fstream>
 #include <iostream>
+
+static void	make_replace(std::ifstream &file, std::ofstream &out, std::string s1, std::string s2)
+{
+	std::string	line;
+	int	pos;
+
+	while (std::getline(file, line))
+	{
+		pos = 0;
+		while (pos != -1)
+		{
+			pos = line.find(s1);
+			if (pos != -1)
+			{
+				line.erase(pos, s1.length());
+				line.insert(pos, s2);
+				pos += s1.length();
+			}
+		}
+		out << line << std::endl;
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -19,8 +41,6 @@ int	main(int argc, char **argv)
 	std::string	output;
 	std::string	s1;
 	std::string	s2;
-	std::string	line;
-	int	pos;
 
 	if (argc != 4)
 		return (1);
@@ -40,8 +60,7 @@ int	main(int argc, char **argv)
 		std::cerr << "Unfortunately, we failed to open the output file" << std::endl;
 		return (1);
 	}
-	line = std::getline(std::cin, file);
-	std::cout << "achei: " << pos << std::endl;
+	make_replace(file, out, s1, s2);
 	file.close();
 	out.close();
 	return (0);
