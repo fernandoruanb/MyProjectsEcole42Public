@@ -20,7 +20,7 @@ OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-#.c -> .o
+#.cpp -> .o
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS)
