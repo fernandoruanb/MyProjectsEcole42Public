@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 09:18:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/05 18:46:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:58:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	Account:: makeWithdrawal(int withdrawal)
 		_displayTimestamp();
 		std::cout << " index:" << _accountIndex << ";";
 		std::cout << "p_amount:" << checkAmount() << ";";
-		std::cout << "withdrawal:refused" << std::endl;
+		std::cerr << "withdrawal:refused" << std::endl;
 		return (false);
 	}
 	else

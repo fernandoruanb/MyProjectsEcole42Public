@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:46:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 10:52:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:58:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 	if (temp.empty())
         {
 		std::cout << std::endl << std::endl;
-                std::cout << "You need to fill the camp ";
+                std::cerr << "You need to fill the camp ";
 		std::cout << message;
 		std::cin.clear();
 		clearerr(stdin);
@@ -37,7 +37,7 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 		if (temp[index] < 32 || temp[index] > 126)
 		{
 			std::cout << std::endl;
-			std::cout << "ONLY ASCII CHARACTERS!!!";
+			std::cerr << "ONLY ASCII CHARACTERS!!!";
 			return (1);
 		}
 		index++;
@@ -52,7 +52,7 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 			else
 			{
 				std::cout << std::endl;
-				std::cout << "ONLY NUMBERS!!!";
+				std::cerr << "ONLY NUMBERS!!!";
 				return (1);
 			}
 		}
@@ -65,7 +65,7 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 		index++;
 	}
 	std::cout << std::endl;
-	std::cout << "ONLY SPACES IS FORBIDDEN!!!";
+	std::cerr << "ONLY SPACES IS FORBIDDEN!!!";
 	return (1);
 }
 
@@ -149,19 +149,19 @@ void	PhoneBook::show_specif_contact(int index) const
 	if (index < 0 || index > 7)
 	{
 		std::cout << std::endl;
-		std::cout << "Invalid index. Only from 1 to 8, please!";
+		std::cerr << "Invalid index. Only from 1 to 8, please!";
 		return ;
 	}
 	if (index >= total)
 	{
 		std::cout << std::endl;
-		std::cout << "The index surpass the total of contacts";
+		std::cerr << "The index surpass the total of contacts";
 		return ;
 	}
 	if (total == 0)
 	{
 		std::cout << std::endl;
-		std::cout << "Doesn't exist a contact";
+		std::cerr << "Doesn't exist a contact";
 		return ;
 	}
 	std::cout << std::endl;
