@@ -1,6 +1,6 @@
 #Name of the program or library
 
-NAME = my_sed
+NAME = master_of_strings_change
 
 #Compilers and flags
 

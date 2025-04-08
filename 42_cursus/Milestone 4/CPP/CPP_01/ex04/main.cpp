@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:59:00 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 13:02:35 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:05:40 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ int	main(int argc, char **argv)
 	std::string	s2;
 
 	if (argc != 4)
+	{
+		std::cerr << "How to use: [filename] [string1] [string2]" << std::endl;
 		return (1);
+	}
 	input = argv[1];
 	s1 = argv[2];
 	s2 = argv[3];
