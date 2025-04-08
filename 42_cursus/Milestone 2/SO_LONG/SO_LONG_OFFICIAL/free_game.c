@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 10:58:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/12 16:51:17 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:18:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	check_other_things(t_game *game)
 
 int	free_game(t_game *game)
 {
-	if (game->win_ptr)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if (!game)
+		exit(1);
 	if (game->player_img)
 		mlx_destroy_image(game->mlx_ptr, game->player_img);
 	if (game->floor_img)
@@ -50,16 +50,14 @@ int	free_game(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->exit_img);
 	if (game->wall_img)
 		mlx_destroy_image(game->mlx_ptr, game->wall_img);
-	if (game)
-		check_other_things(game);
-	if (game)
-	{
-		game->player_img = NULL;
-		game->floor_img = NULL;
-		game->collectible_img = NULL;
-		game->exit_img = NULL;
-		game->wall_img = NULL;
-	}
+	if (game->win_ptr)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	check_other_things(game);
+	game->player_img = NULL;
+	game->floor_img = NULL;
+	game->collectible_img = NULL;
+	game->exit_img = NULL;
+	game->wall_img = NULL;
 	exit(0);
 	return (0);
 }
