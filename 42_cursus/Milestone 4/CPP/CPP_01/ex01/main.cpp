@@ -6,43 +6,12 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:24:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 20:34:21 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 20:57:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 #include <cstdlib>
-
-/*static int	ft_atoi(std::string num_of_zombies)
-{
-	long	index;
-	long	result;
-	long	signal;
-
-	index = 0;
-	result = 0;
-	signal = 1;
-	while (num_of_zombies[index] == ' ' || num_of_zombies[index] == '\n'
-		|| num_of_zombies[index] == '\t' || num_of_zombies[index] == '\v'
-		|| num_of_zombies[index] == '\f' || num_of_zombies[index] == '\r')
-		index++;
-	if (num_of_zombies[index] == '+' || num_of_zombies[index] == '-')
-	{
-		if (num_of_zombies[index] == '-')
-			signal *= -1;
-		index++;
-	}
-	while (num_of_zombies[index] >= '0' && num_of_zombies[index] <= '9')
-	{
-		result *= 10;
-		result += num_of_zombies[index] - '0';
-		index++;
-	}
-	result *= signal;
-	if (result > 9000 || result <= 0)
-		return (-1);
-	return ((int)result);
-}*/
 
 int	main(void)
 {
