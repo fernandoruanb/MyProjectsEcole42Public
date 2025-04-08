@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:23:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 20:26:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 20:55:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ class Zombie
 	private:
 		std::string name;
 	public:
-		Zombie(void);
 		Zombie(std::string name);
 		~Zombie(void);
 		static Zombie*	newZombie(std::string name);
