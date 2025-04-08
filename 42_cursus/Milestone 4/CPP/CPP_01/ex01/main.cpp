@@ -6,13 +6,14 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:24:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 18:11:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 20:34:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+#include <cstdlib>
 
-static int	ft_atoi(std::string num_of_zombies)
+/*static int	ft_atoi(std::string num_of_zombies)
 {
 	long	index;
 	long	result;
@@ -41,7 +42,7 @@ static int	ft_atoi(std::string num_of_zombies)
 	if (result > 9000 || result <= 0)
 		return (-1);
 	return ((int)result);
-}
+}*/
 
 int	main(void)
 {
@@ -58,8 +59,8 @@ int	main(void)
 		std::cout << "🧙: You need to pass something to continue!" << std::endl;
 		return (1);
 	}
-	real_number = ft_atoi(num_of_zombies);
-	if (real_number == -1)
+	real_number = std::atoi(num_of_zombies.c_str());
+	if (real_number > 10000 || real_number <= 0)
 	{
 		std::cout << std::endl;
 		std::cout << "🧙: Invalid number of zombies, man! D=" << std::endl;

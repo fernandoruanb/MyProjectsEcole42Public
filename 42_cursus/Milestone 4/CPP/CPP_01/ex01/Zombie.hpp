@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:03:10 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 10:18:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 20:32:08 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class Zombie
 		Zombie(std::string name);
 		~Zombie(void);
 		void	set_name(std::string name);
+		void	announce(void);
 		static Zombie*	zombieHorde(int N, std::string name);
 };
 

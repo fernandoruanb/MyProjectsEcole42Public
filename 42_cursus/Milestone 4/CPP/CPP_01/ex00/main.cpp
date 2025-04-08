@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 17:30:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 21:35:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 20:30:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(void)
 		return (1);
 	}
 	MyZombie = Zombie::newZombie(name);
+	MyZombie->announce();
 	delete(MyZombie);
 	std::cout << std::endl << std::endl;
 	std::cout << "🧙: Now, I need to know about the second name for the temporary zombie: ";
