@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:33:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 12:01:32 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:24:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class HumanB
 		std::string	name;
 	public:
 		HumanB(std::string name);
-		~HumanB();
+		~HumanB(void);
 		void	setWeapon(Weapon* weapon);
 		void	attack(void) const;
 };

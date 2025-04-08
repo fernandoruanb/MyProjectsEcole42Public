@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 10:28:49 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 12:46:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:24:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 HumanB::HumanB(std::string name)
 	: weapon(NULL), name(name) {}
 
-HumanB::~HumanB() {}
+HumanB::~HumanB(void) {}
 
 void	HumanB::setWeapon(Weapon* weapon)
 {

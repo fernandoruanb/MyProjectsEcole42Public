@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:24:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 21:29:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:31:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static int	ft_atoi(std::string num_of_zombies)
 		result += num_of_zombies[index] - '0';
 		index++;
 	}
-	if (result > 2147483647 || result < 0)
+	result *= signal;
+	if (result > 2147483647 || result <= 0)
 		return (-1);
 	return ((int)result);
 }
@@ -62,6 +63,7 @@ int	main(void)
 	{
 		std::cout << std::endl;
 		std::cout << "🧙: Invalid number of zombies, man! D=" << std::endl;
+		std::cout << std::endl;
 		return (1);
 	}
 	std::cout << std::endl;

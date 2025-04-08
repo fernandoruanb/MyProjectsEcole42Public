@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:01:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 17:06:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:22:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ class Harl
 		void	warning(void);
 		void	error(void);
 	public:
-		Harl();
-		~Harl();
+		Harl(void);
+		~Harl(void);
 		void	complain(std::string level);
 };
 

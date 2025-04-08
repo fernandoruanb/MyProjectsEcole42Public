@@ -6,15 +6,15 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:42:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 16:15:40 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:23:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
-Harl::Harl() {}
+Harl::Harl(void) {}
 
-Harl::~Harl() {}
+Harl::~Harl(void) {}
 
 void	Harl::debug(void)
 {

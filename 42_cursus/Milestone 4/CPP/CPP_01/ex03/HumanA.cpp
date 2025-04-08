@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:40:41 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 12:46:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:24:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,4 @@ void	HumanA::attack(void) const
 HumanA::HumanA(std::string name, Weapon &weapon)
 	: weapon(weapon), name(name) {}
 
-HumanA::~HumanA() {}
+HumanA::~HumanA(void) {}

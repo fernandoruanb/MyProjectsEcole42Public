@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:04:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/06 21:22:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:24:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	Zombie::set_name(std::string name)
 	this->name = name;
 }
 
-Zombie::Zombie()
+Zombie::Zombie(void)
 {
 	std::cout << std::endl;
 	std::cout << "🧟zombie_aleatory:" << " BraiiiiiiinnnzzzZ...";
@@ -30,7 +30,7 @@ Zombie::Zombie(std::string name)
 	this->name = name;
 }
 
-Zombie::~Zombie()
+Zombie::~Zombie(void)
 {
 	std::cout << std::endl;
 	std::cout << "🧟The zombie " << name << " was killed successfully👮⚔️ 🧟";
