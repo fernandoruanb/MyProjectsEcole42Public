@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:24:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 17:31:26 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 18:11:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_atoi(std::string num_of_zombies)
 		index++;
 	}
 	result *= signal;
-	if (result > 2147483647 || result <= 0)
+	if (result > 9000 || result <= 0)
 		return (-1);
 	return ((int)result);
 }
