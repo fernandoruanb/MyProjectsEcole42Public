@@ -30,7 +30,7 @@ static int	ft_strcmp(const char *s1, const char *s2)
 
 static char	*ft_strrchr(const char *s, int c)
 {
-	size_t	length;
+	ssize_t	length;
 
 	length = ft_strlen(s);
 	while (length >= 0)

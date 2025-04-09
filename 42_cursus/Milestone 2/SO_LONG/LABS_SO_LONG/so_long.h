@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:00:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 18:08:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 11:19:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <unistd.h>
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include <fcntl.h>
 
 typedef struct s_game

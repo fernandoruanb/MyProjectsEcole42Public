@@ -12,7 +12,7 @@ MLXFLAGS = -L $(MLXDIR) -lmlx -lXext -lX11 -lm
 
 SRCDIR = .
 INCDIR = .
-MLXDIR = /usr/local/lib
+MLXDIR = ../minilibx-linux
 
 # SRCS
 
