@@ -6,12 +6,11 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 08:39:50 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/02 09:40:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:01:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "microshell.h"
-#include <stdio.h>
 
 static int	ft_strcmp(const char *s1, const char *s2)
 {
