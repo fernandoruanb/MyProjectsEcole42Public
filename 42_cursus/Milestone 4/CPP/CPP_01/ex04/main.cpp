@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 12:59:00 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 13:05:40 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/08 23:43:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	main(int argc, char **argv)
 	if (!out.is_open())
 	{
 		std::cerr << "Unfortunately, we failed to open the output file" << std::endl;
+		file.close();
 		return (1);
 	}
 	make_replace(file, out, s1, s2);
