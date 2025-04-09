@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 09:08:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/06 10:45:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:31:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (1);
 	total_numbers = count_all_numbers(argc, argv);
+	if (total_numbers <= 0)
+		return (ft_putendl_fd_1("Error", 2));
 	if (!init_stack(&stack, total_numbers))
 		return (ft_putendl_fd_1("Error", 2));
 	if (!parse_args(argc, argv, &stack))
