@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:51:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/12/13 11:02:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/09 09:41:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	main(int argc, char **argv)
 	}
 	mlx_key_hook(game.win_ptr, key_press, &game);
 	mlx_hook(game.win_ptr, 17, 0, free_game, &game);
+	mlx_hook(game.win_ptr, 2, 1L<<0, key_press, &game);
+	mlx_loop_hook(game.win_ptr, key_press, NULL);
 	mlx_loop(game.mlx_ptr);
 	free_game(&game);
 	return (0);
