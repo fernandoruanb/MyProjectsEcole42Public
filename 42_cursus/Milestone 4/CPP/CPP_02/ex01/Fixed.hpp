@@ -19,15 +19,18 @@
 class Fixed
 {
 	private:
-		const int	number;
+		int	number;
 		static const int	bits = 8;
 	public:
 		Fixed();
 		~Fixed();
+		Fixed(const int n);
+		Fixed(const float num);
 		Fixed(const Fixed &other);
 		Fixed &operator=(const Fixed &another);
-		int	toFloat(void) const;
+		float	toFloat(void) const;
 		int	toInt(void) const;
 };
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed);
 
 #endif /* FIXED_HPP */

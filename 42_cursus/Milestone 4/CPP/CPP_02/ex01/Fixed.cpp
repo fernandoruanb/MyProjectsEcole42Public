@@ -12,9 +12,8 @@
 
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed() : number(0)
 {
-	this->number = 0;
 	std::cout << "Default constructor called" << std::endl;
 }
 
@@ -26,13 +25,19 @@ Fixed::~Fixed()
 Fixed::Fixed(const int n)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->number = n << bits;
+	number = n << bits;
+}
+
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
+{
+	out << fixed.toFloat();
+	return out;
 }
 
 Fixed::Fixed(const float num)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->number = roundf(num * (1 << bits));
+	number = roundf(num * (1 << bits));
 }
 
 int	Fixed::toInt(void) const
@@ -53,7 +58,7 @@ Fixed::Fixed(const Fixed &another)
 
 Fixed& Fixed::operator=(const Fixed &other)
 {
-	if (this != other)
+	if (this != &other)
 	{
 		this->number = other.number;
 	}
