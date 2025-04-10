@@ -25,12 +25,14 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const int n)
 {
+	std::cout << "Int constructor called" << std::endl;
 	this->number = n << bits;
 }
 
 Fixed::Fixed(const float num)
 {
-	this->number = num roundf(1 << bits);
+	std::cout << "Float constructor called" << std::endl;
+	this->number = roundf(num * (1 << bits));
 }
 
 int	Fixed::toInt(void) const
@@ -40,13 +42,13 @@ int	Fixed::toInt(void) const
 
 float	Fixed::toFloat(void) const
 {
-	return (number << bits);
+	return (float)number / (1 << bits);
 }
 
 Fixed::Fixed(const Fixed &another)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	this.number = another.number;
+	this->number = another.number;
 }
 
 Fixed& Fixed::operator=(const Fixed &other)
