@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:00:38 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 11:11:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:18:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	execute_command(char *cmd, char **envp)
 	char	**commands;
 
 	index = 0;
-	while ((!ft_strnstr(envp[index], "PATH", 4) && envp[index]))
+	while (envp[index] && (!ft_strnstr(envp[index], "PATH", 4)))
 		index++;
 	paths_temp = ft_strdup(envp[index] + 5);
 	if (!paths_temp)

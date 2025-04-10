@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:31:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/23 13:10:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/09 12:31:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,18 @@ int	main(int argc, char **argv)
 		close(file_input);
 		return (1);
 	}
-	dup2(file_input, STDIN_FILENO);
-	dup2(file_output, STDOUT_FILENO);
+	if (dup2(file_input, STDIN_FILENO) == -1)
+	{
+		close(file_input);
+		close(file_output);
+		return (1);
+	}
+	if (dup2(file_output, STDOUT_FILENO))
+	{
+		close(file_input);
+		close(file_output);
+		return (1);
+	}
 	bytes_read = 1;
 	while (bytes_read != 0)
 	{
