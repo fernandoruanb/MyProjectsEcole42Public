@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:20:12 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/10 10:22:20 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:22:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 
 	std::cout << a << std::endl;
 	std::cout << ++a << std::endl;
-	std::cout << a << std:endl;
+	std::cout << a << std::endl;
 	std::cout << a++ << std::endl;
 	std::cout << a << std::endl;
 

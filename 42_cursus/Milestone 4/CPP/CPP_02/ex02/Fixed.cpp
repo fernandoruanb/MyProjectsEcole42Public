@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:35:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/10 11:46:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:14:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,49 +17,54 @@ Fixed::Fixed() : number(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-int	Fixed::operator/(const Fixed &second) const
+Fixed	Fixed::operator/(const Fixed &second) const
 {
-	if (second.number == 0)
+	if (second.toInt() == 0)
 	{
 		std::cout << "Division by Zero Error" << std::endl;
 		return (0);
 	}
-	return (this->number / second.number);
+	return (this->toFloat() / second.toFloat());
 }
 
-void	Fixed::operator++(int num)
+Fixed	Fixed::operator++(int)
 {
-	number += num;
+	Fixed	result;
+
+	result = *this;
+	++(*this);
+	return (result);
 }
 
-void	Fixed::operator++(void)
+Fixed	&Fixed::operator++(void)
 {
-	number += 1;
+	number++;
+	return (*this);
 }
 
 bool	Fixed::operator==(const Fixed &second) const
 {
-	return (this->number == second.number);
+	return (this->toFloat() == second.toFloat());
 }
 
 bool	Fixed::operator!=(const Fixed &second) const
 {
-	return (this->number != second.number);
+	return (this->toFloat() != second.toFloat());
 }
 
 bool	Fixed::operator<=(const Fixed &second) const
 {
-	return (this->number <= second.number);
+	return (this->toFloat() <= second.toFloat());
 }
 
 bool	Fixed::operator>=(const Fixed &second) const
 {
-	return (this->number >= second.number);
+	return (this->toFloat() >= second.toFloat());
 }
 
 bool	Fixed::operator<(const Fixed &second) const
 {
-	return (this->number < second.number);
+	return (this->toFloat() < second.toFloat());
 }
 
 bool	Fixed::operator>(const Fixed &second) const
@@ -67,33 +72,49 @@ bool	Fixed::operator>(const Fixed &second) const
 	return (this->number > second.number);
 }
 
-int	Fixed::operator*(const Fixed &second) const
+Fixed	Fixed::operator*(const Fixed &second) const
 {
-	return (this->number * second.number);
+	return (this->toFloat() * second.toFloat());
 }
 
-int	Fixed::operator-(const Fixed &second) const
+Fixed	Fixed::operator-(const Fixed &second) const
 {
-	return (this->number - second.number);
+	return (this->toFloat() - second.toFloat());
 }
 
-int	Fixed::operator+(const Fixed &second) const
+Fixed	Fixed::operator+(const Fixed &second) const
 {
-	return (this->number + second.number);
+	return (this->toFloat() + second.toFloat());
 }
 
-int	Fixed::max(const Fixed &second) const
+int	Fixed::max(Fixed &first, Fixed &second)
 {
-	if (this->number > second.number)
-		return (this->number.toFloat());
+	if (first.toFloat() > second.toFloat())
+		return (first.toFloat());
 	else
 		return (second.toFloat());
 }
 
-int	Fixed::min(const Fixed &second) const
+int	Fixed::min(Fixed &first, Fixed &second)
 {
-	if (this->number < second.number)
-		return (this->number.toFloat());
+	if (first.toFloat() < second.toFloat())
+		return (first.toFloat());
+	else
+		return (second.toFloat());
+}
+
+int	Fixed::max(const Fixed &first, const Fixed &second)
+{
+	if (first.toFloat() > second.toFloat())
+		return (first.toFloat());
+	else
+		return (second.toFloat());
+}
+
+int	Fixed::min(const Fixed &first, const Fixed &second)
+{
+	if (first.toFloat() < second.toFloat())
+		return (first.toFloat());
 	else
 		return (second.toFloat());
 }
@@ -109,7 +130,7 @@ Fixed::Fixed(const int n)
 	number = n << bits;
 }
 
-std::ostream Fixed::operator<<(std::ostream &out, Fixed &myInstance)
+std::ostream operator<<(std::ostream &out, Fixed &myInstance)
 {
 	out << myInstance.toFloat();
 	return (out);
