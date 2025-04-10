@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:35:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/10 14:14:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:21:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ Fixed	Fixed::operator+(const Fixed &second) const
 	return (this->toFloat() + second.toFloat());
 }
 
-int	Fixed::max(Fixed &first, Fixed &second)
+float	Fixed::max(Fixed &first, Fixed &second)
 {
 	if (first.toFloat() > second.toFloat())
 		return (first.toFloat());
@@ -95,7 +95,7 @@ int	Fixed::max(Fixed &first, Fixed &second)
 		return (second.toFloat());
 }
 
-int	Fixed::min(Fixed &first, Fixed &second)
+float	Fixed::min(Fixed &first, Fixed &second)
 {
 	if (first.toFloat() < second.toFloat())
 		return (first.toFloat());
@@ -103,7 +103,7 @@ int	Fixed::min(Fixed &first, Fixed &second)
 		return (second.toFloat());
 }
 
-int	Fixed::max(const Fixed &first, const Fixed &second)
+float	Fixed::max(const Fixed &first, const Fixed &second)
 {
 	if (first.toFloat() > second.toFloat())
 		return (first.toFloat());
@@ -111,7 +111,7 @@ int	Fixed::max(const Fixed &first, const Fixed &second)
 		return (second.toFloat());
 }
 
-int	Fixed::min(const Fixed &first, const Fixed &second)
+float	Fixed::min(const Fixed &first, const Fixed &second)
 {
 	if (first.toFloat() < second.toFloat())
 		return (first.toFloat());
@@ -130,7 +130,7 @@ Fixed::Fixed(const int n)
 	number = n << bits;
 }
 
-std::ostream operator<<(std::ostream &out, Fixed &myInstance)
+std::ostream& operator<<(std::ostream& out, const Fixed& myInstance)
 {
 	out << myInstance.toFloat();
 	return (out);
