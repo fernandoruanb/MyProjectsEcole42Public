@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:58:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 11:20:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:54:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*find_path(char *cmd, char **paths)
 	int		index;
 
 	index = 0;
+	if (access(cmd, F_OK | X_OK) == 0)
+		return (ft_strdup(cmd));
 	while (paths[index])
 	{
 		true_temp = ft_strjoin(paths[index], "/");
