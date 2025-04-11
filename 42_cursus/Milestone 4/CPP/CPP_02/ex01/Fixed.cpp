@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:31:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/09 19:05:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:28:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ Fixed::Fixed(const Fixed &another)
 
 Fixed& Fixed::operator=(const Fixed &other)
 {
+	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		this->number = other.number;
