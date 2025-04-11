@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:42:22 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/07 10:19:33 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/11 20:06:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class PhoneBook
 		void	add_new_contact(void);
 		void	show_specif_contact(int index) const;
 		void	show_all_contacts(void) const;
+		int	get_total(void) const;
 };
 
 #endif /* PHONEBOOK_HPP */

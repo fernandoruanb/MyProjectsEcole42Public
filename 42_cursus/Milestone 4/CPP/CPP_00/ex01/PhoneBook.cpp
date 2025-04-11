@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:46:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 11:58:01 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/11 20:18:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ bool	PhoneBook::show_add_error(const std::string message, std::string temp) cons
 				std::cerr << "ONLY NUMBERS!!!";
 				return (1);
 			}
+		}
+		if (temp.length() > 16)
+		{
+			std::cout << std::endl;
+			std::cerr << "16 DIGITS IS THE INTERNATIONAL LIMIT PATTERN!!!";
+			return (1);
 		}
 	}
 	index = 0;
@@ -142,6 +148,11 @@ void	PhoneBook::show_all_contacts(void) const
 		show_specif_contact(num);
 		num++;
 	}
+}
+
+int	PhoneBook::get_total(void) const
+{
+	return (total);
 }
 
 void	PhoneBook::show_specif_contact(int index) const
