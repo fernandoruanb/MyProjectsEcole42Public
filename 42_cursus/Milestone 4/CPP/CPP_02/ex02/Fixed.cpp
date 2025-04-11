@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:35:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/10 16:21:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/11 09:59:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ Fixed	Fixed::operator/(const Fixed &second) const
 
 Fixed	Fixed::operator++(int)
 {
-	Fixed	result;
+	Fixed	result(*this);
 
-	result = *this;
 	++(*this);
 	return (result);
 }
