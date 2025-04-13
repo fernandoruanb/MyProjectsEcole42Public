@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:59:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 14:17:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/13 14:31:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class ClapTrap
 {
-	private:
+	protected:
 		std::string name;
 		unsigned int	hit_points;
 		unsigned int	energy;
