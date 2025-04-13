@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:18:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 14:23:33 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/13 18:12:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	main(void)
 	MySecondLittleRobot.attack("Bob");
 	MyLittleRobot.takeDamage(3);
 	MyLittleRobot.beRepaired(2);
+	MyLittleRobot.guardGate();
 	return (0);
 }

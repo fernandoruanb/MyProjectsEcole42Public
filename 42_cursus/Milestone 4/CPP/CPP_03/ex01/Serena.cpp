@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 13:41:37 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 14:44:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/13 18:23:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-	std::cout << "Default input constructor called" << std::endl;
+	std::cout << "ScavTrap Default input constructor called" << std::endl;
 	energy = 50;
 	attack_damage = 20;
 	hit_points = 100;
@@ -22,7 +22,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 
 ScavTrap::ScavTrap() : ClapTrap("Bob")
 {
-	std::cout << "Empty default constructor called" << std::endl;
+	std::cout << "ScavTrap Empty default constructor called" << std::endl;
 	energy = 50;
 	attack_damage = 20;
 	hit_points = 100;
@@ -30,11 +30,12 @@ ScavTrap::ScavTrap() : ClapTrap("Bob")
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "ScavTrap Destructor called" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other)
 {
+	std::cout << "ScavTrap copy constructor called" << std::endl;
 	this->energy = other.energy;
 	this->hit_points = other.hit_points;
 	this->name = other.name;
@@ -43,6 +44,7 @@ ScavTrap::ScavTrap(const ScavTrap &other)
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &other)
 {
+	std::cout << "ScavTrap copy assignment called" << std::endl;
 	if (this != &other)
 	{
 		this->energy = other.energy;
