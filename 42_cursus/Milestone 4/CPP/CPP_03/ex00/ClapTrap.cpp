@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 12:08:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:21:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ClapTrap::attack(const std::string &target)
 	}
 	std::cout << "ClapTrap " << name << " attacks " << target << ", causing some points of damage!" << std::endl;
 	this->energy--;
+	std::cout << "ClapTrap " << name << " Energy (" << this->energy << "/10)" << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
@@ -99,6 +100,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
         	std::cout << "ClapTrap " << name << "(" << this->hit_points << "/10)" << std::endl;
 		this->hit_points = 10;
         	std::cout << "ClapTrap " << name << " recovers all the hit points" << std::endl;
+		std::cout << "ClapTrap " << name << " Hit Points (" << this->hit_points << "/10)" << std::endl;
 		std::cout << std::endl;
 		return ;
 	}
@@ -107,7 +109,9 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	std::cout << "ClapTrap " << name << "(" << this->hit_points << "/10)" << std::endl;
 	std::cout << "ClapTrap " << name << " recovers " << amount << " hit points" << std::endl;
 	this->hit_points += amount;
+	this->energy--;
 	std::cout << "ClapTrap " << name << " Hit Points (" << this->hit_points << "/10)" << std::endl;
+	std::cout << "ClapTrap " << name << " Energy (" << this->energy << "/10)" << std::endl;
 	std::cout << std::endl;
 }
 
@@ -124,7 +128,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 	std::cout << std::endl;
 	std::cout << "ClapTrap " << name << " takes " << amount << " Points of damage" << std::endl;
 	this->hit_points -= amount;
-	std::cout << "ClapTrap " << name << ": " << this->hit_points;
+	std::cout << "ClapTrap " << name << ": Hit_Points(" << this->hit_points << "/10)";
 	std::cout << std::endl;
 }
 
