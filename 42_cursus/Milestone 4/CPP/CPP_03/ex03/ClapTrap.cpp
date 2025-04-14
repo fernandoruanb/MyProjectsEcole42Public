@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 11:28:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:59:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ ClapTrap::ClapTrap(std::string name) : name(name), hit_points(10), energy(10), a
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap Destructor called for " << name << std::endl;
+	std::cout << "ClapTrap Destructor called for " << name << " ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other)
@@ -49,7 +49,7 @@ std::ostream& operator<<(std::ostream &out, const ClapTrap &other)
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other)
 {
-	std::cout << "ClapTrap Copy assignment called for " << name << std::endl;
+	std::cout << "ClapTrap Copy assignment called for " << name << " ClapTrap" << std::endl;
 	if (this != &other)
 	{
 		this->hit_points = other.hit_points;
@@ -58,6 +58,11 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other)
 		this->name = other.name;
 	}
 	return (*this);
+}
+
+std::string	ClapTrap::WhoAmI(void) const
+{
+	return (name);
 }
 
 void	ClapTrap::attack(const std::string &target)
