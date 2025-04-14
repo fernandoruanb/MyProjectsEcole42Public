@@ -1,6 +1,6 @@
 #Name of the program or the library
 
-NAME = claptrap
+NAME = ClapTrap
 
 #Compilers and flags
 
