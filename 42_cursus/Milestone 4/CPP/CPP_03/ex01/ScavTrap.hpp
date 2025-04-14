@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:56:43 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 20:56:45 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 09:42:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 class ScavTrap : public ClapTrap
 {
 	public:
-		ScavTrap();
+		ScavTrap(void);
 		ScavTrap(std::string name);
-		~ScavTrap();
+		~ScavTrap(void);
 		ScavTrap(const ScavTrap &other);
 		ScavTrap& operator=(const ScavTrap &other);
 		void	guardGate(void);

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:56:55 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 21:03:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 09:41:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 	hit_points = 100;
 }
 
-ScavTrap::ScavTrap() : ClapTrap("Bob")
+ScavTrap::ScavTrap(void) : ClapTrap("Bob")
 {
 	std::cout << "ScavTrap Empty default constructor called" << std::endl;
 	energy = 50;
@@ -28,7 +28,7 @@ ScavTrap::ScavTrap() : ClapTrap("Bob")
 	hit_points = 100;
 }
 
-ScavTrap::~ScavTrap()
+ScavTrap::~ScavTrap(void)
 {
 	std::cout << "ScavTrap Destructor called" << std::endl;
 }

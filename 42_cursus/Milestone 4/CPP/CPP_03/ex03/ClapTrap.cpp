@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 19:22:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:20:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ClapTrap::attack(const std::string &target)
 	}
 	std::cout << "ClapTrap " << name << " attacks " << target << ", causing some points of damage!" << std::endl;
 	this->energy--;
-	std::cout << "ClapTrap " << name << " Energy (" << this->energy << "/100)" << std::endl;
+	std::cout << "ClapTrap " << name << " Energy (" << this->energy << "/50)" << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
@@ -118,7 +118,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	this->hit_points += amount;
 	this->energy--;
 	std::cout << "ClapTrap " << name << " Hit Points (" << this->hit_points << "/100)" << std::endl;
-	std::cout << "ClapTrap " << name << " Energy (" << this->energy << "/100)" << std::endl;
+	std::cout << "ClapTrap " << name << " Energy (" << this->energy << "/50)" << std::endl;
 	std::cout << std::endl;
 }
 
@@ -128,6 +128,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 	{
 		this->hit_points = 0;
 		std::cerr << std::endl;
+		std::cerr << "ClapTrap " << name << " takes " << amount << " Points of damage" << std::endl;
 		std::cerr << "ClapTrap " << name << " is died" << std::endl;
 		std::cerr << std::endl;
 		return ;

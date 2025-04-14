@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 22:06:16 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 09:18:54 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 09:46:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int	main(void)
         MySecondLittleDiamondTrap.takeDamage(15);
 	MyLittleDiamondTrap.takeDamage(15);
         MySecondLittleDiamondTrap.takeDamage(15);
+	MySecondLittleDiamondTrap.takeDamage(100);
 	return (0);
 }
