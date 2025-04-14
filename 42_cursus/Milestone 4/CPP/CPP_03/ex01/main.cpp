@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:18:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 21:03:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:28:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,26 @@
 
 int	main(void)
 {
-	ScavTrap MyLittleRobot("Bob");
-	ScavTrap MySecondLittleRobot("James");
+	ClapTrap c1("James");
+	ClapTrap c2("Robert");
+	ScavTrap a1("Optimus");
+	ScavTrap a2("Defender");
 
-	MyLittleRobot.attack("James");
-	MySecondLittleRobot.takeDamage(2);
-	MySecondLittleRobot.attack("Bob");
-	MyLittleRobot.takeDamage(3);
-	MyLittleRobot.beRepaired(2);
-	MyLittleRobot.guardGate();
+	a2.guardGate();
+	a1.attack("James");
+	c1.takeDamage(20);
+	c2.attack(a1.WhoAmI());
+	a1.takeDamage(10);
+	a1.attack(c2.WhoAmI());
+	c2.takeDamage(9);
+	c2.beRepaired(7);
+	c2.attack(a1.WhoAmI());
+	a1.takeDamage(30);
+	a1.beRepaired(20);
+	c2.attack(a1.WhoAmI());
+	a1.takeDamage(30);
+	a1.attack(c2.WhoAmI());
+	c2.takeDamage(100);
+	a1.guardGate();
 	return (0);
 }
