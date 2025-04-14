@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:38:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 19:35:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 09:30:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 class FragTrap : public ClapTrap
 {
 	public:
-		FragTrap();
+		FragTrap(void);
 		FragTrap(std::string name);
-		~FragTrap();
+		~FragTrap(void);
 		FragTrap(const FragTrap &other);
 		FragTrap& operator=(const FragTrap &other);
 		void	highFivesGuys(void);

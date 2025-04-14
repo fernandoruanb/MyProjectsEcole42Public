@@ -17,7 +17,8 @@ INCDIR = .
 SRCS =  main.cpp\
 	ScavTrap.cpp\
 	FragTrap.cpp\
-	ClapTrap.cpp
+	ClapTrap.cpp\
+	DiamondTrap.cpp
 
 #OBJS
 

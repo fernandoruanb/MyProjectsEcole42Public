@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 22:05:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 22:05:30 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 09:35:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap() : ClapTrap("Bob"), ScavTrap("Bob"), FragTrap("Bob");
+DiamondTrap::DiamondTrap(void) : ClapTrap("Bob"), ScavTrap("Bob"), FragTrap("Bob")
 {
 	std::cout << "DiamondTrap empty default constructor called" << std::endl;
 	this->energy = ScavTrap::energy;
@@ -20,7 +20,7 @@ DiamondTrap::DiamondTrap() : ClapTrap("Bob"), ScavTrap("Bob"), FragTrap("Bob");
 	this->attack_damage = FragTrap::attack_damage;
 }
 
-DiamondTrap::~DiamondTrap()
+DiamondTrap::~DiamondTrap(void)
 {
 	std::cout << "DiamondTrap destructor called" << std::endl;
 }
@@ -59,7 +59,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap &other)
 	this->name = other.name;
 }
 
-std::ostream& DiamondTrap::operator<<(std::ostream &out, const DiamondTrap &other)
+std::ostream& operator<<(std::ostream &out, const DiamondTrap &other)
 {
 	out << other.get_name();
 	return (out);

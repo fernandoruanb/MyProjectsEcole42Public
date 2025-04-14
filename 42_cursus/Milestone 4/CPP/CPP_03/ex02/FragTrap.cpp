@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:47:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 19:44:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 09:30:40 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap("Bob")
+FragTrap::FragTrap(void) : ClapTrap("Bob")
 {
 	std::cout << "FragTrap Default contructor called" << std::endl;
 	energy = 100;
@@ -28,7 +28,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 	hit_points = 100;
 }
 
-FragTrap::~FragTrap()
+FragTrap::~FragTrap(void)
 {
 	std::cout << "FragTrap destructor called" << std::endl;
 }

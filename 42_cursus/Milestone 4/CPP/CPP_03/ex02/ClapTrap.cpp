@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 19:22:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 09:28:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ ClapTrap::ClapTrap(std::string name) : name(name), hit_points(10), energy(10), a
 	std::cout << "ClapTrap Default input constructor called" << std::endl;
 }
 
-ClapTrap::~ClapTrap()
+ClapTrap::~ClapTrap(void)
 {
 	std::cout << "ClapTrap Destructor called" << std::endl;
 }

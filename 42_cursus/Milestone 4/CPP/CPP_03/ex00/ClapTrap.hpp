@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:59:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 14:17:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 09:31:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class ClapTrap
 	public:
 		ClapTrap(std::string name);
 		ClapTrap(void);
-		~ClapTrap();
+		~ClapTrap(void);
 		ClapTrap(const ClapTrap &other);
 		ClapTrap& operator=(const ClapTrap &other);
 		void	attack(const std::string& target);
