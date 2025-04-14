@@ -1,6 +1,6 @@
 #Name of the program or the library
 
-NAME = serena_my_love
+NAME = ScavTrap
 
 #Compilers and flags
 
@@ -16,7 +16,7 @@ INCDIR = .
 
 SRCS =  main.cpp\
 	ClapTrap.cpp\
-	Serena.cpp
+	ScavTrap.cpp
 
 #OBJS
 

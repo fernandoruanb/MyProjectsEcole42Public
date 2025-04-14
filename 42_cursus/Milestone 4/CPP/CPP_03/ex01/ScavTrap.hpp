@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/13 14:18:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 21:03:15 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/13 20:56:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/13 20:56:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#ifndef SERENA_HPP
+# define SERENA_HPP
 
-int	main(void)
+# include "ClapTrap.hpp"
+
+class ScavTrap : public ClapTrap
 {
-	ScavTrap MyLittleRobot("Bob");
-	ScavTrap MySecondLittleRobot("James");
+	public:
+		ScavTrap();
+		ScavTrap(std::string name);
+		~ScavTrap();
+		ScavTrap(const ScavTrap &other);
+		ScavTrap& operator=(const ScavTrap &other);
+		void	guardGate(void);
+		std::string	get_name(void) const;
+};
+std::ostream& operator<<(std::ostream &out, const ScavTrap &other);
 
-	MyLittleRobot.attack("James");
-	MySecondLittleRobot.takeDamage(2);
-	MySecondLittleRobot.attack("Bob");
-	MyLittleRobot.takeDamage(3);
-	MyLittleRobot.beRepaired(2);
-	MyLittleRobot.guardGate();
-	return (0);
-}
+#endif /* SERENA_HPP */
