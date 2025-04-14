@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:11:42 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 11:02:40 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:13:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(void)
 	c5.attack("WALL-E");
 	c2.takeDamage(10);
 	c2.beRepaired(10);
-	c2.attack(c5.WhoAmI());
+	c2.attack(c5.get_clapTrap());
 	std::cout << c2 << std::endl;
 	return (0);
 }

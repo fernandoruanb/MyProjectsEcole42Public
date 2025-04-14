@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:53:56 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 09:22:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:02:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class DiamondTrap : virtual public ScavTrap, virtual public FragTrap
 		DiamondTrap& operator=(const DiamondTrap &other);
 		DiamondTrap(const DiamondTrap &other);
 		std::string	get_name(void) const;
+		void	whoAmI(void);
 };
 std::ostream& operator<<(std::ostream &out, const DiamondTrap &other);
 

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 11:13:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:04:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ClapTrap::attack(const std::string &target)
 	std::cout << "ClapTrap " << name << " Energy (" << this->energy << "/50)" << std::endl;
 }
 
-std::string	ClapTrap::WhoAmI(void) const
+std::string	ClapTrap::get_clapTrap(void) const
 {
 	return (name);
 }

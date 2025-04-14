@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 11:24:49 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:03:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	ClapTrap::get_status(void) const
 	return (this->energy);
 }
 
-std::string	ClapTrap::WhoAmI(void) const
+std::string	ClapTrap::get_clapTrap(void) const
 {
 	return (name);
 }
 
 std::ostream& operator<<(std::ostream &out, const ClapTrap &other)
 {
-	std::cout << "ClapTrap " << other.WhoAmI() << " energy: ";
+	std::cout << "ClapTrap " << other.get_clapTrap() << " energy: ";
 	out << other.get_status();
 	return (out);
 }

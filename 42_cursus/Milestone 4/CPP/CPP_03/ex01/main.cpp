@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:18:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 13:28:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:07:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ int	main(void)
 	a2.guardGate();
 	a1.attack("James");
 	c1.takeDamage(20);
-	c2.attack(a1.WhoAmI());
+	c2.attack(a1.get_clapTrap());
 	a1.takeDamage(10);
-	a1.attack(c2.WhoAmI());
+	a1.attack(c2.get_clapTrap());
 	c2.takeDamage(9);
 	c2.beRepaired(7);
-	c2.attack(a1.WhoAmI());
+	c2.attack(a1.get_clapTrap());
 	a1.takeDamage(30);
 	a1.beRepaired(20);
-	c2.attack(a1.WhoAmI());
+	c2.attack(a1.get_clapTrap());
 	a1.takeDamage(30);
-	a1.attack(c2.WhoAmI());
+	a1.attack(c2.get_clapTrap());
 	c2.takeDamage(100);
 	a1.guardGate();
 	return (0);

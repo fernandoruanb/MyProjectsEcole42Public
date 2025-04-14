@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:56:55 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 11:55:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:09:36 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ std::string	 ScavTrap::get_name(void) const
 
 std::ostream& operator<<(std::ostream &out, const ScavTrap &other)
 {
-	std::cout << 
 	out << other.get_name();
 	return (out);
 }
