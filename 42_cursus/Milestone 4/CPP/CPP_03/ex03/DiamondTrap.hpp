@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:53:56 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 20:55:17 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/13 21:39:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,19 @@
 # include <iostream>
 # include "ScavTrap.hpp"
 # include "ClapTrap.hpp"
+
+class DiamondTrap : public ClapTrap, public ScavTrap
+{
+	private:
+		std::string name;
+	public:
+		DiamondTrap();
+		DiamondTrap(std::string name);
+		~DiamondTrap();
+		DiamondTrap& operator=(const DiamondTrap &other);
+		DiamondTrap(const DiamondTrap &other);
+		std::string	get_name(void) const;
+};
+std::ostream& operator<<(std::ostream &out, const DiamondTrap &other);
 
 #endif /* DIAMONDTRAP_HPP */
