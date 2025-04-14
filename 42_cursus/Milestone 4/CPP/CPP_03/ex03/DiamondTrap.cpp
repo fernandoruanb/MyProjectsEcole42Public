@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 22:05:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 16:56:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 20:20:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ DiamondTrap::DiamondTrap(void) : ClapTrap("Bob_clap_name"), ScavTrap("Bob"), Fra
 	this->hit_points = FragTrap::hit_points;
 	this->attack_damage = FragTrap::attack_damage;
 	this->name = "Bob";
+}
+
+void	DiamondTrap::attack(const std::string &target)
+{
+	ScavTrap::attack(target);
 }
 
 DiamondTrap::~DiamondTrap(void)

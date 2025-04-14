@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:24:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 16:10:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:10:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(void)
 	ScavTrap a2("Defender 2");
 	ClapTrap b1("attacker");
 	DiamondTrap d1("Diamond Warrior");
+	DiamondTrap d2;
 
 	a1.guardGate();
 	a2.guardGate();
@@ -39,5 +40,6 @@ int	main(void)
 	d1.attack(c1.get_claptrap_name());
 	c1.takeDamage(100);
 	d1.whoAmI();
+	d2.whoAmI();
 	return (0);
 }
