@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:11:42 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 10:59:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:02:40 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int	main(void)
 	c2.takeDamage(10);
 	c2.beRepaired(10);
 	c2.attack(c5.WhoAmI());
+	std::cout << c2 << std::endl;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 09:48:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:24:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 ClapTrap::ClapTrap(void) : name("aleatory_claptrap"), hit_points(10), energy(10), attack_damage(0)
 {
-	std::cout << "ClapTrap Empty default constructor called" << std::endl;
+	std::cout << "ClapTrap Empty default constructor called for " << "aleatory_ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) : name(name), hit_points(10), energy(10), attack_damage(0)
 {
-	std::cout << "ClapTrap Default input constructor called" << std::endl;
+	std::cout << "ClapTrap Default input constructor called for " << name << " ClapTrap" << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "ClapTrap Destructor called" << std::endl;
+	std::cout << "ClapTrap Destructor called for " << name << " ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "ClapTrap Copy constructor called for " << name << " ClapTrap" << std::endl;
 	this->hit_points = other.hit_points;
 	this->energy = other.energy;
 	this->attack_damage = other.attack_damage;
@@ -41,15 +41,21 @@ int	ClapTrap::get_status(void) const
 	return (this->energy);
 }
 
+std::string	ClapTrap::WhoAmI(void) const
+{
+	return (name);
+}
+
 std::ostream& operator<<(std::ostream &out, const ClapTrap &other)
 {
+	std::cout << "ClapTrap " << other.WhoAmI() << " energy: ";
 	out << other.get_status();
 	return (out);
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other)
 {
-	std::cout << "Copy assignment called" << std::endl;
+	std::cout << "ClapTrap Copy assignment called for " << name << " ClapTrap" << std::endl;
 	if (this != &other)
 	{
 		this->hit_points = other.hit_points;

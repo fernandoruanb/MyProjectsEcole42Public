@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:47:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 19:44:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:32:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 FragTrap::FragTrap() : ClapTrap("Bob")
 {
-	std::cout << "FragTrap Default contructor called" << std::endl;
+	std::cout << "FragTrap Default contructor called for " << "Bob_aleatory" << std::endl;
 	energy = 100;
 	attack_damage = 30;
 	hit_points = 100;
@@ -22,7 +22,7 @@ FragTrap::FragTrap() : ClapTrap("Bob")
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
-	std::cout << "FragTrap input constructor called" << std::endl;
+	std::cout << "FragTrap input constructor called for " << name << " FragTrap" << std::endl;
 	energy = 100;
 	attack_damage = 30;
 	hit_points = 100;
@@ -30,12 +30,12 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 
 FragTrap::~FragTrap()
 {
-	std::cout << "FragTrap destructor called" << std::endl;
+	std::cout << "FragTrap destructor called for " << name << " FragTrap" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &other)
 {
-	std::cout << "FragTrap copy constructor called" << std::endl;
+	std::cout << "FragTrap copy constructor called for " << name << " FragTrap" << std::endl;
 	this->name = other.name;
 	this->energy = other.energy;
 	this->attack_damage = other.attack_damage;
@@ -49,7 +49,7 @@ std::string	FragTrap::get_name(void) const
 
 FragTrap& FragTrap::operator=(const FragTrap &other)
 {
-	std::cout << "FragTrap copy assignment constructor called" << std::endl;
+	std::cout << "FragTrap copy assignment constructor called for " << name << " FragTrap" << std::endl;
 	if (this != &other)
 	{
 		this->name = other.name;

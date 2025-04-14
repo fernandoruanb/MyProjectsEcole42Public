@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:32:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/11 20:17:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:52:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static int	check_index(std::string command)
 int	main(void)
 {
 	std::string	command;
+	std::string	cmd;
 	int	index;
 	PhoneBook	MyPhoneBook;
 
@@ -85,15 +86,15 @@ int	main(void)
 		else if (command == "SEARCH")
 		{
 			std::cout << "You need a specif contact (YES/NO)? ";
-			std::getline(std::cin, command);
-			if (command == "YES" || command == "yes")
+			std::getline(std::cin, cmd);
+			if (cmd == "YES" || cmd == "yes")
 			{
 				std::cout << std::endl;
 				std::cout << "Set the index of the contact: ";
-				std::getline(std::cin, command);
-				if (check_index(command))
+				std::getline(std::cin, cmd);
+				if (check_index(cmd))
 				{
-					index = ft_atoi(command) - 1;
+					index = ft_atoi(cmd) - 1;
 					MyPhoneBook.show_specif_contact(index);
 				}
 				else
@@ -102,7 +103,7 @@ int	main(void)
 					std::cerr << "The index needs to be a number, please!";
 				}
 			}
-			else if (command == "NO" || command == "no")
+			else if (cmd == "NO" || cmd == "no")
 				MyPhoneBook.show_all_contacts();
 		}
 		else if (command == "EXIT")

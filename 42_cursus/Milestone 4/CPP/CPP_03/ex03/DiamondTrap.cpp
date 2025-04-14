@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 22:05:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 09:35:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:38:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 DiamondTrap::DiamondTrap(void) : ClapTrap("Bob"), ScavTrap("Bob"), FragTrap("Bob")
 {
-	std::cout << "DiamondTrap empty default constructor called" << std::endl;
+	std::cout << "DiamondTrap empty default constructor called for " << "Bob_aleatory" << " DiamondTrap" << std::endl;
 	this->energy = ScavTrap::energy;
 	this->hit_points = FragTrap::hit_points;
 	this->attack_damage = FragTrap::attack_damage;
@@ -22,12 +22,12 @@ DiamondTrap::DiamondTrap(void) : ClapTrap("Bob"), ScavTrap("Bob"), FragTrap("Bob
 
 DiamondTrap::~DiamondTrap(void)
 {
-	std::cout << "DiamondTrap destructor called" << std::endl;
+	std::cout << "DiamondTrap destructor called for " << name << " DiamondTrap" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name), ScavTrap(name), FragTrap(name)
 {
-	std::cout << "DiamondTrap default contructor called" << std::endl;
+	std::cout << "DiamondTrap default contructor called for " << name << " DiamondTrap" << std::endl;
 	this->energy = ScavTrap::energy;
 	this->hit_points = FragTrap::hit_points;
 	this->attack_damage = FragTrap::attack_damage;
@@ -35,7 +35,7 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name), ScavTrap(name), Fra
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap &other)
 {
-	std::cout << "DiamondTrap copy assignment constructor called" << std::endl;
+	std::cout << "DiamondTrap copy assignment constructor called for " << name << " DiamondTrap" << std::endl;
 	if (this != &other)
 	{
 		this->name = other.name;
@@ -61,6 +61,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap &other)
 
 std::ostream& operator<<(std::ostream &out, const DiamondTrap &other)
 {
+	std::cout << "DiamondTrap " << other.WhoAmI() << " energy: ";
 	out << other.get_name();
 	return (out);
 }
