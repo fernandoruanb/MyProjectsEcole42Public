@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:53:56 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/13 21:39:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:22:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "ScavTrap.hpp"
 # include "ClapTrap.hpp"
 
-class DiamondTrap : public ClapTrap, public ScavTrap
+class DiamondTrap : public ClapTrap, public ScavTrap, public FragTrap
 {
 	private:
 		std::string name;
