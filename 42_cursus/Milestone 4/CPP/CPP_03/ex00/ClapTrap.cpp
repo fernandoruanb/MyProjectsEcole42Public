@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 09:58:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:00:13 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 ClapTrap::ClapTrap(void) : name("aleatory_claptrap"), hit_points(10), energy(10), attack_damage(0)
 {
-	std::cout << "Empty default constructor called" << std::endl;
+	std::cout << "Empty default constructor called for aleatory_claptrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) : name(name), hit_points(10), energy(10), attack_damage(0)
 {
-	std::cout << "Default input constructor called" << std::endl;
+	std::cout << "Default input name constructor called for " << name << " ClapTrap" << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Destructor constructor called" << std::endl;
+	std::cout << "ClapTrap Destructor constructor called for " << name << " ClapTrap" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "ClapTrap Copy constructor called for " << this->name << " ClapTrap" << std::endl;
 	this->hit_points = other.hit_points;
 	this->energy = other.energy;
 	this->attack_damage = other.attack_damage;
@@ -49,7 +49,7 @@ std::ostream& operator<<(std::ostream &out, const ClapTrap &other)
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other)
 {
-	std::cout << "Copy assignment called" << std::endl;
+	std::cout << "ClapTrap Copy assignment called for " << name << " ClapTrap" << std::endl;
 	if (this != &other)
 	{
 		this->hit_points = other.hit_points;
@@ -98,6 +98,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	{
 		std::cout << std::endl;
 		std::cout << "ClapTrap " << name << " hit_points is full" << std::endl;
+		std::cout << "ClapTrap doesn't need to repair itself" << std::endl;
 		return ;
 	}
 	else if ((this->hit_points + amount) >= 10)
@@ -120,6 +121,11 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	std::cout << "ClapTrap " << name << " Hit Points (" << this->hit_points << "/10)" << std::endl;
 	std::cout << "ClapTrap " << name << " Energy (" << this->energy << "/10)" << std::endl;
 	std::cout << std::endl;
+}
+
+std::string	ClapTrap::WhoAmI(void) const
+{
+	return (name);
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 20:59:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 09:31:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:56:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ class ClapTrap
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 		int	get_status(void) const;
+		std::string WhoAmI(void) const;
 };
 std::ostream& operator<<(std::ostream &out, const ClapTrap &other);
 

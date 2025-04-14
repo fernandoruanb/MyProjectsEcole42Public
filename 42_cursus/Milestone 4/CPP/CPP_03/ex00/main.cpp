@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:11:42 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 10:27:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:59:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,23 @@
 
 int	main(void)
 {
-	ClapTrap MyLittleClapTrap("Bob");
-	ClapTrap MySecondLittleClapTrap("WALL-E");
+	ClapTrap c1("Bob");
+	ClapTrap c2("WALL-E");
+	ClapTrap c3("James");
+	ClapTrap c4("Optimus");
+	ClapTrap c5;
+	ClapTrap c6(c1);
 
-	MyLittleClapTrap.attack("WALL-E");
-	MySecondLittleClapTrap.takeDamage(9);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(8);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.takeDamage(9);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.beRepaired(2);
-	MySecondLittleClapTrap.attack("Bob");
-	MySecondLittleClapTrap.attack("Bob");
-	MyLittleClapTrap.takeDamage(2);
-	MyLittleClapTrap.takeDamage(2);
-	MySecondLittleClapTrap.beRepaired(1);
-	MyLittleClapTrap.takeDamage(2);
-	MyLittleClapTrap.beRepaired(2);
+	c6 = c5;
+	c1.attack("James");
+	c3.takeDamage(7);
+	c3.beRepaired(4);
+	c3.attack("Bob");
+	c1.takeDamage(9);
+	c1.beRepaired(10);
+	c5.attack("WALL-E");
+	c2.takeDamage(10);
+	c2.beRepaired(10);
+	c2.attack(c5.WhoAmI());
 	return (0);
 }
