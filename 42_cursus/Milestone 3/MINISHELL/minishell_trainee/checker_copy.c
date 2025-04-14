@@ -6,11 +6,11 @@
 /*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:08:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/02/07 10:51:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:11:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "includes/minishell.h"
 
 // typedef struct s_utils
 // {
@@ -216,7 +216,7 @@ void	token_print(t_token *token)
 
 #pragma region Fernando
 
-#include "../../includes/minishell.h"
+#include "includes/minishell.h"
 
 typedef struct s_utils
 {
