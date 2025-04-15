@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:49:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/15 15:13:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:43:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Vehicle::Vehicle(void) : model("aleatory_vehicle") {}
 
-Vehicle::Vehicle(std::string model) : model(model) {}
+Vehicle::Vehicle(const std::string model) : model(model) {}
 
 Vehicle::~Vehicle(void) {}
 
