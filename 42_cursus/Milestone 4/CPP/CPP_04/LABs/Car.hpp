@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Vehicle.hpp                                        :+:      :+:    :+:   */
+/*   Car.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 13:10:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/15 15:15:23 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/15 14:50:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/15 15:16:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VEHICLE_HPP
-# define VEHICLE_HPP
+#include "Vehicle.hpp"
 
-class Vehicle
+class Car : public Vehicle
 {
-	protected:
+	private:
 		std::string model;
 	public:
-		Vehicle(void);
-		~Vehicle(void);
-		Vehicle(const Vehicle &other);
-		Vehicle& operator=(const Vehicle &other);
-		virtual void startEngine(void) const = 0;
-		virtual void stopEngine(void) const = 0;
-		virtual void honk(void) const = 0;
-		std::string get_model(void) const;
+		Car(void);
+		Car(std::string model);
+		~Car(void);
+		Car(const Car &other);
+		Car& operator=(const Car &other);
+		void	startEngine(void) const override;
+		void	stopEngine(void) const override;
+		void	honk(void) const override;
+		std::string get_car_model(void) const;
 };
-std::ostream& operator<<(std::ostream &out, const Vehicle &other);
-
-#endif /* VEHICLE_HPP */
+std::ostream& operator<<(std::ostream &out, const Car &other);
