@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:07:53 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 13:40:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:15:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ Dog::Dog(const Dog &other)
 {
 	std::cout << "Copy constructor called for " << type << " Dog" << std::endl;
 	this->type = other.type;
+	brain = new Brain(*other.brain);
 }
 
 Dog& Dog::operator=(const Dog &other)
@@ -42,6 +43,8 @@ Dog& Dog::operator=(const Dog &other)
 	if (this != &other)
 	{
 		this->type = other.type;
+		delete(this->brain);
+		brain = new Brain(*other.brain);
 	}
 	return (*this);
 }
