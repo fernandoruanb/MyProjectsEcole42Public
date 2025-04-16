@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 10:28:49 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/08 20:38:46 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:03:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void	HumanB::setWeapon(Weapon* weapon)
 
 void	HumanB::attack(void) const
 {
+	if (!weapon)
+	{
+		std::cout << std::endl;
+		std::cout << "🧔HumanB doesn't have a 🔨weapon to attack!" << std::endl;
+		return ;
+	}
 	std::cout << std::endl;
 	std::cout << "🧔" << name << " attacks with their " << "🔨" << weapon->getType() << std::endl;
 }
