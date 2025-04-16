@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:56:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 12:47:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:11:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	main(void)
 	Animal* c2 = new Cat;
 	Animal* d1 = new Dog("gold dog");
 	Animal* d2 = new Dog;
-	WrongCat* e1 = new WrongCat("false cat");
-	WrongCat* e2 = new WrongCat;
+	WrongAnimal* e1 = new WrongCat("false cat");
+	WrongAnimal* e2 = new WrongCat;
 
 	std::cout << std::endl;
 	c1->makeSound();
@@ -32,6 +32,9 @@ int	main(void)
 	d2->makeSound();
 	e1->makeSound();
 	e2->makeSound();
+	std::cout << std::endl;
+//	c1->brain.add_new_idea();
+//	d1->brain.add_new_idea();
 	std::cout << std::endl;
 	delete(c1);
 	delete(c2);

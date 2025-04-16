@@ -1,6 +1,6 @@
 #Name of the program or the library
 
-NAME = Animal
+NAME = Brain
 
 #Compilers and flags
 

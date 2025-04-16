@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 09:35:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 13:35:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:41:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 Cat::Cat(void) : type("aleatory_cat")
 {
 	std::cout << "Cat Empty default constructor called for aleatory_cat Cat" << std::endl;
-	brain = new Brain alpha;
+	brain = new Brain;
 }
 
 Cat::Cat(std::string type) : type(type)
 {
 	std::cout << "Cat input default constructor called for " << type << " Cat" << std::endl;
-	brain = new Brain alpha;
+	brain = new Brain;
 }
 
 Cat::~Cat(void)

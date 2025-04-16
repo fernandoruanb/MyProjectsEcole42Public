@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:13:58 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 13:38:35 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:00:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 WrongCat::WrongCat(void) : type("aleatory_wrong_cat")
 {
 	std::cout << "WrongCat empty default constructor WrongCat called for aleatory_wrong_cat" << std::endl;
-	brain = new Brain alpha;
+	brain = new Brain;
 }
 
 WrongCat::WrongCat(std::string type) : type(type)
 {
 	std::cout << "WrongCat default input constructor called for " << type << " WrongCat" << std::endl;
-	brain = new Brain alpha;
+	brain = new Brain;
 }
 
 WrongCat::~WrongCat(void)

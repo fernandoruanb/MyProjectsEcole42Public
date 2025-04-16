@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 13:17:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 13:34:45 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:05:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,15 @@ Brain::~Brain(void)
 
 Brain::Brain(const Brain &other)
 {
+	int	index;
+
+	index = 0;
 	std::cout << "Copy Brain constructor called" << std::endl;
-	this->ideas = other.ideas;
+	while (index < 100)
+	{
+		ideas[index] = other.ideas[index];
+		index++;
+	}
 	this->total = other.total;
 }
 
@@ -41,18 +48,26 @@ void	Brain::add_new_idea(void)
 	if (ideas[total].empty())
 	{
 		std::cin.clear();
-		clearerr(stdin);
 		return ;
 	}
+	if (std::cin.eof())
+		return ;
 	total++;
 }
 
 Brain& Brain::operator=(const Brain &other)
 {
+	int	index;
+
+	index = 0;
 	std::cout << "Copy assignment called" << std::endl;
 	if (this != &other)
 	{
-		this->ideas = other.ideas;
+		while (index < 100)
+		{
+			ideas[index] = other.ideas[index];
+			index++;
+		}
 		this->total = other.total;
 	}
 	return (*this);

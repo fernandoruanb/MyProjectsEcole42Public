@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:07:53 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 13:35:40 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:40:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 Dog::Dog(void) : type("aleatory_dog")
 {
 	std::cout << "Dog empty constructor called for aleatory_dog Dog" << std::endl;
-	brain = new Brain alpha;
+	brain = new Brain;
 }
 
 Dog::Dog(std::string type) : type(type)
 {
 	std::cout << "Dog default input constructor called for " << type << " Dog" << std::endl;
-	brain = new Brain alpha;
+	brain = new Brain;
 }
 
 Dog::~Dog(void)
