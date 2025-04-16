@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:29:37 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/15 18:39:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:16:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ Animal::Animal(const Animal &other)
 std::string Animal::get_Animal_type(void) const
 {
 	return (type);
+}
+
+void	Animal::makeSound(void) const
+{
+	std::cout << "A loud, clear sound by an animal" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream &out, const Animal &other)

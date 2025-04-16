@@ -6,12 +6,12 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 20:56:43 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 20:26:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:20:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERENA_HPP
-# define SERENA_HPP
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
 
 # include "ClapTrap.hpp"
 
@@ -29,4 +29,4 @@ class ScavTrap : virtual public ClapTrap
 };
 std::ostream& operator<<(std::ostream &out, const ScavTrap &other);
 
-#endif /* SERENA_HPP */
+#endif /* SCAVTRAP_HPP */
