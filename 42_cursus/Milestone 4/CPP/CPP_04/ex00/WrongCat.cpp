@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:13:58 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 11:29:52 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:01:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ WrongCat& operator=(const WrongCat &other)
 		this->type = other.type;
 	}
 	return (*this);
+}
+
+void	WrongCat::makeSound(void) const
+{
+	std::cout << "WrongCat: Wooooooooooooooooooof" << std::endl;
 }
 
 std::string WrongCat::get_WrongCat_type(void) const

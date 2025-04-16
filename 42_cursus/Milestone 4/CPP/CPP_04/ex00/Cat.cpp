@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 09:35:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 09:50:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:01:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ Cat& Cat::operator=(const Cat &other)
 
 void	makeSound(void) const
 {
-	std::cout << "Meoooowwwww!!!" << std::endl;
+	std::cout << "Cat: Meoooowwwww!!!" << std::endl;
 }

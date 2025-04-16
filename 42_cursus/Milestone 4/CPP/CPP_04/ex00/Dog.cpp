@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:07:53 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 10:24:43 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:01:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ std::ostream& operator<<(std::ostream &out, const Dog &other)
 
 void	Dog::makeSound(void) const
 {
-	std::cout << "Wooooof" << std::endl;
+	std::cout << "Dog: Wooooof" << std::endl;
 }
