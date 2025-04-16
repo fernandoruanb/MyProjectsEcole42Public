@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 18:25:15 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 19:32:32 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/16 11:07:08 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/16 14:00:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
+# include "WrongAnimal.hpp"
 # include <iostream>
 
-class Animal
+class WrongCat : public WrongAnimal
 {
 	private:
 		std::string type;
+		Brain* brain;
 	public:
-		Animal(void);
-		Animal(std::string type);
-		virtual ~Animal(void);
-		virtual void makeSound(void) const = 0;
-		Animal(const Animal &other);
-		std::string get_Animal_type(void) const;
-		Animal& operator=(const Animal &other);
+		WrongCat(void);
+		WrongCat(std::string type);
+		~WrongCat(void);
+		WrongCat(const WrongCat &other);
+		void	makeSound(void) const;
+		std::string get_WrongCat_type(void) const;
+		WrongCat& operator=(const WrongCat &other);
 };
-std::ostream& operator<<(std::ostream &out, const Animal &other);
+std::ostream& operator<<(std::ostream &out, const WrongCat &other);
 
-#endif /* ANIMAL_HPP */
+#endif /* WRONGCAT_HPP */
