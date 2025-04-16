@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 09:35:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 16:17:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:50:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ Cat::Cat(const Cat &other)
 	std::cout << "Copy constructor called for " << type << " Cat" << std::endl;
 	this->type = other.type;
 	brain = new Brain(*other.brain);
+}
+
+Brain& Cat::get_cat_brain(void) const
+{
+	return (*brain);
 }
 
 Cat& Cat::operator=(const Cat &other)

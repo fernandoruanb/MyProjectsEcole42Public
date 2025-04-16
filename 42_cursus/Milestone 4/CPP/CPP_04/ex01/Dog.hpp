@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 09:51:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 13:35:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 16:44:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class Dog : public Animal
 		Dog(std::string type);
 		~Dog(void);
 		Dog(const Dog &other);
+		Brain& get_brain(void) const;
 		std::string get_dog_type(void) const;
 		void	makeSound(void) const;
 		Dog& operator=(const Dog &other);
