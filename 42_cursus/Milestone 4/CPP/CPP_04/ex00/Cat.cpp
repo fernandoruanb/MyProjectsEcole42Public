@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 09:35:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 12:01:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:30:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Cat::Cat(void) : type("aleatory_cat")
 
 Cat::Cat(std::string type) : type(type)
 {
-	std::cout << "Cat input default constructor called for " << type << " Cat" < std::endl;
+	std::cout << "Cat input default constructor called for " << type << " Cat" << std::endl;
 }
 
 Cat::~Cat(void)
@@ -30,6 +30,7 @@ Cat::~Cat(void)
 Cat::Cat(const Cat &other)
 {
 	std::cout << "Copy constructor called for " << type << " Cat" << std::endl;
+	this->type = other.type;
 }
 
 Cat& Cat::operator=(const Cat &other)
@@ -42,7 +43,18 @@ Cat& Cat::operator=(const Cat &other)
 	return (*this);
 }
 
-void	makeSound(void) const
+std::string Cat::get_cat_type(void) const
+{
+	return (type);
+}
+
+std::ostream& operator<<(std::ostream &out, const Cat &other)
+{
+	out << other.get_cat_type() << std::endl;
+	return (out);
+}
+
+void	Cat::makeSound(void) const
 {
 	std::cout << "Cat: Meoooowwwww!!!" << std::endl;
 }

@@ -6,12 +6,15 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:56:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 12:00:09 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:02:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 #include "WrongAnimal.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
+#include "WrongCat.hpp"
 
 int	main(void)
 {

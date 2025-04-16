@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:13:58 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 12:01:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:31:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ WrongCat::WrongCat(void) : type("aleatory_wrong_cat")
 	std::cout << "WrongCat empty default constructor WrongCat called for aleatory_wrong_cat" << std::endl;
 }
 
-WrongCat::WrongCat(std::string type) : type(type);
+WrongCat::WrongCat(std::string type) : type(type)
 {
 	std::cout << "WrongCat default input constructor called for " << type << " WrongCat" << std::endl;
 }
@@ -33,9 +33,9 @@ WrongCat::WrongCat(const WrongCat &other)
 	this->type = other.type;
 }
 
-WrongCat& operator=(const WrongCat &other)
+WrongCat& WrongCat::operator=(const WrongCat &other)
 {
-	std::cout << "WrongCat copy assignment for " << type << std::endl;
+	std::cout << "WrongCat copy assignment for " << type << " WrongCat" << std::endl;
 	if (this != &other)
 	{
 		this->type = other.type;

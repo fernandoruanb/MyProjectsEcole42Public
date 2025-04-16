@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:07:53 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 12:01:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:14:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Dog::~Dog(void)
 	std::cout << "Dog Destructor called for " << type << " Dog" << std::endl;
 }
 
-Dog::Dog(const std::string &other)
+Dog::Dog(const Dog &other)
 {
 	std::cout << "Copy constructor called for " << type << " Dog" << std::endl;
 	this->type = other.type;
@@ -43,14 +43,14 @@ Dog& Dog::operator=(const Dog &other)
 	return (*this);
 }
 
-std::string get_dog_type(void) const
+std::string Dog::get_dog_type(void) const
 {
 	return (type);
 }
 
 std::ostream& operator<<(std::ostream &out, const Dog &other)
 {
-	out << get_dog_type() << std::endl;
+	out << other.get_dog_type() << std::endl;
 	return (out);
 }
 
