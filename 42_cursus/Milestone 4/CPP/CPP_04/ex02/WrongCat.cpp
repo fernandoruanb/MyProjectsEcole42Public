@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:13:58 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 14:00:07 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/17 09:39:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void	WrongCat::makeSound(void) const
 	std::cout << "WrongCat: Wooooooooooooooooooof" << std::endl;
 }
 
-std::string WrongCat::get_WrongCat_type(void) const
+std::string WrongCat::getType(void) const
 {
 	return (type);
 }
 
 std::ostream& operator<<(std::ostream &out, const WrongCat &other)
 {
-	out << other.get_WrongCat_type() << std::endl;
+	out << other.getType() << std::endl;
 	return (out);
 }

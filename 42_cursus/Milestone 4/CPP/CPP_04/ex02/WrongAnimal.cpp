@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:31:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 14:03:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/17 09:41:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal &other)
 	this->type = other.type;
 }
 
-std::string WrongAnimal::wrongType(void) const
+std::string WrongAnimal::getType(void) const
 {
 	return (type);
 }
@@ -44,7 +44,7 @@ void	WrongAnimal::makeSound(void) const
 
 std::ostream& operator<<(std::ostream &out, const WrongAnimal& other)
 {
-	out << other.wrongType() << std::endl;
+	out << other.getType() << std::endl;
 	return (out);
 }
 

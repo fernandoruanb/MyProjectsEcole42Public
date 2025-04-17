@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:29:37 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 14:02:50 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/17 09:40:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Animal::Animal(const Animal &other)
 	this->type = other.type;
 }
 
-std::string Animal::get_Animal_type(void) const
+std::string Animal::getType(void) const
 {
 	return (type);
 }
@@ -44,7 +44,7 @@ void	Animal::makeSound(void) const
 
 std::ostream& operator<<(std::ostream &out, const Animal &other)
 {
-	out << other.get_Animal_type() << std::endl;
+	out << other.getType() << std::endl;
 	return (out);
 }
 
