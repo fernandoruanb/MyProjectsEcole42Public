@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:56:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/17 10:03:54 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/17 10:17:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	main(void)
 	delete(meta);
 	delete(j);
 	delete(i);
+	delete(a1);
 	return (0);
 }
