@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 09:35:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 12:30:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/17 08:50:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ Cat& Cat::operator=(const Cat &other)
 	return (*this);
 }
 
-std::string Cat::get_cat_type(void) const
+std::string Cat::getType(void) const
 {
 	return (type);
 }
 
 std::ostream& operator<<(std::ostream &out, const Cat &other)
 {
-	out << other.get_cat_type() << std::endl;
+	out << other.getType() << std::endl;
 	return (out);
 }
 

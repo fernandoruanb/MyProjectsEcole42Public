@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 09:17:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 12:27:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/17 08:47:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Cat : public Animal
 		Cat(std::string type);
 		~Cat(void);
 		Cat(const Cat &other);
-		std::string get_cat_type(void) const;
+		std::string getType(void) const;
 		void	makeSound(void) const;
 		Cat& operator=(const Cat &other);
 };

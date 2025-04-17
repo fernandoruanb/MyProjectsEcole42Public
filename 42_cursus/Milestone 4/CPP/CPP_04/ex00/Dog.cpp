@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:07:53 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/16 12:14:54 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/17 08:50:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ Dog& Dog::operator=(const Dog &other)
 	return (*this);
 }
 
-std::string Dog::get_dog_type(void) const
+std::string Dog::getType(void) const
 {
 	return (type);
 }
 
 std::ostream& operator<<(std::ostream &out, const Dog &other)
 {
-	out << other.get_dog_type() << std::endl;
+	out << other.getType() << std::endl;
 	return (out);
 }
 
