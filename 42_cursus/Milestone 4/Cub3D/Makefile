@@ -21,7 +21,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 #SRCS
 
-SRCS =  $(SRCDIR)/srcs/cub3d/main.c
+SRCS =  $(SRCDIR)/srcs/cub3d/main.c\
+	$(SRCDIR)/srcs/validation/check_cub.c
 
 #OBJS
 

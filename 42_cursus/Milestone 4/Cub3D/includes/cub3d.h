@@ -13,12 +13,15 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "../libft/libft.h"
+# include "../libft/libft.h"
+# include <fcntl.h>
 
 typedef struct s_game
 {
 	int	player_x;
 	int	player_y;
 }	t_game;
+
+int	check_cub(const char *filename);
 
 #endif /* CUB3D_H */
