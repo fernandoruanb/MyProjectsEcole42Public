@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   init_all_things.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:21:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/18 20:21:08 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/18 22:54:02 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/18 22:54:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	init_game(const char *filename, t_game *game)
+void	init_all_things(t_game *game)
 {
-	init_all_things(game);
-	game->maps = get_map(filename);
-	return (1);
+	game->mlx = NULL;
+	game->maps = NULL;
+	game->win = NULL;
 }
+
+

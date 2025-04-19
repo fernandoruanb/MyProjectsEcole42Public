@@ -24,5 +24,6 @@ int	main(int argc, char **argv)
 	{
 		return (ft_putendl_fd_1("Init Error", 2));
 	}
+	show_map(&game);
 	return (free_game(&game));
 }

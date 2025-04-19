@@ -30,5 +30,7 @@ int		free_game(t_game *game);
 int		init_game(const char *filename, t_game *game);
 char	**get_map(const char *filename);
 int		free_game(t_game *game);
+void	show_map(t_game *game);
+void	init_all_things(t_game *game);
 
 #endif /* CUB3D_H */
