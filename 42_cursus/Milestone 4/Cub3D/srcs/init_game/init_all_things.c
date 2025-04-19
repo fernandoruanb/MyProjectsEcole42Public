@@ -18,5 +18,3 @@ void	init_all_things(t_game *game)
 	game->maps = NULL;
 	game->win = NULL;
 }
-
-
