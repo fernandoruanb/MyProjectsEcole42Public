@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 10:35:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 15:16:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:47:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static int	get_the_base(int index, t_game *game)
 		game->true_game_map[pos] = ft_strdup(game->maps[index]);
 		if (!game->true_game_map[pos])
 			return (clear_the_true_map(game, index));
-		ft_printf("[%i]: %s\n", index, game->true_game_map[pos]);
 		pos++;
 		index++;
 	}

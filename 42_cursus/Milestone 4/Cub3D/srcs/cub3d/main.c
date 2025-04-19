@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:29:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/18 18:29:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:46:46 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int argc, char **argv)
 	{
 		return (ft_putendl_fd_1("Init Error", 2));
 	}
-	show_map(&game);
 	show_textures(&game);
 	return (free_game(&game));
 }
