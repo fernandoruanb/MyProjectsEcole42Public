@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 10:35:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 15:47:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/19 20:49:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static int	get_lines(int index, t_game *game)
 			|| game->maps[index][0] == 'W'
 			|| game->maps[index][0] == 'S'
 			|| game->maps[index][0] == 'C'
-			|| game->maps[index][0] == 'E'
-			|| game->maps[index][0] == '\n')
+			|| game->maps[index][0] == 'E')
 			index++;
 		else
 		{

@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_map.c                                     :+:      :+:    :+:   */
+/*   check_true_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 15:53:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 20:26:10 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/19 19:39:09 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/19 20:46:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	check_textures(t_game *game)
+static int	check_newlines(t_game *game)
 {
-	if (is_anything_null(game))
-		return (ft_putendl_fd_0("Anything null found!", 2));
-	if (!check_colours(game))
-		return (ft_putendl_fd_0("RGB Colours Error!", 2));
+	int	index;
+
+	index = 0;
+	while (game->true_game_map[index] != NULL)
+	{
+		if (game->true_game_map[index]
+			&& (game->true_game_map[index][0] == '\n'
+			|| game->true_game_map[index][0] == '\t'))
+			return (0);
+		index++;
+	}
 	return (1);
 }
 
-int	is_valid_map(t_game *game)
+int	check_true_map(t_game *game)
 {
-	if (!check_textures(game))
-		return (ft_putendl_fd_0("Invalid texture detected", 2));
-	if (!check_true_map(game))
-		return (0);
-	/*if (!check_elements(game))
-		return (0);*/
+	if (!check_newlines(game))
+		return (ft_putendl_fd_0("Newlines or Tabs found on map", 2));
 	return (1);
 }
