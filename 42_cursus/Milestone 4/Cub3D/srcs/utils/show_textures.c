@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   show_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 12:08:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 15:34:41 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/19 19:32:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/19 19:32:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
- 
+
 #include "../../includes/cub3d.h"
 
 static void	show_true_game_map(t_game *game)

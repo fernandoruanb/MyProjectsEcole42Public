@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:34:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 18:51:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/19 19:30:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int	check_is_only_numbers(char **colours)
 	while (colours[index] != NULL)
 	{
 		count = 0;
-		if (!ft_isdigit(colours[index][count]))
+		if (!ft_isdigit(colours[index][count])
+			&& colours[index][count] != '-')
 			return (0);
 		index++;
 	}
@@ -39,9 +40,8 @@ static int	check_rgb(char **colours)
 	n1 = ft_atoi(colours[0]);
 	n2 = ft_atoi(colours[1]);
 	n3 = ft_atoi(colours[2]);
-	free_splits(NULL, colours, NULL, NULL);
 	if (n1 < 0 || n1 > 255 || n2 < 0 || n2 > 255 || n3 < 0 || n3 > 255)
-		return (0);
+		return (ft_putendl_fd_0("Invalid range of RGB", 2));
 	return (1);
 }
 
@@ -52,8 +52,24 @@ static int	check_length_colours(char **colours)
 	length = 0;
 	while (colours[length] != NULL)
 		length++;
-	if (length > 3 || length < 3)
+	if (length != 3)
+		return (ft_putendl_fd_0("Invalid length RGB", 2));
+	return (1);
+}
+
+static int	check_all(char **colours)
+{
+	if (!check_length_colours(colours))
+	{
+		free_splits(NULL, colours, NULL, NULL);
 		return (0);
+	}
+	if (!check_rgb(colours))
+	{
+		free_splits(NULL, colours, NULL, NULL);
+		return (0);
+	}
+	free_splits(NULL, colours, NULL, NULL);
 	return (1);
 }
 
@@ -64,22 +80,12 @@ int	check_colours(t_game *game)
 	colours = ft_split(game->floor_colours, ',');
 	if (!colours)
 		return (0);
-	if (!check_length_colours(colours))
-	{
-		free_splits(NULL, colours, NULL, NULL);
-		return (0);
-	}
-	if (!check_rgb(colours))
+	if (!check_all(colours))
 		return (0);
 	colours = ft_split(game->ceiling_colours, ',');
 	if (!colours)
 		return (0);
-	if (!check_length_colours(colours))
-	{
-		free_splits(NULL, colours, NULL, NULL);
-		return (0);
-	}
-	if (!check_rgb(colours))
+	if (!check_all(colours))
 		return (0);
 	return (1);
 }

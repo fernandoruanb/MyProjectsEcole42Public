@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 15:53:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 18:40:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/19 19:02:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_textures(t_game *game)
 {
 	if (is_anything_null(game))
-		return (0);
+		return (ft_putendl_fd_0("Anything null found!", 2));
 	if (!check_colours(game))
 		return (0);
 	return (1);

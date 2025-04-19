@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 20:21:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 15:53:17 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/19 19:21:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	init_game(const char *filename, t_game *game)
 {
 	init_all_things(game);
 	game->maps = get_map(filename);
-	if (!game->maps || !is_valid_map(game))
+	if (!game->maps || !get_map_textures(game))
 		return (0);
-	if (!get_map_textures(game))
+	if (!is_valid_map(game))
 		return (0);
 	return (1);
 }
