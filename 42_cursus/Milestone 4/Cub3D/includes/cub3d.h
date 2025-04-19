@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:31:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/18 18:31:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/19 18:45:42 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,9 @@ int	get_floor_colours(t_game *game);
 int	get_ceiling_colours(t_game *game);
 int	get_true_map(t_game *game);
 void	show_textures(t_game *game);
+int	is_anything_null(t_game *game);
+int	is_valid_map(t_game *game);
+int	is_anything_null(t_game *game);
+int	check_colours(t_game *game);
 
 #endif /* CUB3D_H */

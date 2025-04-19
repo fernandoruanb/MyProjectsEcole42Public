@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   is_valid_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:21:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 15:53:17 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/19 15:53:26 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/19 18:40:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	init_game(const char *filename, t_game *game)
+static int	check_textures(t_game *game)
 {
-	init_all_things(game);
-	game->maps = get_map(filename);
-	if (!game->maps || !is_valid_map(game))
+	if (is_anything_null(game))
 		return (0);
-	if (!get_map_textures(game))
+	if (!check_colours(game))
 		return (0);
+	return (1);
+}
+
+int	is_valid_map(t_game *game)
+{
+	if (!check_textures(game))
+		return (ft_putendl_fd_0("Invalid texture detected", 2));
+	/*if (!check_true_map(game))
+		return (0);
+	if (!check_elements(game))
+		return (0);*/
 	return (1);
 }
