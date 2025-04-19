@@ -6,11 +6,25 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 20:26:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/18 20:26:35 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/19 14:05:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static void	free_true_game_map(t_game *game)
+{
+	int	index;
+
+	index = 0;
+	while (game->true_game_map[index] != NULL)
+	{
+		free(game->true_game_map[index]);
+		index++;
+	}
+	free(game->true_game_map);
+	game->true_game_map = NULL;
+}
 
 static void	free_map(t_game *game)
 {
@@ -54,5 +68,7 @@ int	free_game(t_game *game)
 	if (game->maps)
 		free_map(game);
 	clear_all_textures(game);
+	if (game->true_game_map)
+		free_true_game_map(game);
 	return (0);
 }

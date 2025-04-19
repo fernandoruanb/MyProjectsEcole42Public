@@ -6,11 +6,23 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 12:08:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 12:08:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/19 15:34:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
  
 #include "../../includes/cub3d.h"
+
+static void	show_true_game_map(t_game *game)
+{
+	int	index;
+
+	index = 0;
+	while (game->true_game_map[index] != NULL)
+	{
+		ft_printf("[%i]: %s\n", index, game->true_game_map[index]);
+		index++;
+	}
+}
 
 void	show_textures(t_game *game)
 {
@@ -27,5 +39,5 @@ void	show_textures(t_game *game)
 	if (game->ceiling_colours)
 		ft_printf("%s\n", game->ceiling_colours);
 	if (game->true_game_map)
-		ft_printf("%s\n", game->true_game_map);
+		show_true_game_map(game);
 }

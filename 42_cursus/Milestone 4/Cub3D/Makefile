@@ -12,7 +12,7 @@ MLXFLAGS = -L $(MLXDIR) -lmlx -lXext -lX11 -lm
 
 SRCDIR = srcs
 INCDIR = includes
-MLXDIR = ../minilibx-linux
+MLXDIR = minilibx-linux
 LIBFT_DIR = libft
 
 # LIBFT
