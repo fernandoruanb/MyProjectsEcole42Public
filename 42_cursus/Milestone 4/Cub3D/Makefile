@@ -22,7 +22,10 @@ LIBFT = $(LIBFT_DIR)/libft.a
 #SRCS
 
 SRCS =  $(SRCDIR)/srcs/cub3d/main.c\
-	$(SRCDIR)/srcs/validation/check_cub.c
+	$(SRCDIR)/srcs/validation/check_cub.c\
+	$(SRCDIR)/srcs/init_game/init_game.c\
+	$(SRCDIR)/srcs/init_game/get_map.c\
+	$(SRCDIR)/srcs/free_game/free_game.c
 
 #OBJS
 

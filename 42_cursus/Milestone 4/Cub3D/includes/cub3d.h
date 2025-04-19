@@ -9,7 +9,7 @@
 /*   Updated: 2025/04/18 18:31:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
- 
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -18,10 +18,17 @@
 
 typedef struct s_game
 {
-	int	player_x;
-	int	player_y;
+	void	*mlx;
+	void	*win;
+	int		player_x;
+	int		player_y;
+	char	**maps;
 }	t_game;
 
-int	check_cub(const char *filename);
+int		check_cub(const char *filename);
+int		free_game(t_game *game);
+int		init_game(const char *filename, t_game *game);
+char	**get_map(const char *filename);
+int		free_game(t_game *game);
 
 #endif /* CUB3D_H */

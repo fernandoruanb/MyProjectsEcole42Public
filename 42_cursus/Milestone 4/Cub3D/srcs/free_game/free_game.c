@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 18:29:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/18 18:29:29 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/18 20:26:35 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/18 20:26:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+static void	free_map(t_game *game)
 {
-	t_game	game;
+	int	index;
 
-	if (argc < 2)
-		return (ft_putendl_fd_1("Error", 2));
-	if (!check_cub(argv[1]))
-		return (ft_putendl_fd_1("Directory/Empty file/.cub Error", 2));
-	if (!init_game(argv[1], &game))
+	index = 0;
+	while (game->maps[index] != NULL)
 	{
-		return (ft_putendl_fd_1("Init Error", 2));
+		free(game->maps[index]);
+		index++;
 	}
-	return (free_game(&game));
+	free(game->maps);
+}
+
+int	free_game(t_game *game)
+{
+	if (!game)
+		return (0);
+	if (game->maps)
+		free_map(game);
+	return (1);
 }

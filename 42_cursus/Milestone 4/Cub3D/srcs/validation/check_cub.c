@@ -14,7 +14,7 @@
 
 static int	check_content(const char *filename)
 {
-	int	fd;
+	int		fd;
 	char	buffer[1024];
 	ssize_t	bytes_read;
 
