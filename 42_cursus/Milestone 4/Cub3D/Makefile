@@ -10,8 +10,8 @@ MLXFLAGS = -L $(MLXDIR) -lmlx -lXext -lX11 -lm
 
 #Directories
 
-SRCDIR = .
-INCDIR = .
+SRCDIR = srcs
+INCDIR = includes
 MLXDIR = ../minilibx-linux
 LIBFT_DIR = libft
 
@@ -21,13 +21,22 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 #SRCS
 
-SRCS =  $(SRCDIR)/srcs/cub3d/main.c\
-	$(SRCDIR)/srcs/validation/check_cub.c\
-	$(SRCDIR)/srcs/init_game/init_game.c\
-	$(SRCDIR)/srcs/init_game/get_map.c\
-	$(SRCDIR)/srcs/free_game/free_game.c\
-	$(SRCDIR)/srcs/init_game/init_all_things.c\
-	$(SRCDIR)/srcs/utils/show_map.c
+SRCS =  $(SRCDIR)/cub3d/main.c\
+	$(SRCDIR)/validation/check_cub.c\
+	$(SRCDIR)/init_game/init_game.c\
+	$(SRCDIR)/init_game/get_map.c\
+	$(SRCDIR)/free_game/free_game.c\
+	$(SRCDIR)/init_game/init_all_things.c\
+	$(SRCDIR)/init_game/get_map_textures.c\
+	$(SRCDIR)/utils/show_map.c\
+	$(SRCDIR)/init_game/get_no_texture.c\
+	$(SRCDIR)/init_game/get_so_texture.c\
+	$(SRCDIR)/init_game/get_we_texture.c\
+	$(SRCDIR)/init_game/get_ea_texture.c\
+	$(SRCDIR)/init_game/get_floor_colours.c\
+	$(SRCDIR)/init_game/get_ceiling_colours.c\
+	$(SRCDIR)/init_game/get_true_map.c\
+	$(SRCDIR)/utils/show_textures.c
 
 #OBJS
 

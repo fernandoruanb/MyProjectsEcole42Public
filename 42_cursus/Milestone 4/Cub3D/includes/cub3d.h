@@ -20,6 +20,13 @@ typedef struct s_game
 {
 	void	*mlx;
 	void	*win;
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
+	char	*floor_colours;
+	char	*ceiling_colours;
+	char	**true_game_map;
 	int		player_x;
 	int		player_y;
 	char	**maps;
@@ -32,5 +39,14 @@ char	**get_map(const char *filename);
 int		free_game(t_game *game);
 void	show_map(t_game *game);
 void	init_all_things(t_game *game);
+int	get_map_textures(t_game *game);
+int	get_no_texture(t_game *game);
+int	get_so_texture(t_game *game);
+int	get_we_texture(t_game *game);
+int	get_ea_texture(t_game *game);
+int	get_floor_colours(t_game *game);
+int	get_ceiling_colours(t_game *game);
+int	get_true_map(t_game *game);
+void	show_textures(t_game *game);
 
 #endif /* CUB3D_H */

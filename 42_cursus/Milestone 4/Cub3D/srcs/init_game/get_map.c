@@ -45,6 +45,8 @@ static char	**clear_map(char **map, int index, int fd)
 		free(map[index]);
 		count++;
 	}
+	free(map);
+	map = NULL;
 	close(fd);
 	return (NULL);
 }

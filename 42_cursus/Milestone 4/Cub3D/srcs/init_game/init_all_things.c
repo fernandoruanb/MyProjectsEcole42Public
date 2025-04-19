@@ -17,4 +17,11 @@ void	init_all_things(t_game *game)
 	game->mlx = NULL;
 	game->maps = NULL;
 	game->win = NULL;
+	game->no_texture = NULL;
+	game->so_texture = NULL;
+	game->we_texture = NULL;
+	game->ea_texture = NULL;
+	game->floor_colours = NULL;
+	game->ceiling_colours = NULL;
+	game->true_game_map = NULL;
 }

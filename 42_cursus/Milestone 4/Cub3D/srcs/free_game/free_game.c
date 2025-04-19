@@ -25,11 +25,34 @@ static void	free_map(t_game *game)
 	free(game->maps);
 }
 
+static void	clear_all_textures(t_game *game)
+{
+	if (game->no_texture != NULL)
+		free(game->no_texture);
+	if (game->so_texture != NULL)
+		free(game->so_texture);
+	if (game->we_texture != NULL)
+		free(game->we_texture);
+	if (game->ea_texture != NULL)
+		free(game->ea_texture);
+	if (game->floor_colours)
+		free(game->floor_colours);
+	if (game->ceiling_colours)
+		free(game->ceiling_colours);
+	game->no_texture = NULL;
+	game->so_texture = NULL;
+	game->we_texture = NULL;
+	game->ea_texture = NULL;
+	game->floor_colours = NULL;
+	game->ceiling_colours = NULL;
+}
+
 int	free_game(t_game *game)
 {
 	if (!game)
-		return (0);
+		return (1);
 	if (game->maps)
 		free_map(game);
-	return (1);
+	clear_all_textures(game);
+	return (0);
 }

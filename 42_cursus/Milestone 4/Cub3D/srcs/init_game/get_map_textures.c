@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   get_map_textures.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 20:21:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/18 20:21:08 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/19 09:39:48 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/19 09:39:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	init_game(const char *filename, t_game *game)
+int	get_map_textures(t_game *game)
 {
-	init_all_things(game);
-	game->maps = get_map(filename);
-	if (!game->maps)
+	if (!get_no_texture(game))
 		return (0);
-	if (!get_map_textures(game))
+	if (!get_so_texture(game))
+		return (0);
+	if (!get_we_texture(game))
+		return (0);
+	if (!get_ea_texture(game))
+		return (0);
+	if (!get_floor_colours(game))
+		return (0);
+	if (!get_ceiling_colours(game))
+		return (0);
+	if (!get_true_map(game))
 		return (0);
 	return (1);
 }
