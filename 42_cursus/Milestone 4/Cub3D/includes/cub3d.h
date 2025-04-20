@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:31:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 21:09:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/20 15:17:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_game
 	char	*floor_colours;
 	char	*ceiling_colours;
 	char	**true_game_map;
+	int		players;
 	int		player_x;
 	int		player_y;
 	char	**maps;
@@ -53,5 +54,6 @@ int	is_valid_map(t_game *game);
 int	check_colours(t_game *game);
 int	check_true_map(t_game *game);
 int	check_is_valid_png(t_game *game);
+int	check_elements(t_game *game);
 
 #endif /* CUB3D_H */
