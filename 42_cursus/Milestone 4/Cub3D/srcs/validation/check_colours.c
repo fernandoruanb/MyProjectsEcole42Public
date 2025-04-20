@@ -21,9 +21,18 @@ static int	check_is_only_numbers(char **colours)
 	while (colours[index] != NULL)
 	{
 		count = 0;
-		if (!ft_isdigit(colours[index][count])
-			&& colours[index][count] != '-')
-			return (0);
+		if (count == 0)
+		{
+			if (colours[index][count] == '-')
+				count++;
+		}
+		while (colours[index][count] != '\n'
+			&& colours[index][count] != '\0')
+		{
+			if (!ft_isdigit(colours[index][count]))
+				return (0);
+			count++;
+		}
 		index++;
 	}
 	return (1);
