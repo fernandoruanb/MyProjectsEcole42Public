@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 14:49:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/20 15:25:22 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/20 17:43:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	check_each_element(char c, t_game *game, int x, int y)
 
 int	check_elements(t_game *game)
 {
-	int	index;
-	int	count;
+	int		index;
+	int		count;
 	char	c;
 
 	index = 0;
@@ -55,6 +55,6 @@ int	check_elements(t_game *game)
 		index++;
 	}
 	if (game->players != 1)
-		return (0);
+		return (ft_putendl_fd_0("The map doesn't have a player", 2));
 	return (1);
 }

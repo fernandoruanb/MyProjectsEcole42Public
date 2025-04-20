@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:31:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/20 15:17:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/20 17:01:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,8 @@ int	check_colours(t_game *game);
 int	check_true_map(t_game *game);
 int	check_is_valid_png(t_game *game);
 int	check_elements(t_game *game);
+int	check_entire_wall(t_game *game, int index);
+int	check_first_last_wall(t_game *game, int index);
+size_t		get_all_lines(t_game *game);
 
 #endif /* CUB3D_H */

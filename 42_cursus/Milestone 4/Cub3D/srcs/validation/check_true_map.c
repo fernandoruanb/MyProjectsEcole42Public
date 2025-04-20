@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:39:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/20 14:40:52 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/20 17:40:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,35 @@ static int	check_special_chars(t_game *game)
 	return (1);
 }
 
+static int	surrounded_by_walls(t_game *game)
+{
+	size_t	index;
+	size_t	lines;
+
+	index = 0;
+	lines = get_all_lines(game);
+	while (game->true_game_map[index] != NULL)
+	{
+		if (index == 0 || index == lines - 1)
+		{
+			if (!check_entire_wall(game, index))
+				return (0);
+		}
+		else
+		{
+			if (!check_first_last_wall(game, index))
+				return (0);
+		}
+		index++;
+	}
+	return (1);
+}
+
 int	check_true_map(t_game *game)
 {
 	if (!check_special_chars(game))
-		return (ft_putendl_fd_0("Newlines or Tabs found on map", 2));
+		return (ft_putendl_fd_0("\\n,\\t,\\f.. found on map", 2));
+	if (!surrounded_by_walls(game))
+		return (ft_putendl_fd_0("The map isn't surrounded by walls", 2));
 	return (1);
 }
