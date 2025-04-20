@@ -52,5 +52,6 @@ int	is_anything_null(t_game *game);
 int	is_valid_map(t_game *game);
 int	check_colours(t_game *game);
 int	check_true_map(t_game *game);
+int	check_is_valid_png(t_game *game);
 
 #endif /* CUB3D_H */

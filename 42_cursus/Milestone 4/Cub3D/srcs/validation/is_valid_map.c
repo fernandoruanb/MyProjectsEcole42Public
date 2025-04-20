@@ -18,6 +18,8 @@ static int	check_textures(t_game *game)
 		return (ft_putendl_fd_0("Anything null found!", 2));
 	if (!check_colours(game))
 		return (ft_putendl_fd_0("RGB Colours Error!", 2));
+	if (!check_is_valid_png(game))
+		return (ft_putendl_fd_0("Invalid texture files!", 2));
 	return (1);
 }
 
@@ -26,7 +28,7 @@ int	is_valid_map(t_game *game)
 	if (!check_textures(game))
 		return (ft_putendl_fd_0("Invalid texture detected", 2));
 	if (!check_true_map(game))
-		return (0);
+		return (ft_putendl_fd_0("Invalid map detected", 2));
 	/*if (!check_elements(game))
 		return (0);*/
 	return (1);

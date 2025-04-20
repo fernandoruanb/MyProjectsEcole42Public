@@ -40,7 +40,8 @@ SRCS =  $(SRCDIR)/cub3d/main.c\
 	$(SRCDIR)/validation/is_valid_map.c\
 	$(SRCDIR)/validation/is_anything_null.c\
 	$(SRCDIR)/validation/check_colours.c\
-	$(SRCDIR)/validation/check_true_map.c
+	$(SRCDIR)/validation/check_true_map.c\
+	$(SRCDIR)/validation/check_is_valid_png.c
 
 #OBJS
 
