@@ -60,24 +60,31 @@ all: $(NAME)
 #All the magic happens here
 
 $(NAME): $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) --no-print-directory
-	$(CC) $(CFLAGS) -I $(INCDIR) -I $(MLXDIR) -o $(NAME) $(OBJS) $(MLXFLAGS) $(LIBFT)
+	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	@$(CC) $(CFLAGS) -I $(INCDIR) -I $(MLXDIR) -o $(NAME) $(OBJS) $(MLXFLAGS) $(LIBFT)
 
 # .c -> .o
 
 %.o:%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "\033[38;5;208mCompiling	->	$<\033[0m"
+	@$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
 
 #clean
 
 clean:
-	rm -rf $(OBJS)
+	@echo "\033[1;32m===========================================\033[0m"
+	@echo "\033[1;32m		OBJECTS REMOVED						\033[0m"
+	@echo "\033[1;32m===========================================\033[0m"
+	@rm -rf $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
 
 #fclean
 
 fclean: clean
-	rm -rf $(NAME)
+	@echo "\033[1;32m===========================================\033[0m"
+	@echo "\033[1;32m		$(NAME) REMOVED						\033[0m"
+	@echo "\033[1;32m===========================================\033[0m"
+	@rm -rf $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory
 
 #restart

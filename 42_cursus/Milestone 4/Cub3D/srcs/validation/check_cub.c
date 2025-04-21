@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 19:13:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/18 19:13:47 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:51:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_cub(const char *filename)
 	{
 		if (filename[index] == '.')
 		{
-			substr = ft_substr(filename, index, length);
+			substr = ft_substr(filename, index, length - index);
 			if (ft_strcmp(substr, check_str) == 0)
 			{
 				free(substr);

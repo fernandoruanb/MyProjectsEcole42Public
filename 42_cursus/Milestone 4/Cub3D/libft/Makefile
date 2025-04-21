@@ -158,7 +158,7 @@ all: $(NAME)
 # Main rule
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 # Main bonus
 
@@ -167,17 +167,24 @@ bonus: $(NAME)
 # .c -> .o
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
+	@echo "\033[1;32mCompiling	->	$<\033[0m"
+	@$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
 
 # Clear archives
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	@echo "\033[1;32m===========================================\033[0m"
+	@echo "\033[1;32m		OBJECTS REMOVED						\033[0m"
+	@echo "\033[1;32m===========================================\033[0m"
+	@rm -f $(OBJS) $(BONUS_OBJS)
 
 # Full clean
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "\033[1;32m===========================================\033[0m"
+	@echo "\033[1;32m		$(NAME) REMOVED						\033[0m"
+	@echo "\033[1;32m===========================================\033[0m"
+	@rm -f $(NAME)
 
 # Restart
 

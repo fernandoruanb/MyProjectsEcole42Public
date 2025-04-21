@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_valid_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 15:53:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/20 21:01:25 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:52:38 by jopereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int	check_textures(t_game *game)
 		return (ft_putendl_fd_0("Anything null found!", 2));
 	if (!check_colours(game))
 		return (ft_putendl_fd_0("RGB Colours Error!", 2));
-	if (!check_is_valid_png(game))
-		return (ft_putendl_fd_0("Invalid texture files!", 2));
+	// if (!check_is_valid_png(game))
+	// 	return (ft_putendl_fd_0("Invalid texture files!", 2));
 	return (1);
 }
 

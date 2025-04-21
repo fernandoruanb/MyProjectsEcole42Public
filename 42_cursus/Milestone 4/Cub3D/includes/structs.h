@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 18:31:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 12:57:26 by jopereir         ###   ########.fr       */
+/*   Created: 2025/04/21 12:55:55 by jopereir          #+#    #+#             */
+/*   Updated: 2025/04/21 12:57:44 by jopereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-# include "../libft/libft.h"
-# include <fcntl.h>
+# include "cub3d.h"
 
-# include "structs.h"
-# include "validation.h"
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
+	char	*floor_colours;
+	char	*ceiling_colours;
+	char	**true_game_map;
+	int		players;
+	int		invalid_map;
+	int		player_x;
+	int		player_y;
+	char	**maps;
+}	t_game;
 
-#endif /* CUB3D_H */
+#endif
