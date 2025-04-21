@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 11:08:55 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/20 12:13:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/21 09:30:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	check_signature(char *file_path)
 	int				fd;
 	ssize_t			bytes_read;
 
+	ft_printf("%s\n", file_path);
 	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
 		return (ft_putendl_fd_0("Inexistent file", 2));

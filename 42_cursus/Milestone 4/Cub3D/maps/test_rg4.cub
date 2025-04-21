@@ -1,14 +1,14 @@
-NO ./path_to_no
+NO ./images/minimal.png
 
-SO ./path_to_so
+SO ./images/minimal.png
 
-WE ./path_to_we
+WE ./images/minimal.png
 
-EA ./path_to_ea
+EA ./images/minimal.png
 
 F 200,200,---
 C 200,200,200
 
 111111111111111111
-100000000000000001
+10W000000000000001
 101111111111111111
