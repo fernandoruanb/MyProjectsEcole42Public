@@ -47,7 +47,17 @@ SRCS =  $(SRCDIR)/cub3d/main.c\
 	$(SRCDIR)/validation/check_entire_wall.c\
 	$(SRCDIR)/validation/check_first_last_wall.c\
 	$(SRCDIR)/validation/check_invalid_access.c\
-	$(SRCDIR)/validation/flood_fill.c
+	$(SRCDIR)/validation/flood_fill.c\
+	$(SRCDIR)/utils/drawstr.c\
+	$(SRCDIR)/set_window/set_window.c\
+	$(SRCDIR)/set_window/render.c\
+	$(SRCDIR)/set_window/run_window.c\
+	$(SRCDIR)/validation/check_security_on_map.c\
+	$(SRCDIR)/validation/check_is_anything_equal.c\
+	$(SRCDIR)/validation/check_repeat_textures.c\
+	$(SRCDIR)/validation/check_split_length.c\
+	$(SRCDIR)/utils/free_dynamic_texture.c\
+	$(SRCDIR)/cub3d/destroy.c
 
 #OBJS
 
@@ -77,6 +87,9 @@ clean:
 	@echo "\033[1;32m===========================================\033[0m"
 	@rm -rf $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
+
+run: all
+	valgrind --show-leak-kinds=all --leak-check=full ./cub3d maps/test_map4.cub
 
 #fclean
 

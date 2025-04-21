@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_NO_texture.c                                   :+:      :+:    :+:   */
+/*   get_so_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 09:45:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 09:45:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:11:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	get_so_texture(t_game *game)
 			&& game->maps[index][1] == 'O')
 		{
 			get_so = ft_split(game->maps[index], ' ');
+			if (!check_split_length(get_so))
+				return (free_dynamic_texture(get_so));
 			game->so_texture = ft_strdup(get_so[1]);
 			if (!game->so_texture)
 			{

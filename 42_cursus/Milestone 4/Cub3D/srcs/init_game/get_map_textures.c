@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 09:39:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 09:39:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/21 18:05:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	get_map_textures(t_game *game)
 {
+	if (!check_repeat_textures(game))
+		return (0);
 	if (!get_no_texture(game))
 		return (0);
 	if (!get_so_texture(game))

@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 10:34:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 13:35:03 by jopereir         ###   ########.fr       */
+/*   Created: 2025/04/21 13:23:51 by jopereir          #+#    #+#             */
+/*   Updated: 2025/04/21 16:55:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	index;
+#include "cub3d.h"
 
-	if (!s1 || !s2)
-		return (1);
-	index = 0;
-	while (s1[index] != '\0' && s2[index] != '\0')
+int	destroy(t_game *game)
+{
+	if (game->win != NULL)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx != NULL)
 	{
-		if (s1[index] != s2[index])
-			return ((unsigned char)s1[index] - (unsigned char)s2[index]);
-		index++;
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
 	}
-	return ((unsigned char)s1[index] - (unsigned char)s2[index]);
+	return (free_game(game));
 }

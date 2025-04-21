@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   run_window.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 10:34:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 13:35:03 by jopereir         ###   ########.fr       */
+/*   Created: 2025/04/21 13:21:48 by jopereir          #+#    #+#             */
+/*   Updated: 2025/04/21 13:57:06 by jopereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	index;
+#include "cub3d.h"
 
-	if (!s1 || !s2)
-		return (1);
-	index = 0;
-	while (s1[index] != '\0' && s2[index] != '\0')
-	{
-		if (s1[index] != s2[index])
-			return ((unsigned char)s1[index] - (unsigned char)s2[index]);
-		index++;
-	}
-	return ((unsigned char)s1[index] - (unsigned char)s2[index]);
+static int	handle_no_event(void)
+{
+	return (0);
+}
+
+static int	handle_input(int key, t_game *game)
+{
+	if (key == 65307)
+		destroy(game);
+	return (0);
+}
+
+void	run_window(t_game *game)
+{
+	if (!game)
+		return ;
+	mlx_loop_hook(game->mlx, &handle_no_event, NULL);
+	mlx_key_hook(game->win, &handle_input, game);
+	mlx_hook(game->win, 17, 0, &destroy, game);
+	mlx_loop(game->mlx);
 }

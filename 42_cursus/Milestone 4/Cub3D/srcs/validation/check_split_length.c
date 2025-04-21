@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   check_split_length.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 18:31:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 13:36:16 by jopereir         ###   ########.fr       */
+/*   Created: 2025/04/21 19:01:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/21 19:16:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "../../includes/cub3d.h"
 
-# include "../libft/libft.h"
-# include <fcntl.h>
-# include "../minilibx-linux/mlx.h"
+int	check_split_length(char **split)
+{
+	int	index;
 
-# include "structs.h"
-# include "validation.h"
-# include "window.h"
-
-int	destroy(t_game *game);
-
-#endif /* CUB3D_H */
+	index = 0;
+	while (split[index] != NULL)
+		index++;
+	if (index > 1)
+		return (ft_putendl_fd_0("Too many texture spaces", 2));
+	return (1);
+}
