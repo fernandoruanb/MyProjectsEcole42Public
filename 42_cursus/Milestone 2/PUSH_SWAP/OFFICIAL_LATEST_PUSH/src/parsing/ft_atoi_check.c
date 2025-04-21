@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 12:34:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/05 15:00:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/21 10:50:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	ft_atoi_check(const char *nptr, int *error)
 	{
 		result *= 10;
 		result += (nptr[index] - '0');
+		if (result > INT_MAX || result < INT_MIN)
+			*error = 1;
 		index++;
 	}
 	return (is_valid_limit(result, signal, error));
