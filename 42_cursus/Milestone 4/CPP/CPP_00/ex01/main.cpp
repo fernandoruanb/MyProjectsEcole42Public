@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:32:01 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/17 11:04:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:42:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	main(void)
 			MyPhoneBook.add_new_contact();
 		else if (command == "SEARCH")
 		{
+			MyPhoneBook.show_all_contacts();
 			std::cout << "You need a specif contact (YES/NO)? ";
 			std::getline(std::cin, cmd);
 			if (cmd == "YES" || cmd == "yes")
