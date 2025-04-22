@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 20:26:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 14:05:58 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:26:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,11 @@ int	free_game(t_game *game)
 	clear_all_textures(game);
 	if (game->true_game_map)
 		free_true_game_map(game);
+	if (game->rrggbb_floor)
+		free(game->rrggbb_floor);
+	if (game->rrggbb_ceiling)
+		free(game->rrggbb_ceiling);
+	game->rrggbb_floor = NULL;
+	game->rrggbb_ceiling = NULL;
 	return (0);
 }

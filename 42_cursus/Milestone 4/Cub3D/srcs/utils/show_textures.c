@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:32:43 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 15:45:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:56:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	show_textures(t_game *game)
 	ft_printf("player_y: %d\n\n", game->player_y);
 	ft_printf("Width: %d\n\n", game->width);
 	ft_printf("Heigth: %d\n\n", game->heigth);
+	ft_printf("rrggbb_floor: %s\n\n", game->rrggbb_floor);
+	ft_printf("rrggbb_ceiling: %s\n\n", game->rrggbb_ceiling);
 	if (game->true_game_map)
 		show_true_game_map(game);
 }

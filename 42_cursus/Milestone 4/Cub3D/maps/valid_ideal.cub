@@ -3,7 +3,7 @@ SO ./images/s.xpm
 WE ./images/w.xpm
 EA ./images/e.xpm
 F 255,255,255
-C 111,11,99
+C 255,255,255
 
  11111 
 1000001

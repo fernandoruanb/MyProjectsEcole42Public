@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:55:55 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/22 16:00:52 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:26:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ typedef struct s_game
 	char	*we_texture;
 	char	*ea_texture;
 	char	*floor_colours;
+	char	*rrggbb_floor;
 	char	*ceiling_colours;
+	char	*rrggbb_ceiling;
 	int		width;
 	int		heigth;
 	char	**true_game_map;
@@ -49,5 +51,5 @@ typedef struct s_game
 }	t_game;
 
 int	free_dynamic_texture(char **split);
-
+int	rgb_to_rrggbb(t_game *game);
 #endif
