@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 19:01:43 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 19:16:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/21 20:02:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_split_length(char **split)
 	index = 0;
 	while (split[index] != NULL)
 		index++;
-	if (index > 1)
-		return (ft_putendl_fd_0("Too many texture spaces", 2));
+	if (index != 2)
+		return (ft_putendl_fd_0("Invalid texture length", 2));
 	return (1);
 }
