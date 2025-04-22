@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 20:21:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 17:08:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:41:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	init_game(const char *filename, t_game *game)
 	if (!game->maps || !get_map_textures(game))
 		return (0);
 	if (!is_valid_map(game))
+		return (0);
+	if (set_window(game))
 		return (0);
 	return (1);
 }

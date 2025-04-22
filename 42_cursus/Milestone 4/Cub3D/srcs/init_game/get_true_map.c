@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 10:35:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 20:49:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:24:46 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,8 @@ static int	get_lines(int index, t_game *game)
 	lines = 0;
 	while (game->maps[index] != NULL)
 	{
-		if (game->maps[index][0] == 'F' || game->maps[index][0] == 'N'
-			|| game->maps[index][0] == 'W'
-			|| game->maps[index][0] == 'S'
-			|| game->maps[index][0] == 'C'
-			|| game->maps[index][0] == 'E')
-			index++;
-		else
-		{
-			lines++;
-			index++;
-		}
+		index++;
+		lines++;
 	}
 	return (lines);
 }
@@ -83,13 +74,13 @@ int	get_true_map(t_game *game)
 	while (game->maps[index] != NULL)
 	{
 		if (game->maps[index][0] && game->maps[index][1]
-			&& game->maps[index][0] != 'N'
-			&& game->maps[index][0] != 'S'
-			&& game->maps[index][0] != '\n'
-			&& game->maps[index][0] != 'W'
-			&& game->maps[index][0] != 'E'
-			&& game->maps[index][0] != 'F'
-			&& game->maps[index][0] != 'C')
+			&& ft_strncmp(game->maps[index], "NO", 2) != 0
+			&& ft_strncmp(game->maps[index], "SO", 2) != 0
+			&& ft_strncmp(game->maps[index], "WE", 2) != 0
+			&& ft_strncmp(game->maps[index], "EA", 2) != 0
+			&& ft_strncmp(game->maps[index], "\n", 1) != 0
+			&& ft_strncmp(game->maps[index], "F", 1) != 0
+			&& ft_strncmp(game->maps[index], "C", 1) != 0)
 		{
 			if (!get_the_base(index, game))
 				return (0);

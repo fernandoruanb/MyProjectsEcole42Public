@@ -1,10 +1,10 @@
-NO ./path_to_no
+NO ./path_to_no.xpm
 
-SO ./path_to_so
+SO ./path_to_so.xpm
 
-WE ./path_to_we
+WE ./path_to_we.xpm
 
-EA ./path_to_ea
+EA ./path_to_ea.xpm
 
 F 200,200,200
 C 200,200,200

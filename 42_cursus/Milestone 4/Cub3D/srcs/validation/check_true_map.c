@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 19:39:09 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/20 20:55:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:59:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static int	surrounded_by_walls(t_game *game)
 int	check_true_map(t_game *game)
 {
 	if (!check_special_chars(game))
-		return (ft_putendl_fd_0("\\n,\\t,\\f.. found on map", 2));
+		return (ft_putendl_fd_0("Error: \\n,\\t,\\ found on map", 2));
 	if (!surrounded_by_walls(game))
-		return (ft_putendl_fd_0("The map isn't surrounded by walls", 2));
+		return (ft_putendl_fd_0("Error: The map needs to be closed", 2));
 	return (1);
 }

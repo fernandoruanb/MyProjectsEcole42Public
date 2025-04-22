@@ -41,7 +41,7 @@ SRCS =  $(SRCDIR)/cub3d/main.c\
 	$(SRCDIR)/validation/is_anything_null.c\
 	$(SRCDIR)/validation/check_colours.c\
 	$(SRCDIR)/validation/check_true_map.c\
-	$(SRCDIR)/validation/check_is_valid_png.c\
+	$(SRCDIR)/validation/check_is_valid_xpm.c\
 	$(SRCDIR)/validation/check_elements.c\
 	$(SRCDIR)/validation/get_all_lines.c\
 	$(SRCDIR)/validation/check_entire_wall.c\
@@ -57,6 +57,7 @@ SRCS =  $(SRCDIR)/cub3d/main.c\
 	$(SRCDIR)/validation/check_repeat_textures.c\
 	$(SRCDIR)/validation/check_split_length.c\
 	$(SRCDIR)/utils/free_dynamic_texture.c\
+	$(SRCDIR)/validation/remove_spaces_and_tabs.c\
 	$(SRCDIR)/cub3d/destroy.c
 
 #OBJS

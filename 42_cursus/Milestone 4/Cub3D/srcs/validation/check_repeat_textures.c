@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:45:54 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 18:00:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:57:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	check_repeat_textures(t_game *game)
 		|| game->we_texture_index > 1 || game->ea_texture_index > 1
 		|| game->floor_colours_index > 1
 		|| game->ceiling_colours_index > 1)
-		return (ft_putendl_fd_0("Textures must not be repeated", 2));
+		return (ft_putendl_fd_0("Error: Textures repeated", 2));
 	return (1);
 }

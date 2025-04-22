@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 19:50:38 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/20 21:00:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:00:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	flood_fill(t_game *game)
 	if (game->invalid_map == 1)
 	{
 		free_map_copy(map_copy);
-		return (ft_putendl_fd_0("The player was died by Black Hole", 2));
+		return (ft_putendl_fd_0("Error: The player met Hole", 2));
 	}
 	free_map_copy(map_copy);
 	return (1);

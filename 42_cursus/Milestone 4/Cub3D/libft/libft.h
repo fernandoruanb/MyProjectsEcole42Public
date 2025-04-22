@@ -6,7 +6,7 @@
 /*   By: fruan-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:41:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/01/26 10:42:01 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 09:41:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void		wdmatch(const char *s1, const char *s2);
 void		ft_putnbr(int n);
 int			is_prime(int n);
 void		add_prime_num(int argc, char **argv);
-void		epur_str(const char *str);
+char		*epur_str(const char *str);
 void		expand_str(const char *str);
 int			get_decimal_digit(char c, int str_base);
 char		to_lower(const char c);

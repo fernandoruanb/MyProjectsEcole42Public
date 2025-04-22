@@ -1,8 +1,8 @@
-NO ./images/n.png
+NO ./images/n.xpm
 oi
-SO ./images/s.png
-WE ./images/w.png
-EA ./images/e.png
+SO ./images/s.xpm
+WE ./images/w.xpm
+EA ./images/e.xpm
 F 240,233,133
 C 225,0,0
 

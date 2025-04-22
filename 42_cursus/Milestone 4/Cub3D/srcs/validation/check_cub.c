@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 19:13:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 11:51:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:53:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ int	check_cub(const char *filename)
 		}
 		index++;
 	}
-	return (0);
+	return (ft_putendl_fd_0("Error: .cub file only", 2));
 }

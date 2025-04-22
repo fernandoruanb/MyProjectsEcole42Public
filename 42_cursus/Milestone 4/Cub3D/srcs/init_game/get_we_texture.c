@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 09:45:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 19:12:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 10:59:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	get_we_texture(t_game *game)
 			&& game->maps[index][1] == 'E')
 		{
 			get_we = ft_split(game->maps[index], ' ');
+			remove_spaces_and_tabs(&get_we);
 			if (!check_split_length(get_we))
 				return (free_dynamic_texture(get_we));
 			game->we_texture = ft_strdup(get_we[1]);

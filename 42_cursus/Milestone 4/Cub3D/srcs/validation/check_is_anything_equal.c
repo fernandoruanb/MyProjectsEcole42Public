@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:17:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 17:39:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:56:32 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ int	check_is_anything_equal(t_game *game)
 	checker[3] = game->ea_texture;
 	checker[4] = NULL;
 	if (emperor_decision(checker))
-		return (ft_putendl_fd_0("You must not put the same file", 2));
+		return (ft_putendl_fd_0("Error: Duplicate files found", 2));
 	return (1);
 }

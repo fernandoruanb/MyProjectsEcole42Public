@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_invalid_access.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 18:21:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/20 18:33:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:55:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	check_invalid_access(t_game *game)
 {
-	int	lines;
 	int	index;
 	int	count;
 
-	lines = get_all_lines(game);
 	index = 1;
 	while (game->true_game_map[index] != NULL)
 	{
@@ -28,7 +26,7 @@ int	check_invalid_access(t_game *game)
 		{
 			if (game->true_game_map[index][count] == '0'
 				&& game->true_game_map[index - 1][count] == ' ')
-				return (ft_putendl_fd_0("Invalid access", 2));
+				return (ft_putendl_fd_0("Error: HOLE!", 2));
 			count++;
 		}
 		index++;

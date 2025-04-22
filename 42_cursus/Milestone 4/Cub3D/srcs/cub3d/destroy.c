@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:23:51 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/21 16:55:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:52:27 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	destroy(t_game *game)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
-	return (free_game(game));
+	free_game(game);
+	exit(0);
 }

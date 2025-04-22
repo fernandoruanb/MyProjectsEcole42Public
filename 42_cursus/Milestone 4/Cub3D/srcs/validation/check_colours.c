@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:34:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/19 19:30:54 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:52:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	check_rgb(char **colours)
 	n2 = ft_atoi(colours[1]);
 	n3 = ft_atoi(colours[2]);
 	if (n1 < 0 || n1 > 255 || n2 < 0 || n2 > 255 || n3 < 0 || n3 > 255)
-		return (ft_putendl_fd_0("Invalid range of RGB", 2));
+		return (ft_putendl_fd_0("Error: invalid RGB range", 2));
 	return (1);
 }
 
@@ -62,7 +62,7 @@ static int	check_length_colours(char **colours)
 	while (colours[length] != NULL)
 		length++;
 	if (length != 3)
-		return (ft_putendl_fd_0("Invalid length RGB", 2));
+		return (ft_putendl_fd_0("Error: invalid length RGB", 2));
 	return (1);
 }
 

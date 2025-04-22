@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 13:56:28 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/11/29 12:17:21 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 09:29:05 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	index = 0;
 	while (result[index] != NULL)
 	{
-		printf("Array[%i] %s.\n", index, result[index]);
+		printf("Array[%i] %s\n", index, result[index]);
 		free(result[index]);
 		index++;
 	}

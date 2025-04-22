@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:11:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 16:24:52 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:57:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_security_on_map(t_game *game)
 			|| ft_strncmp(game->maps[index], " ", 1) == 0)
 			index++;
 		else
-			return (ft_putendl_fd_0("Security error on map", 2));
+			return (ft_putendl_fd_0("Error: Danger Zone", 2));
 	}
 	return (1);
 }

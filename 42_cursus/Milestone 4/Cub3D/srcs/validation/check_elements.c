@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 14:49:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/20 19:07:46 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:54:17 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static int	check_each_element(char c, t_game *game, int x, int y)
 	{
 		game->players++;
 		if (game->players > 1)
-			return (ft_putendl_fd_0("Too many players", 2));
+			return (ft_putendl_fd_0("Error: too many players", 2));
 		game->player_x = x;
 		game->player_y = y;
 	}
 	if (!ft_strchr(elements, c) && c != ' ')
-		return (ft_putendl_fd_0("Invalid element on map", 2));
+		return (ft_putendl_fd_0("Error: invalid element on map", 2));
 	return (1);
 }
 
@@ -55,6 +55,6 @@ int	check_elements(t_game *game)
 		index++;
 	}
 	if (game->players != 1)
-		return (ft_putendl_fd_0("The map doesn't have a player", 2));
+		return (ft_putendl_fd_0("Error: where is the player?", 2));
 	return (1);
 }

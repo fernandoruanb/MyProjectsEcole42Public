@@ -1,7 +1,7 @@
-NO ./images/n.png
-SO ./images/s.png
-WE ./images/w.png
-EA ./images/e.png
+NO ./images/n.xpm
+SO ./images/s.xpm
+WE ./images/w.xpm
+EA ./images/e.xpm
 F 266,233,133
 C 225,0,0
 
