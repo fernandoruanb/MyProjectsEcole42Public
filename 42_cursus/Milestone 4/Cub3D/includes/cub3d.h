@@ -6,7 +6,7 @@
 /*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:31:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/21 13:36:16 by jopereir         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:56:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 # include "window.h"
 
 int	destroy(t_game *game);
+int	get_width_heigth(t_game *game);
 
 #endif /* CUB3D_H */

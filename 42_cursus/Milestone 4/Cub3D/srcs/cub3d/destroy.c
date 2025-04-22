@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:23:51 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/22 11:52:27 by jonas            ###   ########.fr       */
+/*   Updated: 2025/04/22 15:29:04 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	destroy(t_game *game)
 {
-	if (game->win != NULL)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx != NULL)
+	if (game->mlx.win)
+		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win);
+	if (game->mlx.mlx_ptr)
 	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
+		mlx_destroy_display(game->mlx.mlx_ptr);
+		free(game->mlx.mlx_ptr);
 	}
 	free_game(game);
 	exit(0);

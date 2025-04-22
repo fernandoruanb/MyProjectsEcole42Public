@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:52:26 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/21 13:56:57 by jopereir         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:26:09 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render(t_game *game)
+void	render(t_mlx *mlx)
 {
-	if (!game)
+	if (!mlx)
 		return ;
 	return ;
 }

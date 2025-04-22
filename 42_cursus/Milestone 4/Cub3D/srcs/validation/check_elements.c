@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 14:49:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 12:54:17 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:03:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	check_each_element(char c, t_game *game, int x, int y)
+static int	check_each_element(char c, t_game *game, int y, int x)
 {
 	char	*elements;
 

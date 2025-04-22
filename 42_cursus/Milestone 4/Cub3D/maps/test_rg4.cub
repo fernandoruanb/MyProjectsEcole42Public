@@ -1,10 +1,10 @@
-NO ./images/minimal.png
+NO ./images/minimal.xpm
 
-SO ./images/minimal.png
+SO ./images/minimal.xpm
 
-WE ./images/minimal.png
+WE ./images/minimal.xpm
 
-EA ./images/minimal.png
+EA ./images/minimal.xpm
 
 F 200,200,---
 C 200,200,200

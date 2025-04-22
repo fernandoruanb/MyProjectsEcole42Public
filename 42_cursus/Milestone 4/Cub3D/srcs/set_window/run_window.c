@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_window.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:21:48 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/21 13:57:06 by jopereir         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:26:42 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	run_window(t_game *game)
 {
 	if (!game)
 		return ;
-	mlx_loop_hook(game->mlx, &handle_no_event, NULL);
-	mlx_key_hook(game->win, &handle_input, game);
-	mlx_hook(game->win, 17, 0, &destroy, game);
-	mlx_loop(game->mlx);
+	mlx_loop_hook(game->mlx.mlx_ptr, &handle_no_event, NULL);
+	mlx_key_hook(game->mlx.win, &handle_input, game);
+	mlx_hook(game->mlx.win, 17, 0, &destroy, game);
+	mlx_loop(game->mlx.mlx_ptr);
 }
