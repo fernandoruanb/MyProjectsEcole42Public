@@ -6,11 +6,26 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 22:54:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 17:20:21 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:02:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static void	set_more_things(t_game *game)
+{
+	game->offset_x = 0;
+	game->offset_y = 0;
+	game->min_col = 0;
+	game->min_row = 0;
+	game->max_col = 0;
+	game->min_col = 0;
+	game->dir_x = 0;
+	game->dir_y = 0;
+	game->width_map = 0;
+	game->heigth_map = 0;
+	game->angle = 0;
+}
 
 void	init_all_things(t_game *game)
 {
@@ -36,4 +51,5 @@ void	init_all_things(t_game *game)
 	game->ea_texture_index = 0;
 	game->floor_colours_index = 0;
 	game->ceiling_colours_index = 0;
+	set_more_things(game);
 }

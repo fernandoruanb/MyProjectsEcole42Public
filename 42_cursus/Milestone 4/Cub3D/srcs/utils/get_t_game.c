@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   get_t_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/21 13:01:59 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/23 11:22:11 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/23 12:06:52 by jopereir          #+#    #+#             */
+/*   Updated: 2025/04/23 12:16:32 by jopereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_H
-# define WINDOW_H
+#include "cub3d.h"
 
-# include "cub3d.h"
+t_game	*get_t_game(void)
+{
+	static t_game	game;
 
-int		drawstr(char *str, int fd, int _return);
-int		set_window(t_mlx *mlx);
-void	run_window(t_game *game);
-void	render(t_mlx *mlx);
-
-#endif
+	return (&game);
+}

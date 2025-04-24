@@ -60,6 +60,11 @@ SRCS =  $(SRCDIR)/cub3d/main.c\
 	$(SRCDIR)/validation/remove_spaces_and_tabs.c\
 	$(SRCDIR)/init_game/get_width_heigth.c\
 	$(SRCDIR)/init_game/rgb_to_rrggbb.c\
+	$(SRCDIR)/bonus/minimap.c\
+	$(SRCDIR)/utils/get_t_game.c\
+	$(SRCDIR)/ray_cast/init_map.c\
+	$(SRCDIR)/bonus/draw_radius.c\
+	$(SRCDIR)/bonus/update_angle_dir_x_y.c\
 	$(SRCDIR)/cub3d/destroy.c
 
 #OBJS

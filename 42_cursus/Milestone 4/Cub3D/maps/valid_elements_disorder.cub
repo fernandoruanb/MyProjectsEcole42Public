@@ -1,8 +1,8 @@
 SO ./images/s.xpm
 WE ./images/w.xpm
-F 240,233,133
+F 255,255,255
 EA ./images/e.xpm
-C 225,0,0
+C 255,255,0
 NO ./images/n.xpm
 
 1111111

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 16:58:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 17:57:54 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/23 09:00:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ static char	*get_rrggbb(char **target)
 	free(temp);
 	free(new2);
 	free(new3);
-	ft_printf("HEX: %s\n", new);
+	temp = ft_strjoin("0x", new);
+	free(new);
+	new = temp;
 	return (new);
 }
 

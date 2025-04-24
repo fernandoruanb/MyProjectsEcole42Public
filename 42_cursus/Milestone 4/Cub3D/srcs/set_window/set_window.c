@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_window.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:02:35 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/22 15:25:27 by jonas            ###   ########.fr       */
+/*   Updated: 2025/04/23 12:17:41 by jopereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	set_window(t_mlx *mlx)
 		return (1);
 	win_w = 1920;
 	win_h = 1080;
-	// mlx_get_screen_size(game->mlx, &win_w, &win_h);
 	mlx->win = mlx_new_window(mlx->mlx_ptr, win_w, win_h, "cub3d");
 	if (!mlx->win)
 		return (drawstr("Error: Couldn't open the window\n", 2, 1));

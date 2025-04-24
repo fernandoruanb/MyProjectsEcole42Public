@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_anything_null.c                                 :+:      :+:    :+:   */
+/*   update_angle_dir_x_y.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 16:14:33 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/23 09:06:03 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/24 16:56:52 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/24 17:18:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	is_anything_null(t_game *game)
+void	update_angle_dir_x_y(t_game *game, int keycode)
 {
-	if (!game->no_texture)
-		return (1);
-	if (!game->so_texture)
-		return (1);
-	if (!game->we_texture)
-		return (1);
-	if (!game->ea_texture)
-		return (1);
-	if (!game->floor_colours)
-		return (1);
-	if (!game->ceiling_colours)
-		return (1);
-	if (!game->true_game_map)
-		return (1);
-	return (0);
+	if (keycode == 65361)
+		game->angle -= ROTATION_SPEED;
+	else if (keycode == 65363)
+		game->angle += ROTATION_SPEED;
+	if (game->angle < 0)
+		game->angle += 2 * M_PI;
+	if (game->angle >= 2 * M_PI)
+		game->angle -= 2 * M_PI;
+	game->dir_x = cos(game->angle);
+	game->dir_y = sin(game->angle);
 }

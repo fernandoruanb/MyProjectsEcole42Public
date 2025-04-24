@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:55:55 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/22 17:26:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:27:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,35 @@
 # include "cub3d.h"
 # define TILE_SIZE 64
 
+typedef struct s_angle
+{
+	char	dir;
+	int		angle;
+}	t_angle;
+
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*win;
 }	t_mlx;
 
+typedef struct s_player
+{
+	int	x;
+	int	y;
+	int	angle;
+}	t_player;
+
+typedef struct s_map
+{
+	char		***map;
+	t_player	player;
+}	t_map;
+
 typedef struct s_game
 {
 	t_mlx	mlx;
+	t_map	map;
 	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
@@ -41,6 +61,17 @@ typedef struct s_game
 	int		invalid_map;
 	int		player_x;
 	int		player_y;
+	int		offset_x;
+	int		offset_y;
+	double		dir_x;
+	double		dir_y;
+	int		min_col;
+	int		min_row;
+	int		max_col;
+	double		angle;
+	int		max_row;
+	int		width_map;
+	int		heigth_map;
 	char	**maps;
 	int		no_texture_index;
 	int		so_texture_index;
@@ -50,6 +81,8 @@ typedef struct s_game
 	int		ceiling_colours_index;
 }	t_game;
 
-int	free_dynamic_texture(char **split);
-int	rgb_to_rrggbb(t_game *game);
+int			free_dynamic_texture(char **split);
+int			rgb_to_rrggbb(t_game *game);
+void		minimap(t_game *game);
+
 #endif

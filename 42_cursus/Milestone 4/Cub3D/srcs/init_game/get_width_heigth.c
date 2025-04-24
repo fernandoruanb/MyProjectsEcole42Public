@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:10:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 15:47:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:12:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,12 @@ int	get_width_heigth(t_game *game)
 	game->width = get_width(game);
 	if (game->width == -1)
 		return (ft_putendl_fd_0("Error: invalid width", 2));
+	game->width_map = game->width;
+	game->width *= TILE_SIZE;
 	game->heigth = get_heigth(game);
 	if (game->heigth == -1)
 		return (ft_putendl_fd_0("Error: invalid heigth", 2));
+	game->heigth_map = game->heigth;
+	game->heigth *= TILE_SIZE;
 	return (1);
 }

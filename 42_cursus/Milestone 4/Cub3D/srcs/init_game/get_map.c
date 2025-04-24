@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 20:40:57 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/18 20:40:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:43:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	get_how_many_lines(const char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		return (ft_putendl_fd_0("Error: unable to open file", 2));
 	lines = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
@@ -60,7 +60,7 @@ static char	**get_the_map(const char *filename, int lines)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (NULL);
+		return (ft_putendl_fd_n("Error: failed to open file", 2));
 	map = (char **)malloc((lines + 1) * sizeof(char *));
 	if (!map)
 		return (NULL);
