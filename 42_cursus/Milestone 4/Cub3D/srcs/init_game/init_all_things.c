@@ -25,6 +25,10 @@ static void	set_more_things(t_game *game)
 	game->width_map = 0;
 	game->heigth_map = 0;
 	game->angle = 0;
+	game->angle_left = 0;
+	game->angle_right = 0;
+	game->dir_left_x = 0;
+	game->dir_right_y = 0;
 }
 
 void	init_all_things(t_game *game)

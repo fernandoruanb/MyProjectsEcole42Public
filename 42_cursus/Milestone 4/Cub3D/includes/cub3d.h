@@ -29,6 +29,7 @@
 # define COLOUR_DEFAULT 0x0000f6
 # define MINIMAP_SCALE 0.125
 # define ROTATION_SPEED 0.05
+# define VISUAL_CAMP 0.8
 
 int		destroy(t_game *game);
 int		get_width_heigth(t_game *game);

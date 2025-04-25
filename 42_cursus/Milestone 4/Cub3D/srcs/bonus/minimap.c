@@ -59,6 +59,7 @@ static void	draw_the_player(t_game *game)
 		y++;
 	}
 	draw_radius(game);
+	draw_fov(game);
 }
 
 void	minimap(t_game *game)

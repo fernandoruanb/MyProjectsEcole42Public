@@ -69,6 +69,12 @@ typedef struct s_game
 	int		min_row;
 	int		max_col;
 	double		angle;
+	double		angle_left;
+	double		angle_right;
+	double		dir_left_x;
+	double		dir_left_y;
+	double		dir_right_x;
+	double		dir_right_y;
 	int		max_row;
 	int		width_map;
 	int		heigth_map;
@@ -84,5 +90,6 @@ typedef struct s_game
 int			free_dynamic_texture(char **split);
 int			rgb_to_rrggbb(t_game *game);
 void		minimap(t_game *game);
+void		draw_fov(t_game *game);
 
 #endif
