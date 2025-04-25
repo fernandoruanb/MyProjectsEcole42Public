@@ -29,6 +29,8 @@ static void	set_more_things(t_game *game)
 	game->angle_right = 0;
 	game->dir_left_x = 0;
 	game->dir_right_y = 0;
+	game->dir_left_y = 0;
+	game->dir_right_x = 0;
 }
 
 void	init_all_things(t_game *game)
