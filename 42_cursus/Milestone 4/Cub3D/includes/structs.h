@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:55:55 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/29 11:51:05 by jonas            ###   ########.fr       */
+/*   Updated: 2025/04/29 12:59:49 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_game	t_game;
 
 typedef struct s_keys
 {
-	int	key;
+	int		key;
 	void	(*f)(t_game*);
 }	t_keys;
 
@@ -55,7 +55,6 @@ typedef struct s_game
 	t_mlx	mlx;
 	t_map	map;
 	t_keys	keys;
-	char	*no_texture;
 	void	*no_addr;
 	void	*so_addr;
 	void	*ea_addr;
@@ -74,6 +73,7 @@ typedef struct s_game
 	int		endian_ea;
 	double	plane_x;
 	double	plane_y;
+	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;

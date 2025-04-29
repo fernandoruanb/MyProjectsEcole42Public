@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_keys.c                                         :+:      :+:    :+:   */
+/*   draw_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 12:23:22 by jonas             #+#    #+#             */
-/*   Updated: 2025/04/29 12:47:47 by jonas            ###   ########.fr       */
+/*   Created: 2025/04/29 12:55:18 by jonas             #+#    #+#             */
+/*   Updated: 2025/04/29 13:01:54 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_handle_key(int keycode, int set)
+void	draw_textures(t_game *game)
 {
-	static int	handle_key = 0;
-
-	if (set)
-		handle_key = keycode;
-	return (handle_key);
-}
-
-t_keys	*get_keys(void)
-{
-	static t_keys	keys[5] = {
-	{119, &move_w},
-	{97, &move_a},
-	{115, &move_s},
-	{100, &move_d}};
-
-	return (keys);
+	if (!game)
+		return ;
 }
