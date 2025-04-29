@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   get_keys.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/21 13:01:59 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/29 12:24:06 by jonas            ###   ########.fr       */
+/*   Created: 2025/04/29 12:23:22 by jonas             #+#    #+#             */
+/*   Updated: 2025/04/29 12:45:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_H
-# define WINDOW_H
+#include "cub3d.h"
 
-# include "cub3d.h"
+int	get_handle_key(int keycode, int set)
+{
+	static int	handle_key = 0;
 
-int		drawstr(char *str, int fd, int _return);
-int		set_window(t_mlx *mlx);
-void	run_window(t_game *game);
-void	render(t_mlx *mlx);
-int		get_handle_key(int keycode, int set);
-t_keys	*get_keys(void);
+	if (set)
+		handle_key = keycode;
+	return (handle_key);
+}
 
-#endif
+t_keys	*get_keys(void)
+{
+	static t_keys	keys[5] = {
+	{119, &move_w},
+	{97, &move_a},
+	{115, &move_s},
+	{100, &move_d}
+	};
+
+	return (keys);
+}

@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_angle_dir_x_y.c                             :+:      :+:    :+:   */
+/*   show_distances.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 16:56:52 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/28 18:51:18 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/04/24 22:40:58 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/24 22:40:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	update_angle_dir_x_y(t_game *game, int keycode)
+void	show_distances(t_game *game)
 {
-	if (keycode == 65361)
-		game->angle -= ROTATION_SPEED;
-	else if (keycode == 65363)
-		game->angle += ROTATION_SPEED;
-	if (game->angle < 0)
-		game->angle += 2 * M_PI;
-	if (game->angle >= 2 * M_PI)
-		game->angle -= 2 * M_PI;
-	game->dir_x = cos(game->angle);
-	game->dir_y = sin(game->angle);
-	get_plane_x_y(game);
+	printf("Distance: %f\n\n", game->distance);
+	printf("Distance Left: %f\n\n", game->distance_l);
+	printf("Distance Right: %f\n\n", game->distance_r);
 }

@@ -6,11 +6,19 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 22:54:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/24 17:02:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/28 11:14:08 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static void	set_more_more_things(t_game *game)
+{
+	game->no_addr = NULL;
+	game->so_addr = NULL;
+	game->we_addr = NULL;
+	game->ea_addr = NULL;
+}
 
 static void	set_more_things(t_game *game)
 {
@@ -20,7 +28,7 @@ static void	set_more_things(t_game *game)
 	game->min_row = 0;
 	game->max_col = 0;
 	game->min_col = 0;
-	game->dir_x = 0;
+	game->dir_x = 1;
 	game->dir_y = 0;
 	game->width_map = 0;
 	game->heigth_map = 0;
@@ -28,9 +36,17 @@ static void	set_more_things(t_game *game)
 	game->angle_left = 0;
 	game->angle_right = 0;
 	game->dir_left_x = 0;
-	game->dir_right_y = 0;
 	game->dir_left_y = 0;
 	game->dir_right_x = 0;
+	game->dir_right_y = 0;
+	game->ea_img = NULL;
+	game->so_img = NULL;
+	game->no_img = NULL;
+	game->we_img = NULL;
+	game->wall_3d_height = 0;
+	game->wall_3d_width = 0;
+	game->screen_w = 0;
+	set_more_more_things(game);
 }
 
 void	init_all_things(t_game *game)
@@ -57,5 +73,6 @@ void	init_all_things(t_game *game)
 	game->ea_texture_index = 0;
 	game->floor_colours_index = 0;
 	game->ceiling_colours_index = 0;
+	game->screen_h = 0;
 	set_more_things(game);
 }

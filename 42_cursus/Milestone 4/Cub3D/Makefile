@@ -66,6 +66,16 @@ SRCS =  $(SRCDIR)/cub3d/main.c\
 	$(SRCDIR)/bonus/draw_radius.c\
 	$(SRCDIR)/bonus/update_angle_dir_x_y.c\
 	$(SRCDIR)/bonus/draw_fov.c\
+	$(SRCDIR)/bonus/get_distance.c\
+	$(SRCDIR)/init_game/check_and_set_images.c\
+	$(SRCDIR)/the_cub_3d_powered/init_all_3d.c\
+	$(SRCDIR)/the_cub_3d_powered/render_the_3d.c\
+	$(SRCDIR)/the_cub_3d_powered/draw_floor.c\
+	$(SRCDIR)/the_cub_3d_powered/draw_ceiling.c\
+	$(SRCDIR)/ray_cast/can_move.c\
+	$(SRCDIR)/ray_cast/get_plane_x_y.c\
+	$(SRCDIR)/ray_cast/movements.c\
+	$(SRCDIR)/set_window/get_keys.c\
 	$(SRCDIR)/cub3d/destroy.c
 
 #OBJS

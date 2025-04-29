@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 20:26:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 17:26:07 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/25 18:47:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,29 @@ static void	clear_all_textures(t_game *game)
 	game->ceiling_colours = NULL;
 }
 
+static void	clear_all_images(t_game *game)
+{
+	if (game->ea_img)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->ea_img);
+	if (game->no_img)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->no_img);
+	if (game->so_img)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->so_img);
+	if (game->we_img)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->we_img);
+	game->ea_img = NULL;
+	game->no_img = NULL;
+	game->so_img = NULL;
+	game->we_img = NULL;
+}
+
 int	free_game(t_game *game)
 {
 	if (!game)
 		return (1);
 	if (game->maps)
 		free_map(game);
+	clear_all_images(game);
 	clear_all_textures(game);
 	if (game->true_game_map)
 		free_true_game_map(game);

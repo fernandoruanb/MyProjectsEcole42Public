@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 10:04:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/24 13:29:12 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:58:13 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void	show_the_art_to_godness(t_game *game, int s_y, int s_x, int c)
 		while (x < TILE_SIZE)
 		{
 			mlx_pixel_put(game->mlx.mlx_ptr, game->mlx.win,
-				s_x + x, s_y + y, c);
+				(s_x + x) * MINIMAP_SCALE, (s_y + y)
+				* MINIMAP_SCALE, c);
 			x++;
 		}
 		y++;
@@ -39,21 +40,22 @@ static void	draw_the_player(t_game *game)
 {
 	int	new_player_x_location;
 	int	new_player_y_location;
-	int	color;
 	int	x;
 	int	y;
 
-	new_player_x_location = (game->width / 2) - (TILE_SIZE / 4);
-	new_player_y_location = (game->heigth / 2) - (TILE_SIZE / 4);
-	color = COLOUR_PLAYER;
+	new_player_x_location = ((game->width / 2)
+			- (TILE_SIZE / 4)) * MINIMAP_SCALE;
+	new_player_y_location = ((game->heigth / 2)
+			- (TILE_SIZE / 4)) * MINIMAP_SCALE;
 	y = 0;
-	while (y < TILE_SIZE / 2)
+	while (y < TILE_SIZE / 4)
 	{
 		x = 0;
-		while (x < TILE_SIZE / 2)
+		while (x < TILE_SIZE / 4)
 		{
 			mlx_pixel_put(game->mlx.mlx_ptr, game->mlx.win,
-				x + new_player_x_location, y + new_player_y_location, color);
+				x + new_player_x_location, y
+				+ new_player_y_location, COLOUR_PLAYER);
 			x++;
 		}
 		y++;
@@ -77,10 +79,10 @@ void	minimap(t_game *game)
 		{
 			c = game->true_game_map[index][count];
 			if (c == '1')
-				color = COLOUR_WALL;
+				color = COLOUR_DEFAULT;
 			else if (c == '0' || c == 'N' || c == 'W' || c == 'E'
 				|| c == 'S')
-				color = COLOUR_FLOOR;
+				color = ft_atoi_base(game->rrggbb_floor + 2, 16);
 			if (c == '0' || c == '1' || c == 'N'
 				|| c == 'W' || c == 'E' || c == 'S')
 				show_the_art_to_godness(game, index, count, color);

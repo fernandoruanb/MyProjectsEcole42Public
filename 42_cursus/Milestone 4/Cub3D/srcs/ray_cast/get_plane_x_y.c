@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   get_plane_x_y.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/21 13:23:51 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/22 15:29:04 by jonas            ###   ########.fr       */
+/*   Created: 2025/04/28 15:47:54 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/04/28 15:52:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	destroy(t_game *game)
+void	get_plane_x_y(t_game *game)
 {
-	free_game(game);
-	if (game->mlx.win)
-		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win);
-	if (game->mlx.mlx_ptr)
-	{
-		mlx_destroy_display(game->mlx.mlx_ptr);
-		free(game->mlx.mlx_ptr);
-	}
-	exit(0);
+	game->plane_x = -game->dir_y * 0.66;
+	game->plane_y = game->dir_x * 0.66;
 }

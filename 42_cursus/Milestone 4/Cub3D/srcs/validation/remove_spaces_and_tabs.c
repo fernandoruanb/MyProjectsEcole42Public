@@ -47,7 +47,8 @@ static char	*do_magic(char *str, int *flag)
 	count = 0;
 	while (str[index] != '\0')
 	{
-		if (str[index] != ' ' && str[index] != '\t')
+		if (str[index] != ' ' && str[index] != '\t'
+			&& str[index] != '\n')
 			new_str[count++] = str[index];
 		index++;
 	}

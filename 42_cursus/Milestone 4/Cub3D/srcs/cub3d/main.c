@@ -3,26 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:29:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/23 18:44:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:39:50 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+static int	check_can_open_file(char *filename)
+{
+	int	fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (ft_putendl_fd_0("Error: unable to open file", 2));
+	close(fd);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	*game;
-	int		fd;
 
 	if (argc < 2)
 		return (ft_putendl_fd_1("How to use: ./cub3d <map.cub>", 2));
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (ft_putendl_fd_1("Error: unable to open file", 2));
-	close(fd);
+	if (!check_can_open_file(argv[1]))
+		return (1);
 	if (!check_cub(argv[1]))
 		return (1);
 	game = get_t_game();
