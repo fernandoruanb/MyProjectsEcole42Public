@@ -25,6 +25,7 @@ SRCS =  $(SRCDIR)/cub3d/main.c\
 	$(SRCDIR)/validation/check_cub.c\
 	$(SRCDIR)/init_game/init_game.c\
 	$(SRCDIR)/init_game/get_map.c\
+	$(SRCDIR)/the_cub_3d_powered/get_tex_colour.c\
 	$(SRCDIR)/free_game/free_game.c\
 	$(SRCDIR)/init_game/init_all_things.c\
 	$(SRCDIR)/init_game/get_map_textures.c\
@@ -76,7 +77,16 @@ SRCS =  $(SRCDIR)/cub3d/main.c\
 	$(SRCDIR)/ray_cast/get_plane_x_y.c\
 	$(SRCDIR)/ray_cast/movements.c\
 	$(SRCDIR)/set_window/get_keys.c\
-	$(SRCDIR)/cub3d/destroy.c
+	$(SRCDIR)/dda/calculate_perp_dist_update_wall.c\
+	$(SRCDIR)/dda/dda_loop.c\
+	$(SRCDIR)/dda/init_camera_plane.c\
+	$(SRCDIR)/dda/init_dda_params.c\
+	$(SRCDIR)/set_window/mouse.c\
+	$(SRCDIR)/dda/init_ray.c\
+	$(SRCDIR)/cub3d/destroy.c\
+	$(SRCDIR)/utils/get_sign.c\
+	$(SRCDIR)/utils/fps_control.c\
+	$(SRCDIR)/init_game/find_texture.c
 
 #OBJS
 
@@ -90,6 +100,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	@$(MAKE) -C $(MLXDIR) --no-print-directory
 	@$(CC) $(CFLAGS) -I $(INCDIR) -I $(MLXDIR) -o $(NAME) $(OBJS) $(MLXFLAGS) $(LIBFT)
 
 # .c -> .o

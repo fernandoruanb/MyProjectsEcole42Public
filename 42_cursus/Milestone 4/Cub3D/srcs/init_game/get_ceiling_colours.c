@@ -20,8 +20,7 @@ int	get_ceiling_colours(t_game *game)
 	index = 0;
 	while (game->maps[index] != NULL)
 	{
-		if (game->maps[index][0] && game->maps[index][1]
-			&& game->maps[index][0] == 'C')
+		if (find_texture(game->maps[index], "C ", 2))
 		{
 			get_c_colours = ft_split(game->maps[index], ' ');
 			remove_spaces_and_tabs(&get_c_colours);

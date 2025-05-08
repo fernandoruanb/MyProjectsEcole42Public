@@ -20,9 +20,7 @@ int	get_no_texture(t_game *game)
 	index = 0;
 	while (game->maps[index] != NULL)
 	{
-		if (game->maps[index][0] && game->maps[index][1]
-			&& game->maps[index][0] == 'N'
-			&& game->maps[index][1] == 'O')
+		if (find_texture(game->maps[index], "NO ", 3))
 		{
 			get_no = ft_split(game->maps[index], ' ');
 			remove_spaces_and_tabs(&get_no);

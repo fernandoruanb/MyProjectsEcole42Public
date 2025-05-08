@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:10:07 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/29 12:42:05 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:39:55 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ static int	get_heigth(t_game *game)
 
 int	get_width_heigth(t_game *game)
 {
-	if (set_window(&game->mlx))
-		return (0);
-	mlx_get_screen_size(game->mlx.mlx_ptr, &game->screen_w, &game->screen_h);
 	game->width = get_width(game);
 	if (game->width == -1)
 		return (ft_putendl_fd_0("Error: invalid width", 2));
@@ -66,7 +63,12 @@ int	get_width_heigth(t_game *game)
 		return (ft_putendl_fd_0("Error: invalid heigth", 2));
 	game->heigth_map = game->heigth;
 	game->heigth *= TILE_SIZE;
-	game->heigth = game->screen_h;
-	game->width = game->screen_w;
+	if (!flood_fill(game))
+		return (0);
+	if (set_window(&game->mlx))
+		return (0);
+	mlx_get_screen_size(game->mlx.mlx_ptr, &game->screen_w, &game->screen_h);
+	game->heigth = 1080;
+	game->width = 1920;
 	return (1);
 }

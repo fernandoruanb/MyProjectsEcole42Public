@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:21:48 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/29 17:45:01 by jonas            ###   ########.fr       */
+/*   Updated: 2025/05/07 21:13:36 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	handle_no_event(t_game *game)
 	key = get_handle_key(0, 0);
 	game->min_row = game->offset_y / TILE_SIZE;
 	game->min_col = game->offset_x / TILE_SIZE;
-	render_the_3d(game);
+	fps_control(game);
 	keys = get_keys();
 	i = -1;
 	while (++i < 4)
@@ -47,12 +47,20 @@ static int	handle_input(int key, t_game *game)
 	return (0);
 }
 
+static int	handle_mouse(int x, int y, t_game *game)
+{
+	t_mouse	*mouse;
+
+	mouse = &game->mouse;
+	fill_struct(mouse, x, y);
+	update_angle_mouse(game, mouse);
+	return (0);
+}
+
 void	run_window(t_game *game)
 {
 	if (!game)
 		return ;
-	ft_printf("Screen Width: %d\n", game->screen_w);
-	ft_printf("Screen Heigth: %d\n", game->screen_h);
 	if (game->width > game->screen_w)
 		game->width = game->screen_w;
 	if (game->heigth > game->screen_h)
@@ -61,5 +69,6 @@ void	run_window(t_game *game)
 	mlx_hook(game->mlx.win, 17, 0, &destroy, game);
 	mlx_hook(game->mlx.win, 2, 1L << 0, &handle_input, game);
 	mlx_hook(game->mlx.win, 3, 1L << 1, &handle_key_release, NULL);
+	mlx_hook(game->mlx.win, 6, 1L << 6, &handle_mouse, game);
 	mlx_loop(game->mlx.mlx_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 12:55:55 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/29 12:59:49 by jonas            ###   ########.fr       */
+/*   Updated: 2025/05/07 14:58:09 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,38 @@
 # include <limits.h>
 # include "cub3d.h"
 # define TILE_SIZE 64
+
+typedef struct s_ray
+{
+	double	px;
+	double	py;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+}	t_ray;
+
+typedef struct s_dda
+{
+	int		hit;
+	int		side;
+	double	raydirx;
+	double	raydiry;
+	int		mapx;
+	int		mapy;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
+	double	deltadistx;
+	double	deltadisty;
+	int		stepx;
+	int		stepy;
+	double	px;
+	double	py;
+	double	perpwalldist;
+	double	sidedistx;
+	double	sidedisty;
+}	t_dda;
 
 typedef struct s_angle
 {
@@ -36,13 +68,13 @@ typedef struct s_player
 	int	angle;
 }	t_player;
 
+typedef struct s_game	t_game;
+
 typedef struct s_map
 {
 	char		***map;
 	t_player	player;
 }	t_map;
-
-typedef struct s_game	t_game;
 
 typedef struct s_keys
 {
@@ -50,27 +82,47 @@ typedef struct s_keys
 	void	(*f)(t_game*);
 }	t_keys;
 
+typedef struct s_tex
+{
+	char	*addr;
+	int		bpp;
+	int		linelen;
+	int		endian;
+}	t_tex;
+
+typedef struct s_mouse
+{
+	int		x;
+	int		y;
+	int		prev_x;
+	int		prev_y;
+	void	*target;
+}	t_mouse;
+
 typedef struct s_game
 {
 	t_mlx	mlx;
 	t_map	map;
 	t_keys	keys;
-	void	*no_addr;
-	void	*so_addr;
-	void	*ea_addr;
-	void	*we_addr;
-	int		bpp_no;
-	int		bpp_so;
-	int		bpp_we;
-	int		bpp_ea;
-	int		line_length_no;
-	int		line_length_so;
-	int		line_length_we;
-	int		line_length_ea;
-	int		endian_no;
-	int		endian_so;
-	int		endian_we;
-	int		endian_ea;
+	t_dda	dda;
+	t_ray	rays;
+	t_tex	no;
+	t_tex	so;
+	t_tex	ea;
+	t_tex	we;
+	t_mouse	mouse;
+	int		pitch;
+	int		minimap_w;
+	int		minimap_h;
+	double	origin_x;
+	double	origin_y;
+	double	world_x;
+	double	world_y;
+	double	center_y;
+	double	center_x;
+	double	player_size;
+	double	start_x;
+	double	start_y;
 	double	plane_x;
 	double	plane_y;
 	char	*no_texture;

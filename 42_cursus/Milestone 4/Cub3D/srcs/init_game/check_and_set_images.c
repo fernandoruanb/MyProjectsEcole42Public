@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_and_set_images.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 17:54:50 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/28 12:04:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:00:54 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 static int	get_all_images_addr(t_game *game)
 {
-	game->no_addr = mlx_get_data_addr(game->no_img, &game->bpp_no,
-			&game->line_length_no, &game->endian_no);
-	if (!game->no_addr)
+	game->no.addr = mlx_get_data_addr(game->no_img, &game->no.bpp,
+			&game->no.linelen, &game->no.endian);
+	if (!game->no.addr)
 		return (0);
-	game->so_addr = mlx_get_data_addr(game->so_img, &game->bpp_so,
-			&game->line_length_so, &game->endian_so);
-	if (!game->so_addr)
+	game->so.addr = mlx_get_data_addr(game->so_img, &game->so.bpp,
+			&game->so.linelen, &game->so.endian);
+	if (!game->so.addr)
 		return (0);
-	game->we_addr = mlx_get_data_addr(game->we_img, &game->bpp_we,
-			&game->line_length_we, &game->endian_we);
-	if (!game->we_addr)
+	game->we.addr = mlx_get_data_addr(game->we_img, &game->we.bpp,
+			&game->we.linelen, &game->we.endian);
+	if (!game->we.addr)
 		return (0);
-	game->ea_addr = mlx_get_data_addr(game->ea_img, &game->bpp_ea,
-			&game->line_length_ea, &game->endian_ea);
-	if (!game->ea_addr)
+	game->ea.addr = mlx_get_data_addr(game->ea_img, &game->ea.bpp,
+			&game->ea.linelen, &game->ea.endian);
+	if (!game->ea.addr)
 		return (0);
 	return (1);
 }
@@ -54,6 +54,7 @@ int	check_and_set_images(t_game *game)
 			game->ea_texture, &width, &heigth);
 	if (!game->ea_img || width != TILE_SIZE || heigth != TILE_SIZE)
 		return (0);
+	game->mouse.target = get_target(&game->mlx);
 	if (!get_all_images_addr(game))
 		return (0);
 	return (1);

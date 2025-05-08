@@ -6,26 +6,18 @@
 /*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 13:02:35 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/29 11:31:58 by jonas            ###   ########.fr       */
+/*   Updated: 2025/05/07 15:31:38 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int	init_mlx(t_mlx *mlx)
-{
-	mlx->mlx_ptr = mlx_init();
-	if (!mlx->mlx_ptr)
-		return (drawstr("Error: mlx error\n", 2, 1));
-	return (0);
-}
 
 int	set_window(t_mlx *mlx)
 {
 	int	win_w;
 	int	win_h;
 
-	if (!mlx || init_mlx(mlx))
+	if (!mlx)
 		return (1);
 	win_w = 1920;
 	win_h = 1080;

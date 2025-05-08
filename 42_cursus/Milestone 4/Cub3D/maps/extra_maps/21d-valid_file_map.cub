@@ -1,13 +1,18 @@
 
 
-NO ./maps/croissant.png
-            
-            
-SO ./maps/croissant.png
-        
-WE ./maps/croissant.png
+NO ./images/wall.xpm
 
-EA ./maps/croissant.png
+
+SO ./images/ender64.xpm
+WE ./images/blue.xpm
+
+
+
+
+
+
+
+EA ./images/white.xpm
 
 
 F 100,100,0
@@ -28,4 +33,3 @@ C 225,100,0
 11000001110101011101011010N0111  
 11110111 1110101 101111010001    
 11111111 1111111 111111111111    
-

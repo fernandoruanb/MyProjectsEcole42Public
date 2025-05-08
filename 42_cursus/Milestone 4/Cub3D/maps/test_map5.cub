@@ -1,10 +1,10 @@
-NO ./path_to_no.xpm
+		NO ./images/blockwall.xpm
 
-SO ./path_to_so.xpm
+SO ./images/ruins.xpm
 
-WE ./path_to_we.xpm
+WE ./images/brickWall.xpm
 
-EA ./path_to_ea.xpm oi
+EA ./images/wall1.xpm oi
 
 F 200,200,200
 C 200,200,200

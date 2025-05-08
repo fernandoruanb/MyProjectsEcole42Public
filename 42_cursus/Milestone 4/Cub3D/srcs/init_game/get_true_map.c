@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 10:35:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 13:24:46 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/04 10:41:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,31 @@ static int	get_the_base(int index, t_game *game)
 	return (1);
 }
 
+static int	empty_line(char *line)
+{
+	int	index;
+	int	flag;
+
+	index = 0;
+	flag = 0;
+	if (find_texture(line, "NO ", 3)
+		|| find_texture(line, "SO ", 3)
+		|| find_texture(line, "WE ", 3)
+		|| find_texture(line, "EA ", 3)
+		|| find_texture(line, "F ", 2)
+		|| find_texture(line, "C ", 2))
+		return (1);
+	while (line[index] != '\0' && line[index] != '\n' && flag == 0)
+	{
+		if (line[index] != ' ' && line[index] != '\t')
+			flag = 1;
+		index++;
+	}
+	if (flag == 0)
+		return (1);
+	return (0);
+}
+
 int	get_true_map(t_game *game)
 {
 	int	index;
@@ -80,7 +105,8 @@ int	get_true_map(t_game *game)
 			&& ft_strncmp(game->maps[index], "EA", 2) != 0
 			&& ft_strncmp(game->maps[index], "\n", 1) != 0
 			&& ft_strncmp(game->maps[index], "F", 1) != 0
-			&& ft_strncmp(game->maps[index], "C", 1) != 0)
+			&& ft_strncmp(game->maps[index], "C", 1) != 0
+			&& !empty_line(game->maps[index]))
 		{
 			if (!get_the_base(index, game))
 				return (0);
@@ -88,5 +114,5 @@ int	get_true_map(t_game *game)
 		}
 		index++;
 	}
-	return (1);
+	return (0);
 }

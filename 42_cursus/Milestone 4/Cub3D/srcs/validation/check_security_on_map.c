@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:11:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 12:57:33 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/03 18:58:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	check_security_on_map(t_game *game)
 			|| ft_strncmp(game->maps[index], "1", 1) == 0
 			|| ft_strncmp(game->maps[index], "F", 1) == 0
 			|| ft_strncmp(game->maps[index], "C", 1) == 0
-			|| ft_strncmp(game->maps[index], " ", 1) == 0)
+			|| ft_strncmp(game->maps[index], " ", 1) == 0
+			|| ft_strncmp(game->maps[index], "\t", 1) == 0)
 			index++;
 		else
 			return (ft_putendl_fd_0("Error: Danger Zone", 2));

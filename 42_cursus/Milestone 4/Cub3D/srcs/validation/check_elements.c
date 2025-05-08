@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 14:49:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 15:03:45 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/03 21:59:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	check_each_element(char c, t_game *game, int y, int x)
 		game->player_x = x;
 		game->player_y = y;
 	}
-	if (!ft_strchr(elements, c) && c != ' ')
+	if (!ft_strchr(elements, c) && c != ' ' && c != '\t')
 		return (ft_putendl_fd_0("Error: invalid element on map", 2));
 	return (1);
 }

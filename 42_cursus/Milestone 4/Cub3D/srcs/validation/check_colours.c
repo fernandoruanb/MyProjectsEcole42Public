@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 16:34:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 12:52:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/04 11:41:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	check_is_only_numbers(char **colours)
 			&& colours[index][count] != '\0')
 		{
 			if (!ft_isdigit(colours[index][count]))
-				return (0);
+				return (ft_putendl_fd_0("Error: Crazy RGB", 2));
 			count++;
 		}
 		index++;

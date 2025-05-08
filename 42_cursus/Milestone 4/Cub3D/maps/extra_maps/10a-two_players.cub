@@ -1,10 +1,10 @@
        C 2,2,255
        F 255,255,255
 
-	NO ./maps/croissant-NO.png
-	SO ./maps/croissant-SO.png
-	EA ./maps/croissant-EA.png
-	WE ./maps/croissant-WE.png
+	NO ./maps/croissant-NO.xpm
+	SO ./maps/croissant-SO.xpm
+	EA ./maps/croissant-EA.xpm
+	WE ./maps/croissant-WE.xpm
        
        1111111111111111111111111
        1000000000110000000000001

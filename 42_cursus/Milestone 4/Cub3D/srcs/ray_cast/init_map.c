@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:23:38 by jopereir          #+#    #+#             */
-/*   Updated: 2025/04/23 12:47:53 by jopereir         ###   ########.fr       */
+/*   Updated: 2025/05/05 18:42:14 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ static void	init_player(t_player *player, t_game *game)
 	{
 		j = -1;
 		while (game->true_game_map[i][++j])
+		{
 			if (get_angle(game->true_game_map[i][j]))
 			{
 				set_angle(game->true_game_map[i][j], player);
 				return ;
 			}
+		}
 		i++;
 	}
 	player->angle = 90;
