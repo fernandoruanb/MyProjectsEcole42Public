@@ -51,7 +51,6 @@ SRCS =  $(SRCDIR)/cub3d/main.c\
 	$(SRCDIR)/validation/flood_fill.c\
 	$(SRCDIR)/utils/drawstr.c\
 	$(SRCDIR)/set_window/set_window.c\
-	$(SRCDIR)/set_window/render.c\
 	$(SRCDIR)/set_window/run_window.c\
 	$(SRCDIR)/validation/check_security_on_map.c\
 	$(SRCDIR)/validation/check_is_anything_equal.c\
@@ -86,6 +85,7 @@ SRCS =  $(SRCDIR)/cub3d/main.c\
 	$(SRCDIR)/cub3d/destroy.c\
 	$(SRCDIR)/utils/get_sign.c\
 	$(SRCDIR)/utils/fps_control.c\
+	$(SRCDIR)/validation/find_another.c\
 	$(SRCDIR)/init_game/find_texture.c
 
 #OBJS

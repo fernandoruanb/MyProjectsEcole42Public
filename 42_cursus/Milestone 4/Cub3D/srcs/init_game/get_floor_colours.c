@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 09:45:39 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/22 11:00:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/09 12:20:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	get_floor_colours(t_game *game)
 	{
 		if (find_texture(game->maps[index], "F ", 2))
 		{
+			if (find_another(game->maps, index, "F "))
+				return (0);
 			get_f_colours = ft_split(game->maps[index], ' ');
 			remove_spaces_and_tabs(&get_f_colours);
 			if (!check_split_length(get_f_colours))

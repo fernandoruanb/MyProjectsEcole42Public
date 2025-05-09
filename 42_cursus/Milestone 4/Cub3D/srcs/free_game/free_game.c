@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jonas <jonas@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 20:26:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/25 18:47:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/07 22:57:05 by jonas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ static void	clear_all_images(t_game *game)
 		mlx_destroy_image(game->mlx.mlx_ptr, game->so_img);
 	if (game->we_img)
 		mlx_destroy_image(game->mlx.mlx_ptr, game->we_img);
+	if (game->mouse.target)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->mouse.target);
 	game->ea_img = NULL;
 	game->no_img = NULL;
 	game->so_img = NULL;
