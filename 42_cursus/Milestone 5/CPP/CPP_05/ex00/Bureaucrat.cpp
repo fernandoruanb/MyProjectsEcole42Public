@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:55:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/10 20:02:26 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:10:17 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ Bureaucrat&	Bureaucrat::operator--(void)
 
 std::ostream& operator<<(std::ostream &out, const Bureaucrat &other)
 {
-	out << other.getName() << ", bureaucrat grade " << other.getGrade() << "." << std::endl;
+	out << other.getName() << ", bureaucrat grade " << other.getGrade() << ".";
 	return (out);
 }
 

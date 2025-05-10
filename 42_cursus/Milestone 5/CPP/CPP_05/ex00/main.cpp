@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 17:28:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/10 19:55:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:10:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(void)
 		std::cout << b.getName() << std::endl;
 		std::cout << a.getGrade() << std::endl;
 		++a;
+		std::cout << a << std::endl;
 		std::cout << a.getGrade() << std::endl;
 		std::cout << b.getGrade() << std::endl;
 	}
