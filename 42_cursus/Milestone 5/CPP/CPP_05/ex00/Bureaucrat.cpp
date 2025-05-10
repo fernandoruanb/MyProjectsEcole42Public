@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:55:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/10 19:44:07 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:02:26 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,16 @@ Bureaucrat	Bureaucrat::operator++(int)
 {
 	Bureaucrat	result(*this);
 
+	if (grade < 1)
+		throw GradeTooHighException();
 	--(*this);
 	return (result);
 }
 
-Bureaucrat	Bureaucrat::operator++(void)
+Bureaucrat&	Bureaucrat::operator++(void)
 {
+	if (grade < 1)
+		throw GradeTooHighException();
 	grade--;
 	return (*this);
 }
@@ -69,12 +73,16 @@ Bureaucrat	Bureaucrat::operator--(int)
 {
 	Bureaucrat result(*this);
 
+	if (grade >= 150)
+		throw GradeTooLowException();
 	++(*this);
 	return (result);
 }
 
-Bureaucrat	Bureaucrat::operator--(void)
+Bureaucrat&	Bureaucrat::operator--(void)
 {
+	if (grade >= 150)
+		throw GradeTooLowException();
 	grade++;
 	return (*this);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:25:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/10 19:38:05 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:02:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ class	Bureaucrat
 		~Bureaucrat(void);
 		Bureaucrat(std::string name, int grade);
 		Bureaucrat& operator=(const Bureaucrat &other);
-		Bureaucrat operator++(void);
-		Bureaucrat operator--(void);
+		Bureaucrat& operator++(void);
+		Bureaucrat& operator--(void);
 		Bureaucrat operator--(int);
 		Bureaucrat operator++(int);
 		Bureaucrat(Bureaucrat &other);
