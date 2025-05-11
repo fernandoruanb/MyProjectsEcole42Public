@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:09:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 13:44:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:54:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ Form::Form(std::string name, bool is_sign, int sign_grade, int sign_execute): na
 
 Form::Form(Form &another)
 {
-	if (another.sign_grade < 1 || another.sign_execute < 1)
+	if (another.getSignGrade() < 1 || another.getSignExecute() < 1)
 		throw GradeTooHighException();
-	if (another.sign_grade > 150 || sign_execute > 150)
+	if (another.getSignGrade() > 150 || another.getSignExecute() > 150)
 		throw GradeTooLowException();
 	std::cout << "Copy constructor called for " << name << " Form";
 }
@@ -48,9 +48,9 @@ Form& Form::operator=(Form &other)
 {
 	if (this != &other)
 	{
-		if (other.sign_grade < 1 || other.sign_execute < 1)
+		if (other.getSignGrade() < 1 || other.getSignExecute() < 1)
 			throw GradeTooHighException();
-		if (other.sign_grade > 150 || other.sign_execute > 150)
+		if (other.getSignGrade() > 150 || other.getSignExecute() > 150)
 			throw GradeTooLowException();
 		this->is_sign = other.getIsSign();
 		this->sign_grade = other.getSignGrade();
@@ -71,7 +71,10 @@ int	Form::getSignExecute(void) const
 
 std::ostream& operator<<(std::ostream &out, Form &another)
 {
-	out << "Form: " << another.getFormName();
+	out << "Form: " << another.getFormName() << std::endl
+		<< "Is_Sign: " << another.getIsSign() << std::endl
+		<< "Sign_Grade: " << another.getSignGrade() << std::endl
+		<< "Sign_Execute: " << another.getSignExecute() << std::endl;
 	return (out);
 }
 

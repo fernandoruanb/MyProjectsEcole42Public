@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:55:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 13:10:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:59:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,13 @@ Bureaucrat::~Bureaucrat(void)
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 {
 	if (this != &other)
+	{
+		if (other.getGrade() < 1)
+			throw GradeTooHighException();
+		if (other.getGrade() > 150)
+			throw GradeTooLowException();
 		this->grade = other.getGrade();
+	}
 	return (*this);
 }
 
@@ -100,12 +106,7 @@ std::string	Bureaucrat::getName(void) const
 
 void	Bureaucrat::signForm(Form &form) const
 {
-	if (form.getIsSign())
-	{
-		std::cout << "The form is already signed" << std::endl;
-		return ;
-	}
-	else if (grade <= form.getSignGrade())
+	if (grade <= form.getSignGrade())
 	{
 		form.setIsSign(1);
 		std::cout << name << " signed " << form.getFormName() << std::endl;

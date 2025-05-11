@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 17:28:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 13:22:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:59:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@ int	main(void)
 	try
 	{
 		Bureaucrat a("Robson", 3);
-		Form form1("Formula 1", false, 250, 120);
+		Form form1("Formula 1", false, 20, 10);
 		Bureaucrat b;
 
 		std::cout << a.getName() << std::endl;
 		std::cout << b.getName() << std::endl;
 		std::cout << a.getGrade() << std::endl;
 		++a;
-		std::cout << a << std::endl;
+		++a;
+		std::cout << "New grade: " <<  a << std::endl;
 		a.signForm(form1);
+		b.signForm(form1);
+		std::cout << form1;
 		form1.beSigned(form1);
 		std::cout << a.getGrade() << std::endl;
 		std::cout << b.getGrade() << std::endl;
