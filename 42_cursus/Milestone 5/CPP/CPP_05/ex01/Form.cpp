@@ -6,11 +6,13 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:09:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 15:54:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 19:04:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
+
+class Bureaucrat;
 
 Form::Form(void): name("aleatory_form"), is_sign(false), sign_grade(100), sign_execute(70)
 {
@@ -131,12 +133,16 @@ void	Form::setIsSign(bool god_decision)
 	is_sign = god_decision;
 }
 
-void	Form::beSigned(const Form &check)
+void	Form::beSigned(const Bureaucrat &check)
 {
-	if (check.getIsSign())
-		std::cout << "The Form is signed" << std::endl;
+	if (check.getGrade() <= this->sign_grade)
+	{
+		std::cout << check.getName() << " signed " << this->name << std::endl;
+		this->is_sign = 1;
+	}
 	else
-		std::cout << "The Form isn't signed" << std::endl;
+		std::cout << check.getName() << " couldn't sign " << this->name 
+			<< " because low grade" << std::endl;
 }
 
 const char	*Form::GradeTooHighException::what() const throw()

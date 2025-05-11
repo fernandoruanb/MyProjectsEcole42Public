@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 17:28:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 15:59:58 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 19:05:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,24 @@ int	main(void)
 {
 	try
 	{
-		Bureaucrat a("Robson", 3);
+		Bureaucrat a("Robson", 10);
 		Form form1("Formula 1", false, 20, 10);
 		Bureaucrat b;
 
 		std::cout << a.getName() << std::endl;
 		std::cout << b.getName() << std::endl;
-		std::cout << a.getGrade() << std::endl;
-		++a;
+		std::cout << "Bureaucrat A first grade: " << a.getGrade() << std::endl;
 		++a;
 		std::cout << "New grade: " <<  a << std::endl;
 		a.signForm(form1);
 		b.signForm(form1);
 		std::cout << form1;
-		form1.beSigned(form1);
-		std::cout << a.getGrade() << std::endl;
-		std::cout << b.getGrade() << std::endl;
+		form1.beSigned(a);
+		form1.beSigned(b);
+		a.signForm(form1);
+		b.signForm(form1);
+		std::cout << "Last A grade: " << a.getGrade() << std::endl;
+		std::cout << "Last B grade: " << b.getGrade() << std::endl;
 	}
 	catch (const Bureaucrat::GradeTooLowException &exception)
 	{
