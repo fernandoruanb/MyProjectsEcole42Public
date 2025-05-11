@@ -6,14 +6,18 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:10:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/10 22:35:58 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 12:56:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORM_HPP
 # define FORM_HPP
 
-#include "Bureaucrat.hpp"
+# include "Bureaucrat.hpp"
+# include <exception>
+# include <iostream>
+
+class Bureaucrat;
 
 class Form
 {
@@ -24,7 +28,7 @@ class Form
 		int	sign_execute;
 	public:
 		Form(void);
-		Form(std::string name, bool is_sign, int sign_grade, sign_execute);
+		Form(std::string name, bool is_sign, int sign_grade, int sign_execute);
 		Form(Form &another);
 		~Form(void);
 		Form& operator=(Form &other);
@@ -32,9 +36,20 @@ class Form
 		Form& operator++(void);
 		Form operator--(int);
 		Form operator++(int);
-		void	beSigned(Bureaucrat &check);
+		void	beSigned(const Bureaucrat &check);
 		std::string	getFormName(void) const;
 		bool	getIsSign(void) const;
+		int	getSignGrade(void) const;
+		int	getSignExecute(void) const;
+		void	setIsSign(bool god_decision);
+		class GradeTooHighException: public std::exception
+		{
+			virtual const char *what() const throw();
+		};
+		class GradeTooLowException: public std::exception
+		{
+			virtual const char *what() const throw();
+		};
 };
 std::ostream& operator<<(std::ostream &out, Form &another);
 

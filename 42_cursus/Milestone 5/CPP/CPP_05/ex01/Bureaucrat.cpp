@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:55:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/10 22:27:36 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 12:54:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,20 @@ std::string	Bureaucrat::getName(void) const
 	return (name);
 }
 
-std::string	Bureaucrat::signForm(Form &form) const
+void	Bureaucrat::signForm(Form &form) const
 {
-	if (form.is_sign)
+	if (form.getIsSign())
+	{
+		std::cout << "The form is already signed" << std::endl;
+		return ;
+	}
+	else if (grade >= form.getSignGrade())
+	{
+		form.setIsSign(1);
 		std::cout << name << " signed " << form.getFormName();
+	}
+	else
+		std::cout << name << " didn't sign because the grade" << std::endl;
 }
 
 int	Bureaucrat::getGrade(void) const
