@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:25:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/10 20:02:47 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:44:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ class	Bureaucrat
 		int	getGrade(void) const;
 		class GradeTooHighException: public std::exception
 		{
-			virtual const char *what() const throw();
+			public:
+				virtual const char *what() const throw();
 		};
 		class GradeTooLowException: public std::exception
 		{
-			virtual const char *what() const throw();
+			public:
+				virtual const char *what() const throw();
 		};
 };
 std::ostream& operator<<(std::ostream &out, const Bureaucrat &other);

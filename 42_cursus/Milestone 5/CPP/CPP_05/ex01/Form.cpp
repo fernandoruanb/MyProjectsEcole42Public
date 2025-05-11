@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:09:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 13:08:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:44:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,10 @@ void	Form::beSigned(const Form &check)
 
 const char	*Form::GradeTooHighException::what() const throw()
 {
-	return ("Grade is too high\n");
+	return ("Form grade is too high\n");
 }
 
 const char	*Form::GradeTooLowException::what() const throw()
 {
-	return ("Grade is too low\n");
+	return ("Form grade is too low\n");
 }

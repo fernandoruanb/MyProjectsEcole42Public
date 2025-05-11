@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 17:28:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 13:08:39 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:22:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(void)
 	try
 	{
 		Bureaucrat a("Robson", 3);
-		Form form1("Formula 1", false, 100, 120);
+		Form form1("Formula 1", false, 250, 120);
 		Bureaucrat b;
 
 		std::cout << a.getName() << std::endl;
@@ -30,13 +30,21 @@ int	main(void)
 		std::cout << a.getGrade() << std::endl;
 		std::cout << b.getGrade() << std::endl;
 	}
-	catch (Bureaucrat::GradeTooLowException &exception)
+	catch (const Bureaucrat::GradeTooLowException &exception)
 	{
 		std::cerr << "Grade is too low" << std::endl;
 	}
-	catch (Bureaucrat::GradeTooHighException &exception)
+	catch (const Bureaucrat::GradeTooHighException &exception)
 	{
 		std::cerr << "Grade is too high" << std::endl;
+	}
+	catch (const Form::GradeTooLowException &exception)
+	{
+		std::cerr << exception.what();
+	}
+	catch (const Form::GradeTooHighException &exception)
+	{
+		std::cerr << exception.what();
 	}
 	catch (const std::exception &exception)
 	{

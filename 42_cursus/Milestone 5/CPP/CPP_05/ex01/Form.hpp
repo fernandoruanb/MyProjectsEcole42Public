@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:10:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 13:06:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:24:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ class Form
 		void	setIsSign(bool god_decision);
 		class GradeTooHighException: public std::exception
 		{
-			virtual const char *what() const throw();
+			public:
+				virtual const char *what() const throw();
 		};
 		class GradeTooLowException: public std::exception
 		{
-			virtual const char *what() const throw();
+			public:
+				virtual const char *what() const throw();
 		};
 };
 std::ostream& operator<<(std::ostream &out, Form &another);
