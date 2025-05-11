@@ -1,6 +1,6 @@
 #Name of the program or the library
 
-NAME = bureacrat
+NAME = bureacrat_form
 
 #Compilers and flags
 

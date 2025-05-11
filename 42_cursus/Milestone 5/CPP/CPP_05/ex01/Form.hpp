@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:10:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 12:56:45 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:06:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class Form
 		Form& operator++(void);
 		Form operator--(int);
 		Form operator++(int);
-		void	beSigned(const Bureaucrat &check);
+		void	beSigned(const Form &check);
 		std::string	getFormName(void) const;
 		bool	getIsSign(void) const;
 		int	getSignGrade(void) const;

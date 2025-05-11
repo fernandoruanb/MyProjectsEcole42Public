@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:09:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 12:57:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:08:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,12 +128,12 @@ void	Form::setIsSign(bool god_decision)
 	is_sign = god_decision;
 }
 
-void	Form::beSigned(const Bureaucrat &check)
+void	Form::beSigned(const Form &check)
 {
-	int	grade;
-
-	if (sign_grade <= check.getGrade())
-		is_sign = true;
+	if (check.getIsSign())
+		std::cout << "The Form is signed" << std::endl;
+	else
+		std::cout << "The Form isn't signed" << std::endl;
 }
 
 const char	*Form::GradeTooHighException::what() const throw()
