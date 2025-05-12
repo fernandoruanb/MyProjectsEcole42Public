@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:09:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 11:26:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:28:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ AForm::~AForm(void)
 	std::cout << "Destructor called for " << name << " AForm" << std::endl;
 }
 
-AForm::AForm(std::string name, bool is_sign, int sign_grade, int sign_execute): name(name), is_sign(is_sign), sign_grade(sign_grade), sign_execute(sign_execute)
+AForm::AForm(std::string name, int sign_grade, int sign_execute): name(name), is_sign(false), sign_grade(sign_grade), sign_execute(sign_execute)
 {
 	if (sign_grade < 1 || sign_execute < 1)
 		throw GradeTooHighException();

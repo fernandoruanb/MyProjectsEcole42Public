@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:10:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 11:18:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:27:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class AForm
 		int	sign_execute;
 	public:
 		AForm(void);
-		AForm(std::string name, bool is_sign, int sign_grade, int sign_execute);
+		AForm(std::string name, int sign_grade, int sign_execute);
 		AForm(AForm &another);
 		virtual ~AForm(void);
 		virtual AForm& operator=(AForm &other) = 0;

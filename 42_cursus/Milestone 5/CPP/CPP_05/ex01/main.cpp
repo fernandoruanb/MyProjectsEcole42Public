@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 17:28:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 19:05:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:30:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(void)
 	try
 	{
 		Bureaucrat a("Robson", 10);
-		Form form1("Formula 1", false, 20, 10);
+		Form form1("Formula 1", 20, 10);
 		Bureaucrat b;
 
 		std::cout << a.getName() << std::endl;
