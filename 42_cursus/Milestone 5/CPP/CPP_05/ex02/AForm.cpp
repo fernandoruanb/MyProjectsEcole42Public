@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:09:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 12:28:25 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:59:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,24 +88,6 @@ bool	AForm::getIsSign(void) const
 std::string	AForm::getFormName(void) const
 {
 	return (name);
-}
-
-AForm& AForm::operator--(void)
-{
-	if (sign_grade >= 150 || sign_execute >= 150)
-		throw GradeTooLowException();
-	sign_grade++;
-	sign_execute++;
-	return (*this);
-}
-
-AForm& AForm::operator++(void)
-{
-	if (sign_grade < 1 || sign_execute < 1)
-		throw GradeTooHighException();
-	sign_grade--;
-	sign_execute--;
-	return (*this);
 }
 
 void	AForm::setIsSign(bool god_decision)
