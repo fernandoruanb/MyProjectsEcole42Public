@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:55:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 11:03:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/12 19:10:42 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,17 @@ void	Bureaucrat::signForm(AForm &form) const
 int	Bureaucrat::getGrade(void) const
 {
 	return (grade);
+}
+
+void	executeForm(AForm const &form)
+{
+	if (grade <= form.getSignGrade())
+		if (grade <= form.getSignExecute())
+			
+	if (grade > form.getSignGrade())
+	{
+		std::cerr << "Bureaucrat " << name << " doesn't have enough grade" << std::endl;
+	}
 }
 
 const char	*Bureaucrat::GradeTooHighException::what() const throw()
