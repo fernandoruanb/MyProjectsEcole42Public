@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:18:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 12:57:50 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:09:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,45 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm &o
 	return (*this);
 }
 
+std::ostream& operator<<(std::ostream &out, ShrubberyCreationForm& other)
+{
+	out << "That is the tree form" << std::endl;
+	return (out);
+}
+
 std::string	ShrubberyCreationForm::getTarget(void) const
 {
 	return (target);
+}
+
+void	execute_tree(const Bureaucrat &check)
+{
+	if (check.getGrade < 1)
+		throw GradeTooHighException();
+	if (check.getGrade > 150)
+		throw GradeTooLowException();
+	draw_ascii_tree(this->target);
+}
+
+void	draw_ascii_tree(std::string target)
+{
+	std::ofstream out(target + "_shrubbery");
+	if (!out.is_open())
+	{
+		std::cerr << "Failed to open the file" << std::endl;
+	}
+	out << R"(
+       /\
+      /**\
+     /****\
+    /******\
+   /********\
+  /**********\
+ /************\
+/**************\
+       ||
+       ||
+       ||
+      /||\ )" << std::endl;
+	out.close();
 }
