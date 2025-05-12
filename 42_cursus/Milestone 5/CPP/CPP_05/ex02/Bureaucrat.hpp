@@ -6,18 +6,18 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:25:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 13:24:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:03:42 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-# include "Form.hpp"
+# include "AForm.hpp"
 # include <exception>
 # include <iostream>
 
-class Form;
+class AForm;
 
 class	Bureaucrat
 {
@@ -35,7 +35,7 @@ class	Bureaucrat
 		Bureaucrat operator++(int);
 		Bureaucrat(Bureaucrat &other);
 		std::string	getName(void) const;
-		void	signForm(Form &form) const;
+		void	signForm(AForm &form) const;
 		int	getGrade(void) const;
 		class GradeTooHighException: public std::exception
 		{

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:55:29 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 18:27:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:03:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ std::string	Bureaucrat::getName(void) const
 	return (name);
 }
 
-void	Bureaucrat::signForm(Form &form) const
+void	Bureaucrat::signForm(AForm &form) const
 {
 	if (form.getIsSign())
 		std::cout << name << " signed " << form.getFormName() << std::endl;
