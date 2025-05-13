@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 19:48:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 19:59:22 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:16:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@ int	main(void)
 	{
 		Bureaucrat A("Robert", 100);
 		Bureaucrat B("Thiago", 10);
+		//Bureaucrat C("Thomas", 0);
+		//Bureaucrat D("Jonathan", 1000);
+
+		std::cout << A << std::endl;
+		++A;
+		std::cout << A << std::endl;
+		--A;
+		std::cout << A << std::endl;
+		A++;
+		std::cout << A << std::endl;
+		A--;
 		std::cout << A << std::endl;
 		std::cout << B << std::endl;
 	}
