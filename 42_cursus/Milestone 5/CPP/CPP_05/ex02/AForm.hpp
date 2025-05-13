@@ -31,13 +31,14 @@ class AForm
 		AForm(std::string name, int sign_grade, int sign_execute);
 		AForm(AForm &another);
 		virtual ~AForm(void);
-		virtual AForm& operator=(AForm &other) = 0;
-		virtual void	beSigned(const Bureaucrat &check) = 0;
+		AForm& operator=(AForm &other);
+		void	beSigned(const Bureaucrat &check);
 		std::string	getFormName(void) const;
 		bool	getIsSign(void) const;
 		int	getSignGrade(void) const;
 		int	getSignExecute(void) const;
 		void	setIsSign(bool god_decision);
+		void	execute_power(const &executor) const;
 		class GradeTooHighException: public std::exception
 		{
 			public:
@@ -48,6 +49,11 @@ class AForm
 			public:
 				virtual const char *what() const throw();
 		};
+		class FormIsNotSigned: public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		}
 };
 std::ostream& operator<<(std::ostream &out, AForm &another);
 

@@ -112,6 +112,20 @@ const char	*AForm::GradeTooHighException::what() const throw()
 	return ("AForm grade is too high\n");
 }
 
+const char	*AForm::FormIsNotSigned::what() const throw()
+{
+	return ("Don't have enough grade to sign the Form\n");
+}
+
+void	AForm::execute(Bureaucrat const & executor) const
+{
+	if (!executor.beSigned())
+		throw FormIsNotSigned();
+	if (executor.getGrade() > this->sign_execute)
+		throw GradeTooLowException();
+	this->execute_power();
+}
+
 const char	*AForm::GradeTooLowException::what() const throw()
 {
 	return ("AForm grade is too low\n");
