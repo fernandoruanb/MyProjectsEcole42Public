@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:16:25 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 11:09:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:50:06 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ Student::~Student(void)
 
 Student::Student(const std::string name, int grade): name(name), grade(grade)
 {
+	if (grade < 1)
+		throw GradeTooHighException();
+	if (grade > 150)
+		throw GradeTooLowException();
 	std::cout << "Default constructor called for " << name << " Student" << std::endl;
 }
 
