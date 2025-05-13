@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:16:25 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 12:01:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/13 12:02:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ Student&	Student::operator++(void)
 
 Student&	Student::operator--(void)
 {
-	if (this->getGrade() < 1)
+	if (this->getGrade() <= 1)
 		throw GradeTooHighException();
 	if (this->getGrade() >= 150)
 		throw GradeTooLowException();
