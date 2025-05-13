@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:16:25 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 11:50:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/13 12:01:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Student::Student(const std::string name, int grade): name(name), grade(grade)
 	std::cout << "Default constructor called for " << name << " Student" << std::endl;
 }
 
-Student::Student(const Student &another)
+Student::Student(const Student &another): name(another.getName()), grade(another.getGrade())
 {
 	std::cout << "Copy constructor called for " << another.getName() << " Student" << std::endl;
 	this->grade = another.getGrade();
@@ -108,10 +108,10 @@ std::string	Student::getName(void) const
 
 const char	*Student::GradeTooHighException::what() const throw()
 {
-	return ("Grade too high\n");
+	return ("Grade too high");
 }
 
 const char	*Student::GradeTooLowException::what() const throw()
 {
-	return ("Grade too low\n");
+	return ("Grade too low");
 }
