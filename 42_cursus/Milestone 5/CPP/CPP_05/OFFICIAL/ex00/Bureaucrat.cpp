@@ -1,0 +1,100 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/13 19:24:05 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/13 19:45:07 by fruan-ba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "Bureaucrat.hpp"
+
+Bureaucrat::Bureaucrat(const std::string name, int grade): name(name), grade(grade)
+{
+	std::cout << "Default constructor called for " << name << " Bureaucrat";
+}
+
+Bureaucrat::~Bureaucrat(void)
+{
+	std::cout << "Destructor called for " << this->getName() << " Bureaucrat" << std::endl;
+}
+
+Bureaucrat::Bureaucrat(const Bureaucrat &another)
+{
+	std::cout << "Copy constructor called for " << this->getName() << " Bureaucrat" << std::endl;
+	this->grade = another.getGrade();
+}
+
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat &another)
+{
+	if (this != &another)
+	{
+		this->grade = another.getGrade();
+	}
+	return (*this);
+}
+
+std::string	Bureaucrat::getName(void) const
+{
+	return (name);
+}
+
+int	Bureaucrat::getGrade(void) const
+{
+	return (grade);
+}
+
+Bureaucrat&	Bureaucrat::operator--(int)
+{
+	if (this->getGrade() >= 150)
+		throw GradeTooLowException();
+	++grade;
+	return (*this);
+}
+
+Bureaucrat&	Bureaucrat::operator++(int)
+{
+	if (this->getGrade() <= 1)
+		throw GradeTooHighException();
+	--grade;
+	return (*this);
+}
+
+Bureaucrat	Bureaucrat::operator--(void)
+{
+	Bureaucrat result(*this);
+
+	if (this->getGrade() >= 150)
+		throw GradeTooLowException();
+	--(*this);
+	return (result);
+}
+
+Bureaucrat	Bureaucrat::operator++(void)
+{
+	Bureaucrat result(*this);
+
+	if (this->getGrade() < 1)
+		throw GradeTooHighException();
+	++(*this);
+	return (result);
+}
+
+std::ostream& operator<<(std::ostream& out, const Bureaucrat &another)
+{
+	out << another.getName() << ", bureaucrat grade " << another.getGrade() << std::endl;
+	return (out);
+}
+
+const char	*Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("Grade too high! Maximum grade is 1");
+}
+
+const char	*Bureaucrat::GradeTooFewException::what() const throw()
+{
+	return ("Grade too low! Minimum grade is 150");
+}
