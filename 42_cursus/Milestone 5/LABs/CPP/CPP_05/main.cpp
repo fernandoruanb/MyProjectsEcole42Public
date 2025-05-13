@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:48:15 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 12:00:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/13 12:07:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@ int	main(void)
 	
 		Student a("Thiago", 20);
 		Student b;
+		Student c(b);
+		
 		std::cout << a;
 		std::cout << b;
+		std::cout << c;
+		b = a;
+		std::cout << b;
+
 	}
 	catch (Student::GradeTooHighException &exception)
 	{
