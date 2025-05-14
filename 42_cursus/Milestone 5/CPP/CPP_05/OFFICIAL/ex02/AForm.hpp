@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:11:52 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 15:59:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/14 19:08:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define AFORM_HPP
 
 # include "Bureaucrat.hpp"
+# include <fstream>
 
 class Bureaucrat;
 

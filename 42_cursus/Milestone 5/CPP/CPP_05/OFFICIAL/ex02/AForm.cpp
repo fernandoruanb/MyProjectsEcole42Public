@@ -6,14 +6,14 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:47:32 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 16:01:19 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/14 19:47:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 
-AForm::AForm(const std::string name, const int required_grade, const int required_exec): name(name), required_grade(required_grade),
-required_exec(required_exec)
+AForm::AForm(const std::string name, const int required_grade, const int required_exec): name(name), is_sign(false), 
+required_grade(required_grade), required_exec(required_exec)
 {
 	std::cout << "Default constructor called for " << this->getAFormName() << " AForm" << std::endl;
 }
