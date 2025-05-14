@@ -1,0 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/14 12:25:34 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/14 12:46:54 by fruan-ba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef BUREAUCRAT_HPP
+# define BUREAUCRAT_HPP
+
+# include <iostream>
+# include <exception>
+
+class Bureaucrat
+{
+	private:
+		const std::string	name;
+		int	grade;
+	public:
+		Bureaucrat(const std::string name, int grade);
+		~Bureaucrat(void);
+		Bureaucrat(const Bureaucrat &another);
+		Bureaucrat& operator=(const Bureaucrat &another);
+		Bureaucrat& operator--(void);
+		Bureaucrat& operator++(void);
+		Bureaucrat operator--(int);
+		Bureaucrat operator++(int);
+		std::string	getName(void) const;
+		int	getGrade(void) const;
+		void	signForm(const Form &attempt);
+		class GradeTooHighException: public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		}
+		class GradeTooLowException: public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		}
+};
+std::ostream& operator<<(std::ostream &out, const Bureaucrat &another);
+
+#endif /* BUREAUCRAT_HPP */
