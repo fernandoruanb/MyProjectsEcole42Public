@@ -15,7 +15,8 @@ INCDIR = .
 #SRCS
 
 SRCS =  $(SRCDIR)/main.cpp\
-	$(SRCDIR)/Bureaucrat.cpp
+	$(SRCDIR)/Bureaucrat.cpp\
+	$(SRCDIR)/Form.cpp
 
 #OBJS
 

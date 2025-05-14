@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:37:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 20:53:08 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:06:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,15 @@ std::ostream& operator<<(std::ostream &out, const Bureaucrat &another)
 {
 	out << another.getName() << " bureaucrat grade " << another.getGrade() << std::endl;
 	return (out);
+}
+
+void	Bureaucrat::signForm(const Form &form)
+{
+	if (form.getIsSign())
+		std::cout << this->getName() << " signed " << form.getFormName() << std::endl;
+	else
+		std::cerr << this->getName() << " couldn't sign " << form.getFormName() 
+			<< " because " << "the grade" << std::endl;
 }
 
 const char	*Bureaucrat::GradeTooHighException::what() const throw()
