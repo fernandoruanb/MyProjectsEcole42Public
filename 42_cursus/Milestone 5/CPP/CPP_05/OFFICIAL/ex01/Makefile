@@ -15,7 +15,7 @@ INCDIR = .
 #SRCS
 
 SRCS =  $(SRCDIR)/main.cpp\
-	$(SRCDIR)/bureaucrat.cpp
+	$(SRCDIR)/Bureaucrat.cpp
 
 #OBJS
 
@@ -47,6 +47,6 @@ fclean: clean
 
 #restart
 
-re: all fclean
+re: fclean all
 
 .PHONY: all fclean re clean
