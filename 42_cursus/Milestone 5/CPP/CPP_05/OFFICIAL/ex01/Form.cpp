@@ -6,14 +6,14 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 11:14:33 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 12:03:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:14:36 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
-Form::Form(const std::string name, const int required_grade, const int required_exec): name(name), required_grade(required_grade),
-	required_exec(required_exec)
+Form::Form(const std::string name, const int required_grade, const int required_exec): name(name), is_sign(false),
+ required_grade(required_grade), required_exec(required_exec)
 {
 	if (required_grade < 1 || required_exec < 1)
 		throw GradeTooHighException();

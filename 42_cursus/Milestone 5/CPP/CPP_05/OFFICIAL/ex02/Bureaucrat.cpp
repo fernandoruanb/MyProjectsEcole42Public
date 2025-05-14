@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:46:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 13:18:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/14 15:42:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,17 @@ std::ostream&	operator<<(std::ostream &out, const Bureaucrat &another)
 	return (out);
 }
 
-void	Bureaucrat::signForm(const Form &attempt)
+void	Bureaucrat::signForm(const AForm &attempt)
 {
-	if (Form.getIsSign())
-		std::cout << this->getName() << " signed " << attempt.getFormName() << std::endl;
+	if (this->getGrade() > attempt.getRequiredGrade())
+	{
+		std::cerr << this->getName() << " couldn't sign " << attempt.getAFormName() << " because the grade";
+		return ;
+	}
+	if (attempt.getIsSign())
+		std::cout << this->getName() << " signed " << attempt.getAFormName() << std::endl;
 	else
-		std::cout << this->getName() << " couldn't sign " << attempt.getFormName() << " because the grade";
+		std::cout << this->getName() << " couldn't sign " << attempt.getAFormName() << " because the grade";
 }
 
 std::string	Bureaucrat::getName(void) const
@@ -99,6 +104,12 @@ std::string	Bureaucrat::getName(void) const
 int	Bureaucrat::getGrade(void) const
 {
 	return (grade);
+}
+
+void	Bureaucrat::executeForm(AForm const & form)
+{
+	if (this->getGrade() <= form.getRequiredExec())
+		form.execute(*this);
 }
 
 const char	*Bureaucrat::GradeTooHighException::what() const throw()
