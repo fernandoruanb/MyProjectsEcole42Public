@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 13:00:49 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 13:38:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:16:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,43 @@ std::ostream& operator<<(std::ostream &out, const Intern &another)
 	return (out);
 }
 
+AForm	*Intern::shrubbery(const std::string& target) const
+{
+	return new ShrubberyCreationForm(target);
+}
+
+AForm	*Intern::robotomy(const std::string& target) const
+{
+	return new RobotomyRequestForm(target);
+}
+
+AForm	*Intern::presidential(const std::string& target) const
+{
+	return new PresidentialPardonForm(target);
+}
+
 AForm	*Intern::makeForm(const std::string FormName, const std::string target) const
 {
-	if (FormName == "robotomy request")
-		return new RobotomyRequestForm(target);
-	else if (FormName == "presidential request")
-		return new PresidentialPardonForm(target);
-	else if (FormName == "shrubbery request")
-		return new ShrubberyCreationForm(target);
-	else
-		std::cerr << "Intern said: Unrecognized Form Name, sir" << std::endl;
+	static const char	*forms[3] = {"shrubbery request", "robotomy request", "presidential request"};
+	int	index;
+
+	static FormCreator creators[3] =
+	{
+		&Intern::shrubbery,
+		&Intern::robotomy,
+		&Intern::presidential,
+	};
+	index = 0;
+	while (index < 3)
+	{
+		if (FormName.c_str() == forms[index])
+		{
+			((this->*creators[index])(target));
+			break ;
+		}
+		index++;
+	}
+	if (index == 3)
+		return (NULL);
 	return (NULL);
 }
