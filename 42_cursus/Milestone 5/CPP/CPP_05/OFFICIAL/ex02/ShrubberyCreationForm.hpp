@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:42:36 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 19:47:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/14 21:01:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "AForm.hpp"
 
+class Bureaucrat;
 class AForm;
 
 class ShrubberyCreationForm: public AForm
@@ -22,7 +23,7 @@ class ShrubberyCreationForm: public AForm
 	private:
 		const std::string target;
 	public:
-		ShrubberyCreationForm(const std::string target, int required_grade, int required_exec);
+		ShrubberyCreationForm(const std::string target, const int required_grade, const int required_exec);
 		~ShrubberyCreationForm(void);
 		ShrubberyCreationForm(const ShrubberyCreationForm &another);
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm &another);

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:47:32 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 19:47:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/14 21:18:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ int	AForm::getRequiredGrade(void) const
 int	AForm::getRequiredExec(void) const
 {
 	return (required_exec);
+}
+
+void	AForm::setSign(bool sign)
+{
+	is_sign = sign;
 }
 
 std::string	AForm::getAFormName(void) const

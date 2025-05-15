@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:11:52 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 19:08:33 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/14 21:16:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ class	AForm
 		int	getRequiredGrade(void) const;
 		int	getRequiredExec(void) const;
 		bool	getIsSign(void) const;
+		void	setSign(bool sign);
 		std::string	getAFormName(void) const;
 		class	GradeTooHighException: public std::exception
 		{
