@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 13:00:49 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 17:54:33 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:23:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ AForm	*Intern::presidential(const std::string& target) const
 	return new PresidentialPardonForm(target);
 }
 
+const char	*Intern::UnrecognizedFormMistake::what() const throw()
+{
+	return ("Intern didn't find the form");
+}
+
 AForm	*Intern::makeForm(const std::string FormName, const std::string target) const
 {
 	static const char	*forms[3] = {"shrubbery request", "robotomy request", "presidential request"};
@@ -73,12 +78,12 @@ AForm	*Intern::makeForm(const std::string FormName, const std::string target) co
 	{
 		if (FormName == forms[index])
 		{
+			std::cout << "Intern creates " << forms[index] << std::endl;
 			return(this->*creators[index])(target);
-			break ;
 		}
 		index++;
 	}
 	if (index == 3)
-		return (NULL);
+		throw UnrecognizedFormMistake();
 	return (NULL);
 }
