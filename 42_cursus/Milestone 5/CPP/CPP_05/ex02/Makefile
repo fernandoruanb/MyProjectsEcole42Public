@@ -18,7 +18,8 @@ SRCS =  $(SRCDIR)/main.cpp\
 	$(SRCDIR)/Bureaucrat.cpp\
 	$(SRCDIR)/AForm.cpp\
 	$(SRCDIR)/ShrubberyCreationForm.cpp\
-	$(SRCDIR)/RobotomyRequestForm.cpp
+	$(SRCDIR)/RobotomyRequestForm.cpp\
+	$(SRCDIR)/PresidentialPardonForm.cpp
 
 #OBJS
 

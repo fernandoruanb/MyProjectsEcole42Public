@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 10:51:17 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 11:57:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int	main(void)
 {
@@ -22,23 +23,28 @@ int	main(void)
 	{
 		Bureaucrat	A("Thiago", 90);
 		Bureaucrat	B("Morpheus", 10);
+		Bureaucrat	C("Jonathan", 1);
 		ShrubberyCreationForm test("Form");
 		RobotomyRequestForm secondtest("Form2");
+		PresidentialPardonForm thirdtest("Form3");
 		//Bureaucrat	C("Leonard", 0);
 		//Bureaucrat	D("Mike", 2000);
 
 		test.beSigned(B);
 		test.beSigned(A);
+		thirdtest.beSigned(C);
 		secondtest.beSigned(B);
 		secondtest.beSigned(A);
 		B.signForm(secondtest);
 		A.signForm(secondtest);
+		C.signForm(thirdtest);
 		B.signForm(test);
 		A.signForm(test);
 		test.execute(B);
 		test.execute(A);
 		secondtest.execute(B);
 		secondtest.execute(A);
+		thirdtest.execute(C);
 		std::cout << A << std::endl;
 		++A;
 		std::cout << A << std::endl;
