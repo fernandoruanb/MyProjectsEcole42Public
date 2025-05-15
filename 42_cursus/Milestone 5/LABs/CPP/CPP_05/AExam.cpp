@@ -6,50 +6,50 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 13:02:12 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 13:28:40 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:39:39 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AExam.hpp"
 
-AExam::AExam(const std::string &target, int required_grade, int required_extra): target(target), required_grade(grade),
-	required_extra(required_extra);
+AExam::AExam(const std::string &target, int required_grade, int extra_grade): target(target), pass(false), required_grade(required_grade), extra_grade(extra_grade)
 {
-	std::cout << "Default construtor called for " << name << " Exam" << std::endl;
+	std::cout << "Default construtor called for " << this->getExamTarget() << " Exam" << std::endl;
 }
 
 AExam::~AExam(void)
 {
-	std::cout << "Destructor called for " << name << " Exam" << std::endl;
+	std::cout << "Destructor called for " << this->getExamTarget() << " Exam" << std::endl;
 }
 
-AExam& AForm::operator=(const AForm &Exam)
+AExam& AExam::operator=(const AExam &Exam)
 {
 	if (this != &Exam)
 	{
-		this->grade = Exam.getExamGrade();
+		this->required_grade = Exam.getExamRequiredGrade();
+		this->extra_grade = Exam.getExamExtraGrade();
 	}
 	return (*this);
 }
 
-std::string	AForm::getTarget(void) const
+std::string	AExam::getExamTarget(void) const
 {
 	return (target);
 }
 
-int	AForm::getExamRequiredGrade(void) const
+int	AExam::getExamRequiredGrade(void) const
 {
 	return (required_grade);
 }
 
-int	AForm::getExamExtraGrade(void) const
+int	AExam::getExamExtraGrade(void) const
 {
 	return (extra_grade);
 }
 
-std::ostream&	operator<<(std::ostream &out, const AForm &Exam)
+std::ostream&	operator<<(std::ostream &out, const AExam &Exam)
 {
-	out << "Exam: " << Exam.getExamName() << std::endl;
+	out << "Exam: " << Exam.getExamTarget() << std::endl;
 	return (out);
 }
 

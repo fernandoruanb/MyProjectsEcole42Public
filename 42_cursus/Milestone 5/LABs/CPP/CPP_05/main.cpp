@@ -6,11 +6,13 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:48:15 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 12:15:40 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:13:32 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Student.hpp"
+#include "AExam.hpp"
+#include "MathExam.hpp"
 
 int	main(void)
 {
@@ -18,9 +20,12 @@ int	main(void)
 	{
 	
 		Student a("Thiago", 20);
+		MathExam examshell(100, 70);
 		Student b;
 		Student c(b);
-		
+	
+		examshell.evaluate_student(a);
+		examshell.execute_action(a);	
 		std::cout << a;
 		std::cout << b;
 		std::cout << c;
@@ -50,6 +55,22 @@ int	main(void)
 		std::cerr << exception.what() << std::endl;
 	}
 	catch (Student::GradeTooLowException &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+	catch (AExam::AExamNotPassed &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+	catch (AExam::AExamImpossibleExtra &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+	catch (MathExam::MathGradeTooHighException &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+	catch (MathExam::MathGradeTooLowException &exception)
 	{
 		std::cerr << exception.what() << std::endl;
 	}

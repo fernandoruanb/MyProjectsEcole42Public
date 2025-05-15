@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:16:25 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 12:22:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/13 14:11:40 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ std::ostream& operator<<(std::ostream &out, const Student &another)
 
 Student&	Student::operator++(void)
 {
-	if (this->getGrade() < 1)
+	if (this->getGrade() <= 1)
 		throw GradeTooHighException();
 	if (this->getGrade() >= 150)
 		throw GradeTooLowException();

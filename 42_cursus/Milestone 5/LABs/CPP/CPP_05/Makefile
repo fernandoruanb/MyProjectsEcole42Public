@@ -16,7 +16,8 @@ INCDIR = .
 
 SRCS = $(SRCDIR)/main.cpp\
        $(SRCDIR)/Student.cpp\
-       $(SRCDIR)/AForm.cpp
+       $(SRCDIR)/AExam.cpp\
+       $(SRCDIR)/MathExam.cpp
 
 #OBJS
 
