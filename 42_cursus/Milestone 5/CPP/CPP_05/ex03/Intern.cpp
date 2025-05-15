@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 13:00:49 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 16:16:35 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:54:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ AForm	*Intern::makeForm(const std::string FormName, const std::string target) co
 	index = 0;
 	while (index < 3)
 	{
-		if (FormName.c_str() == forms[index])
+		if (FormName == forms[index])
 		{
-			((this->*creators[index])(target));
+			return(this->*creators[index])(target);
 			break ;
 		}
 		index++;
