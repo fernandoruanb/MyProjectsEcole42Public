@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 22:09:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 12:39:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:36:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &another): AF
 
 void	RobotomyRequestForm::beSigned(const Bureaucrat &attempt)
 {
-	setSign(false);
 	if (attempt.getGrade() <= this->getRequiredGrade())
 		setSign(true);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:52:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 12:46:22 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:36:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void	ShrubberyCreationForm::beSigned(const Bureaucrat &attempt)
 {
-	setSign(false);
 	if (attempt.getGrade() <= this->getRequiredGrade())
 		setSign(true);
 }

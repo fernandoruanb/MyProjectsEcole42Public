@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 11:15:53 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 12:46:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:37:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ std::string	PresidentialPardonForm::getTarget(void) const
 
 void	PresidentialPardonForm::beSigned(const Bureaucrat &attempt)
 {
-	setSign(false);
 	if (attempt.getGrade() <= this->getRequiredGrade())
 		setSign(true);
 }
