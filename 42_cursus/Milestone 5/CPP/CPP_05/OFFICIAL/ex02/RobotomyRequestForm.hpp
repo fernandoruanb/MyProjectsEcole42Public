@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:57:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 22:16:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 10:19:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class RobotomyRequestForm: public AForm
 		void	beSigned(const Bureaucrat &attempt);
 		void	execute(Bureaucrat const & executor) const;
 		std::string	getTarget(void) const;
-}
+};
 std::ostream&	operator<<(std::ostream& out, const RobotomyRequestForm &another);
 
 #endif /* ROBOTOMYREQUESTFORM_HPP */

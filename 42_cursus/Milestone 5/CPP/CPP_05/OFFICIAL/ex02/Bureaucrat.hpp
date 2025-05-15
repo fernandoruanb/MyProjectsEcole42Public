@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:25:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 15:31:36 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 10:04:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <iostream>
 # include <exception>
+# include <cstdlib>
+# include <ctime>
 # include "AForm.hpp"
 
 class AForm;
