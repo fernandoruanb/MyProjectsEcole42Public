@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 22:09:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 11:00:46 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:39:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &another): AF
 
 void	RobotomyRequestForm::beSigned(const Bureaucrat &attempt)
 {
+	setSign(false);
 	if (attempt.getGrade() <= this->getRequiredGrade())
 		setSign(true);
 }
 
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	if (executor.getGrade() <= this->getRequiredExec())
+	if (this->getIsSign() && executor.getGrade() <= this->getRequiredExec())
 	{
 		std::cout << executor.getName() << " executes " << this->getTarget() << std::endl;
 		if (std::rand() % 2 == 0)
@@ -47,6 +48,8 @@ void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 		else
 			std::cout << "Robotomy failed" << std::endl;
 	}
+	else
+		std::cerr << executor.getName() << " didn't execute the RobotomyRequestForm unfortunately" << std::endl;
 }
 
 std::string	RobotomyRequestForm::getTarget(void) const

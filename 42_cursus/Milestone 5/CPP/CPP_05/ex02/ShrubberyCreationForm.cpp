@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:52:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 10:52:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:46:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void	ShrubberyCreationForm::beSigned(const Bureaucrat &attempt)
 {
+	setSign(false);
 	if (attempt.getGrade() <= this->getRequiredGrade())
 		setSign(true);
 }
@@ -50,7 +51,7 @@ std::string	ShrubberyCreationForm::getTarget(void) const
 
 void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
-	if (executor.getGrade() <= this->getRequiredExec())
+	if (this->getIsSign() && executor.getGrade() <= this->getRequiredExec())
 	{
 		std::ofstream out((this->getTarget() + "_shrubbery").c_str());
 		if (!out.is_open())
@@ -79,6 +80,8 @@ out << "...::::::::---::::::::::----::::::::::-----::::::::---:::::::::::-----::
 		out.close();
 		std::cout << executor.getName() << " executed " << this->getTarget() << " Form" << std::endl;
 	}
+	else
+		std::cerr << executor.getName() << " didn't execute ShrubberyCreationForm" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream &out, const ShrubberyCreationForm &another)

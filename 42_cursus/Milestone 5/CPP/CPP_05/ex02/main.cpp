@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:19:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 11:57:33 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:36:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int	main(void)
 		Bureaucrat	A("Thiago", 90);
 		Bureaucrat	B("Morpheus", 10);
 		Bureaucrat	C("Jonathan", 1);
-		ShrubberyCreationForm test("Form");
-		RobotomyRequestForm secondtest("Form2");
-		PresidentialPardonForm thirdtest("Form3");
+		ShrubberyCreationForm test("MyTreeMyLife");
+		RobotomyRequestForm secondtest("Morpheus");
+		PresidentialPardonForm thirdtest("Fernando");
 		//Bureaucrat	C("Leonard", 0);
 		//Bureaucrat	D("Mike", 2000);
 
+		A.executeForm(test);
 		test.beSigned(B);
 		test.beSigned(A);
 		thirdtest.beSigned(C);
