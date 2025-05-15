@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/10 21:10:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 12:59:22 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/14 11:00:38 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/14 11:54:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define FORM_HPP
 
 # include "Bureaucrat.hpp"
-# include <exception>
-# include <iostream>
 
 class Bureaucrat;
 
@@ -24,20 +22,18 @@ class Form
 	private:
 		const std::string	name;
 		bool	is_sign;
-		int	sign_grade;
-		int	sign_execute;
+		const int	required_grade;
+		const int	required_exec;
 	public:
-		Form(void);
-		Form(std::string name, int sign_grade, int sign_execute);
-		Form(Form &another);
+		Form(const std::string name, const int required_grade, const int required_exec);
 		~Form(void);
-		Form& operator=(Form &other);
-		void	beSigned(const Bureaucrat &check);
+		Form(const Form &another);
+		Form& operator=(const Form &another);
 		std::string	getFormName(void) const;
+		void	beSigned(const Bureaucrat &attempt);
 		bool	getIsSign(void) const;
-		int	getSignGrade(void) const;
-		int	getSignExecute(void) const;
-		void	setIsSign(bool god_decision);
+		int	getRequiredGrade(void) const;
+		int	getRequiredExec(void) const;
 		class GradeTooHighException: public std::exception
 		{
 			public:
@@ -49,6 +45,6 @@ class Form
 				virtual const char *what() const throw();
 		};
 };
-std::ostream& operator<<(std::ostream &out, Form &another);
+std::ostream& operator<<(std::ostream &out, const Form &another);
 
 #endif /* FORM_HPP */

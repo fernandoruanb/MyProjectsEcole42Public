@@ -5,41 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 12:18:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 15:09:37 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/14 17:52:35 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/15 10:52:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target): AForm("ShrubberyCreationForm", 145, 137), target(target);
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string target): AForm(target, 145, 137), target(target)
 {
-	std::cout << "Default constructor called for target " << target << std::endl;
+	if (this->getRequiredGrade() < 1 || this->getRequiredExec() < 1)
+		throw AForm::GradeTooHighException();
+	if (this->getRequiredGrade() > 150 || this->getRequiredExec() > 150)
+		throw AForm::GradeTooLowException();
+	std::cout << "ShrubberyCreationForm construtor called for " << this->getTarget() << " ShrubberyCreationForm" << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void)
 {
-	std::cout << "Destructor called for target " << target << std::endl;
+	std::cout << "ShrubberyCreationForm destructor called for " << this->getTarget() << " ShrubberyCreationForm" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &other)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &another): AForm(another.getTarget(), 145, 137), target(another.getTarget())
 {
-	std::cout << "Copy constructor called for target " << target << std::endl;
+	std::cout << "Copy constructor called for " << this->getTarget() << " ShrubberyCreationForm" << std::endl;
 }
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm &other)
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &another)
 {
-	if (this != &other)
-	{
-		this->target = other.getTarget();
-	}
+	(void)another;
 	return (*this);
 }
 
-std::ostream& operator<<(std::ostream &out, ShrubberyCreationForm& other)
+void	ShrubberyCreationForm::beSigned(const Bureaucrat &attempt)
 {
-	out << "That is the tree form" << std::endl;
-	return (out);
+	if (attempt.getGrade() <= this->getRequiredGrade())
+		setSign(true);
 }
 
 std::string	ShrubberyCreationForm::getTarget(void) const
@@ -47,34 +48,41 @@ std::string	ShrubberyCreationForm::getTarget(void) const
 	return (target);
 }
 
-void	execute_tree(const Bureaucrat &check)
+void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
-	if (check.getGrade < 1)
-		throw GradeTooHighException();
-	if (check.getGrade > 150)
-		throw GradeTooLowException();
-	draw_ascii_tree(this->target);
+	if (executor.getGrade() <= this->getRequiredExec())
+	{
+		std::ofstream out((this->getTarget() + "_shrubbery").c_str());
+		if (!out.is_open())
+		{
+			std::cerr << "Error creating the file" << std::endl;
+			return ;
+		}
+		out <<"                  ...:::::::::::::::..." << std::endl;
+                out << "               .:+-::::::::::::::::::-+=." << std::endl;
+                 out << "             .:-=--==================--==-===:." << std::endl;
+               out << "            .:-==--=====================--====--=--=." << std::endl;
+             out << "           .:-===--========================--======--===:." << std::endl;
+           out << "        .:===--==========================----=======--====-:." << std::endl;
+         out << "       .:===--============================--============--===-:." << std::endl;
+       out << "       .:====--==============================--==============--====-:." << std::endl;
+      out << "      -=====--================================--==============--======-:" << std::endl;
+    out << "     .:=====--==================================--============--========-:." << std::endl;
+   out << "   .:======--===================================--==========--=========--:." << std::endl;
+  out << "  .:=======--====================================--========--==========--:." << std::endl;
+ out << " .:========--=====================================--======--===========--=:" << std::endl;
+out << "...::::::::---::::::::::----::::::::::-----::::::::---:::::::::::-----:::..." << std::endl;
+                          out << "			|||||||||||||||" << std::endl;
+                          out << "			|||||||||||||||" << std::endl;
+                          out << "			|||||||||||||||" << std::endl;
+                         out << "			/|||||||||||||||\\" << std::endl << std::endl;
+		out.close();
+		std::cout << executor.getName() << " executed " << this->getTarget() << " Form" << std::endl;
+	}
 }
 
-void	draw_ascii_tree(std::string target)
+std::ostream& operator<<(std::ostream &out, const ShrubberyCreationForm &another)
 {
-	std::ofstream out(target + "_shrubbery");
-	if (!out.is_open())
-	{
-		std::cerr << "Failed to open the file" << std::endl;
-	}
-	out << R"(
-       /\
-      /**\
-     /****\
-    /******\
-   /********\
-  /**********\
- /************\
-/**************\
-       ||
-       ||
-       ||
-      /||\ )" << std::endl;
-	out.close();
+	out << "ShrubberyCreationForm Target: " << another.getTarget() << std::endl;
+	return (out);
 }

@@ -5,32 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/10 15:25:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/11 13:44:15 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/13 19:16:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/13 20:12:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-# include <exception>
 # include <iostream>
+# include <exception>
 
 class	Bureaucrat
 {
 	private:
-		const std::string	name;
+		const std::string name;
 		int	grade;
 	public:
-		Bureaucrat(void);
+		Bureaucrat(const std::string name, int grade);
 		~Bureaucrat(void);
-		Bureaucrat(std::string name, int grade);
-		Bureaucrat& operator=(const Bureaucrat &other);
-		Bureaucrat& operator++(void);
+		Bureaucrat(const Bureaucrat &another);
+		Bureaucrat& operator=(const Bureaucrat &another);
 		Bureaucrat& operator--(void);
+		Bureaucrat& operator++(void);
 		Bureaucrat operator--(int);
 		Bureaucrat operator++(int);
-		Bureaucrat(Bureaucrat &other);
 		std::string	getName(void) const;
 		int	getGrade(void) const;
 		class GradeTooHighException: public std::exception
@@ -44,6 +43,6 @@ class	Bureaucrat
 				virtual const char *what() const throw();
 		};
 };
-std::ostream& operator<<(std::ostream &out, const Bureaucrat &other);
+std::ostream& operator<<(std::ostream &out, const Bureaucrat &another);
 
 #endif /* BUREAUCRAT_HPP */

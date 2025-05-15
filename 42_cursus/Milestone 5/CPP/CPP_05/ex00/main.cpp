@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/10 17:28:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/10 20:10:28 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/13 19:48:08 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/13 20:16:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,33 @@ int	main(void)
 {
 	try
 	{
-		Bureaucrat a("Robson", 3);
-		Bureaucrat b;
+		Bureaucrat A("Robert", 100);
+		Bureaucrat B("Thiago", 10);
+		//Bureaucrat C("Thomas", 0);
+		//Bureaucrat D("Jonathan", 1000);
 
-		std::cout << a.getName() << std::endl;
-		std::cout << b.getName() << std::endl;
-		std::cout << a.getGrade() << std::endl;
-		++a;
-		std::cout << a << std::endl;
-		std::cout << a.getGrade() << std::endl;
-		std::cout << b.getGrade() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException &exception)
-	{
-		std::cerr << "Grade is too low" << std::endl;
+		std::cout << A << std::endl;
+		++A;
+		std::cout << A << std::endl;
+		--A;
+		std::cout << A << std::endl;
+		A++;
+		std::cout << A << std::endl;
+		A--;
+		std::cout << A << std::endl;
+		std::cout << B << std::endl;
 	}
 	catch (Bureaucrat::GradeTooHighException &exception)
 	{
-		std::cerr << "Grade is too high" << std::endl;
+		std::cerr << exception.what() << std::endl;
 	}
-	catch (const std::exception &exception)
+	catch (Bureaucrat::GradeTooLowException &exception)
 	{
-		std::cerr << "There is other exception from exceptions" << std::endl;
+		std::cerr << exception.what() << std::endl;
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << "Another exception found!!!" << std::endl;
 	}
 	return (0);
 }

@@ -5,84 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/10 21:09:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 13:00:20 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/14 11:14:33 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/14 14:14:36 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
-class Bureaucrat;
-
-Form::Form(void): name("aleatory_form"), is_sign(false), sign_grade(100), sign_execute(70)
+Form::Form(const std::string name, const int required_grade, const int required_exec): name(name), is_sign(false),
+ required_grade(required_grade), required_exec(required_exec)
 {
-	if (sign_grade < 1 || sign_execute < 1)
+	if (required_grade < 1 || required_exec < 1)
 		throw GradeTooHighException();
-	if (sign_grade > 150 || sign_execute > 150)
+	if (required_grade > 150 || required_exec > 150)
 		throw GradeTooLowException();
-	std::cout << "Default construtor Form called for " << name << " Form";
+	std::cout << "Default Form constructor called for " << this->getFormName() << " Form" << std::endl;
 }
 
 Form::~Form(void)
 {
-	std::cout << "Destructor called for " << name << " Form" << std::endl;
+	std::cout << "Default destructor called for " << this->getFormName() << " Form" << std::endl;
 }
 
-Form::Form(std::string name, int sign_grade, int sign_execute): name(name), sign_grade(sign_grade), sign_execute(sign_execute)
+Form::Form(const Form &another): name(another.getFormName()), is_sign(another.getIsSign()), required_grade(another.getRequiredGrade()),
+	required_exec(another.getRequiredExec())
 {
-	if (sign_grade < 1 || sign_execute < 1)
-		throw GradeTooHighException();
-	if (sign_grade > 150 || sign_execute > 150)
-		throw GradeTooLowException();
-	std::cout << "Default input constructor called for " << name << " Form";
+	std::cout << "Copy constructor called for " << this->getFormName() << " Form" << std::endl;
 }
 
-Form::Form(Form &another)
+Form&	Form::operator=(const Form &another)
 {
-	if (another.getSignGrade() < 1 || another.getSignExecute() < 1)
-		throw GradeTooHighException();
-	if (another.getSignGrade() > 150 || another.getSignExecute() > 150)
-		throw GradeTooLowException();
-	std::cout << "Copy constructor called for " << name << " Form";
-}
-
-Form& Form::operator=(Form &other)
-{
-	if (this != &other)
+	if (this != &another)
 	{
-		if (other.getSignGrade() < 1 || other.getSignExecute() < 1)
-			throw GradeTooHighException();
-		if (other.getSignGrade() > 150 || other.getSignExecute() > 150)
-			throw GradeTooLowException();
-		this->is_sign = other.getIsSign();
-		this->sign_grade = other.getSignGrade();
-		this->sign_execute = other.getSignExecute();
+		this->is_sign = another.getIsSign();
 	}
 	return (*this);
-}
-
-int	Form::getSignGrade(void) const
-{
-	return (sign_grade);
-}
-
-int	Form::getSignExecute(void) const
-{
-	return (sign_execute);
-}
-
-std::ostream& operator<<(std::ostream &out, Form &another)
-{
-	out << "Form: " << another.getFormName() << std::endl
-		<< "Is_Sign: " << another.getIsSign() << std::endl
-		<< "Sign_Grade: " << another.getSignGrade() << std::endl
-		<< "Sign_Execute: " << another.getSignExecute() << std::endl;
-	return (out);
-}
-
-bool	Form::getIsSign(void) const
-{
-	return (is_sign);
 }
 
 std::string	Form::getFormName(void) const
@@ -90,29 +47,42 @@ std::string	Form::getFormName(void) const
 	return (name);
 }
 
-void	Form::setIsSign(bool god_decision)
+void	Form::beSigned(const Bureaucrat &attempt)
 {
-	is_sign = god_decision;
+	if (attempt.getGrade() <= this->getRequiredGrade())
+		is_sign = 1;
 }
 
-void	Form::beSigned(const Bureaucrat &check)
+bool	Form::getIsSign(void) const
 {
-	if (check.getGrade() <= this->sign_grade)
-	{
-		std::cout << check.getName() << " signed " << this->name << std::endl;
-		this->is_sign = 1;
-	}
-	else
-		std::cout << check.getName() << " couldn't sign " << this->name 
-			<< " because low grade" << std::endl;
+	return (is_sign);
+}
+
+int	Form::getRequiredGrade(void) const
+{
+	return (required_grade);
+}
+
+int	Form::getRequiredExec(void) const
+{
+	return (required_exec);
+}
+
+std::ostream&	operator<<(std::ostream &out, const Form &another)
+{
+	out << "Form name: " << another.getFormName() << std::endl
+		<< " Form signed: " << another.getIsSign() << std::endl
+		<< " Form required grade: " << another.getRequiredGrade() << std::endl
+		<< " Form required exec: " << another.getRequiredExec() << std::endl;
+	return (out);
 }
 
 const char	*Form::GradeTooHighException::what() const throw()
 {
-	return ("Form grade is too high\n");
+	return ("Form grade is too high! Maximum grade is 1");
 }
 
 const char	*Form::GradeTooLowException::what() const throw()
 {
-	return ("Form grade is too low\n");
+	return ("Form grade is too low! Minimum grade is 150");
 }

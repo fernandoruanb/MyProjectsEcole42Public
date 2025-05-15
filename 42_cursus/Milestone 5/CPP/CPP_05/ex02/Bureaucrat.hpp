@@ -5,39 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/10 15:25:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 15:33:10 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/14 12:25:34 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/15 10:04:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-# include "AForm.hpp"
-# include <exception>
 # include <iostream>
+# include <exception>
+# include <cstdlib>
+# include <ctime>
+# include "AForm.hpp"
 
 class AForm;
 
-class	Bureaucrat
+class Bureaucrat
 {
 	private:
 		const std::string	name;
 		int	grade;
 	public:
-		Bureaucrat(void);
+		Bureaucrat(const std::string name, int grade);
 		~Bureaucrat(void);
-		Bureaucrat(std::string name, int grade);
-		Bureaucrat& operator=(const Bureaucrat &other);
-		Bureaucrat& operator++(void);
+		Bureaucrat(const Bureaucrat &another);
+		Bureaucrat& operator=(const Bureaucrat &another);
 		Bureaucrat& operator--(void);
+		Bureaucrat& operator++(void);
 		Bureaucrat operator--(int);
 		Bureaucrat operator++(int);
-		Bureaucrat(Bureaucrat &other);
 		std::string	getName(void) const;
-		void	signForm(AForm &form) const;
 		int	getGrade(void) const;
-		void	executeForm(AForm const &form);
+		void	signForm(const AForm &attempt);
+		void	executeForm(AForm const & form);
 		class GradeTooHighException: public std::exception
 		{
 			public:
@@ -49,6 +50,6 @@ class	Bureaucrat
 				virtual const char *what() const throw();
 		};
 };
-std::ostream& operator<<(std::ostream &out, const Bureaucrat &other);
+std::ostream& operator<<(std::ostream &out, const Bureaucrat &another);
 
 #endif /* BUREAUCRAT_HPP */

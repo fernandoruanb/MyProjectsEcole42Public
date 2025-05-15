@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 21:57:20 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 10:19:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 10:41:53 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class RobotomyRequestForm: public AForm
 	private:
 		const std::string target;
 	public:
-		RobotomyRequestForm(const std::string target, int required_grade, int required_exec);
+		RobotomyRequestForm(const std::string target);
 		~RobotomyRequestForm(void);
 		RobotomyRequestForm(const RobotomyRequestForm &another);
 		RobotomyRequestForm& operator=(const RobotomyRequestForm &another);

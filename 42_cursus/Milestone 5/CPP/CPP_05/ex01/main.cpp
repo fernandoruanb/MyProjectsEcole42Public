@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/10 17:28:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 12:30:47 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/13 20:53:43 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/14 12:19:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,44 +16,46 @@ int	main(void)
 {
 	try
 	{
-		Bureaucrat a("Robson", 10);
-		Form form1("Formula 1", 20, 10);
-		Bureaucrat b;
+		Bureaucrat A("Thiago", 10);
+		Bureaucrat B("Robert", 80);
+		Form Payment("Payment", 50, 20);
+		//Form Action("Action", 1500, 20);
+		//Form Activity("Activity", 0, 20);
+		//Bureaucrat C("Morpheus", 8000);
+		//Bureaucrat D("Indiana Jones", 0);
 
-		std::cout << a.getName() << std::endl;
-		std::cout << b.getName() << std::endl;
-		std::cout << "Bureaucrat A first grade: " << a.getGrade() << std::endl;
-		++a;
-		std::cout << "New grade: " <<  a << std::endl;
-		a.signForm(form1);
-		b.signForm(form1);
-		std::cout << form1;
-		form1.beSigned(a);
-		form1.beSigned(b);
-		a.signForm(form1);
-		b.signForm(form1);
-		std::cout << "Last A grade: " << a.getGrade() << std::endl;
-		std::cout << "Last B grade: " << b.getGrade() << std::endl;
+		Payment.beSigned(A);
+		A.signForm(Payment);
+		std::cout << A << std::endl;
+		++A;
+		std::cout << A << std::endl;
+		--A;
+		std::cout << A << std::endl;
+		A++;
+		std::cout << A << std::endl;
+		A--;
+		std::cout << A << std::endl;
+		std::cout << B << std::endl;
 	}
-	catch (const Bureaucrat::GradeTooLowException &exception)
+	catch (Bureaucrat::GradeTooHighException &exception)
 	{
-		std::cerr << "Grade is too low" << std::endl;
+		std::cerr << exception.what() << std::endl;
 	}
-	catch (const Bureaucrat::GradeTooHighException &exception)
+	catch (Bureaucrat::GradeTooLowException &exception)
 	{
-		std::cerr << "Grade is too high" << std::endl;
+		std::cerr << exception.what() << std::endl;
 	}
-	catch (const Form::GradeTooLowException &exception)
+	catch (Form::GradeTooHighException &exception)
 	{
-		std::cerr << exception.what();
+		std::cerr << exception.what() << std::endl;
 	}
-	catch (const Form::GradeTooHighException &exception)
+	catch (Form::GradeTooLowException &exception)
 	{
-		std::cerr << exception.what();
+		std::cerr << exception.what() << std::endl;
 	}
-	catch (const std::exception &exception)
+	catch (std::exception &exception)
 	{
-		std::cerr << "There is other exception from exceptions" << std::endl;
+		std::cerr << "Another exception was found!" << std::endl;
 	}
 	return (0);
 }

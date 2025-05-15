@@ -1,6 +1,6 @@
 #Name of the program or the library
 
-NAME = bureacrat_form
+NAME = bureaucrat_abstract_form
 
 #Compilers and flags
 
@@ -14,26 +14,28 @@ INCDIR = .
 
 #SRCS
 
-SRCS =  $(SRCDIR)/Bureaucrat.cpp\
-	$(SRCDIR)/main.cpp\
-	$(SRCDIR)/AForm.cpp
+SRCS =  $(SRCDIR)/main.cpp\
+	$(SRCDIR)/Bureaucrat.cpp\
+	$(SRCDIR)/AForm.cpp\
+	$(SRCDIR)/ShrubberyCreationForm.cpp\
+	$(SRCDIR)/RobotomyRequestForm.cpp
 
 #OBJS
 
-OBJS = $(SRCS:.cpp=.o)
+OBJS =  $(SRCS:.cpp=.o)
 
 #Main
 
 all: $(NAME)
 
-# all the magic happens here
+#All the magic happens here
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS)
 
 #.cpp -> .o
 
-%o:%.cpp
+%.o:%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #clean
@@ -50,4 +52,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all fclean re clean
+.PHONY: all fclean clean re

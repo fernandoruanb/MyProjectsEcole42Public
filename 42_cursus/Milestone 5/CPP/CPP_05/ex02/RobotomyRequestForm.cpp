@@ -6,17 +6,17 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 22:09:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 10:28:22 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/15 11:00:46 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string target, int required_grade, int required_exec): AForm(target, required_grade, required_exec), target(target)
+RobotomyRequestForm::RobotomyRequestForm(const std::string target): AForm(target, 72, 45), target(target)
 {
-	if (required_grade < 1 || required_exec < 1)
+	if (this->getRequiredGrade() < 1 || this->getRequiredExec() < 1)
 		throw GradeTooHighException();
-	if (required_grade > 150 || required_exec > 150)
+	if (this->getRequiredGrade() > 150 || this->getRequiredExec() > 150)
 		throw GradeTooLowException();
 	std::cout << "Default constructor called for " << this->getTarget() << " RobotomyRequestForm" << std::endl;
 }
@@ -26,7 +26,7 @@ RobotomyRequestForm::~RobotomyRequestForm(void)
 	std::cout << "Destructor called for " << this->getTarget() << " RobotomyRequestForm" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &another): AForm(another.getTarget(), another.getRequiredGrade(), another.getRequiredExec()), target(another.getTarget())
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &another): AForm(another.getTarget(), 72, 45), target(another.getTarget())
 {
 	std::cout << "Copy constructor called for " << this->getTarget() << " RobotomyRequestForm" << std::endl;
 }
@@ -57,6 +57,7 @@ std::string	RobotomyRequestForm::getTarget(void) const
 RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm &another)
 {
 	(void)another;
+	std::cout << "Copy assignment called for " << this->getTarget() << " Form" << std::endl;
 	return (*this);
 }
 

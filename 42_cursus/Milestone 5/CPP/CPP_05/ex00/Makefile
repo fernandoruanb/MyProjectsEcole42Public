@@ -1,6 +1,6 @@
 #Name of the program or the library
 
-NAME = bureacrat
+NAME = bureaucrat
 
 #Compilers and flags
 
@@ -14,8 +14,8 @@ INCDIR = .
 
 #SRCS
 
-SRCS =  $(SRCDIR)/Bureaucrat.cpp\
-	$(SRCDIR)/main.cpp
+SRCS =  $(SRCDIR)/main.cpp\
+	$(SRCDIR)/Bureaucrat.cpp
 
 #OBJS
 
@@ -25,14 +25,14 @@ OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-# all the magic happens here
+#All the magic happens here
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS)
 
-#.cpp -> .o
+# .cpp -> .o
 
-%o:%.cpp
+%.o:%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #clean
@@ -49,4 +49,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all fclean re clean
+.PHONY: all fclean clean re

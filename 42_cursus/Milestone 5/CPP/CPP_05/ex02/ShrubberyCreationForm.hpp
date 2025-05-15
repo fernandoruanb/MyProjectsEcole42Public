@@ -5,30 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 11:51:22 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/12 15:13:25 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/14 17:42:36 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/15 10:51:36 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHRUBBERYCREATIONFORM_HPP
 # define SHRUBBERYCREATIONFORM_HPP
 
-# include <fstream>
 # include "AForm.hpp"
+
+class Bureaucrat;
+class AForm;
 
 class ShrubberyCreationForm: public AForm
 {
 	private:
-		std::string target;
-		void	draw_ascii_tree(std::string file);
+		const std::string target;
 	public:
-		ShrubberyCreationForm(const std::string &target);
-		ShrubberyCreationForm& operator=(ShrubberyCreationForm &other);
-		ShrubberyCreationForm(ShrubberyCreationForm &other);
+		ShrubberyCreationForm(const std::string target);
 		~ShrubberyCreationForm(void);
+		ShrubberyCreationForm(const ShrubberyCreationForm &another);
+		ShrubberyCreationForm& operator=(const ShrubberyCreationForm &another);
 		std::string	getTarget(void) const;
-		void execute_tree(const Bureaucrat &check);
+		void	beSigned(const Bureaucrat &attempt);
+		void	execute(Bureaucrat const & executor) const;
 };
-std::ostream& operator<<(std::ostream &out, ShrubberyCreationForm &other);
+std::ostream& operator<<(std::ostream &out, const ShrubberyCreationForm &another);
 
 #endif /* SHRUBBERYCREATIONFORM_HPP */
