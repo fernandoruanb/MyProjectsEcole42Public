@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 19:24:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 20:15:56 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/16 09:54:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ Bureaucrat::~Bureaucrat(void)
 	std::cout << "Destructor called for " << this->getName() << " Bureaucrat" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &another)
+Bureaucrat::Bureaucrat(const Bureaucrat &another): name(another.getName()), grade(another.getGrade())
 {
-	std::cout << "Copy constructor called for " << this->getName() << " Bureaucrat" << std::endl;
-	this->grade = another.getGrade();
+	(void)another;
+	std::cout << "Copy constructor called" << std::endl;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &another)
