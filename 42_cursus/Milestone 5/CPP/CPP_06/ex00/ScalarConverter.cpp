@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:17:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/16 17:58:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/16 20:22:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,33 @@ ScalarConverter&	ScalarConverter::operator=(const ScalarConverter &another)
 	return (*this);
 }
 
-std::string	ScalarConverter::isInt(const std::string target) const
+std::string	ScalarConverter::isInt(std::string target) const
 {
-	long	index;
-	long	result;
-	long	is_sign;
+	int	result;
+	int	length;
+	std::string new_target;
 
-	index = 0;
+	length = 0;
 	result = 0;
-	is_sign = 1;
-	if (target[index] == '-' || target[index] == '+')
+	try
 	{
-		if (target[index] == '-')
-			is_sign = -1;
-		index++;
+		result = std::stoi(target);
+		while (result > 0)
+		{
+			result /= 10;
+			length++;
+		}
+		if (length == 0)
+			length = 1;
+		return ("int: " + target.substr(0, length));
 	}
-	while (target[index] >= '0' && target[index] <= '9')
+	catch (std::exception &exception)
 	{
-		result *= 10;
-		result += target[index] - '0';
-		if ((result * is_sign) > INT_MAX || (result * is_sign) < INT_MIN)
-			return ("int: impossible");
-		index++;
+		return ("int: impossible");
 	}
-	if (target[index] == '\0')
-		return ("int: " + target);
-	return ("int: impossible");
 }
 
-std::string	ScalarConverter::isChar(const std::string target) const
+std::string	ScalarConverter::isChar(std::string target) const
 {
 	if (target[0] && target[1])
 	{
@@ -78,24 +76,60 @@ std::string	ScalarConverter::isChar(const std::string target) const
 	return ("char: Non displayable");
 }
 
-std::string	ScalarConverter::isFloat(const std::string target) const
+std::string	ScalarConverter::isFloat(std::string target) const
 {
-	bool	result;
+	long	index;
 
-	result = false;
-	if (result == false)
-		return ("float: impossible");
-	return ("float: tudo ok");
+	index = 0;
+	while (target[index] >= '0' && target[index] <= '9')
+	{
+		if (index > LONG_MAX - 1)
+			return ("float: impossible");
+		index++;
+	}
+	if (target[index] == '\0')
+		return ("float: " + target + ".0f");
+	else if (target[index] == '.')
+	{
+		++index;
+		while (target[index] >= '0' && target[index] <= '9')
+		{
+			if (index > LONG_MAX - 1)
+				return ("float: impossible");
+			index++;
+		}
+		if (target[index] == '\0')
+			return ("float: " + target + "f");
+	}
+	return ("float: impossible");
 }
 
-std::string	ScalarConverter::isDouble(const std::string target) const
+std::string	ScalarConverter::isDouble(std::string target) const
 {
-	bool	result;
+	long    index;
 
-	result = false;
-	if (result == false)
-		return ("double: impossible");
-	return ("double: tudo ok");
+        index = 0;
+        while (target[index] >= '0' && target[index] <= '9')
+        {
+                if (index > LONG_MAX - 1)
+                        return ("double: impossible");
+                index++;
+        }
+        if (target[index] == '\0')
+                return ("double: " + target + ".0");
+        else if (target[index] == '.')
+        {
+                ++index;
+                while (target[index] >= '0' && target[index] <= '9')
+                {
+                        if (index > LONG_MAX - 1)
+                                return ("double: impossible");
+                        index++;
+                }
+                if (target[index] == '\0')
+                        return ("double: " + target);
+        }
+        return ("double: impossible");
 }
 
 std::ostream&	operator<<(std::ostream &out, const ScalarConverter &another)

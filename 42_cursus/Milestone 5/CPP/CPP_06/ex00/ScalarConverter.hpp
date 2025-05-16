@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 10:11:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/16 17:53:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/16 18:27:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ class	ScalarConverter
 		~ScalarConverter(void);
 		ScalarConverter(const ScalarConverter &another);
 		ScalarConverter& operator=(const ScalarConverter &another);
-		std::string	isInt(const std::string target) const;
-		std::string	isChar(const std::string target) const;
-		std::string	isFloat(const std::string target) const;
-		std::string	isDouble(const std::string target) const;
+		std::string	isInt(std::string target) const;
+		std::string	isChar(std::string target) const;
+		std::string	isFloat(std::string target) const;
+		std::string	isDouble(std::string target) const;
 };
 std::ostream& operator<<(std::ostream &out, const ScalarConverter &another);
 
