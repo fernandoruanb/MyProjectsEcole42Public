@@ -27,7 +27,7 @@ class	AForm
 		const int	required_exec;
 	public:
 		AForm(const std::string name, const int required_grade, const int required_exec);
-		~AForm(void);
+		virtual ~AForm(void);
 		AForm(const AForm &another);
 		AForm&	operator=(const AForm &another);
 		virtual void	beSigned(const Bureaucrat &attempt) = 0;

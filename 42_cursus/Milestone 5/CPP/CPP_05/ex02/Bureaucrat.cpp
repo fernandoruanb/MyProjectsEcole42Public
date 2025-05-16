@@ -26,10 +26,10 @@ Bureaucrat::~Bureaucrat(void)
 	std::cout << "Destructor called for " << this->getName() << " Bureaucrat";
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other)
+Bureaucrat::Bureaucrat(const Bureaucrat &other): name(other.getName()), grade(other.getGrade())
 {
+	(void)other;
 	std::cout << "Copy constructor called for " << this->getName() << " Bureaucrat";
-	this->grade = other.getGrade();
 }
 
 Bureaucrat&	Bureaucrat::operator=(const Bureaucrat &another)
