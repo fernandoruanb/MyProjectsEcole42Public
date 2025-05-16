@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:17:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/16 14:06:19 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:26:08 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ std::string	ScalarConverter::isInt(const std::string target) const
 	result = false;
 	if (result == false)
 		return ("int: impossible");
-	return ("int: tudo ok");	
+	return ("int: tudo ok");
 }
 
 std::string	ScalarConverter::isChar(const std::string target) const
@@ -49,6 +49,8 @@ std::string	ScalarConverter::isChar(const std::string target) const
 	if (target[0] && target[1])
 	{
 		if (target[0] < 32 || target[0] > 126)
+			return ("char: Non displayable");
+		else if (target[1] != '\0')
 			return ("char: Non displayable");
 		else
 			return ("char: impossible");
