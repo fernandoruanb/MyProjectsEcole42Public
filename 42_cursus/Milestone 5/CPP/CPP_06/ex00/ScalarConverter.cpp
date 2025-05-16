@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:17:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/16 15:54:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:58:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,26 @@ ScalarConverter&	ScalarConverter::operator=(const ScalarConverter &another)
 std::string	ScalarConverter::isInt(const std::string target) const
 {
 	long	index;
+	long	result;
+	long	is_sign;
 
 	index = 0;
+	result = 0;
+	is_sign = 1;
 	if (target[index] == '-' || target[index] == '+')
+	{
+		if (target[index] == '-')
+			is_sign = -1;
 		index++;
+	}
 	while (target[index] >= '0' && target[index] <= '9')
+	{
+		result *= 10;
+		result += target[index] - '0';
+		if ((result * is_sign) > INT_MAX || (result * is_sign) < INT_MIN)
+			return ("int: impossible");
 		index++;
+	}
 	if (target[index] == '\0')
 		return ("int: " + target);
 	return ("int: impossible");

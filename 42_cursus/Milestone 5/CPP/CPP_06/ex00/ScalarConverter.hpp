@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 10:11:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/16 13:40:40 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:53:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SCALARCONVERTER_HPP
 
 # include <iostream>
-# include <limits>
+# include <climits>
 
 class	ScalarConverter
 {
