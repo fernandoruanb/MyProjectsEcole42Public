@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:17:23 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/16 14:26:08 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:54:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@ ScalarConverter&	ScalarConverter::operator=(const ScalarConverter &another)
 
 std::string	ScalarConverter::isInt(const std::string target) const
 {
-	bool	result;
+	long	index;
 
-	result = false;
-	if (result == false)
-		return ("int: impossible");
-	return ("int: tudo ok");
+	index = 0;
+	if (target[index] == '-' || target[index] == '+')
+		index++;
+	while (target[index] >= '0' && target[index] <= '9')
+		index++;
+	if (target[index] == '\0')
+		return ("int: " + target);
+	return ("int: impossible");
 }
 
 std::string	ScalarConverter::isChar(const std::string target) const
@@ -50,7 +54,7 @@ std::string	ScalarConverter::isChar(const std::string target) const
 	{
 		if (target[0] < 32 || target[0] > 126)
 			return ("char: Non displayable");
-		else if (target[1] != '\0')
+		else if (target[0] == '\\')
 			return ("char: Non displayable");
 		else
 			return ("char: impossible");
@@ -82,6 +86,6 @@ std::string	ScalarConverter::isDouble(const std::string target) const
 
 std::ostream&	operator<<(std::ostream &out, const ScalarConverter &another)
 {
-	out << "ScalarConverter v1.0 =D"<< std::endl;
+	out << "ScalarConverter v1.0 =D" << std::endl;
 	return (out);
 }
