@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/17 19:44:08 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/17 20:02:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,18 @@ void	ScalarConverter::converter(const std::string &target)
 {
 	if (isPseudo(target))
 	{
-		std::cout << "char: " + target << std::endl;
+		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
-		std::cout << "float: impossible" << std::endl;
-		std::cout << "double: impossible" << std::endl;
+		if (target != "nanf" && target != "+inff" && target != "-inff")
+		{
+			std::cout << "float: " + target + "f" << std::endl;
+			std::cout << "double: " + target << std::endl;
+		}
+		else
+		{
+			std::cout << "float: " + target << std::endl;
+			std::cout << "double: " + target.substr(0, target.size() - 1) << std::endl;
+		}
 		return ;
 	}
 }
