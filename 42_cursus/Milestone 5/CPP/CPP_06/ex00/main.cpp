@@ -14,16 +14,10 @@
 
 int	main(int argc, char **argv)
 {
-	ScalarConverter A;
-
 	if (argc != 2)
 	{
 		std::cerr << "This program needs only an argument" << std::endl;
 		return (1);
 	}
-	std::cout << A.isChar(argv[1]) << std::endl;
-	std::cout << A.isInt(argv[1]) << std::endl;
-	std::cout << A.isFloat(argv[1]) << std::endl;
-	std::cout << A.isDouble(argv[1]) << std::endl;
 	return (0);
 }

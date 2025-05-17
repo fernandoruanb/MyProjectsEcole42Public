@@ -18,15 +18,13 @@
 
 class	ScalarConverter
 {
-	public:
+	private:
 		ScalarConverter(void);
 		~ScalarConverter(void);
-		ScalarConverter(const ScalarConverter &another);
-		ScalarConverter& operator=(const ScalarConverter &another);
-		std::string	isInt(std::string target) const;
-		std::string	isChar(std::string target) const;
-		std::string	isFloat(std::string target) const;
-		std::string	isDouble(std::string target) const;
+		ScalarConverter(const ScalarConverter&);
+		ScalarConverter& operator=(const ScalarConverter&);
+	public:
+		static void	converter(const std::string& target);
 };
 std::ostream& operator<<(std::ostream &out, const ScalarConverter &another);
 
