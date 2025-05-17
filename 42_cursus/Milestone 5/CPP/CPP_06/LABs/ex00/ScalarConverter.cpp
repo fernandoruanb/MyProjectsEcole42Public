@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/17 20:02:23 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/17 20:45:30 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,23 @@ void	ScalarConverter::converter(const std::string &target)
 		}
 		return ;
 	}
+	else if (isChar(target))
+	{
+		if (target[0] > 32 && target[0] < 127)
+		{
+			std::cout << "char: " + target << std::endl;
+			std::cout << "int: " << static_cast<int>(target) << std::endl;
+			std::cout << "float: " << static_cast<float>(target) << std::endl;
+			std::cout << "double: " << static_cast<double>(target) << std::endl;
+		}
+		else
+		{
+			std::cout << "char: non displayable"; << std::endl;
+			std::cout << "int: " << static_cast<int>(target) << std::endl;
+			std::cout << "float: " << static_cast<float>(target) << std::endl;
+			std::cout << "double: " << static_cast<double>(target) << std::endl;
+		}
+	}
 }
 
 /*bool	ScalarConverter::isFloat(const std::string &target)
@@ -117,14 +134,9 @@ void	ScalarConverter::converter(const std::string &target)
 
 bool	ScalarConverter::isChar(const std::string &target)
 {
-	char	caracter;
-
 	if (target.size() != 1)
 		return (false);
-	caracter = static_cast<unsigned char>(target[0]);
-	if (caracter > 32 && caracter < 127)
-		return (true);
-	return (false);
+	return (true);
 }
 
 std::ostream& operator<<(std::ostream &out, const ScalarConverter &another)

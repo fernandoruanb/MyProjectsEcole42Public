@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:46:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 15:42:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/17 20:46:05 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	Bureaucrat::getGrade(void) const
 
 void	Bureaucrat::executeForm(AForm const & form)
 {
-	if (this->getGrade() <= form.getRequiredExec())
+	if (form.getIsSign() && this->getGrade() <= form.getRequiredExec())
 		form.execute(*this);
 }
 
