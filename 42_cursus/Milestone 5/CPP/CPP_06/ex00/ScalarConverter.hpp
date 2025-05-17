@@ -23,6 +23,11 @@ class	ScalarConverter
 		~ScalarConverter(void);
 		ScalarConverter(const ScalarConverter&);
 		ScalarConverter& operator=(const ScalarConverter&);
+		static bool isPseudo(const std::string& target);
+		static bool isChar(const std::string& target);
+		static bool isInt(const std::string& target);
+		static bool isFloat(const std::string& target);
+		static bool isDouble(const std::string& target);
 	public:
 		static void	converter(const std::string& target);
 };
