@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:39:32 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/17 21:32:30 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/18 11:01:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <iomanip>
+# include <cfloat>
 # include <cstdlib>
 # include <climits>
 

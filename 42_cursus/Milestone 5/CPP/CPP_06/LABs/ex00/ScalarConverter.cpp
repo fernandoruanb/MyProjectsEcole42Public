@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/17 21:42:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/18 11:08:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ bool	ScalarConverter::isInt(const std::string &target)
 
 void	ScalarConverter::converter(const std::string &target)
 {
+	long long	number;
+
 	if (isPseudo(target))
 	{
 		std::cout << "char: impossible" << std::endl;
@@ -98,9 +100,9 @@ void	ScalarConverter::converter(const std::string &target)
 	}
 	else if (isChar(target))
 	{
-		if (target[0] > 32 && target[0] < 127)
+		if (target[0] > 31 && target[0] < 127)
 		{
-			std::cout << "char: " + target << std::endl;
+			std::cout << "char: " << "\'" << target << "\'" << std::endl;
 			std::cout << "int: " << std::fixed << static_cast<int>(target[0])
 				<< std::setprecision(1) << std::endl;
 			std::cout << "float: " << std::fixed << static_cast<float>(target[0])
@@ -110,7 +112,10 @@ void	ScalarConverter::converter(const std::string &target)
 		}
 		else
 		{
-			std::cout << "char: non displayable" << std::endl;
+			if (target[0] < -128 || target[0] > 126)
+				std::cout << "char: impossible" << std::endl;
+			else
+				std::cout << "char: non displayable" << std::endl;
 			std::cout << "int: " << std::fixed << static_cast<int>(target[0]) << std::endl;
 			std::cout << "float: " << std::fixed << static_cast<float>(target[0])
 				<< std::setprecision(1) << "f" << std::endl;
@@ -120,18 +125,32 @@ void	ScalarConverter::converter(const std::string &target)
 	}
 	else if (isInt(target))
 	{
-		if (target.size() == 1)
-		{
-			if (target[0] > 32 && target[0] < 127)
-				std::cout << "char: '" << static_cast<char>(target[0]) << "\'" << std::endl;
-			else
-				std::cout << "char: Non displayable" << std::endl;
-		}
+		number = std::atof(target.c_str());
+		if (number > 31 && number < 127)
+			std::cout << "char: '" << static_cast<char>(number) << "\'" << std::endl;
+		else if (number > -128 && number < 127)
+			std::cout << "char: Non displayable" << std::endl;
 		else
 			std::cout << "char: impossible" << std::endl;
-		std::cout << "int: " << std::atoi(target.c_str()) << std::endl;
-		std::cout << "float: " << std::fixed << std::atof(target.c_str()) << std::setprecision(1) << "f" << std::endl;
-		std::cout << "double: " << std::fixed << std::atof(target.c_str()) << std::setprecision(1) << std::endl;
+		if (number > INT_MAX || number < INT_MIN)
+			std::cout << "int: impossible" << std::endl;
+		else
+			std::cout << "int: " << std::atoi(target.c_str()) << std::endl;
+		if (number > FLT_MAX || number < FLT_MIN)
+			std::cout << "float: impossible" << std::endl;
+		else
+			std::cout << "float: " << std::fixed << std::setprecision(1) << std::atof(target.c_str()) << "f" << std::endl;
+		if (number > DBL_MAX || number < DBL_MIN)
+			std::cout << "double: impossible" << std::endl;
+		else
+			std::cout << "double: " << std::fixed << std::setprecision(1) << std::atof(target.c_str()) << std::endl;
+	}
+	else
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
 	}
 }
 
