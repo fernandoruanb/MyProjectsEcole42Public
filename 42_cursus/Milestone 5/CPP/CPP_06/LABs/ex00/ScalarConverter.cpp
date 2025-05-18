@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/17 20:45:30 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:02:08 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,16 +105,19 @@ void	ScalarConverter::converter(const std::string &target)
 		if (target[0] > 32 && target[0] < 127)
 		{
 			std::cout << "char: " + target << std::endl;
-			std::cout << "int: " << static_cast<int>(target) << std::endl;
-			std::cout << "float: " << static_cast<float>(target) << std::endl;
-			std::cout << "double: " << static_cast<double>(target) << std::endl;
+			std::cout << "int: " << std::fixed << static_cast<int>(target[0]) << std::setprecision(1) << std::endl;
+			std::cout << "float: " << std::fixed << static_cast<float>(target[0])
+				<< std::setprecision(1) << "f" << std::endl;
+			std::cout << "double: " << std::fixed << static_cast<double>(target[0])
+				<< std::setprecision(1) << std::endl;
 		}
 		else
 		{
-			std::cout << "char: non displayable"; << std::endl;
-			std::cout << "int: " << static_cast<int>(target) << std::endl;
-			std::cout << "float: " << static_cast<float>(target) << std::endl;
-			std::cout << "double: " << static_cast<double>(target) << std::endl;
+			std::cout << "char: non displayable" << std::endl;
+			std::cout << "int: " << std::fixed << static_cast<int>(target[0]) << std::endl;
+			std::cout << "float: " << std::fixed << static_cast<float>(target[0])
+				<< std::setprecision(1) << "f" << std::endl;
+			std::cout << "double: " << std::fixed << static_cast<double>(target[0]) << std::setprecision(1) << std::endl;
 		}
 	}
 }
