@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/18 11:08:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/18 13:40:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ bool	ScalarConverter::isInt(const std::string &target)
 	int	index;
 
 	index = 0;
+	if (target[0] == '.')
+		return (0);
 	if (target[0] == '-' || target[1] == '+')
 	{
 		if (target.size() == 1)
@@ -145,6 +147,28 @@ void	ScalarConverter::converter(const std::string &target)
 		else
 			std::cout << "double: " << std::fixed << std::setprecision(1) << std::atof(target.c_str()) << std::endl;
 	}
+	else if (isFloat(target))
+	{
+		number = std::atof(target.c_str());
+		if (number < 0 || number > 127)
+			std::cout << "char: impossible" << std::endl;
+		else if (number < 32 || number > 126)
+			std::cout << "char: Non displayable" << std::endl;
+		else
+			std::cout << "char: " << "\'" << static_cast<char>(number) << "\'" << std::endl;
+		if (number > INT_MAX || number < INT_MIN)
+			std::cout << "int: impossible" << std::endl;
+		else
+			std::cout << "int: " << static_cast<int>(number) << std::endl;
+		if (number > FLT_MAX || number < FLT_MIN)
+			std::cout << "float: impossible" << std::endl;
+		else
+			std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(number) << "f" << std::endl;
+		if (number > DBL_MAX || number < DBL_MIN)
+			std::cout << "double: impossible" << std::endl;
+		else
+			std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(number) << std::endl;
+	}
 	else
 	{
 		std::cout << "char: impossible" << std::endl;
@@ -154,18 +178,47 @@ void	ScalarConverter::converter(const std::string &target)
 	}
 }
 
-/*bool	ScalarConverter::isFloat(const std::string &target)
+bool	ScalarConverter::isFloat(const std::string &target)
 {
-	long	index;
+	long long	index;
 
 	index = 0;
+	if (target[0] == '.')
+		return (false);
 	if (target[0] == '+' || target[0] == '-')
 	{
 		if (target.size() == 1)
 			return (false);
 		index++;
 	}
-}*/
+	if (target[target.size() - 1] != 'f')
+		return (false);
+	while ((unsigned long)index < target.size())
+	{
+		if (target[index] >= '0' && target[index] <= '9')
+			index++;
+		else
+			break ;
+	}
+	if (target[index] == '.' && target[index + 1] == '\0')
+		return (false);
+	else if (target[index] == 'f')
+		return (true);
+	else
+	{
+		index++;
+		if (target[index] < '0' || target[index] > '9')
+			return (false);
+		while ((unsigned long)index < target.size() && target[index] != 'f')
+		{
+			if (target[index] >= '0' && target[index] <= '9')
+				index++;
+			else
+				return (false);
+		}
+	}
+	return (true);
+}
 
 bool	ScalarConverter::isChar(const std::string &target)
 {
