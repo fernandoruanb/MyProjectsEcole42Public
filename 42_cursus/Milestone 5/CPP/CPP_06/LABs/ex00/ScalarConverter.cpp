@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/17 21:02:08 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:42:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,9 @@ bool	ScalarConverter::isPseudo(const std::string &target)
 	return (false);
 }
 
-/*bool	ScalarConverter::isInt(const std::string &target)
+bool	ScalarConverter::isInt(const std::string &target)
 {
-	long	index;
-	long	number;
+	int	index;
 
 	index = 0;
 	if (target[0] == '-' || target[1] == '+')
@@ -65,22 +64,19 @@ bool	ScalarConverter::isPseudo(const std::string &target)
 			return (false);
 		index++;
 	}
+	if ((index == 1 && target.size() > 11) || (index == 0 && target.size() > 10))
+		return (false);
 	while ((unsigned long)index < target.size())
 	{
 		if (target[index] >= '0' && target[index] <= '9')
-			index++;
-		if (index > 11)
-			break ;
+		       index++;
+		else
+			break ;	
 	}
 	if ((unsigned long)index == target.size())
-	{
-		number = static_cast<int>(target);
-		if (number > INT_MAX || number < INT_MIN)
-			return (false);
 		return (true);
-	}
 	return (false);
-}*/
+}
 
 void	ScalarConverter::converter(const std::string &target)
 {
@@ -105,7 +101,8 @@ void	ScalarConverter::converter(const std::string &target)
 		if (target[0] > 32 && target[0] < 127)
 		{
 			std::cout << "char: " + target << std::endl;
-			std::cout << "int: " << std::fixed << static_cast<int>(target[0]) << std::setprecision(1) << std::endl;
+			std::cout << "int: " << std::fixed << static_cast<int>(target[0])
+				<< std::setprecision(1) << std::endl;
 			std::cout << "float: " << std::fixed << static_cast<float>(target[0])
 				<< std::setprecision(1) << "f" << std::endl;
 			std::cout << "double: " << std::fixed << static_cast<double>(target[0])
@@ -117,8 +114,24 @@ void	ScalarConverter::converter(const std::string &target)
 			std::cout << "int: " << std::fixed << static_cast<int>(target[0]) << std::endl;
 			std::cout << "float: " << std::fixed << static_cast<float>(target[0])
 				<< std::setprecision(1) << "f" << std::endl;
-			std::cout << "double: " << std::fixed << static_cast<double>(target[0]) << std::setprecision(1) << std::endl;
+			std::cout << "double: " << std::fixed << static_cast<double>(target[0])
+				<< std::setprecision(1) << std::endl;
 		}
+	}
+	else if (isInt(target))
+	{
+		if (target.size() == 1)
+		{
+			if (target[0] > 32 && target[0] < 127)
+				std::cout << "char: '" << static_cast<char>(target[0]) << "\'" << std::endl;
+			else
+				std::cout << "char: Non displayable" << std::endl;
+		}
+		else
+			std::cout << "char: impossible" << std::endl;
+		std::cout << "int: " << std::atoi(target.c_str()) << std::endl;
+		std::cout << "float: " << std::fixed << std::atof(target.c_str()) << std::setprecision(1) << "f" << std::endl;
+		std::cout << "double: " << std::fixed << std::atof(target.c_str()) << std::setprecision(1) << std::endl;
 	}
 }
 

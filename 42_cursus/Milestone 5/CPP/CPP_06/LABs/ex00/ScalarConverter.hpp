@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:39:32 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/17 20:54:56 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/17 21:32:30 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <iomanip>
+# include <cstdlib>
 # include <climits>
 
 class ScalarConverter
@@ -26,7 +27,7 @@ class ScalarConverter
 		ScalarConverter& operator=(const ScalarConverter &another);
 		static bool	isPseudo(const std::string &target);
 		static bool	isChar(const std::string &target);
-		//static bool	isInt(const std::string &target);
+		static bool	isInt(const std::string &target);
 		//static bool	isFloat(const std::string &target);
 		//static bool	isDouble(const std::string &target);
 	public:
