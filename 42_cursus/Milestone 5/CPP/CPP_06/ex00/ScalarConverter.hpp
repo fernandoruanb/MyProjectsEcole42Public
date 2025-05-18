@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 10:11:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/16 18:27:21 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/17 15:39:32 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/18 15:04:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 # define SCALARCONVERTER_HPP
 
 # include <iostream>
+# include <iomanip>
+# include <cfloat>
+# include <cstdlib>
 # include <climits>
 
-class	ScalarConverter
+class ScalarConverter
 {
 	private:
 		ScalarConverter(void);
 		~ScalarConverter(void);
-		ScalarConverter(const ScalarConverter&);
-		ScalarConverter& operator=(const ScalarConverter&);
-		static bool isPseudo(const std::string& target);
-		static bool isChar(const std::string& target);
-		static bool isInt(const std::string& target);
-		static bool isFloat(const std::string& target);
-		static bool isDouble(const std::string& target);
+		ScalarConverter(const ScalarConverter &another);
+		ScalarConverter& operator=(const ScalarConverter &another);
+		static bool	isPseudo(const std::string &target);
+		static bool	isChar(const std::string &target);
+		static bool	isInt(const std::string &target);
+		static bool	isFloat(const std::string &target);
+		static bool	isDouble(const std::string &target);
 	public:
-		static void	converter(const std::string& target);
+		static void converter(const std::string &target);
 };
 std::ostream& operator<<(std::ostream &out, const ScalarConverter &another);
 

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 12:58:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/16 13:46:34 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/17 19:17:41 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/17 19:18:46 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
-	{
-		std::cerr << "This program needs only an argument" << std::endl;
 		return (1);
-	}
+	ScalarConverter::converter(argv[1]);
 	return (0);
 }

@@ -2,7 +2,7 @@
 
 NAME = convert
 
-#Compilers and flags
+#Compilers and Flags
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
@@ -25,25 +25,25 @@ OBJS =  $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-#all the magic happens here
+#All the magic happens here
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -I $(INCDIR) -o $(NAME) $(OBJS)
 
 #.cpp -> .o
 
-.%o:%.cpp
+%.o:%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #clean
 
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(NAME)
 
 #fclean
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(OBJS)
 
 #restart
 
