@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/18 16:07:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:50:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,10 +237,8 @@ bool	ScalarConverter::isDouble(const std::string &target)
 		if (target[index] >= '0' && target[index] <= '9')
 			index++;
 		else
-			break ;
+			return (false);
 	}
-	if (target[index] != '\0')
-		return (false);
 	return (true);
 }
 
