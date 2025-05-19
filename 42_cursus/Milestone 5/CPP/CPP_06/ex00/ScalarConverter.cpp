@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/19 15:56:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:45:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,18 @@ bool	ScalarConverter::isDouble(const std::string &target)
 bool	ScalarConverter::isFloat(const std::string &target)
 {
 	long long	index;
+	int	count;
 
+	index = 0;
+	count = 0;
+	while ((unsigned long)index < target.size())
+	{
+		if (target[index] == 'f')
+			count++;
+		if (count > 1)
+			return (false);
+		index++;
+	}
 	index = 0;
 	if (target[0] == '.')
 		return (false);
