@@ -34,6 +34,16 @@ Serializer&	Serializer::operator=(const Serializer &another)
 	return (*this);
 }
 
+uintptr_t	Serializer::serialize(t_data *ptr)
+{
+	return (reinterpret_cast<uintptr_t>(ptr));
+}
+
+t_data	*Serializer::deserialize(uintptr_t target)
+{
+	return (reinterpret_cast<t_data*>(target));
+}
+
 std::ostream& operator<<(std::ostream &out, const Serializer &another)
 {
 	(void)another;
