@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/19 20:45:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:54:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ bool	ScalarConverter::isInt(const std::string &target)
 		return (0);
 	if (target[0] == '-' || target[1] == '+')
 	{
-		if (target.size() == 1)
+		if (target.size() == 1 || target[1] == '.')
 			return (false);
 		index++;
 	}
@@ -207,7 +207,7 @@ bool	ScalarConverter::isDouble(const std::string &target)
 		return (false);
 	if (target[0] == '+' || target[0] == '-')
 	{
-		if (target.size() == 1)
+		if (target.size() == 1 || target[1] == '.')
 			return (false);
 		index++;
 	}
@@ -260,7 +260,7 @@ bool	ScalarConverter::isFloat(const std::string &target)
 		return (false);
 	if (target[0] == '+' || target[0] == '-')
 	{
-		if (target.size() == 1)
+		if (target.size() == 1 || target[1] == '.')
 			return (false);
 		index++;
 	}
