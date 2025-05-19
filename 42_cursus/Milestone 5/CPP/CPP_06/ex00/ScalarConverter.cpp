@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/19 14:50:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/19 15:56:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,14 @@ bool	ScalarConverter::isInt(const std::string &target)
 		if (target[index] >= '0' && target[index] <= '9')
 		       index++;
 		else
-			break ;	
+			return (false) ;	
 	}
-	if ((unsigned long)index == target.size())
-		return (true);
-	return (false);
+	return (true);
 }
 
 void	ScalarConverter::converter(const std::string &target)
 {
-	long long	number;
+	double	number;
 
 	if (isPseudo(target))
 	{
@@ -105,12 +103,12 @@ void	ScalarConverter::converter(const std::string &target)
 		if (target[0] > 31 && target[0] < 127)
 		{
 			std::cout << "char: " << "\'" << target << "\'" << std::endl;
-			std::cout << "int: " << std::fixed << static_cast<int>(target[0])
-				<< std::setprecision(1) << std::endl;
-			std::cout << "float: " << std::fixed << static_cast<float>(target[0])
-				<< std::setprecision(1) << "f" << std::endl;
-			std::cout << "double: " << std::fixed << static_cast<double>(target[0])
-				<< std::setprecision(1) << std::endl;
+			std::cout << "int: " << std::fixed << std::setprecision(1) 
+				<< static_cast<int>(target[0]) << std::setprecision(1) << std::endl;
+			std::cout << "float: " << std::fixed << std::setprecision(1) 
+				<< static_cast<float>(target[0]) << "f" << std::endl;
+			std::cout << "double: " << std::fixed << std::setprecision(1)
+				<< static_cast<double>(target[0]) << std::endl;
 		}
 		else
 		{
