@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/20 13:10:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:36:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,12 +142,12 @@ void	ScalarConverter::converter(const std::string &target)
 	else if (isInt(target))
 	{
 		number = std::atof(target.c_str());
-		if (number > 31 && number < 127)
-			std::cout << "char: '" << static_cast<char>(number) << "\'" << std::endl;
-		else if (number < 32 || number > 126)
-			std::cout << "char: Non displayable" << std::endl;
-		else
-			std::cout << "char: impossible" << std::endl;
+		if (static_cast<int>(number) < 0 || static_cast<int>(number) > 127)
+                        std::cout << "char: impossible" << std::endl;
+                else if (static_cast<int>(number) < 32 || static_cast<int>(number) > 126)
+                        std::cout << "char: Non displayable" << std::endl;
+                else
+                        std::cout << "char: " << "\'" << static_cast<char>(number) << "\'" << std::endl;
 		if (number > INT_MAX || number < INT_MIN)
 			std::cout << "int: impossible" << std::endl;
 		else
