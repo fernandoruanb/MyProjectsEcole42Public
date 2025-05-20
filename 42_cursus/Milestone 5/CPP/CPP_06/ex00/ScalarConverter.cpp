@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/19 20:54:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/19 23:24:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,37 @@ bool	ScalarConverter::isPseudo(const std::string &target)
 bool	ScalarConverter::isInt(const std::string &target)
 {
 	int	index;
+	int	zeros;
+	int	copy;
 
 	index = 0;
+	zeros = 0;
 	if (target[0] == '.')
 		return (0);
-	if (target[0] == '-' || target[1] == '+')
+	if (target[0] == '-' || target[0] == '+')
 	{
 		if (target.size() == 1 || target[1] == '.')
 			return (false);
 		index++;
 	}
-	if ((index == 1 && target.size() > 11) || (index == 0 && target.size() > 10))
+	copy = index;
+	while ((unsigned long)index < target.size())
+	{
+		if (target[index] == '0')
+			zeros++;
+		else
+			break ;
+		index++;
+	}
+	index = copy;
+	if ((index == 1 && target.size() > (unsigned long)(11 + zeros)) || (index == 0 && target.size() > (unsigned long)(10 + zeros)))
 		return (false);
 	while ((unsigned long)index < target.size())
 	{
 		if (target[index] >= '0' && target[index] <= '9')
 		       index++;
 		else
-			return (false) ;	
+			return (false) ;
 	}
 	return (true);
 }
@@ -201,8 +214,11 @@ void	ScalarConverter::converter(const std::string &target)
 bool	ScalarConverter::isDouble(const std::string &target)
 {
 	long long	index;
+	long long	zeros;
+	long long	copy;
 
 	index = 0;
+	zeros = 0;
 	if (target[0] == '.')
 		return (false);
 	if (target[0] == '+' || target[0] == '-')
@@ -211,14 +227,24 @@ bool	ScalarConverter::isDouble(const std::string &target)
 			return (false);
 		index++;
 	}
+	copy = index;
+	while ((unsigned long)index < target.size())
+	{
+		if (target[index] == '0')
+			zeros++;
+		else
+			break ;
+		index++;
+	}
+	index = copy;
 	while ((unsigned long)index < target.size())
 	{
 		if (target[index] >= '0' && target[index] <= '9')
 		{
-			if ((target[0] == '+' || target[0] == '-') && index > 19)
+			if ((target[0] == '+' || target[0] == '-') && index > (19 + zeros))
 				return (false);
 			else if (target[0] != '+' && target[0] != '-')
-				if (index > 18)
+				if (index > (18 + zeros))
 					return (false);
 			index++;
 		}
@@ -244,8 +270,11 @@ bool	ScalarConverter::isFloat(const std::string &target)
 {
 	long long	index;
 	int	count;
+	long long	zeros;
+	long long	copy;
 
 	index = 0;
+	zeros = 0;
 	count = 0;
 	while ((unsigned long)index < target.size())
 	{
@@ -264,16 +293,26 @@ bool	ScalarConverter::isFloat(const std::string &target)
 			return (false);
 		index++;
 	}
+	copy = index;
+	while ((unsigned long)index < target.size())
+	{
+		if (target[index] == '0')
+			zeros++;
+		else
+			break ;
+		index++;
+	}
+	index = copy;
 	if (target[target.size() - 1] != 'f')
 		return (false);
 	while ((unsigned long)index < target.size())
 	{
 		if (target[index] >= '0' && target[index] <= '9')
 		{
-			if ((target[0] == '+' || target[0] == '-') && index > 19)
+			if ((target[0] == '+' || target[0] == '-') && index > (19 + zeros))
                                 return (false);
                         else if (target[0] != '+' && target[0] != '-')
-                                if (index > 18)
+                                if (index > (18 + zeros))
                                         return (false);
 			index++;
 		}
