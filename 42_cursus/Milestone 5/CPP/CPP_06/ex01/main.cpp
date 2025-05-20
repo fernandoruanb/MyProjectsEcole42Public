@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 17:52:44 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/19 15:33:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:19:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(void)
 	std::cout << "The double number is: " << test.test_double << std::endl;
 
 	ptr = Serializer::serialize(&test);
+	std::cout << "The serialized ptr is: " << ptr << std::endl;
 	recover = Serializer::deserialize(ptr);
 
 	std::cout << "The new pointer is: " << recover << std::endl;

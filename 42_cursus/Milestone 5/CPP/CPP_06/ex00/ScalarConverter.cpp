@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/19 23:24:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:41:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,14 @@ bool	ScalarConverter::isInt(const std::string &target)
 	int	index;
 	int	zeros;
 	int	copy;
+	double	number;
 
+	errno = 0;
 	index = 0;
 	zeros = 0;
+	number = std::strtol(target.c_str(), NULL, 10);
+	if (errno == ERANGE)
+		return (false);
 	if (target[0] == '.')
 		return (0);
 	if (target[0] == '-' || target[0] == '+')
@@ -79,8 +84,6 @@ bool	ScalarConverter::isInt(const std::string &target)
 		index++;
 	}
 	index = copy;
-	if ((index == 1 && target.size() > (unsigned long)(11 + zeros)) || (index == 0 && target.size() > (unsigned long)(10 + zeros)))
-		return (false);
 	while ((unsigned long)index < target.size())
 	{
 		if (target[index] >= '0' && target[index] <= '9')
@@ -141,7 +144,7 @@ void	ScalarConverter::converter(const std::string &target)
 		number = std::atof(target.c_str());
 		if (number > 31 && number < 127)
 			std::cout << "char: '" << static_cast<char>(number) << "\'" << std::endl;
-		else if (number > -128 && number < 127)
+		else if (number > -129 && number < 128)
 			std::cout << "char: Non displayable" << std::endl;
 		else
 			std::cout << "char: impossible" << std::endl;
@@ -163,7 +166,7 @@ void	ScalarConverter::converter(const std::string &target)
 		number = std::atof(target.c_str());
 		if (number < 0 || number > 127)
 			std::cout << "char: impossible" << std::endl;
-		else if (number < 32 || number > 126)
+		else if (number > -129 && number < 128)
 			std::cout << "char: Non displayable" << std::endl;
 		else
 			std::cout << "char: " << "\'" << static_cast<char>(number) << "\'" << std::endl;
@@ -182,10 +185,11 @@ void	ScalarConverter::converter(const std::string &target)
 	}
 	else if (isDouble(target))
 	{
-		number = std::atof(target.c_str());
+
+		number = std::strtof(target.c_str(), NULL);
 		if (number < 0 || number > 127)
 			std::cout << "char: impossible" << std::endl;
-		else if (number < 32 || number > 126)
+		else if (number > -128 && number < 128)
 			std::cout << "char: Non displayable" << std::endl;
 		else
 			std::cout << "char: " << "\'" << static_cast<char>(number) << "\'" << std::endl;
@@ -216,7 +220,12 @@ bool	ScalarConverter::isDouble(const std::string &target)
 	long long	index;
 	long long	zeros;
 	long long	copy;
+	double	number;
 
+	errno = 0;
+	number = std::strtod(target.c_str(), NULL);
+	if (errno == ERANGE)
+		return (false);
 	index = 0;
 	zeros = 0;
 	if (target[0] == '.')
@@ -240,14 +249,7 @@ bool	ScalarConverter::isDouble(const std::string &target)
 	while ((unsigned long)index < target.size())
 	{
 		if (target[index] >= '0' && target[index] <= '9')
-		{
-			if ((target[0] == '+' || target[0] == '-') && index > (19 + zeros))
-				return (false);
-			else if (target[0] != '+' && target[0] != '-')
-				if (index > (18 + zeros))
-					return (false);
 			index++;
-		}
 		else
 			break ;
 	}
@@ -272,10 +274,15 @@ bool	ScalarConverter::isFloat(const std::string &target)
 	int	count;
 	long long	zeros;
 	long long	copy;
-
+	float	number;
+	
+	errno = 0;
 	index = 0;
 	zeros = 0;
 	count = 0;
+	number = std::strtof(target.c_str(), 0);
+	if (errno == ERANGE)
+		return (false);
 	while ((unsigned long)index < target.size())
 	{
 		if (target[index] == 'f')
@@ -289,7 +296,7 @@ bool	ScalarConverter::isFloat(const std::string &target)
 		return (false);
 	if (target[0] == '+' || target[0] == '-')
 	{
-		if (target.size() == 1 || target[1] == '.')
+		if (target.size() == 1 || target[1] == '.' || target[1] == 'f')
 			return (false);
 		index++;
 	}
@@ -308,14 +315,7 @@ bool	ScalarConverter::isFloat(const std::string &target)
 	while ((unsigned long)index < target.size())
 	{
 		if (target[index] >= '0' && target[index] <= '9')
-		{
-			if ((target[0] == '+' || target[0] == '-') && index > (19 + zeros))
-                                return (false);
-                        else if (target[0] != '+' && target[0] != '-')
-                                if (index > (18 + zeros))
-                                        return (false);
 			index++;
-		}
 		else
 			break ;
 	}
