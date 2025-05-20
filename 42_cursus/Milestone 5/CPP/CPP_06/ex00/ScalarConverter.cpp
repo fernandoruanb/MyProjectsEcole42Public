@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:53:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/20 14:36:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:51:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,10 @@ bool	ScalarConverter::isPseudo(const std::string &target)
 bool	ScalarConverter::isInt(const std::string &target)
 {
 	int	index;
-	int	zeros;
-	int	copy;
 	double	number;
 
 	errno = 0;
 	index = 0;
-	zeros = 0;
 	number = std::strtol(target.c_str(), NULL, 10);
 	if (errno == ERANGE)
 		return (false);
@@ -74,16 +71,6 @@ bool	ScalarConverter::isInt(const std::string &target)
 			return (false);
 		index++;
 	}
-	copy = index;
-	while ((unsigned long)index < target.size())
-	{
-		if (target[index] == '0')
-			zeros++;
-		else
-			break ;
-		index++;
-	}
-	index = copy;
 	while ((unsigned long)index < target.size())
 	{
 		if (target[index] >= '0' && target[index] <= '9')
@@ -218,8 +205,6 @@ void	ScalarConverter::converter(const std::string &target)
 bool	ScalarConverter::isDouble(const std::string &target)
 {
 	long long	index;
-	long long	zeros;
-	long long	copy;
 	double	number;
 
 	errno = 0;
@@ -227,7 +212,6 @@ bool	ScalarConverter::isDouble(const std::string &target)
 	if (errno == ERANGE)
 		return (false);
 	index = 0;
-	zeros = 0;
 	if (target[0] == '.')
 		return (false);
 	if (target[0] == '+' || target[0] == '-')
@@ -236,16 +220,6 @@ bool	ScalarConverter::isDouble(const std::string &target)
 			return (false);
 		index++;
 	}
-	copy = index;
-	while ((unsigned long)index < target.size())
-	{
-		if (target[index] == '0')
-			zeros++;
-		else
-			break ;
-		index++;
-	}
-	index = copy;
 	while ((unsigned long)index < target.size())
 	{
 		if (target[index] >= '0' && target[index] <= '9')
@@ -272,13 +246,10 @@ bool	ScalarConverter::isFloat(const std::string &target)
 {
 	long long	index;
 	int	count;
-	long long	zeros;
-	long long	copy;
 	float	number;
 	
 	errno = 0;
 	index = 0;
-	zeros = 0;
 	count = 0;
 	number = std::strtof(target.c_str(), 0);
 	if (errno == ERANGE)
@@ -300,16 +271,6 @@ bool	ScalarConverter::isFloat(const std::string &target)
 			return (false);
 		index++;
 	}
-	copy = index;
-	while ((unsigned long)index < target.size())
-	{
-		if (target[index] == '0')
-			zeros++;
-		else
-			break ;
-		index++;
-	}
-	index = copy;
 	if (target[target.size() - 1] != 'f')
 		return (false);
 	while ((unsigned long)index < target.size())
