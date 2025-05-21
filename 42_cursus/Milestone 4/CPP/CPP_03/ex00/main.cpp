@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:11:42 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/21 15:49:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:23:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int	main(void)
 	ClapTrap c5;
 	ClapTrap c6(c1);
 
-	std::cout << "Name: " << c1.get_name() << std::endl;
-	std::cout << "Hit Points: " << c1.get_hit_points() << std::endl;
-	std::cout << "Energy: " << c1.get_energy() << std::endl;
-	std::cout << "Attack_Damage: " << c1.get_attack_damage() << std::endl;
+	std::cout << LIGHT_MAGENTA << "==============================================" RESET << std::endl;
+	std::cout << YELLOW "Name: " RESET<< c1.get_name() << std::endl;
+	std::cout << YELLOW "Hit Points: " RESET << c1.get_hit_points() << std::endl;
+	std::cout << YELLOW "Energy: " RESET << c1.get_energy() << std::endl;
+	std::cout << YELLOW "Attack_Damage: " RESET << c1.get_attack_damage() << std::endl;
+	std::cout << LIGHT_MAGENTA << "==============================================" RESET << std::endl;
 	c6 = c5;
 	c1.attack("James");
 	c3.takeDamage(7);

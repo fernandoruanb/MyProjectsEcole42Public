@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/21 15:38:54 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:25:36 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 ClapTrap::ClapTrap(void) : name("aleatory_claptrap"), hit_points(10), energy(10), attack_damage(0)
 {
-	std::cout << "Empty default constructor called for aleatory_claptrap" << std::endl;
+	std::cout << GREEN "Empty default constructor called for aleatory_claptrap" RESET << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) : name(name), hit_points(10), energy(10), attack_damage(0)
 {
-	std::cout << "Default input name constructor called for " << name << " ClapTrap" << std::endl;
+	std::cout << RED "Default input name constructor called for " << YELLOW << name << RED " ClapTrap" << RESET << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "ClapTrap Destructor constructor called for " << name << " ClapTrap" << std::endl;
+	std::cout << BLUE << YELLOW << "ClapTrap" << BLUE " Destructor constructor called for " << YELLOW << name << BLUE " ClapTrap" << RESET << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 {
-	std::cout << "ClapTrap Copy constructor called for " << this->name << " ClapTrap" << std::endl;
+	std::cout << BRIGHT_CYAN "ClapTrap Copy constructor called for " << YELLOW << this->name << BRIGHT_CYAN " ClapTrap" RESET << std::endl;
 	this->hit_points = other.hit_points;
 	this->energy = other.energy;
 	this->attack_damage = other.attack_damage;
