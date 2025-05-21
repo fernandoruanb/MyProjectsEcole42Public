@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:53:43 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 12:19:19 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:34:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	main(void)
 		std::cout << A << std::endl;
 		A--;
 		std::cout << A << std::endl;
+		B.incrementGrade();
+		B.decrementGrade();
 		std::cout << B << std::endl;
 	}
 	catch (Bureaucrat::GradeTooHighException &exception)

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 19:16:43 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/13 20:12:49 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:25:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ class	Bureaucrat
 		Bureaucrat& operator++(void);
 		Bureaucrat operator--(int);
 		Bureaucrat operator++(int);
+		void	incrementGrade(void);
+		void	decrementGrade(void);
 		std::string	getName(void) const;
 		int	getGrade(void) const;
 		class GradeTooHighException: public std::exception

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:23:48 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 11:40:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:26:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ class	Bureaucrat
 		int	getGrade(void) const;
 		std::string	getName(void) const;
 		void	signForm(const Form &form);
+		void	incrementGrade(void);
+		void	decrementGrade(void);
 		class GradeTooHighException: public std::exception
 		{
 			public:

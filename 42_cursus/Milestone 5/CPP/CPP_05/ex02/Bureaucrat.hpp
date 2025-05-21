@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:25:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/15 10:04:19 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:27:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ class Bureaucrat
 		Bureaucrat& operator++(void);
 		Bureaucrat operator--(int);
 		Bureaucrat operator++(int);
+		void	incrementGrade(void);
+		void	decrementGrade(void);
 		std::string	getName(void) const;
 		int	getGrade(void) const;
 		void	signForm(const AForm &attempt);

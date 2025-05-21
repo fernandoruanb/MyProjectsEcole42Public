@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:46:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/17 20:47:12 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:32:51 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,16 @@ void	Bureaucrat::executeForm(AForm const & form)
 {
 	if (form.getIsSign() && this->getGrade() <= form.getRequiredExec())
 		form.execute(*this);
+}
+
+void	Bureaucrat::incrementGrade(void)
+{
+	++(*this);
+}
+
+void	Bureaucrat::decrementGrade(void)
+{
+	--(*this);
 }
 
 const char	*Bureaucrat::GradeTooHighException::what() const throw()

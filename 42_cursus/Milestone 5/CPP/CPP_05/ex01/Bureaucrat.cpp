@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:37:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/14 14:34:49 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:32:15 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ Bureaucrat::Bureaucrat(const Bureaucrat &another): name(another.getName()), grad
 	std::cout << "Copy constructor called" << std::endl;
 }
 
+void	Bureaucrat::incrementGrade(void)
+{
+	++(*this);
+}
+
+void	Bureaucrat::decrementGrade(void)
+{
+	--(*this);
+}
 int	Bureaucrat::getGrade(void) const
 {
 	return (grade);

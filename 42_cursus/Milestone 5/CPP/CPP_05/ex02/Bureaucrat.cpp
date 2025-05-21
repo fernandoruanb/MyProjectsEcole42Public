@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:46:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/17 20:46:05 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:32:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,16 @@ std::string	Bureaucrat::getName(void) const
 int	Bureaucrat::getGrade(void) const
 {
 	return (grade);
+}
+
+void	Bureaucrat::incrementGrade(void)
+{
+	++(*this);
+}
+
+void	Bureaucrat::decrementGrade(void)
+{
+	--(*this);
 }
 
 void	Bureaucrat::executeForm(AForm const & form)

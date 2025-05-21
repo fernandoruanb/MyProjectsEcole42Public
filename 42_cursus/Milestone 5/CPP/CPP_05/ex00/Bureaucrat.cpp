@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 19:24:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/16 09:54:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:31:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ Bureaucrat::Bureaucrat(const std::string name, int grade): name(name), grade(gra
 Bureaucrat::~Bureaucrat(void)
 {
 	std::cout << "Destructor called for " << this->getName() << " Bureaucrat" << std::endl;
+}
+
+void	Bureaucrat::incrementGrade(void)
+{
+	++(*this);
+}
+
+void	Bureaucrat::decrementGrade(void)
+{
+	--(*this);
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &another): name(another.getName()), grade(another.getGrade())
