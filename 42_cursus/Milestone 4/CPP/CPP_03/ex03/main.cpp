@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:24:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 18:10:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:59:11 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ int	main(void)
 	ClapTrap b1("attacker");
 	DiamondTrap d1("Diamond Warrior");
 	DiamondTrap d2;
+
+	std::cout << "Name: " << d1.get_name() << std::endl;
+        std::cout << "Hit Points: " << d1.get_hit_points() << std::endl;
+        std::cout << "Energy: " << d1.get_energy() << std::endl;
+        std::cout << "Attack_Damage: " << d1.get_attack_damage() << std::endl;
+	d1.guardGate();
+	d1.highFivesGuys();
 
 	a1.guardGate();
 	a2.guardGate();

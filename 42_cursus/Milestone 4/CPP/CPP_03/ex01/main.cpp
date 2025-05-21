@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:18:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 17:07:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:50:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ int	main(void)
 	ScavTrap a1("Optimus");
 	ScavTrap a2("Defender");
 
+	std::cout << "Name: " << a1.get_name() << std::endl;
+        std::cout << "Hit Points: " << a1.get_hit_points() << std::endl;
+        std::cout << "Energy: " << a1.get_energy() << std::endl;
+        std::cout << "Attack_Damage: " << a1.get_attack_damage() << std::endl;
 	a2.guardGate();
 	a1.attack("James");
 	c1.takeDamage(20);

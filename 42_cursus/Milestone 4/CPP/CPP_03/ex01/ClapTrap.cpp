@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 21:10:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 17:04:57 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:46:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,26 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other)
 		this->name = other.name;
 	}
 	return (*this);
+}
+
+std::string     ClapTrap::get_name(void) const
+{
+        return (name);
+}
+
+unsigned int    ClapTrap::get_hit_points(void) const
+{
+        return (hit_points);
+}
+
+unsigned int    ClapTrap::get_energy(void) const
+{
+        return (energy);
+}
+
+unsigned int    ClapTrap::get_attack_damage(void) const
+{
+        return (attack_damage);
 }
 
 void	ClapTrap::attack(const std::string &target)
