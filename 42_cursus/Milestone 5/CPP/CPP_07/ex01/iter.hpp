@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 12:00:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/21 12:57:49 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/21 18:51:02 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/21 19:52:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#ifndef ITER_HPP
+# define ITER_HPP
 
 # include <iostream>
 
-template<typename S>
-void swap(S& a, S& b)
+template<typename T>
+void iter(T const *a, size_t length, void (*f)(T const &))
 {
-	S temp = a;
-	a = b;
-	b = temp;
+	std::size_t	index;
+
+	if (!a || length == 0)
+		return ;
+	index = 0;
+	while (index < length)
+	{
+		f(a[index]);
+		index++;
+	}
 }
 
-template<typename MAX>
-MAX max(const MAX& a, const MAX& b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-template<typename MIN>
-MIN min(const MIN& a, const MIN& b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
-#endif /* WHATEVER_HPP */
+#endif /* ITER_HPP */
