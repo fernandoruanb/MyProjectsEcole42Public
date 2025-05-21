@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:46:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/17 11:05:12 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:43:17 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void	PhoneBook::show_specif_contact(int index) const
 		return ;
 	}
 	std::cout << std::endl;
-	std::cout << std::setfill('-') << std::setw(45) << "-" << std::endl;;
+	std::cout << std::setfill('-') << std::setw(45) << "-" << std::endl;
 	std::cout << "|";
 	std::cout << std::setfill(' ') << std::setw(10) << "Index";
 	std::cout << "|";
