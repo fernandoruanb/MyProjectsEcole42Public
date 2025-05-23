@@ -16,9 +16,11 @@ int	main(void)
 {
 	int	index;
 
+	Array<std::string> countries(4);
 	Array<int> a;
 	Array<int> b(5);
 	Array<int> c;
+
 	std::cout << std::endl;
 	try
 	{
@@ -75,5 +77,43 @@ int	main(void)
 	{
 		std::cerr << RED "TEST 4 FAILED!!! COPY ACCESS FAILED!!!" RESET << std::endl;
 	}
+	try
+	{
+		std::cout << MAGENTA "============ TEST 5 COPY CONSTRUCTOR ACCESS ===============" RESET << std::endl;
+		Array<int> e(c);
+		index = 0;
+		while ((unsigned int)index < e.size())
+		{
+			std::cout << "E[" << index << "]: " << e[index] << std::endl;
+			index++;
+		}
+		std::cout << MAGENTA "====================================================" RESET << std::endl << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cerr << RED "TEST 5 FAILED!!!" RESET << std::endl;
+	}
+	try
+	{
+		std::cout << MAGENTA "============ TEST 6 STD::STRING ===============" RESET << std::endl;
+		{
+			index = 0;
+			countries[0] = "Brazil";
+			countries[1] = "United States";
+			countries[2] = "Singapore";
+			countries[3] = "Malta";
+			//countries[4] = "Another";
+			while ((unsigned int)index < countries.size())
+			{
+				std::cout << YELLOW << countries[index] << RESET << std::endl;
+				index++;
+			}
+		}
+	}
+	catch(std::exception &e)
+	{
+		std::cerr << RED "FAILED TEST 6!!!" RESET << std::endl;
+	}
+	std::cout << MAGENTA "====================================================" RESET << std::endl << std::endl;
 	return (0);
 }
