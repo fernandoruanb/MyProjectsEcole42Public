@@ -26,6 +26,7 @@ int	main(void)
 	{
 		std::cout << MAGENTA "============= TEST 1 - EMPTY ARRAY =================" RESET << std::endl;
 		std::cout << a << std::endl;
+		//a[0] = 1;
 		std::cout << MAGENTA "====================================================" RESET << std::endl << std::endl;
 	}
 	catch (std::exception &e)

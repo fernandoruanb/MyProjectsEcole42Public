@@ -14,6 +14,8 @@
 # define ITER_HPP
 
 # include <iostream>
+# include <exception>
+# include "colours.hpp"
 
 template<typename T>
 void iter(T const *a, size_t length, void (*f)(T const &))
@@ -25,8 +27,15 @@ void iter(T const *a, size_t length, void (*f)(T const &))
 	index = 0;
 	while (index < length)
 	{
-		f(a[index]);
-		index++;
+		try
+		{
+			f(a[index]);
+			index++;
+		}
+		catch (std::exception &e)
+		{
+			std::cerr << RED "Error found!" RESET << std::endl;
+		}
 	}
 }
 

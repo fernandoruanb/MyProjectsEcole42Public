@@ -24,12 +24,12 @@ static void	print_letter(char const &letter)
 	else if (letter >= 'A' && letter <= 'Z')
 		std::cout << static_cast<char>(letter + 32);
 	else
-		std::cout << letter << std::endl;
+		std::cout << BRIGHT_GREEN << letter << RESET << std::endl;
 }
 
 static void	print_numbers(int const &number)
 {
-	std::cout << number << std::endl;
+	std::cout << GREEN << number << RESET << std::endl;
 }
 
 int	main(void)
@@ -37,13 +37,21 @@ int	main(void)
 	std::string	text;
 	int numbers[8] = {33, 34, 35, 36, 37, 48, 70, 78};
 
+	std::cout << MAGENTA "======== TEST 1 =======" RESET << std::endl;
 	text = "myFriEnd";
 	::iter(text.c_str(), text.size(), &print_letter);
 	std::cout << std::endl;
-	std::cout << text << std::endl << std::endl;
+	std::cout << YELLOW << text << RESET << std::endl;
+	std::cout << MAGENTA "=======================" RESET << std::endl << std::endl;
+	std::cout << MAGENTA "======== TEST 2 =======" RESET << std::endl;
 	::iter(text.c_str(), text.size(), &get_ascii);
+	std::cout << MAGENTA "=======================" RESET << std::endl;
 	std::cout << std::endl << std::endl;
+	std::cout << MAGENTA "======== TEST 3 =======" RESET << std::endl;
 	::iter("iu", 2, &get_ascii);
+	std::cout << MAGENTA "=======================" RESET << std::endl;
 	std::cout << std::endl;
+	std::cout << MAGENTA "======== TEST 4 ======" RESET << std::endl;
 	::iter(numbers, 8, &print_numbers);
+	std::cout << MAGENTA "======================" RESET << std::endl;
 }
