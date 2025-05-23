@@ -25,32 +25,38 @@ class Array
 		A* data;
 		unsigned int	length;
 	public:
-		template<typename A>
-		Array(void): data(NULL), length(0)
+		Array(void): data(new A[0]), length(0)
 		{
 			std::cout << GREEN << "Default constructor called" RESET << std::endl;
 		}
-		template<typename A>
-		Array(unsigned int len): data(NULL), length(len)
+		Array(unsigned int len): data(new A[len]), length(len)
 		{
 			std::cout << BRIGHT_GREEN << "Default input constructor called " RESET << std::endl;
 		}
-		template<typename A>
 		~Array(void)
 		{
-			std::cout << BLUE << "Destructor called " RESET << std::endl;
+			std::cout << RED << "Destructor called " RESET << std::endl;
+			delete [] this->data;
 		}
-		template<typename A>
 		Array& operator=(const Array &another)
 		{
+			unsigned int	index;
+
+			std::cout << BRIGHT_YELLOW "Copy assignment operator called" RESET << std::endl;
+			index = 0;
 			if (this != &another)
 			{
-				data = another.get_data();
+				delete [] this->data;
+				this->data = new A[another.size()];
+				while (index < another.size())
+				{
+					data[index] = another[index];
+					index++;
+				}
 				length = another.get_length();
 			}
 			return (*this);
 		}
-		template<typename A>
 		A& operator[](unsigned int index)
 		{
 			if (index >= this->get_length())
@@ -63,36 +69,40 @@ class Array
 				throw std::runtime_error("Operator[] Index Error");
 			return (this->data[index]);
 		}
-		template<typename A>
 		A*	get_data(void)
 		{
 			return (this->data);
 		}
-		template<typename A>
 		A const *get_data(void) const
 		{
 			return (this->data);
 		}
-		template<typename A>
 		unsigned int	size(void) const
 		{
 			return (this->length);
 		}
-		template<typename A>
 		unsigned int	get_length(void) const
 		{
 			return (this->length);
 		}
-		template<typename A>
-		Array(const Array &another): data(another.get_data()), length(another.size())
+		Array(const Array &another): data(new A[another.size()]), length(another.size())
 		{
+			unsigned int 	index;
+
+			index = 0;
+			while (index < another.size())
+			{
+				data[index] = another[index];
+				index++;
+			}
 			std::cout << BRIGHT_MAGENTA "Copy constructor called" RESET << std::endl;
 		}
 };
 template<typename OUT>
 std::ostream& operator<<(std::ostream& out, const Array<OUT> &another)
 {
-	std::cout << "The array: " << another.get_data();
+	out << "The array: " << YELLOW << another.get_data() << RESET << " Length: " << YELLOW << another.get_length() << RESET;
+	return (out);
 }
 
 #endif /* ARRAY_HPP */
