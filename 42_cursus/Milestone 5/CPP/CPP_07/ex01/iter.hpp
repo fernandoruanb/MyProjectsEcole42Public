@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:51:02 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/21 19:52:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:55:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <exception>
 # include "colours.hpp"
 
-template<typename T>
-void iter(T const *a, size_t length, void (*f)(T const &))
+template<typename T, typename F>
+void iter(T *a, size_t length, F function)
 {
 	std::size_t	index;
 
@@ -29,7 +29,7 @@ void iter(T const *a, size_t length, void (*f)(T const &))
 	{
 		try
 		{
-			f(a[index]);
+			function(a[index]);
 			index++;
 		}
 		catch (std::exception &e)

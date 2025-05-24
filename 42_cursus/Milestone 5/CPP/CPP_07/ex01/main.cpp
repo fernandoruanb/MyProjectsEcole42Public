@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:57:41 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/21 19:58:58 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:59:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ static void	print_numbers(int const &number)
 	std::cout << GREEN << number << RESET << std::endl;
 }
 
+static void	pow2(int &number)
+{
+	number *= 2;
+	std::cout << GREEN << number << RESET << std::endl;
+}
+
 int	main(void)
 {
 	std::string	text;
@@ -53,5 +59,7 @@ int	main(void)
 	std::cout << std::endl;
 	std::cout << MAGENTA "======== TEST 4 ======" RESET << std::endl;
 	::iter(numbers, 8, &print_numbers);
+	std::cout << std::endl;
+	::iter(numbers, 8, &pow2);
 	std::cout << MAGENTA "======================" RESET << std::endl;
 }
