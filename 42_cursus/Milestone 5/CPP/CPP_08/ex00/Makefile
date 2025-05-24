@@ -31,7 +31,7 @@ $(NAME): $(OBJS)
 
 #.cpp -> .o
 
-%.cpp:%.o
+%.o:%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #clean
