@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 11:54:10 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/22 15:59:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/24 18:00:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ class Array
 		A& operator[](unsigned int index)
 		{
 			if (index >= this->get_length())
-				throw std::runtime_error("Operator[] Index Error");
+				throw std::exception();
 			return (this->data[index]);
 		}
 		A const& operator[](unsigned int index) const
 		{
 			if (index >= this->get_length())
-				throw std::runtime_error("Operator[] Index Error");
+				throw std::exception();
 			return (this->data[index]);
 		}
 		A*	get_data(void)
