@@ -15,6 +15,7 @@
 
 # include <exception>
 # include <iostream>
+# include <algorithm>
 # include <vector>
 # include "colours.hpp"
 
@@ -28,8 +29,8 @@ class Span
 		~Span(void);
 		Span& operator=(const Span &other);
 		Span(const Span &other);
-		//int	shortestSpan(void) const;
-		//int	longestSpan(void) const;
+		int	shortestSpan(void) const;
+		int	longestSpan(void) const;
 		void	addNumber(int number);
 		const std::vector<int>& getNumber(void) const;
 		unsigned int	getCapacity(void) const;

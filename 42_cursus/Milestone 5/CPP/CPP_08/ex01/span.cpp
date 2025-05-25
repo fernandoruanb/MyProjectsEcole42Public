@@ -22,6 +22,41 @@ Span::~Span(void)
 	std::cout << RED << "Destructor called" RESET << std::endl;
 }
 
+int	Span::longestSpan(void) const
+{
+	int	min;
+	int	max;
+
+	if (number.size() < 2)
+		throw std::exception();
+	min = *std::min_element(number.begin(), number.end());
+	max = *std::max_element(number.begin(), number.end());
+	return (max - min);
+}
+
+int	Span::shortestSpan(void) const
+{
+	int	minDiff;
+	int	temp;
+	unsigned int	index;
+	std::vector<int> sorted;
+
+	if (number.size() < 2)
+		throw std::exception();
+	sorted = getNumber();
+	std::sort(sorted.begin(), sorted.end());
+	index = 1;
+	minDiff = sorted[index] - sorted[index - 1];
+	while (index < sorted.size())
+	{
+		temp = sorted[index] - sorted[index - 1];
+		if (temp < minDiff)
+			minDiff = temp;
+		index++;
+	}
+	return (minDiff);
+}
+
 Span&	Span::operator=(const Span &other)
 {
 	std::cout << YELLOW "Copy assignment operator called" RESET << std::endl;

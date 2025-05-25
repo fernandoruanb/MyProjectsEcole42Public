@@ -14,6 +14,9 @@
 
 int	main(void)
 {
+	int	ShortSpan;
+	int	LongSpan;
+
 	try
 	{
 		Span a(2);
@@ -21,6 +24,10 @@ int	main(void)
 		std::cout << BRIGHT_MAGENTA << std::string(30, '=') << std::endl;
 		a.addNumber(1);
 		a.addNumber(2);
+		ShortSpan = a.shortestSpan();
+		LongSpan = a.longestSpan();
+		std::cout << "Shortest Span: " YELLOW << ShortSpan << RESET << std::endl;
+		std::cout << "Longest Span: " << YELLOW << LongSpan << RESET << std::endl;
 		//a.addNumber(3);
 		std::cout << BRIGHT_MAGENTA << std::string(30, '=') << std::endl;
 	}
