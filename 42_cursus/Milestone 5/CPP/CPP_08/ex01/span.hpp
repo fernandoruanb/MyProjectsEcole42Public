@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:45:41 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/24 21:34:54 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/25 11:34:31 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,16 @@ class Span
 		const std::vector<int>& getNumber(void) const;
 		unsigned int	getCapacity(void) const;
 		unsigned int	getSize(void) const;
+		template<typename iterator>
+		void	addrange(iterator begin, iterator end);
 };
 std::ostream& operator<<(std::ostream &out, const Span &other);
+template<typename iterator>
+void Span::addrange(iterator begin, iterator end)
+{
+	if (std::distance(begin, end) > capacity)
+		throw std::exception();
+	number.insert(number.end(), begin, end);
+}
 
 #endif /* SPAN_HPP */
