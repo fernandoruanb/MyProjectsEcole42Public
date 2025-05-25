@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 21:25:54 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/25 10:51:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/25 13:40:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,24 @@ int	main(void)
 		sp.addNumber(11);
 		std::cout << YELLOW << sp.shortestSpan() << RESET << std::endl;
 		std::cout << YELLOW << sp.longestSpan() << RESET << std::endl;
+		std::cout << BRIGHT_MAGENTA << std::string(30, '=') << RESET << std::endl;
+		std::cout << BRIGHT_MAGENTA << std::string(12, '=') << "TEST 4" << std::string(12, '=') << std::endl;
+		Span test(10);
+		std::vector<int> values;
+		index = 1;
+		while (index < 11)
+		{
+			values.push_back(index * 3);
+			index++;
+		}
+		std::cout << BRIGHT_GREEN "Adding range of values at the same time" << RESET << std::endl;
+		test.addRange(values.begin(), values.end());
+		index = 0;
+		while (index < values.size())
+		{
+			std::cout << LIGHT_BLUE "values[" << ORANGE << index << "]: " << YELLOW << values[index] << RESET << std::endl;
+			index++;
+		}
 		std::cout << BRIGHT_MAGENTA << std::string(30, '=') << RESET << std::endl;
 	}
 	catch (std::exception &e)
