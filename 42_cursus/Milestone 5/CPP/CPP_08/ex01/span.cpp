@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:59:40 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/24 21:35:43 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/25 09:55:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	Span::longestSpan(void) const
 		throw std::exception();
 	min = *std::min_element(number.begin(), number.end());
 	max = *std::max_element(number.begin(), number.end());
+	std::cout << GREEN "min: " RESET << YELLOW << min << RESET << std::endl;
+	std::cout << GREEN "max: " RESET << YELLOW << max << RESET << std::endl;
 	return (max - min);
 }
 
