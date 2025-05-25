@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   span.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/24 20:45:41 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/24 21:34:54 by fruan-ba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SPAN_HPP
+# define SPAN_HPP
+
+# include <exception>
+# include <iostream>
+# include <vector>
+# include "colours.hpp"
+
+class Span
+{
+	private:
+		std::vector<int> number;
+		unsigned int	capacity;
+	public:
+		Span(unsigned int N);
+		~Span(void);
+		Span& operator=(const Span &other);
+		Span(const Span &other);
+		//int	shortestSpan(void) const;
+		//int	longestSpan(void) const;
+		void	addNumber(int number);
+		const std::vector<int>& getNumber(void) const;
+		unsigned int	getCapacity(void) const;
+		unsigned int	getSize(void) const;
+};
+std::ostream& operator<<(std::ostream &out, const Span &other);
+
+#endif /* SPAN_HPP */
