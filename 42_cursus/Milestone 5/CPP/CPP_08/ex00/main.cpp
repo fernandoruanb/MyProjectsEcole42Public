@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:16:25 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/26 14:09:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/26 14:21:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(void)
 		std::cerr << std::endl;
 		std::cerr << BRIGHT_MAGENTA << std::string(40, '=') << RESET << std::endl;
 		std::cerr << BRIGHT_RED << std::string(8, ' ') << "Value not found D= " << YELLOW << value << RESET << std::endl;
-		std::cerr << BRIGHT_MAGENTA <<  std::string(40, '=') << RESET << std::endl;
+		std::cerr << BRIGHT_MAGENTA << std::string(40, '=') << RESET << std::endl;
 	}
 	return (0);
 }
