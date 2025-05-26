@@ -5,7 +5,7 @@ NAME = MutantStack
 #Compilers and flags
 
 CC = c++
-CFLAGS = -g3 -Wall -Werror -Wextra
+CFLAGS = -g3 -Wall -Werror -Wextra -std=c++98
 
 #Directories
 
