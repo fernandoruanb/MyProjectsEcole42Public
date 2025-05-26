@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 09:36:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/26 09:51:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:58:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <algorithm>
 # include <iostream>
 # include <stack>
+# include <list>
 # include "colours.hpp"
 
 template<typename T>
@@ -30,6 +31,16 @@ class	MutantStack: public std::stack<T>
 		~MutantStack(void)
 		{
 			std::cout << BRIGHT_RED "Destructor called" << RESET << std::endl;
+		}
+		MutantStack(const MutantStack<T> &other)
+		{
+			(void)other;
+			std::cout << BRIGHT_GREEN "Copy constructor called" RESET << std::endl;
+		}
+		MutantStack<T>& operator=(const MutantStack<T> &other)
+		{
+			(void)other;
+			return (*this);
 		}
 		typedef typename std::stack<T>::container_type::iterator iterator;
 
