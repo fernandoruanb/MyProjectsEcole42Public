@@ -6,11 +6,11 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 21:25:54 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/26 13:51:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/26 14:38:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "span.hpp"
+#include "Span.hpp"
 
 int	main(void)
 {

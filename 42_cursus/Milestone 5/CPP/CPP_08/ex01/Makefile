@@ -15,7 +15,7 @@ INCDIR = .
 #SRCS
 
 SRCS =  $(SRCDIR)/main.cpp\
-	$(SRCDIR)/span.cpp
+	$(SRCDIR)/Span.cpp
 
 #OBJS
 

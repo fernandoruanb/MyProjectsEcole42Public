@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:16:25 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/26 14:21:20 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/26 14:40:20 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(void)
 	//std::vector<char>	values;
 	//std::vector<double>	values;
 	//std::vector<float>	values;
+	//std::vector<std::string>	values;
 
 	int	result;
 	int	value;
