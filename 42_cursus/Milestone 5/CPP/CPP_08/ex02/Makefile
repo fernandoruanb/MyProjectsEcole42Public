@@ -5,7 +5,7 @@ NAME = MutantStack
 #Compilers and flags
 
 CC = c++
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -g3 -Wall -Werror -Wextra
 
 #Directories
 
@@ -31,7 +31,7 @@ $(NAME): $(OBJS)
 
 #.cpp -> .o
 
-%.o: %.cpp
+%.o:%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #clean

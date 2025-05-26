@@ -9,6 +9,7 @@
 # define BLUE "\033[0;34m"
 # define MAGENTA "\033[0;35m"
 # define CYAN "\033[0;36m"
+# define ORANGE "\033[38;5;208m"
 # define WHITE "\033[0;37m"
 
 //	Bright colours
