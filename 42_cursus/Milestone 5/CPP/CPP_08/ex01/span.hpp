@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:45:41 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/25 13:31:36 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/26 13:10:02 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ std::ostream& operator<<(std::ostream &out, const Span &other);
 template<typename iterator>
 void Span::addRange(iterator begin, iterator end)
 {
-	if (std::distance(begin, end) > capacity)
+	if ((unsigned long)(std::distance(begin, end)) > (unsigned long)(capacity - number.size()))
 		throw std::exception();
 	number.insert(number.end(), begin, end);
 }
