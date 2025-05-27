@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   span.hpp                                           :+:      :+:    :+:   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 20:45:41 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/26 13:10:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/27 09:55:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class Span
 		std::vector<int> number;
 		unsigned int	capacity;
 	public:
+		Span(void);
 		Span(unsigned int N);
 		~Span(void);
 		Span& operator=(const Span &other);

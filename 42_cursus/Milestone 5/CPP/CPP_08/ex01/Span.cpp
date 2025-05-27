@@ -6,11 +6,16 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:37:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/26 14:38:25 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/27 09:56:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
+
+Span::Span(void): capacity(10)
+{
+	std::cout << GREEN "Empty default constructor called" RESET << std::endl;
+}
 
 Span::Span(unsigned int N): capacity(N)
 {
