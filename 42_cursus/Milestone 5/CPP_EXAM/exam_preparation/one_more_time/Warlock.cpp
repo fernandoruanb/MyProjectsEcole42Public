@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:02:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/28 12:22:16 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:17:40 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ const std::string&	Warlock::getTitle(void) const
 
 void	Warlock::introduce(void) const
 {
-	std::cout << this->getName() << ": I am " << this->getTitle() << std::endl;
+	std::cout << this->getName() << ": I am " << this->getName() << ", " << this->getTitle() << "!" << std::endl;
 }
