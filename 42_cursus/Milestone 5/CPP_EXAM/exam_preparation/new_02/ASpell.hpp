@@ -33,7 +33,7 @@ class ASpell
 		virtual ASpell* clone(void) const = 0;
 		const std::string&	getName(void) const;
 		const std::string&	getEffects(void) const;
-		void	launch(const ATarget &target) const;
+		void	launch(const ATarget *target) const;
 };
 
 #endif /* ASPELL_HPP */

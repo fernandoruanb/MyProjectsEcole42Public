@@ -27,9 +27,9 @@ class TargetGenerator
 	public:
 		TargetGenerator(void);
 		~TargetGenerator(void);
-		learnTargetType(ATarget *target);
-		forgetTargetType(const str::string type);
-		createTargetType(const std::string target);
+		void learnTargetType(ATarget *target);
+		void forgetTarget(const std::string type);
+		ATarget* createTarget(const std::string target);
 };
 
 #endif /* TARGETGENERATOR_HPP */

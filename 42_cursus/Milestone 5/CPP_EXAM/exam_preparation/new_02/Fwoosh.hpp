@@ -25,7 +25,7 @@ class Fwoosh: public ASpell
 		Fwoosh(void);
 		~Fwoosh(void);
 		Fwoosh(const Fwoosh &other);
-		ASpell* Fwoosh(void) const;
+		ASpell* clone(void) const;
 };
 
 #endif /* FWOOSH_HPP */

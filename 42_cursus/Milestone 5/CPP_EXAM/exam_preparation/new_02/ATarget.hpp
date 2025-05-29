@@ -14,6 +14,7 @@
 # define ATARGET_HPP
 
 # include "ASpell.hpp"
+# include <iostream>
 
 class ASpell;
 

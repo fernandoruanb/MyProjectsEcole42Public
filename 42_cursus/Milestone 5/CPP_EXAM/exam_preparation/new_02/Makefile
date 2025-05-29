@@ -22,6 +22,9 @@ SRCS =  $(SRCDIR)/main.cpp\
 	$(SRCDIR)/Fwoosh.cpp\
 	$(SRCDIR)/Fireball.cpp\
 	$(SRCDIR)/SpellBook.cpp\
+	$(SRCDIR)/BrickWall.cpp\
+	$(SRCDIR)/TargetGenerator.cpp\
+	$(SRCDIR)/Polymorph.cpp
 
 #OBJS
 

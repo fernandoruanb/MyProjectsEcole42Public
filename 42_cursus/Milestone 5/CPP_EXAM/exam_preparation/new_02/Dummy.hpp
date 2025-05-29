@@ -25,3 +25,5 @@ class Dummy: public ATarget
 		Dummy(const Dummy &other);
 		ATarget* clone(void) const;
 };
+
+#endif /* DUMMY_HPP */

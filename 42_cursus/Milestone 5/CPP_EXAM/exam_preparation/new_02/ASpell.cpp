@@ -18,9 +18,9 @@ ASpell::~ASpell(void) {}
 
 ASpell::ASpell(const ASpell &other): name(other.getName()), effects(other.getEffects()) {}
 
-void	ASpell::launch(const ATarget &target)
+void	ASpell::launch(const ATarget* target) const
 {
-	target.getHitBySpell(*this);
+	target->getHitBySpell(*this);
 }
 
 const std::string&	ASpell::getName(void) const
@@ -28,7 +28,7 @@ const std::string&	ASpell::getName(void) const
 	return (name);
 }
 
-const std::string&	ASpell:getEffects(void) const
+const std::string&	ASpell::getEffects(void) const
 {
 	return (effects);
 }
