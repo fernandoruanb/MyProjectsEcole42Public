@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:47:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 18:18:07 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:41:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Warlock::~Warlock(void)
 
 void	Warlock::introduce(void) const
 {
-	std::cout << name << ": I am " << name << ", " << title << "!" << std::endl;
+	std::cout << name << ": I am " << name << ", " << title << std::endl;
 }
 
 void	Warlock::learnSpell(ASpell* spell)
