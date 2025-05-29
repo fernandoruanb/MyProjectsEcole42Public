@@ -14,7 +14,17 @@ INCDIR = .
 
 #SRCS
 
-SRCS =  $(SRCDIR)/main.cpp
+SRCS =  $(SRCDIR)/main.cpp\
+	$(SRCDIR)/Warlock.cpp\
+	$(SRCDIR)/ATarget.cpp\
+	$(SRCDIR)/ASpell.cpp\
+	$(SRCDIR)/Dummy.cpp\
+	$(SRCDIR)/Fireball.cpp\
+	$(SRCDIR)/Fwoosh.cpp\
+	$(SRCDIR)/Polymorph.cpp\
+	$(SRCDIR)/SpellBook.cpp\
+	$(SRCDIR)/TargetGenerator.cpp\
+	$(SRCDIR)/BrickWall.cpp
 
 #OBJS
 

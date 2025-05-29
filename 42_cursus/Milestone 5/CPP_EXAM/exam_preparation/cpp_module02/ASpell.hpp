@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:01:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:05:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:00:40 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define ASPELL_HPP
 
 # include "ATarget.hpp"
+# include <iostream>
+
+class ATarget;
 
 class ASpell
 {

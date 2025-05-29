@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:19 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:23:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:04:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ const std::string&	ATarget::getType(void) const
 	return (type);
 }
 
-void	ATarget::getHitBySpell(const ASpell* spell) const
+void	ATarget::getHitBySpell(const ASpell& spell) const
 {
 	std::cout << type << " has been " << spell.getEffects() << std::endl;
 }

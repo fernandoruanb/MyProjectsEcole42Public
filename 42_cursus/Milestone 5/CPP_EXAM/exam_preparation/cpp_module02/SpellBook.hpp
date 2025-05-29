@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:35:56 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 11:55:38 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:55:22 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SPELLBOOK_HPP
 
 # include "ASpell.hpp"
+# include <map>
 # include <iostream>
 
 class SpellBook

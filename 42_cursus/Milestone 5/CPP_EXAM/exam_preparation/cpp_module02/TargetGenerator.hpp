@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:33:13 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 15:48:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:59:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define TARGETGENERATOR_HPP
 
 # include "ATarget.hpp"
+# include <map>
 # include <iostream>
 
 class ATarget;
@@ -27,9 +28,9 @@ class TargetGenerator
 	public:
 		TargetGenerator(void);
 		~TargetGenerator(void);
-		void	learnTarget(ATarget *target);
+		void	learnTargetType(ATarget *target);
 		void	forgetTarget(const std::string &type);
-		ATarget*	createTargetType(const std::string &target);
-}
+		ATarget*	createTarget(const std::string &target);
+};
 
 #endif /* TARGETGENERATOR_HPP */

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:44:58 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:50:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:05:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Fireball::~Fireball(void) {}
 
 Fireball::Fireball(const Fireball& other): ASpell(other.getName(), other.getEffects()) {}
 
-ASpell*	clone(void) const
+ASpell*	Fireball::clone(void) const
 {
 	return new Fireball(*this);
 }

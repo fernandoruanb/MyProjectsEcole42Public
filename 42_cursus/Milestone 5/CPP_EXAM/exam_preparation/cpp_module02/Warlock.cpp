@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:47:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 13:50:18 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 18:18:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	Warlock::launchSpell(const std::string& name, const ATarget& target)
 {
 	ASpell* spell = spellbook.createSpell(name);
 	if (spell)
+	{
 	       spell->launch(target);
+	       delete spell;
+	}
 }
 
 void	Warlock::setTitle(const std::string& title)

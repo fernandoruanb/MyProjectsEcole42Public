@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:34:14 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:44:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:55:59 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,4 @@ class Fireball: public ASpell
 		ASpell* clone(void) const;
 };
 
-#endif /* FIREBALL_HPP
+#endif /* FIREBALL_HPP */
