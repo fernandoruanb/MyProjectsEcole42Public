@@ -6,11 +6,13 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:37:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/21 13:32:15 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 11:57:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+
+Bureaucrat::Bureaucrat(void): name("Bob"), grade(0) {}
 
 Bureaucrat::Bureaucrat(const std::string name, int grade): name(name), grade(grade)
 {

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 19:24:05 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/21 13:31:52 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 11:57:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ Bureaucrat	Bureaucrat::operator++(int)
 	++(*this);
 	return (result);
 }
+
+Bureaucrat::Bureaucrat(void): name("Bob"), grade(0) {}
 
 std::ostream& operator<<(std::ostream& out, const Bureaucrat &another)
 {

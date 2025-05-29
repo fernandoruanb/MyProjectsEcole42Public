@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:25:34 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/21 13:29:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 11:58:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class Bureaucrat
 		const std::string	name;
 		int	grade;
 	public:
+		Bureaucrat(void);
 		Bureaucrat(const std::string name, int grade);
 		~Bureaucrat(void);
 		Bureaucrat(const Bureaucrat &another);
