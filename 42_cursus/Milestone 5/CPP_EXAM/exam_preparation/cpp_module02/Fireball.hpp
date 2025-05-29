@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ASpell.cpp                                         :+:      :+:    :+:   */
+/*   Fireball.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 12:05:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:05:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/29 14:34:14 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/29 14:44:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ASpell.hpp"
+#ifndef FIREBALL_HPP
+# define FIREBALL_HPP
 
-ASpell::ASpell(std::string name, std::string effects): name(name), effects(effects) {}
+# include "ASpell.hpp"
 
-ASpell::~ASpell(void) {}
+class ASpell;
 
-const std::string&	ASpell::getName(void) const
+class Fireball: public ASpell
 {
-	return (name);
-}
+	private:
+		Fireball& operator=(const Fireball& other);
+	public:
+		Fireball(void);
+		~Fireball(void);
+		Fireball(const Fireball &other);
+		ASpell* clone(void) const;
+};
 
-const std::string&	ASpell::getEffects(void) const
-{
-	return (effects);
-}
-
-void	ASpell::launch(const ATarget& target) const
-{
-	target.getHitBySpell(*this);
-}
+#endif /* FIREBALL_HPP

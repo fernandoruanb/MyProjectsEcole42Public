@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ASpell.cpp                                         :+:      :+:    :+:   */
+/*   Fwoosh.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 12:05:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:05:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/29 14:26:36 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/29 14:33:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ASpell.hpp"
+#include "Fwoosh.hpp"
 
-ASpell::ASpell(std::string name, std::string effects): name(name), effects(effects) {}
+Fwoosh::Fwoosh(void): ASpell("Fwoosh", "fwooshed") {}
 
-ASpell::~ASpell(void) {}
+Fwoosh::~Fwoosh(void) {}
 
-const std::string&	ASpell::getName(void) const
+Fwoosh::Fwoosh(const Fwoosh& other) name(other.getName()), effects(other.getEffects()) {}
+
+ASpell*	clone(void) const
 {
-	return (name);
-}
-
-const std::string&	ASpell::getEffects(void) const
-{
-	return (effects);
-}
-
-void	ASpell::launch(const ATarget& target) const
-{
-	target.getHitBySpell(*this);
+	return new Fwoosh(*this);
 }

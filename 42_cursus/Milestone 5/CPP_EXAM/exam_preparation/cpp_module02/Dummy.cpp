@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ASpell.cpp                                         :+:      :+:    :+:   */
+/*   Dummy.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 12:05:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:05:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/29 13:40:10 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/29 13:48:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ASpell.hpp"
+#include "Dummy.hpp"
 
-ASpell::ASpell(std::string name, std::string effects): name(name), effects(effects) {}
+Dummy::Dummy(void): ATarget("Target Practice Dummy") {}
 
-ASpell::~ASpell(void) {}
+Dummy::~Dummy(void) {}
 
-const std::string&	ASpell::getName(void) const
+Dummy::Dummy(const Dummy &other): ATarget(other.getType()) {}
+
+ATarget* clone(void) const
 {
-	return (name);
-}
-
-const std::string&	ASpell::getEffects(void) const
-{
-	return (effects);
-}
-
-void	ASpell::launch(const ATarget& target) const
-{
-	target.getHitBySpell(*this);
+	return new Dummy(*this);
 }

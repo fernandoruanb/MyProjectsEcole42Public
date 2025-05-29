@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ASpell.cpp                                         :+:      :+:    :+:   */
+/*   BrickWall.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 12:05:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:05:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/29 13:58:34 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/29 14:02:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ASpell.hpp"
+#ifndef BRICKWALL_HPP
+# define BRICKWALL_HPP
 
-ASpell::ASpell(std::string name, std::string effects): name(name), effects(effects) {}
+# include "ATarget.hpp" 
 
-ASpell::~ASpell(void) {}
+class ATarget;
 
-const std::string&	ASpell::getName(void) const
+class BrickWall: public ATarget
 {
-	return (name);
-}
+	private:
+		BrickWall& operator=(const BrickWall& other);
+	public:
+		BrickWall(void);
+		~BrickWall(void);
+		BrickWall(const BrickWall &other);
+		ATarget* clone(void) const;
+};
 
-const std::string&	ASpell::getEffects(void) const
-{
-	return (effects);
-}
-
-void	ASpell::launch(const ATarget& target) const
-{
-	target.getHitBySpell(*this);
-}
+#endif /* BRICKWALL_HPP */

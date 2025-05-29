@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ASpell.cpp                                         :+:      :+:    :+:   */
+/*   Polymorph.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 12:05:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:05:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/29 15:17:11 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/29 15:22:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ASpell.hpp"
+#ifndef POLYMORPH_HPP
+# define POLYMORPH_HPP
 
-ASpell::ASpell(std::string name, std::string effects): name(name), effects(effects) {}
+# include "ASpell.hpp"
 
-ASpell::~ASpell(void) {}
+class ASpell;
 
-const std::string&	ASpell::getName(void) const
+class Polymorph: public ASpell
 {
-	return (name);
-}
+	private:
+		Polymorph& operator=(const Polymorph& other);
+	public:
+		Polymorph(void);
+		~Polymorph(void);
+		Polymorph(const Polymorph &other);
+		ASpell* clone(void) const;
+};
 
-const std::string&	ASpell::getEffects(void) const
-{
-	return (effects);
-}
-
-void	ASpell::launch(const ATarget& target) const
-{
-	target.getHitBySpell(*this);
-}
+#endif /* POLYMORPH_HPP */

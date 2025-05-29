@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ASpell.cpp                                         :+:      :+:    :+:   */
+/*   Fireball.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 12:05:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:05:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/29 14:44:58 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/29 14:50:13 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ASpell.hpp"
+#include "Fireball.hpp"
 
-ASpell::ASpell(std::string name, std::string effects): name(name), effects(effects) {}
+Fireball::Fireball(void): ASpell("Fireball", "burnt into a cripper") {}
 
-ASpell::~ASpell(void) {}
+Fireball::~Fireball(void) {}
 
-const std::string&	ASpell::getName(void) const
+Fireball::Fireball(const Fireball& other): ASpell(other.getName(), other.getEffects()) {}
+
+ASpell*	clone(void) const
 {
-	return (name);
-}
-
-const std::string&	ASpell::getEffects(void) const
-{
-	return (effects);
-}
-
-void	ASpell::launch(const ATarget& target) const
-{
-	target.getHitBySpell(*this);
+	return new Fireball(*this);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 10:47:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 12:41:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:50:18 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Warlock::Warlock(std::string name, std::string title): name(name), title(title)
 {
-	std::cout << name << ": This looks like another boring day" << std::endl;
+	std::cout << name << ": This looks like another boring day." << std::endl;
 }
 
 Warlock::~Warlock(void)

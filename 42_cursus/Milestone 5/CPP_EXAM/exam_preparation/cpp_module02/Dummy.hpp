@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ASpell.hpp                                         :+:      :+:    :+:   */
+/*   Dummy.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 12:01:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/29 14:05:03 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/29 13:36:50 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/29 13:40:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASPELL_HPP
-# define ASPELL_HPP
+#ifndef DUMMY_HPP
+# define DUMMY_HPP
 
 # include "ATarget.hpp"
 
-class ASpell
+class ATarget;
+
+class Dummy: public ATarget
 {
 	private:
-		ASpell(void);
-		ASpell& operator=(const ASpell& other);
-	protected:
-		std::string name;
-		std::string effects;
+		Dummy& operator=(const Dummy &other);
 	public:
-		ASpell(std::string name, std::string effects);
-		virtual ~ASpell(void);
-		const std::string&	getName(void) const;
-		const std::string&	getEffects(void) const;
-		virtual ASpell* clone(void) const = 0;
-		void launch(const ATarget& target) const;
+		Dummy(void);
+		~Dummy(void);
+		Dummy(const Dummy &other);
+		ATarget* clone(void) const;
 };
 
-#endif /* ASPELL_HPP */
+#endif /* DUMMY_HPP */
