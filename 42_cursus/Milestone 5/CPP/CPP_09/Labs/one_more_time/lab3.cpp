@@ -1,49 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lab2.cpp                                           :+:      :+:    :+:   */
+/*   lab3.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/31 13:37:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/31 13:37:31 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/05/31 16:04:50 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/05/31 16:04:50 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
- 
-#include <sstream>
+
 #include <map>
-#include <fstream>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
-int	main(void)
+int main(int argc, char **argv)
 {
-	size_t	comma;
+	double	btc_value;
 	std::string	line;
-	std::map<std::string,double> btc;
-	std::string	date;
 	std::string	value;
-	double	new_value;
-
-	std::ifstream file("data.csv");
+	std::string	date;
+	std::map<std::string,double> btc;
+	size_t	pipe;
+	
+	if (argc != 2)
+		return (1);
+	std::ifstream file(argv[1]);
 	if (file.is_open())
 	{
+		std::getline(file, line);
 		while (std::getline(file, line))
 		{
-			comma = line.find(',');
-			if (comma != std::string::npos)
+			pipe = line.find(" | ");
+			if (pipe != std::string::npos)
 			{
-				date = line.substr(0, comma);
-				value = line.substr(comma + 1);
+				date = line.substr(0, pipe);
+				value = line.substr(pipe + 3);
 				std::stringstream ss(value);
-				ss >> new_value;
-				btc[date] = new_value;
+				ss >> btc_value;
+				btc[date] = btc_value;
 			}
 		}
 		file.close();
 		std::map<std::string,double>::const_iterator it = btc.begin();
 		while (it != btc.end())
 		{
-			std::cout << it->first << ", " << it->second << std::endl;
+			std::cout << it->first << " | " << it->second << std::endl;
 			++it;
 		}
 	}
