@@ -32,7 +32,7 @@ void	Warlock::forgetSpell(const std::string& name)
 	spellbook.forgetSpell(name);
 }
 
-void	Warlock::launchSpell(const std::string& name, const ATarget& target)
+void	Warlock::launchSpell(const std::string& name, const ATarget* target)
 {
 	ASpell* spell = spellbook.createSpell(name);
 	if (spell)

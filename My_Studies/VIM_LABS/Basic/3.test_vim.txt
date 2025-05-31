@@ -1,0 +1,5 @@
+
+Meu primeiro teste no Vim
+Linha dois de teste
+Linha três de teste
+Linha quatro de teste
