@@ -1,0 +1,7 @@
+Esse é o meu primeiro teste com o Vim
+é o meu primeiro teste com o Vim
+Esse é o meu primeiro teste com o Vim
+Nl
+Essa é uma linha de teste.newtest
+testandoVamos explorar o novo moiundoteste.
+O Vim é maneiro. Vou aprender tudo.
