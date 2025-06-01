@@ -1,6 +1,10 @@
-Esse é o meu primeiro teste com o Vim
-é o meu primeiro teste com o Vim
-Esse é o meu primeiro teste com o Vim
+é o meu 
+primeiro Linux com o oi
+Esse é o meu primeiro teste com o oi
+Esse é o meu primeiro Linux com o oi
+é o meu 
+primeiro Linux com o oi
+Esse é o meu primeiro teste com o oi
 Nl
 Essa é uma linha de teste.newtest
 testandoVamos explorar o novo moiundoteste.
