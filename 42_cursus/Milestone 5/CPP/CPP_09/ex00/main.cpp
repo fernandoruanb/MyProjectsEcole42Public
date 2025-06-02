@@ -6,43 +6,23 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 17:36:22 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/01 18:53:35 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:41:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-
-static bool	start_check_input(const std::string file)
-{
-	std::ifstream input(file);
-
-	if (file.is_open())
-	{
-		if (!start_mount(input))
-		{
-			file.close();
-			return (0);
-		}
-		file.close();
-	}
-	else
-	{
-		std::cerr << "Error: could not open file" << std::endl;
-		return (0);
-	}
-	return (1);
-}
 
 int	main(int argc, char **argv)
 {
 	(void)argv;
 	if (argc != 2)
 	{
-		std::cerr << "Error: You must send an argument and only one" << std::endl;
+		std::cerr << "Error: could not open file." << std::endl;
 		return (1);
 	}
 
 	std::ifstream db("data.csv");
+	std::ifstream inputDb(argv[1]);
 	std::string	line;
 	std::string	date;
 	std::string	value;
@@ -66,8 +46,13 @@ int	main(int argc, char **argv)
 			}
 		}
 		db.close();
-		if (!start_check_input(argv[1])
+		if (!inputDb.is_open())
+		{
+			std::cerr << "Error: could not open file" << std::endl;
 			return (1);
+		}
+		else
+			start_mount(inputDb, btc);
 		/*std::map<std::string,double>::const_iterator it = btc.begin();
 		while (it != btc.end())
 		{

@@ -1,6 +1,6 @@
 #Name of the program or the library
 
-NAME = BitcoinExchange
+NAME = btc
 
 #Compilers and flags
 

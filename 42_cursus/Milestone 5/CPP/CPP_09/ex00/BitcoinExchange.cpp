@@ -1,0 +1,115 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/01 18:57:35 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/06/01 21:07:07 by fruan-ba         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "BitcoinExchange.hpp"
+
+static bool	investigate_date(const std::string date)
+{
+	std::string	year;
+	std::string	month;
+	std::string	day;
+	size_t	checker;
+
+	year = date.substr(0, 4);
+	month = date.substr(5, 2);
+	day = date.substr(8, 2);
+	std::stringstream ss(year);
+	ss >> checker;
+	if (checker < 0)
+	{
+		std::cerr << "Error: Invalid year => " << date << std::endl;
+		return (0);
+	}
+	ss.clear();
+	ss.str(month);
+	ss >> checker;
+	if (checker < 0 || checker > 12)
+	{
+		std::cerr << "Error: invalid month => " << date << std::endl;
+		return (0);
+	}
+	ss.clear();
+	ss.str(day);
+	ss >> checker;
+	if (checker < 0 || checker > 30)
+	{
+		std::cerr << "Error: invalid day => " << date << std::endl;
+		return (0);
+	}
+	return (1);
+}
+
+static void	print_result(const std::string date, std::map<std::string,double> input, std::map<std::string,double> db)
+{
+	std::map<std::string,double>::const_iterator it = db.lower_bound(date);
+	double	btc_value;
+	double	base;
+
+	btc_value = input[date];
+	while (it->first > date)
+	{
+		if (it == db.begin())
+		{
+			std::cerr << "Error: there are not dates availables to calculate the answer" << std::endl;
+			return ;
+		}
+		--it;
+	}
+	base = it->second;
+	if (it != db.end() && it != db.begin())
+		std::cout << date << " => " << btc_value << " = " << btc_value * base << std::endl;
+}
+
+void	start_mount(std::ifstream &file, std::map<std::string,double> db)
+{
+	std::map<std::string,double> inputDb;
+	std::string	line;
+	std::string	value;
+	std::string	date;
+	double	btc_value;
+	size_t	pipe;
+
+	std::getline(file, line);
+	while (std::getline(file, line))
+	{
+		pipe = line.find(" | ");
+		if (pipe != std::string::npos)
+		{
+			date = line.substr(0, pipe);
+			if (date.length() != 10 || date[4] != '-' || date[7] != '-')
+			{
+				std::cerr << "Error: bad input => " << date << std::endl;
+				continue ;
+			}
+			value = line.substr(pipe + 3);
+			std::stringstream ss(value);
+			ss >> btc_value;
+			if (btc_value < 0)
+			{
+				std::cerr << "Error: not a positive number." << std::endl;
+				continue ;
+			}
+			if (btc_value > 1000)
+			{
+				std::cerr << "Error: too large a number." << std::endl;
+				continue ;
+			}
+			if (!investigate_date(date))
+				continue ;
+			inputDb[date] = btc_value;
+			print_result(date, inputDb, db);
+		}
+		else
+			std::cerr << "Error: bad input => " << line << std::endl;
+	}
+	file.close();
+}
