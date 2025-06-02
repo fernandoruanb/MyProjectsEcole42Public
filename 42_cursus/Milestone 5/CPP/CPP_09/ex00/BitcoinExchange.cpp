@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:57:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/01 21:07:07 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:14:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	investigate_date(const std::string date)
 	ss >> checker;
 	if (checker < 0)
 	{
-		std::cerr << "Error: Invalid year => " << date << std::endl;
+		std::cerr << "Error: bad input => " << date << std::endl;
 		return (0);
 	}
 	ss.clear();
@@ -34,7 +34,7 @@ static bool	investigate_date(const std::string date)
 	ss >> checker;
 	if (checker < 0 || checker > 12)
 	{
-		std::cerr << "Error: invalid month => " << date << std::endl;
+		std::cerr << "Error: bad input => " << date << std::endl;
 		return (0);
 	}
 	ss.clear();
@@ -42,7 +42,7 @@ static bool	investigate_date(const std::string date)
 	ss >> checker;
 	if (checker < 0 || checker > 30)
 	{
-		std::cerr << "Error: invalid day => " << date << std::endl;
+		std::cerr << "Error: bad input => " << date << std::endl;
 		return (0);
 	}
 	return (1);
@@ -54,7 +54,14 @@ static void	print_result(const std::string date, std::map<std::string,double> in
 	double	btc_value;
 	double	base;
 
+	if (db.empty())
+	{
+		std::cerr << "Error: database is empty!" << std::endl;
+		return ;
+	}
 	btc_value = input[date];
+	if (it == db.end())
+		--it;
 	while (it->first > date)
 	{
 		if (it == db.begin())
