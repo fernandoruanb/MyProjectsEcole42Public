@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/02 14:02:50 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:44:48 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	division(int n1, int n2, std::stack<int> &base, long long *result)
 {
 	if (n2 == 0)
 	{
-		std::cerr << "Error: Division by Zero Error" << std::endl;
+		std::cerr << RED "Error: Division by Zero Error" RESET << std::endl;
 		return ;
 	}
 	*result = n1 / n2;
@@ -50,7 +50,7 @@ bool	process(char magic, std::stack<int> &base, long long *result)
 
 	if (base.size() == 0 || base.size() < 2)
 	{
-		std::cerr << "Error: insufficient operands" << std::endl;
+		std::cerr << RED "Error: insufficient operands" RESET << std::endl;
 		return (0);
 	}
 
@@ -79,7 +79,7 @@ bool	process(char magic, std::stack<int> &base, long long *result)
 	}
 	if (index == 4)
 	{
-		std::cerr << "Error: invalid operator" << std::endl;
+		std::cerr << RED "Error: invalid operator" RESET << std::endl;
 		return (0);
 	}
 	return (1);

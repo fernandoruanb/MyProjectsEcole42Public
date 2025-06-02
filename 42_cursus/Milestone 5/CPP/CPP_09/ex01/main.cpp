@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:39:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/02 14:23:36 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:45:29 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		std::cerr << "Error: give one and only an argument, please" << std::endl;
+		std::cerr << RED "Error: give one and only an argument, please" RESET << std::endl;
 		return (1);
 	}
 	if (argv[1][0] == '\0')
 	{
-		std::cerr << "Error: empty input is invalid" << std::endl;
+		std::cerr << RED "Error: empty input is invalid" RESET << std::endl;
 		return (1);
 	}
 	result = 0;
@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 			{
 				if (argv[1][index + 1] >= '0' && argv[1][index] <= '9')
 				{
-					std::cerr << "Error: Only numbers with one unit are accepted" << std::endl;
+					std::cerr << RED "Error: Only numbers with one unit are accepted" RESET << std::endl;
 					return (1);
 				}
 			}
@@ -60,16 +60,16 @@ int	main(int argc, char **argv)
 		}
 		else
 		{
-			std::cerr << "Error" << std::endl;
+			std::cerr << RED "Error" RESET << std::endl;
 			return (1);
 		}
 		++index;
 	}
 	if (base.size() == 1)
-		std::cout << base.top() << std::endl;
+		std::cout << LIGHT_GREEN << base.top() << RESET << std::endl;
 	else
 	{
-		std::cerr << "Error: the stack must be only one number in the final" << std::endl;
+		std::cerr << RED "Error: the stack must be only one number in the final" RESET << std::endl;
 		return (1);
 	}
 	return (0);
