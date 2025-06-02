@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:39:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/02 12:27:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:01:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@ int	main(int argc, char **argv)
 	int	number;
 	std::stack<int> base;
 	long long	index;
-	int	result;
+	long long	result;
 
 	if (argc != 2)
 	{
 		std::cerr << "Error: give one and only an argument, please" << std::endl;
+		return (1);
+	}
+	if (argv[1][0] == '\0')
+	{
+		std::cerr << "Error: empty input is invalid" << std::endl;
 		return (1);
 	}
 	result = 0;
@@ -51,10 +56,7 @@ int	main(int argc, char **argv)
 		else if (argv[1][index] == '*' || argv[1][index] == '/' || argv[1][index] == '+' || argv[1][index] == '-')
 		{
 			if (!process(argv[1][index], base, &result))
-			{
-				std::cerr << "Error: invalid process detected!" << std::endl;
 				return (1);
-			}
 		}
 		else
 		{
@@ -63,6 +65,7 @@ int	main(int argc, char **argv)
 		}
 		++index;
 	}
-	std::cout << base.top() << std::endl;
+	if (base.size() != 0)
+		std::cout << base.top() << std::endl;
 	return (0);
 }
