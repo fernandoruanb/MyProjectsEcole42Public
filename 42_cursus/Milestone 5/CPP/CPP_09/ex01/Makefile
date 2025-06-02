@@ -44,6 +44,7 @@ run: all
 	-./RPN "8 9 * 9 - 9 - 9 - 4 - 1 +"
 	-./RPN "7 7 * 7 -"
 	-./RPN "(1 + 1)" || true
+	-./RPN "1 2 3 7 5 6 8" || true
 
 #All the magic happens here
 

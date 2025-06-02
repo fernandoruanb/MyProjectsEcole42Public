@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:57:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/01 22:14:24 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:37:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	investigate_date(const std::string date)
 	ss >> checker;
 	if (checker < 0)
 	{
-		std::cerr << "Error: bad input => " << date << std::endl;
+		std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
 		return (0);
 	}
 	ss.clear();
@@ -34,7 +34,7 @@ static bool	investigate_date(const std::string date)
 	ss >> checker;
 	if (checker < 0 || checker > 12)
 	{
-		std::cerr << "Error: bad input => " << date << std::endl;
+		std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
 		return (0);
 	}
 	ss.clear();
@@ -42,7 +42,7 @@ static bool	investigate_date(const std::string date)
 	ss >> checker;
 	if (checker < 0 || checker > 30)
 	{
-		std::cerr << "Error: bad input => " << date << std::endl;
+		std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
 		return (0);
 	}
 	return (1);
@@ -56,7 +56,7 @@ static void	print_result(const std::string date, std::map<std::string,double> in
 
 	if (db.empty())
 	{
-		std::cerr << "Error: database is empty!" << std::endl;
+		std::cerr << RED "Error: database is empty!" RESET << std::endl;
 		return ;
 	}
 	btc_value = input[date];
@@ -66,14 +66,14 @@ static void	print_result(const std::string date, std::map<std::string,double> in
 	{
 		if (it == db.begin())
 		{
-			std::cerr << "Error: there are not dates availables to calculate the answer" << std::endl;
+			std::cerr << RED "Error: there are not dates availables to calculate the answer" RESET << std::endl;
 			return ;
 		}
 		--it;
 	}
 	base = it->second;
 	if (it != db.end() && it != db.begin())
-		std::cout << date << " => " << btc_value << " = " << btc_value * base << std::endl;
+		std::cout << BRIGHT_GREEN << date << ORANGE " => " << LIGHT_BLUE << btc_value << ORANGE " = " << BRIGHT_YELLOW << btc_value * base << RESET << std::endl;
 }
 
 void	start_mount(std::ifstream &file, std::map<std::string,double> db)
@@ -94,7 +94,7 @@ void	start_mount(std::ifstream &file, std::map<std::string,double> db)
 			date = line.substr(0, pipe);
 			if (date.length() != 10 || date[4] != '-' || date[7] != '-')
 			{
-				std::cerr << "Error: bad input => " << date << std::endl;
+				std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
 				continue ;
 			}
 			value = line.substr(pipe + 3);
@@ -102,12 +102,12 @@ void	start_mount(std::ifstream &file, std::map<std::string,double> db)
 			ss >> btc_value;
 			if (btc_value < 0)
 			{
-				std::cerr << "Error: not a positive number." << std::endl;
+				std::cerr << RED "Error: not a positive number." RESET << std::endl;
 				continue ;
 			}
 			if (btc_value > 1000)
 			{
-				std::cerr << "Error: too large a number." << std::endl;
+				std::cerr << RED "Error: too large a number." RESET << std::endl;
 				continue ;
 			}
 			if (!investigate_date(date))
@@ -116,7 +116,7 @@ void	start_mount(std::ifstream &file, std::map<std::string,double> db)
 			print_result(date, inputDb, db);
 		}
 		else
-			std::cerr << "Error: bad input => " << line << std::endl;
+			std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << line << RESET << std::endl;
 	}
 	file.close();
 }

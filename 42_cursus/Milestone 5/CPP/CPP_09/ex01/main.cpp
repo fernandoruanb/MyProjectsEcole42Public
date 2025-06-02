@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:39:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/02 14:01:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:23:36 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,12 @@ int	main(int argc, char **argv)
 		}
 		++index;
 	}
-	if (base.size() != 0)
+	if (base.size() == 1)
 		std::cout << base.top() << std::endl;
+	else
+	{
+		std::cerr << "Error: the stack must be only one number in the final" << std::endl;
+		return (1);
+	}
 	return (0);
 }

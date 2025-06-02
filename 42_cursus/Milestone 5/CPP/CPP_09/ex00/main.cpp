@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 17:36:22 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/01 19:41:56 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:30:58 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc != 2)
 	{
-		std::cerr << "Error: could not open file." << std::endl;
+		std::cerr << RED "Error: could not open file." RESET << std::endl;
 		return (1);
 	}
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 		db.close();
 		if (!inputDb.is_open())
 		{
-			std::cerr << "Error: could not open file" << std::endl;
+			std::cerr << RED "Error: could not open file" RESET << std::endl;
 			return (1);
 		}
 		else
@@ -62,7 +62,7 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		std::cerr << "Error: data.csv could not be read" << std::endl;
+		std::cerr << RED "Error: data.csv could not be read" RESET << std::endl;
 		return (1);
 	}
 	return (0);
