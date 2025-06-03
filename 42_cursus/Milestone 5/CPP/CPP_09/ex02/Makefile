@@ -14,7 +14,8 @@ INCDIR = .
 
 #SRCS
 
-SRCS =  $(SRCDIR)/main.cpp
+SRCS =  $(SRCDIR)/main.cpp\
+	$(SRCDIR)/PmergeME.cpp
 
 #OBJS
 
