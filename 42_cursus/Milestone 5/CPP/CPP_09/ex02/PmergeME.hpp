@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:08:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/03 15:00:43 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:57:55 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <sstream>
 # include <climits>
+# include <algorithm>
 # include <list>
 # include <vector>
 # include "colours.hpp"

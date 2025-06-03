@@ -6,85 +6,67 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:24:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/03 15:27:43 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:46:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeME.hpp"
 
-static void	fillList(std::list<int> &highValues, std::list<int> &lowValues, std::list<int> &pmergeMe)
-{
-	(void)lowValues;
-	std::list<int>::iterator it = pmergeMe.begin();
-	std::list<int>::iterator high = highValues.begin();
-//	std::list<int>::iterator low = lowValues.begin();
-	std::list<int>::iterator checker;
-
-	pmergeMe.clear();
-	while (high != highValues.end())
-	{	
-		pmergeMe.push_back(*high);
-		++high;
-	}
-	//pmergeMe.insert(it, num);
-	it = pmergeMe.begin();
-	std::cout << LIGHT_GREEN "FINAL LIST" RESET << std::endl;
-	while (it != pmergeMe.end())
-	{
-		std::cout << *it << std::endl;
-		++it;
-	}
-}
-
-static void	sortLow(std::list<int> &lowValues)
-{
-	std::list<int>::iterator it = lowValues.begin();
-        std::list<int>::iterator magic;
-
-        while (it != lowValues.end())
-        {
-                magic = it;
-                ++magic;
-                if (magic == lowValues.end())
-                        break ;
-                if(*magic < *it)
-                {
-                        std::swap(*magic, *it);
-                        it = lowValues.begin();
-                }
-                ++it;
-        }
-}
-
-static void	sortHigh(std::list<int> &highValues)
-{
-	std::list<int>::iterator it = highValues.begin();
-        std::list<int>::iterator magic;
-
-        while (it != highValues.end())
-        {
-                magic = it;
-                ++magic;
-                if (magic == highValues.end())
-                        break ;
-                if(*magic < *it)
-                {
-                        std::swap(*magic, *it);
-                        it = highValues.begin();
-                }
-                ++it;
-        }
-}
-
-static void	sortList(std::list<int> &highValues, std::list<int> &lowValues)
-{
-	sortHigh(highValues);
-	sortLow(lowValues);
-}
-
 void	fordJohnsonVector(std::vector<int> &pmergeMe2)
 {
 	(void)pmergeMe2;
+	std::vector<int>	highValues;
+	std::vector<int>	lowValues;
+	std::vector<int>::iterator it = pmergeMe2.begin();
+	std::vector<int>::iterator temp;
+	long long	limit;
+	long long	count;
+
+	limit = pmergeMe2.size();
+	count = 0;
+	while (it != pmergeMe2.end())
+	{
+		 temp = it;
+                ++it;
+                ++count;
+                if (count >= limit)
+                {
+                        if (temp != pmergeMe2.end())
+                                lowValues.push_back(*temp);
+                        else
+                                lowValues.push_back(*it);
+                        break ;
+                }
+                if (*temp > *it)
+                {
+                        highValues.push_back(*temp);
+                        lowValues.push_back(*it);
+                }
+                else
+                {
+                        highValues.push_back(*it);
+                        lowValues.push_back(*temp);
+                }
+                ++it;
+                ++count;
+	}
+	std::vector<int>::const_iterator check = highValues.begin();
+	std::vector<int>::iterator start = highValues.begin();
+	std::vector<int>::iterator end = highValues.end();
+	std::sort(start, end);
+        std::cout << WHITE "VECTOR highValues Sorted" RESET << std::endl;
+        while (check != highValues.end())
+        {
+                std::cout << *check << std::endl;
+                ++check;
+        }
+        check = lowValues.begin();
+        std::cout << WHITE "VECTOR lowValues" RESET << std::endl;
+        while (check != lowValues.end())
+        {
+                std::cout << *check << std::endl;
+                ++check;
+        }
 }
 
 void	fordJohnsonList(std::list<int> &pmergeMe)
@@ -124,17 +106,16 @@ void	fordJohnsonList(std::list<int> &pmergeMe)
 		++it;
 		++count;
 	}
-	sortList(highValues, lowValues);
-	fillList(highValues, lowValues, pmergeMe);
 	std::list<int>::const_iterator check = highValues.begin();
-	std::cout << WHITE "highValues" RESET << std::endl;
+	highValues.sort();
+	std::cout << WHITE "LIST highValues Sorted" RESET << std::endl;
 	while (check != highValues.end())
 	{
 		std::cout << *check << std::endl;
 		++check;
 	}
 	check = lowValues.begin();
-	std::cout << WHITE "lowValues" RESET << std::endl;
+	std::cout << WHITE "LIST lowValues" RESET << std::endl;
 	while (check != lowValues.end())
 	{
 		std::cout << *check << std::endl;

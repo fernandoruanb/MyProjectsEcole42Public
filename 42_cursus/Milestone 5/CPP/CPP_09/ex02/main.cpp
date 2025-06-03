@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:00:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/03 10:45:00 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:49:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,19 @@ int	main(int argc, char **argv)
 	}
 	fordJohnsonList(pmergeMe);
 	fordJohnsonVector(pmergeMe2);
-	/*std::vector<int>::const_iterator itv = pmergeMe2.begin();
+	std::vector<int>::const_iterator itv = pmergeMe2.begin();
 	std::list<int>::const_iterator it = pmergeMe.begin();
-	std::cout << "LIST" << std::endl;
+	std::cout << LIGHT_BLUE << "LIST" RESET << std::endl;
 	while (it != pmergeMe.end())
 	{
 		std::cout << *it << std::endl;
 		++it;
 	}
-	std::cout << "VECTOR" << std::endl;
+	std::cout << LIGHT_BLUE "VECTOR" RESET << std::endl;
 	while (itv != pmergeMe2.end())
 	{
 		std::cout << *itv << std::endl;
 		++itv;
-	}*/
+	}
 	return (0);
 }
