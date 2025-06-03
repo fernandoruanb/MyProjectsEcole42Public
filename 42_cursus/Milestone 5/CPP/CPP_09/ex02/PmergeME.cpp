@@ -6,16 +6,35 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:24:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/03 12:29:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:27:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeME.hpp"
 
-/*static void	fillList(std::list<int> &highValues, std::list<int> &lowValues, std::list<int> &pmergeMe)
+static void	fillList(std::list<int> &highValues, std::list<int> &lowValues, std::list<int> &pmergeMe)
 {
+	(void)lowValues;
+	std::list<int>::iterator it = pmergeMe.begin();
+	std::list<int>::iterator high = highValues.begin();
+//	std::list<int>::iterator low = lowValues.begin();
+	std::list<int>::iterator checker;
 
-}*/
+	pmergeMe.clear();
+	while (high != highValues.end())
+	{	
+		pmergeMe.push_back(*high);
+		++high;
+	}
+	//pmergeMe.insert(it, num);
+	it = pmergeMe.begin();
+	std::cout << LIGHT_GREEN "FINAL LIST" RESET << std::endl;
+	while (it != pmergeMe.end())
+	{
+		std::cout << *it << std::endl;
+		++it;
+	}
+}
 
 static void	sortLow(std::list<int> &lowValues)
 {
@@ -106,6 +125,7 @@ void	fordJohnsonList(std::list<int> &pmergeMe)
 		++count;
 	}
 	sortList(highValues, lowValues);
+	fillList(highValues, lowValues, pmergeMe);
 	std::list<int>::const_iterator check = highValues.begin();
 	std::cout << WHITE "highValues" RESET << std::endl;
 	while (check != highValues.end())
