@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:39:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/02 14:45:29 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:01:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	int	number;
+	long long	number;
 	std::stack<int> base;
 	long long	index;
 	long long	result;
