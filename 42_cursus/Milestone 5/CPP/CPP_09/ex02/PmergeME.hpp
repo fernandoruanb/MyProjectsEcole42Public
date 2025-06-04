@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:08:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/03 17:57:55 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:24:56 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define PMERGEME_HPP
 
 # include <iostream>
+# include <iomanip>
 # include <sstream>
 # include <climits>
 # include <algorithm>
 # include <list>
+# include <ctime>
 # include <vector>
 # include "colours.hpp"
 

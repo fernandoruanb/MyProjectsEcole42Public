@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:00:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/03 18:49:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:26:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ int	main(int argc, char **argv)
 	long long	num;
 	bool	flag;
 	long long	checker;
+	double	startTime;
+	double	endTime;
+	double	totalTime;
 	std::list<int>	pmergeMe;
 	std::vector<int> pmergeMe2;
+	std::list<int>::const_iterator it;
 
 	index = 0;
 	count = 1;
@@ -56,7 +60,7 @@ int	main(int argc, char **argv)
 			}
 			else
 			{
-				std::cerr << RED "Error: invalid input detected => " << BRIGHT_YELLOW << argv[count][index] << RESET << std::endl;
+				std::cerr << RED "Error" RESET << std::endl;
 				return (1);
 			}
 			if (flag == 1)
@@ -66,21 +70,32 @@ int	main(int argc, char **argv)
 		}
 		count++;
 	}
-	fordJohnsonList(pmergeMe);
-	fordJohnsonVector(pmergeMe2);
-	std::vector<int>::const_iterator itv = pmergeMe2.begin();
-	std::list<int>::const_iterator it = pmergeMe.begin();
-	std::cout << LIGHT_BLUE << "LIST" RESET << std::endl;
+	std::cout << MAGENTA "Before: " RESET;
+	it = pmergeMe.begin();
 	while (it != pmergeMe.end())
 	{
-		std::cout << *it << std::endl;
+		std::cout << BRIGHT_YELLOW << *it << " " << RESET;
 		++it;
 	}
-	std::cout << LIGHT_BLUE "VECTOR" RESET << std::endl;
-	while (itv != pmergeMe2.end())
-	{
-		std::cout << *itv << std::endl;
-		++itv;
-	}
+	std::cout << std::endl;
+	startTime = std::clock();
+	fordJohnsonList(pmergeMe);
+	endTime = std::clock();
+	totalTime = (endTime - startTime) / 1000000;
+	startTime = std::clock();
+	fordJohnsonVector(pmergeMe2);
+	endTime = std::clock();
+	it = pmergeMe.begin();
+	std::cout << MAGENTA "After: " RESET;
+	it = pmergeMe.begin();
+        while (it != pmergeMe.end())
+        {
+                std::cout << BRIGHT_YELLOW << *it << " " << RESET;
+                ++it;
+        }
+        std::cout << std::endl;
+	std::cout << GREEN "Time to process a range of " << YELLOW << pmergeMe.size() << GREEN " elements with std::list " << ORANGE << std::fixed << std::setprecision(8) << totalTime << GREEN " us" << RESET << std::endl;
+	totalTime = (endTime - startTime) / 1000000;
+	std::cout << GREEN "Time to process a range of " << YELLOW << pmergeMe2.size() << GREEN " elements with std::vector " << ORANGE << totalTime << GREEN " us" << RESET << std::endl;
 	return (0);
 }
