@@ -6,11 +6,47 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:00:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/04 12:30:19 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:03:40 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeME.hpp"
+
+static bool	checkVectorSort(std::vector<int> pmergeMe2)
+{
+	std::vector<int>::iterator it = pmergeMe2.begin();
+	std::vector<int>::iterator next;
+
+	while (it != pmergeMe2.end())
+	{
+		next = it;
+		++next;
+		if (next == pmergeMe2.end())
+			return (1);
+		if (*it > *next)
+			return (0);
+		++it;
+	}
+	return (1);
+}
+
+static bool	checkListSort(std::list<int> pmergeMe)
+{
+	std::list<int>::iterator it = pmergeMe.begin();
+	std::list<int>::iterator next;
+
+	while (it != pmergeMe.end())
+	{
+		next = it;
+		++next;
+		if (next == pmergeMe.end())
+			return (1);
+		if (*it > *next)
+			return (0);
+		++it;
+	}
+	return (1);
+}
 
 int	main(int argc, char **argv)
 {
@@ -29,7 +65,7 @@ int	main(int argc, char **argv)
 	double	totalTime;
 	std::list<int>	pmergeMe;
 	std::vector<int> pmergeMe2;
-	std::list<int>::const_iterator it;
+	std::list<int>::iterator it;
 
 	index = 0;
 	count = 1;
@@ -70,13 +106,26 @@ int	main(int argc, char **argv)
 		}
 		count++;
 	}
-	std::cout << MAGENTA "Before: " RESET;
+	std::cout << MAGENTA "Before LIST: " RESET;
+
+	// I am showing to you all values into LIST here
 	it = pmergeMe.begin();
 	while (it != pmergeMe.end())
 	{
 		std::cout << BRIGHT_YELLOW << *it << " " << RESET;
 		++it;
 	}
+	// I am showing to you all values into VECTOR here
+	std::vector<int>::iterator itv = pmergeMe2.begin();
+	std::cout << std::endl;
+	std::cout << MAGENTA "Before VECTOR: " RESET;
+	while (itv != pmergeMe2.end())
+	{
+		std::cout <<  BRIGHT_YELLOW << *itv << " " << RESET;
+		++itv;
+	}
+
+	// Start Ford-Johnson algorithm and calculate clocks
 	std::cout << std::endl;
 	startTime = std::clock();
 	fordJohnsonList(pmergeMe);
@@ -86,16 +135,39 @@ int	main(int argc, char **argv)
 	fordJohnsonVector(pmergeMe2);
 	endTime = std::clock();
 	it = pmergeMe.begin();
-	std::cout << MAGENTA "After: " RESET;
+	std::cout << MAGENTA "After LIST: " RESET;
+
+	// I am here showing the result of LIST
 	it = pmergeMe.begin();
         while (it != pmergeMe.end())
         {
                 std::cout << BRIGHT_YELLOW << *it << " " << RESET;
                 ++it;
         }
+	std::cout << std::endl;
+	// I am here showing the result of VECTOR
+	std::cout << MAGENTA "After VECTOR: " RESET;
+	itv = pmergeMe2.begin();
+	while (itv != pmergeMe2.end())
+	{
+		std::cout << BRIGHT_YELLOW << *itv << " " << RESET;
+		++itv;
+	}
         std::cout << std::endl;
-	std::cout << GREEN "Time to process a range of " << YELLOW << pmergeMe.size() << GREEN " elements with std::list " << ORANGE << std::fixed << std::setprecision(8) << totalTime << GREEN " us" << RESET << std::endl;
+
+	// Check the work!!!
+	if (checkListSort(pmergeMe))
+		std::cout << BRIGHT_GREEN "LIST is Sorted =D!!!" RESET << std::endl;
+	else
+		std::cerr << RED "LIST ISN'T SORTED D=" RESET << std::endl;
+	if (checkVectorSort(pmergeMe2))
+		std::cout << BRIGHT_GREEN "VECTOR is Sorted =D!!!" RESET << std::endl;
+	else
+		std::cerr << RED "VECTOR INS'T SORTED D=" RESET << std::endl;
+
+	// Now, I will show the time of each process here
+	std::cout << WHITE "Time to process a range of " << YELLOW << pmergeMe.size() << WHITE " elements with " << GREEN "std::list " << ORANGE << std::fixed << std::setprecision(8) << totalTime << WHITE " us" << RESET << std::endl;
 	totalTime = (endTime - startTime) / 1000000;
-	std::cout << GREEN "Time to process a range of " << YELLOW << pmergeMe2.size() << GREEN " elements with std::vector " << ORANGE << totalTime << GREEN " us" << RESET << std::endl;
+	std::cout << WHITE "Time to process a range of " << YELLOW << pmergeMe2.size() << WHITE " elements with " << GREEN "std::vector " << ORANGE << totalTime << WHITE " us" << RESET << std::endl;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:24:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/04 12:21:30 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:05:21 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void	fordJohnsonVector(std::vector<int> &pmergeMe2)
 	std::vector<int>::iterator endLow = lowValues.end();
 	std::vector<int>::iterator startLow = lowValues.begin();
 
+	std::sort(start, end);
+	start = lowValues.begin();
+	end = lowValues.end();
 	std::sort(start, end);
 	check = pmergeMe2.begin();
 	while (check != pmergeMe2.end())
