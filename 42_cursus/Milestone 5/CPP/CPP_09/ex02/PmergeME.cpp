@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:24:45 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/04 14:05:21 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:12:16 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,87 @@ void	sortList(std::list<int> &highValues, std::list<int> &lowValues, std::list<i
 	std::list<int>::iterator it = pmergeME.begin();
 	(void)highValues;
 	(void)lowValues;
+	std::vector<unsigned int> jacobsthal;
+	std::vector<unsigned int> base;
+	unsigned int   mark;
+	unsigned int   index;
+	unsigned int   power;
 
+	mark = 2;
+	index = 1;
+	jacobsthal.push_back(0);
+	jacobsthal.push_back(1);
+	while (index < mark)
+	{
+		power = jacobsthal[index] + 2 * jacobsthal[index - 1];
+		jacobsthal.push_back(power);
+		if (power >= lowValues.size())
+			break ;
+		++mark;
+		++index;
+        }
+	std::vector<unsigned int>::iterator v = jacobsthal.begin();
+	std::advance(v, 2);
+
+	// Bulding the base of Jacobsthal
+
+	std::set<unsigned int> sets;
+	index = 0;
+	while (index < lowValues.size())
+	{
+		sets.insert(index);
+		index++;
+	}
+	index = 0;
+	while (v != jacobsthal.end())
+	{
+		if (*v <= lowValues.size())
+		{
+			base.push_back(*v);
+			sets.erase(*v);
+			index++;
+		}
+		else
+			break ;
+		++v;
+	}
+
+	// base impression;
+
+	v = base.begin();
+	std::set<unsigned int>::iterator y = sets.begin();
+	while (y != sets.end())
+	{
+		base.push_back(*y);
+		++y;
+	}
+	while (v != base.end())
+	{
+		y = v;
+		++y;
+		if (y == base.end())
+			std::cout << *v << "." << std::endl;
+		else
+			std::cout << *v << ", ";
+		++v;
+	}
+	// If you want to see the Jacobsthal sequence you can see here
+	std::vector<unsigned int>::iterator i = jacobsthal.begin();
+        std::vector<unsigned int>::iterator f;
+
+	std::cout << WHITE "SEQUENCE OF JACOBSTHAL USED" RESET << std::endl;
+	std::cout << std::endl;
+        while (i != jacobsthal.end())
+        {
+                f = i;
+                ++f;
+                if (f != jacobsthal.end())
+                        std::cout << YELLOW << *i << MAGENTA ", " RESET;
+                else
+                        std::cout << YELLOW << *i << MAGENTA "." RESET << std::endl;
+                ++i;
+        }
+	std::cout << std::endl;
 	while (it != pmergeME.end())
 		it = pmergeME.erase(it);
 	it = highValues.begin();
@@ -125,6 +205,6 @@ void	fordJohnsonList(std::list<int> &pmergeMe)
 		++count;
 	}
 	highValues.sort();
-	lowValues.sort();
+	//lowValues.sort();
 	sortList(highValues, lowValues, pmergeMe);
 }
