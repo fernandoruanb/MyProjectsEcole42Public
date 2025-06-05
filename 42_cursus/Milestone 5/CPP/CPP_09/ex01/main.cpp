@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:39:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/04 17:01:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:18:33 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv)
 {
 	long long	number;
+	int	flag;
 	std::stack<int> base;
 	long long	index;
 	long long	result;
@@ -24,6 +25,7 @@ int	main(int argc, char **argv)
 		std::cerr << RED "Error: give one and only an argument, please" RESET << std::endl;
 		return (1);
 	}
+	flag = 0;
 	if (argv[1][0] == '\0')
 	{
 		std::cerr << RED "Error: empty input is invalid" RESET << std::endl;
@@ -57,6 +59,7 @@ int	main(int argc, char **argv)
 		{
 			if (!process(argv[1][index], base, &result))
 				return (1);
+			flag = 1;
 		}
 		else
 		{
@@ -65,8 +68,13 @@ int	main(int argc, char **argv)
 		}
 		++index;
 	}
-	if (base.size() == 1)
+	if (base.size() == 1 && flag == 1)
 		std::cout << LIGHT_GREEN << base.top() << RESET << std::endl;
+	else if (flag == 0)
+	{
+		std::cerr << RED "Error: where are the operators???" RESET << std::endl;
+		return (1);
+	}
 	else
 	{
 		std::cerr << RED "Error: the stack must be only one number in the final" RESET << std::endl;

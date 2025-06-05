@@ -6,11 +6,13 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:00:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/04 15:19:56 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:31:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeME.hpp"
+
+static void	studyTimeListVectors(void);
 
 static bool	checkVectorSort(std::vector<int> pmergeMe2)
 {
@@ -176,5 +178,100 @@ int	main(int argc, char **argv)
 	std::cout << WHITE "Time to process a range of " << YELLOW << pmergeMe.size() << WHITE " elements with " << GREEN "std::list " << ORANGE << std::fixed << std::setprecision(8) << totalTime << WHITE " us" << RESET << std::endl;
 	totalTime = (endTime - startTime) / 1000000;
 	std::cout << WHITE "Time to process a range of " << YELLOW << pmergeMe2.size() << WHITE " elements with " << GREEN "std::vector " << ORANGE << totalTime << WHITE " us" << RESET << std::endl;
+
+	// Now, we can understand about everything!!! Uncomment the following line below
+	std::cout << std::endl;
+	studyTimeListVectors();
 	return (0);
+}
+
+static void	studyTimeListVectors(void)
+{
+	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+	std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 1" RESET << std::endl;
+	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+
+	long long	value;
+	double	start;
+	double	end;
+	std::list<int> testList;
+	std::vector<int> testVector;
+
+	value = 0;
+	start = std::clock();
+	while (value < 1000000)
+	{
+		testList.push_back(value);
+		value++;
+	}
+	end = std::clock();
+	std::cout << WHITE "KEYWORD: " << GREEN << "HOGWARDS" << std::endl;
+	std::cout << ORANGE "The time to put 1.000.000 elements on " << GREEN "LIST " << ORANGE "is " << YELLOW  << (end - start) / CLOCKS_PER_SEC << ORANGE " s" << RESET <<  std::endl;
+	start = std::clock();
+	value = 0;
+	while (value < 1000000)
+	{
+		testVector.push_back(value);
+		value++;
+	}
+	end = std::clock();
+	std::cout << WHITE "KEYWORD: " << GREEN << "RESTAURANT" << std::endl;
+	std::cout << ORANGE "The time to put 1.000.000 elements on " << GREEN << "VECTOR " << ORANGE "is " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE " s" << RESET << std::endl;
+
+	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+        std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 2" RESET << std::endl;
+        std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+
+	value = 0;
+	testList.clear();
+	start = std::clock();
+	while (value < 1000000)
+	{
+		testList.push_front(value);
+		value++;
+	}
+	end = std::clock();
+	std::cout << WHITE "KEYWORD: " << GREEN << "POINTERS" << std::endl;
+	std::cout << ORANGE "The time to put front 1.000.000 elements on " << GREEN << "LIST " << ORANGE "is " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE " s" << RESET << std::endl;
+	std::cout << WHITE "KEYWORD: " << GREEN << "CHAOS" << std::endl;
+	std::cout << MAGENTA "Vector: " << LIGHT_BLUE "I gave up! " << GREEN "LIST won!" RESET << std::endl;
+
+	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+        std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 3" RESET << std::endl;
+        std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+
+	std::srand(std::time(NULL));
+	value = rand() % 1000000;
+	std::list<int>::iterator it = testList.begin();
+	start = std::clock();
+	while (it != testList.end())
+	{
+		if (*it == value)
+		{
+			std::cout << GREEN "Value found: " << YELLOW <<  value << GREEN "!!!" << RESET << std::endl;
+			break ;
+		}
+		++it;
+	}
+	if (it == testList.end())
+		std::cerr << RED "Value is lost!" RESET << std::endl;
+	end = std::clock();
+	std::cout << WHITE "KEYWORD: " << GREEN "COMPLEXITY" RESET << std::endl;
+	std::cout << ORANGE << "The " << GREEN "LIST " << ORANGE << "time to find is: " << YELLOW << (end - start) / CLOCKS_PER_SEC <<  ORANGE " s" << RESET << std::endl;
+	std::vector<int>::iterator itV = testVector.begin();
+	start = std::clock();
+	while (itV != testVector.end())
+	{
+		if (*itV == value)
+		{
+			std::cout << GREEN "Value found: " << YELLOW <<  value << GREEN "!!!" << RESET << std::endl;
+			break ;
+		}
+		++itV;
+	}
+	end = std::clock();
+	if (itV == testVector.end())
+                std::cerr << RED "Value is lost!" RESET << std::endl;
+	std::cout << WHITE << "KEYWORD: " << GREEN "ORGANIZED" RESET << std::endl;
+	std::cout << ORANGE << "The " << GREEN "VECTOR " << ORANGE << "time to find is: " << YELLOW << (end - start) / CLOCKS_PER_SEC <<  ORANGE " s" << RESET << std::endl;
 }
