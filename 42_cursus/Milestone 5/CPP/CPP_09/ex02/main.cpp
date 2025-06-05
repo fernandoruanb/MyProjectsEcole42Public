@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:00:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/05 15:56:25 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:54:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,7 +360,37 @@ static void	studyTimeListVectors(void)
 	end = std::clock();
 	std::cout << WHITE "KEYWORD: " GREEN "GOD" RESET << std::endl; 
 	 std::cout << ORANGE "The " GREEN "VECTOR " ORANGE "insert/remove tests: " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE << " s" << RESET << std::endl;
+
 	 std::cout << LIGHT_BLUE << std::string(60, '=') << RESET << std::endl;
 	 std::cout << std::string(18, ' ') << WHITE "Sequence of Jacobsthal" RESET << std::endl;
 	 std::cout << LIGHT_BLUE << std::string(60, '=') << RESET << std::endl;
+
+	 std::vector<unsigned int> jacobsthal;
+	 unsigned int	mark;
+	 unsigned int	index;
+	 unsigned int	power;
+
+	 mark = 19;
+	 index = 1;
+	 jacobsthal.push_back(0);
+	 jacobsthal.push_back(1);
+	 while (index < mark)
+	{
+		power = jacobsthal[index] + 2 * jacobsthal[index - 1];
+		jacobsthal.push_back(power);
+		++index;
+	}
+	std::vector<unsigned int>::iterator i = jacobsthal.begin();
+	std::vector<unsigned int>::iterator f;
+
+	while (i != jacobsthal.end())
+	{
+		f = i;
+		++f;
+		if (f != jacobsthal.end())
+			std::cout << YELLOW << *i << MAGENTA ", " RESET;
+		else
+			std::cout << YELLOW << *i << MAGENTA "." RESET << std::endl;
+		++i;
+	}
 }
