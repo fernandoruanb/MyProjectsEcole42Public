@@ -14,14 +14,12 @@
 
 static bool     checkValidStr(const std::string value)
 {
-        long long       index;
+	const char	*ptr = value.c_str();
 
-        index = 0;
-
-        while (value[index] != '\0')
+        while (*ptr)
         {
-                if ((value[index] >= '0' && value[index] <= '9') || value[index] == '.')
-                        index++;
+                if ((*ptr >= '0' && *ptr <= '9') || *ptr == '.')
+                        ++ptr;
                 else
                         return (0);
         }
