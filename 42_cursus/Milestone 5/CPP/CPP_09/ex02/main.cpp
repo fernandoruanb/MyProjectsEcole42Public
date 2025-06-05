@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:00:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/05 16:54:52 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:56:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeME.hpp"
 
-static void	studyTimeListVectors(void);
+//static void	studyTimeListVectors(void);
 
 static bool	checkVectorSort(std::vector<int> pmergeMe2)
 {
@@ -180,12 +180,12 @@ int	main(int argc, char **argv)
 	std::cout << WHITE "Time to process a range of " << YELLOW << pmergeMe2.size() << WHITE " elements with " << GREEN "std::vector " << ORANGE << totalTime << WHITE " us" << RESET << std::endl;
 
 	// Now, we can understand about everything!!! Uncomment the following line below
-	std::cout << std::endl;
-	studyTimeListVectors();
+	//std::cout << std::endl;
+	//studyTimeListVectors();
 	return (0);
 }
 
-static void	studyTimeListVectors(void)
+/*static void	studyTimeListVectors(void)
 {
 	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
 	std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 1" RESET << std::endl;
@@ -393,4 +393,4 @@ static void	studyTimeListVectors(void)
 			std::cout << YELLOW << *i << MAGENTA "." RESET << std::endl;
 		++i;
 	}
-}
+}*/
