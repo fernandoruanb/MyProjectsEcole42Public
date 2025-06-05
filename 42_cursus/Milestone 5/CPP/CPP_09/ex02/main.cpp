@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:00:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/05 13:31:03 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:56:25 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ static void	studyTimeListVectors(void)
 	std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 1" RESET << std::endl;
 	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
 
+	std::cout << WHITE "ADDING 1.000.000 VALUES" RESET << std::endl;
 	long long	value;
 	double	start;
 	double	end;
@@ -221,9 +222,11 @@ static void	studyTimeListVectors(void)
 	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
         std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 2" RESET << std::endl;
         std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+	std::cout << WHITE "ADDING 1.000.000 VALUES IN FRONT" RESET << std::endl;
 
 	value = 0;
 	testList.clear();
+	testVector.clear();
 	start = std::clock();
 	while (value < 1000000)
 	{
@@ -233,12 +236,23 @@ static void	studyTimeListVectors(void)
 	end = std::clock();
 	std::cout << WHITE "KEYWORD: " << GREEN << "POINTERS" << std::endl;
 	std::cout << ORANGE "The time to put front 1.000.000 elements on " << GREEN << "LIST " << ORANGE "is " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE " s" << RESET << std::endl;
-	std::cout << WHITE "KEYWORD: " << GREEN << "CHAOS" << std::endl;
-	std::cout << MAGENTA "Vector: " << LIGHT_BLUE "I gave up! " << GREEN "LIST won!" RESET << std::endl;
+	std::cout << WHITE "KEYWORD: " << GREEN << "INSTRUCTIONS" << std::endl;
+	std::vector<int>::iterator exam = testVector.begin();
+        value = 0;
+        start = std::clock();
+        while (value < 1000000)
+        {
+                exam = testVector.insert(exam, value);
+                ++exam;
+                value++;
+        }
+        end = std::clock();
+	std::cout << ORANGE "The time to put front 1.000.000 elements on " << GREEN << "VECTOR " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE " s" << RESET << std::endl;
 
 	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
         std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 3" RESET << std::endl;
         std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+	std::cout << WHITE "FINDING RANDOM VALUES" RESET << std::endl;
 
 	std::srand(std::time(NULL));
 	value = rand() % 1000000;
@@ -274,4 +288,79 @@ static void	studyTimeListVectors(void)
                 std::cerr << RED "Value is lost!" RESET << std::endl;
 	std::cout << WHITE << "KEYWORD: " << GREEN "ORGANIZED" RESET << std::endl;
 	std::cout << ORANGE << "The " << GREEN "VECTOR " << ORANGE << "time to find is: " << YELLOW << (end - start) / CLOCKS_PER_SEC <<  ORANGE " s" << RESET << std::endl;
+
+	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+        std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 4" RESET << std::endl;
+        std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+	std::cout << WHITE "REMOVING 1.000 RANDOM VALUES" RESET << std::endl;
+	int	count;
+
+	count = 0;
+	start = std::clock();
+	while (count < 1000)
+	{
+		value = rand();
+		testList.remove(value);
+		count++;
+	}
+	end = std::clock();
+	std::cout << WHITE "KEYWORD: " << GREEN "TASKS" RESET << std::endl;
+	std::cout << ORANGE "The " GREEN "LIST" ORANGE " removing values time: " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE " s" RESET << std::endl;
+	count = 0;
+	start = std::clock();
+	std::vector<int>::iterator s = testVector.begin();
+	std::vector<int>::iterator e = testVector.end();
+	while (count < 1000)
+	{
+		value = rand();
+		std::remove(s, e, value);
+		count++;
+	}
+	end = std::clock();
+	std::cout << WHITE "KEYWORD: " << GREEN "SIMPLE" RESET << std::endl;
+	std::cout << ORANGE "The " GREEN "VECTOR" ORANGE " removing values time: " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE " s" RESET << std::endl;
+
+	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+        std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 5" RESET << std::endl;
+        std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
+	std::cout << WHITE "REMOVING/INSERTING AT THE SAME TIME" RESET << std::endl;
+	testList.clear();
+	testVector.clear();
+	count = 0;
+	start = std::clock();
+	while (count < 1000000)
+	{
+		value = rand();
+		testList.push_back(value);
+		if (count % 1000 == 0)
+		{
+			value = rand();
+			testList.push_back(value);
+			testList.remove(value);
+		}
+		count++;
+	}
+	end = std::clock();
+	std::cout << WHITE "KEYWORD: " GREEN "EASY" RESET << std::endl;
+	std::cout << ORANGE "The " GREEN "LIST " ORANGE "insert/remove tests: " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE << " s" << RESET << std::endl;
+	count = 0;
+	start = std::clock();
+	while (count < 1000000)
+	{
+		value = rand();
+		testVector.push_back(value);
+		if (count % 1000 == 0)
+		{
+			value = rand();
+			testVector.push_back(value);
+			std::remove(s, e, value);
+		}
+		count++;
+	}
+	end = std::clock();
+	std::cout << WHITE "KEYWORD: " GREEN "GOD" RESET << std::endl; 
+	 std::cout << ORANGE "The " GREEN "VECTOR " ORANGE "insert/remove tests: " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE << " s" << RESET << std::endl;
+	 std::cout << LIGHT_BLUE << std::string(60, '=') << RESET << std::endl;
+	 std::cout << std::string(18, ' ') << WHITE "Sequence of Jacobsthal" RESET << std::endl;
+	 std::cout << LIGHT_BLUE << std::string(60, '=') << RESET << std::endl;
 }
