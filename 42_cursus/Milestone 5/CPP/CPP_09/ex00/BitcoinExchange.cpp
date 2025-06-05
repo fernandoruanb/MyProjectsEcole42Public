@@ -12,12 +12,28 @@
 
 #include "BitcoinExchange.hpp"
 
+static bool     checkValidStr(const std::string value)
+{
+        long long       index;
+
+        index = 0;
+
+        while (value[index] != '\0')
+        {
+                if ((value[index] >= '0' && value[index] <= '9') || value[index] == '.')
+                        index++;
+                else
+                        return (0);
+        }
+        return (1);
+}
+
 static bool	investigate_date(const std::string date)
 {
 	std::string	year;
 	std::string	month;
 	std::string	day;
-	size_t	checker;
+	ssize_t	checker;
 
 	year = date.substr(0, 4);
 	month = date.substr(5, 2);
@@ -40,7 +56,7 @@ static bool	investigate_date(const std::string date)
 	ss.clear();
 	ss.str(day);
 	ss >> checker;
-	if (checker < 0 || checker > 30)
+	if (checker < 0 || checker > 31)
 	{
 		std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
 		return (0);
@@ -98,6 +114,11 @@ void	start_mount(std::ifstream &file, std::map<std::string,double> db)
 				continue ;
 			}
 			value = line.substr(pipe + 3);
+			if (!checkValidStr(value))
+			{
+				std::cerr << RED "Error: Only numbers!!!" RESET << std::endl;
+				continue ;
+			}
 			std::stringstream ss(value);
 			ss >> btc_value;
 			if (btc_value < 0)
