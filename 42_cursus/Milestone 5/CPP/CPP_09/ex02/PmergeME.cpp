@@ -122,6 +122,7 @@ void	sortList(std::list<int> &highValues, std::list<int> &lowValues, std::list<i
 
 	// base impression;
 
+	std::cout << WHITE "Base impreesion" RESET << std::endl;
 	v = base.begin();
 	std::set<unsigned int>::iterator y = sets.begin();
 	while (y != sets.end())
@@ -129,11 +130,12 @@ void	sortList(std::list<int> &highValues, std::list<int> &lowValues, std::list<i
 		base.push_back(*y);
 		++y;
 	}
+	std::vector<unsigned int>::iterator A;
 	while (v != base.end())
 	{
-		y = v;
-		++y;
-		if (y == base.end())
+		A = v;
+		++A;
+		if (A == base.end())
 			std::cout << *v << "." << std::endl;
 		else
 			std::cout << *v << ", ";
