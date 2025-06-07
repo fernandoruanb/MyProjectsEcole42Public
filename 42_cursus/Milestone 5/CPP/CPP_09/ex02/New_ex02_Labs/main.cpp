@@ -92,6 +92,7 @@ static void	mountVectorEven(std::vector<unsigned int> vectorBase, std::vector<un
 			vectorHigh.push_back(*nv);
 			vectorLow.push_back(*itv);
 		}
+		itv = nv;
 		++itv;
 	}
 }
@@ -120,6 +121,7 @@ static void	mountListEven(std::list<unsigned int> listBase, std::list<unsigned i
 			listHigh.push_back(*itl);
 			listLow.push_back(*nl);
 		}
+		itl = nl;
 		++itl;
 	}
 }
