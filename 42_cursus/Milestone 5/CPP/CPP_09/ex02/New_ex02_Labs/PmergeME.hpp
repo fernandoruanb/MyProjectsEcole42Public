@@ -16,5 +16,8 @@
 # include <list>
 # include <vector>
 # include <iostream>
+# include <climits>
+# include "colours.hpp"
+# include <sstream>
 
 #endif /* PMERGE_HPP */
