@@ -140,6 +140,8 @@ int	main(int argc, char **argv)
 	std::vector<unsigned int> vectorLow;
 	std::list<unsigned int> listHigh;
 	std::list<unsigned int> listLow;
+	std::vector<unsigned int> jacobVector;
+	std::list<unsigned int> jacobList;
 
 	if (!parser(argc, argv, vectorBase, listBase))
 	{
@@ -150,5 +152,7 @@ int	main(int argc, char **argv)
 	sortHighVector(vectorHigh);
 	mountListEven(listBase, listHigh, listLow);
 	sortHighList(listHigh);
+	generateVectorJacobsthal(jacobVector, vectorLow.size());
+	generateListJacobsthal(jacobList, listLow.size());
 	return (0);
 }

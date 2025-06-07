@@ -20,6 +20,43 @@ void	sortHighVector(std::vector<unsigned int> &vectorHigh)
 	std::sort(s, e);
 }
 
+void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, size_t limit)
+{
+	long long	number;
+	long long	index;
+
+	index = 1;
+	jacobVector.push_back(0);
+	jacobVector.push_back(1);
+	while (index <= limit)
+	{
+		number = jacobVector[index] + 2 * jacobVector[index - 1];
+		jacobVector.push_back(number);
+		index++;
+	}
+}
+
+void	generateListJacobsthal(std::list<unsigned int> &jacobList, size_t limit)
+{
+	long long	number;
+	long long	index;
+	std::list<unsigned int>::iterator it = jacobList.begin();
+	std::list<unsigned int>::iterator next;
+
+	index = 1;
+	jacobList.push_back(0);
+	jacobList.push_back(1);
+	while (index <= limit)
+	{
+		next = it;
+		++next;
+		number = *next + 2 * *it;
+		jacobList.push_back(number);
+		index++;
+		++it;
+	}
+}
+
 void	sortHighList(std::list<unsigned int> &listHigh)
 {
 	listHigh.sort();

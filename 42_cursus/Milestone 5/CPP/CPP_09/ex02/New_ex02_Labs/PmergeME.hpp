@@ -23,5 +23,7 @@
 
 void	sortHighVector(std::vector<unsigned int> &vectorHigh);
 void	sortHighList(std::list<unsigned int> &listHigh);
+void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, size_t limit);
+void	generateListJacobsthal(std::list<unsigned int> &jacobList, size_t limit);
 
 #endif /* PMERGE_HPP */
