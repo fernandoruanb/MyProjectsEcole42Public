@@ -22,37 +22,43 @@ void	sortHighVector(std::vector<unsigned int> &vectorHigh)
 
 void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, size_t limit)
 {
-	long long	number;
-	long long	index;
+	jacobVector.clear();
 
-	index = 1;
+	long long	number;
+	std::vector<unsigned int>::iterator it = jacobVector.begin();
+	std::vector<unsigned int>::iterator next;
+
 	jacobVector.push_back(0);
 	jacobVector.push_back(1);
-	while (index <= limit)
+	while (1)
 	{
-		number = jacobVector[index] + 2 * jacobVector[index - 1];
+		next = it;
+		++next;
+		number = *next + 2 * *it;
+		if (number > limit)
+			break ;
 		jacobVector.push_back(number);
-		index++;
 	}
 }
 
 void	generateListJacobsthal(std::list<unsigned int> &jacobList, size_t limit)
 {
+	jacobList.clear();
+
 	long long	number;
-	long long	index;
 	std::list<unsigned int>::iterator it = jacobList.begin();
 	std::list<unsigned int>::iterator next;
 
-	index = 1;
 	jacobList.push_back(0);
 	jacobList.push_back(1);
-	while (index <= limit)
+	while (1)
 	{
 		next = it;
 		++next;
 		number = *next + 2 * *it;
+		if (number > limit)
+			break ;
 		jacobList.push_back(number);
-		index++;
 		++it;
 	}
 }
