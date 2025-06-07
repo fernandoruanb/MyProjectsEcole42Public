@@ -130,7 +130,7 @@ int	main(int argc, char **argv)
 {
 	if (argc < 2)
 	{
-		std::cerr << RED "Error: You need to put arguments" << std::endl;
+		std::cerr << RED "Error: You need to put arguments" RESET << std::endl;
 		return (1);
 	}
 
@@ -143,10 +143,12 @@ int	main(int argc, char **argv)
 
 	if (!parser(argc, argv, vectorBase, listBase))
 	{
-		std::cerr << RED "Error: Invalid input detected." << std::endl;
+		std::cerr << RED "Error: Invalid input detected." RESET << std::endl;
 		return (1);
 	}
 	mountVectorEven(vectorBase, vectorHigh, vectorLow);
+	sortHighVector(vectorHigh);
 	mountListEven(listBase, listHigh, listLow);
+	sortHighList(listHigh);
 	return (0);
 }

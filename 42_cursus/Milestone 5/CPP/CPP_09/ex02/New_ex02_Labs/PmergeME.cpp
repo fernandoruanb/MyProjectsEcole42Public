@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PmergeME.hpp                                       :+:      :+:    :+:   */
+/*   PmergeME.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 17:55:15 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/06 17:55:15 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/06/07 14:20:09 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/06/07 14:20:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PMERGE_HPP
-# define PMERGE_HPP
+#include "PmergeME.hpp"
 
-# include <list>
-# include <vector>
-# include <iostream>
-# include <algorithm>
-# include <climits>
-# include "colours.hpp"
-# include <sstream>
+void	sortHighVector(std::vector<unsigned int> &vectorHigh)
+{
+	std::vector<unsigned int>::iterator s = vectorHigh.begin();
+	std::vector<unsigned int>::iterator e = vectorHigh.end();
 
-void	sortHighVector(std::vector<unsigned int> &vectorHigh);
-void	sortHighList(std::list<unsigned int> &listHigh);
+	std::sort(s, e);
+}
 
-#endif /* PMERGE_HPP */
+void	sortHighList(std::list<unsigned int> &listHigh)
+{
+	listHigh.sort();
+}
