@@ -14,6 +14,7 @@
 # define PMERGE_HPP
 
 # include <list>
+# include <set>
 # include <vector>
 # include <iostream>
 # include <algorithm>
@@ -23,7 +24,7 @@
 
 void	sortHighVector(std::vector<unsigned int> &vectorHigh);
 void	sortHighList(std::list<unsigned int> &listHigh);
-void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, size_t limit);
-void	generateListJacobsthal(std::list<unsigned int> &jacobList, size_t limit);
+void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, std::vector<unsigned int> &orderVector, size_t limit);
+void	generateListJacobsthal(std::list<unsigned int> &jacobList, std::list<unsigned int> &orderList, size_t limit);
 
 #endif /* PMERGE_HPP */
