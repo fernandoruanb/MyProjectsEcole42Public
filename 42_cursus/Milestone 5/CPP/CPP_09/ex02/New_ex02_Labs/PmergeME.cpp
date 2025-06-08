@@ -12,7 +12,53 @@
 
 #include "PmergeME.hpp"
 
-static void	showVector(std::vector<unsigned int> v)
+bool	isListSorted(std::list<unsigned int> l)
+{
+	std::list<unsigned int>::iterator itl = l.begin();
+	std::list<unsigned int>::iterator nl;
+
+	while (itl != l.end())
+	{
+		nl = itl;
+		++nl;
+		if (nl == l.end())
+			break ;
+		else if (*nl >= *itl)
+			++itl;
+		else
+		{
+			std::cerr << RED "LIST isn't sorted D=" RESET << std::endl;
+			return (0);
+		}
+	}
+	std::cout << BRIGHT_GREEN "LIST is sorted =D" RESET << std::endl;
+	return (1);
+}
+
+bool	isVectorSorted(std::vector<unsigned int> v)
+{
+	std::vector<unsigned int>::iterator itv = v.begin();
+	std::vector<unsigned int>::iterator nv;
+
+	while (itv != v.end())
+	{
+		nv = itv;
+		++nv;
+		if (nv == v.end())
+			break ;
+		else if (*nv >= *itv)
+			++itv;
+		else
+		{
+			std::cerr << RED "VECTOR isn't sorted D=" RESET << std::endl;
+			return (0);
+		}
+	}
+	std::cout << BRIGHT_GREEN "VECTOR is sorted =D" RESET << std::endl;
+	return (1);
+}
+
+void	showVector(std::vector<unsigned int> v)
 {
 	std::vector<unsigned int>::iterator c = v.begin();
 	std::vector<unsigned int>::iterator next;
@@ -48,7 +94,7 @@ static void	showSet(std::set<unsigned int> s)
 	}
 }
 
-static void	showList(std::list<unsigned int> l)
+void	showList(std::list<unsigned int> l)
 {
 	std::list<unsigned int>::iterator c = l.begin();
 	std::list<unsigned int>::iterator next;
@@ -84,9 +130,6 @@ void	doTheMagicList(std::list<unsigned int> &listHigh, std::list<unsigned int> &
 		listHigh.insert(target, *value);
 		++index;
 	}
-	showList(orderList);
-	showList(listLow);
-	showList(listHigh);
 }
 
 void	doTheMagicVector(std::vector<unsigned int> &vectorHigh, std::vector<unsigned int> &vectorLow, std::vector<unsigned int> &orderVector)
@@ -102,9 +145,6 @@ void	doTheMagicVector(std::vector<unsigned int> &vectorHigh, std::vector<unsigne
 		vectorHigh.insert(target, value);
 		++index;
 	}
-	showVector(orderVector);
-	showVector(vectorLow);
-	showVector(vectorHigh);
 }
 
 void	sortHighVector(std::vector<unsigned int> &vectorHigh)
@@ -156,9 +196,6 @@ void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, std::vecto
 			orderVector.push_back(jacobVector[index] - 1);
 		++index;
 	}
-	showSet(indexes);
-	showVector(jacobVector);
-	showVector(orderVector);
 	std::set<unsigned int>::iterator s = indexes.begin();
 	while (s != indexes.end())
 	{
@@ -166,7 +203,6 @@ void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, std::vecto
 		orderVector.push_back(value);
 		++s;
 	}
-	showVector(orderVector);
 }
 
 void	generateListJacobsthal(std::list<unsigned int> &jacobList, std::list<unsigned int> &orderList, size_t limit)
@@ -218,9 +254,6 @@ void	generateListJacobsthal(std::list<unsigned int> &jacobList, std::list<unsign
 		}
 		++it;
 	}
-	showSet(indexes);
-	showList(jacobList);
-	showList(orderList);
 	std::set<unsigned int>::iterator s = indexes.begin();
 	while (s != indexes.end())
 	{
@@ -229,7 +262,6 @@ void	generateListJacobsthal(std::list<unsigned int> &jacobList, std::list<unsign
 		orderList.push_back(value);
 		++s;
 	}
-	showList(orderList);
 }
 
 void	sortHighList(std::list<unsigned int> &listHigh)

@@ -64,41 +64,41 @@ static bool	parser(int argc, char **argv, std::vector<unsigned int> &vectorBase,
 		listBase.push_back(value);
 		count++;
 	}
-	std::cout << GREEN "Parser OK!" RESET << std::endl;
 	return (1);
 }
 
 static void	mountVectorEven(std::vector<unsigned int> vectorBase, std::vector<unsigned int> &vectorHigh, std::vector<unsigned int> &vectorLow)
 {
-	std::vector<unsigned int>::iterator itv = vectorBase.begin();
-	std::vector<unsigned int>::iterator nv;
+	vectorLow.clear();
+	vectorHigh.clear();
+	long long	index;
 
-	while (itv != vectorBase.end())
+	index = 0;
+	while (index < vectorBase.size())
 	{
-		nv = itv;
-		++nv;
-		if (nv == vectorBase.end())
+		if (index + 1 >= vectorBase.size())
 		{
-			vectorLow.push_back(*itv);
+			vectorLow.push_back(vectorBase[index]);
 			break ;
 		}
-		if (*itv < *nv)
+		else if (vectorBase[index] < vectorBase[index + 1])
 		{
-			vectorLow.push_back(*itv);
-			vectorHigh.push_back(*nv);
+			vectorLow.push_back(vectorBase[index]);
+			vectorHigh.push_back(vectorBase[index + 1]);
 		}
 		else
 		{
-			vectorHigh.push_back(*nv);
-			vectorLow.push_back(*itv);
+			vectorLow.push_back(vectorBase[index + 1]);
+			vectorHigh.push_back(vectorBase[index]);
 		}
-		itv = nv;
-		++itv;
+		index += 2;
 	}
 }
 
 static void	mountListEven(std::list<unsigned int> listBase, std::list<unsigned int> &listHigh, std::list<unsigned int> &listLow)
 {
+	listLow.clear();
+	listHigh.clear();
 	std::list<unsigned int>::iterator itl = listBase.begin();
 	std::list<unsigned int>::iterator nl;
 
@@ -158,5 +158,18 @@ int	main(int argc, char **argv)
 	generateListJacobsthal(jacobList, orderList, listLow.size());
 	doTheMagicVector(vectorHigh, vectorLow, orderVector);
 	doTheMagicList(listHigh, listLow, orderList);
+	
+	// Comunicate the results to USER
+
+	std::cout << BRIGHT_MAGENTA "Before: " RESET;
+	showVector(vectorBase);
+	std::cout << BRIGHT_MAGENTA "Before: " RESET;
+	showList(listBase);
+	std::cout << BRIGHT_MAGENTA "After: " RESET;
+	showVector(vectorHigh);
+	std::cout << BRIGHT_MAGENTA "After: " RESET;
+	showList(listHigh);
+	isVectorSorted(vectorHigh);
+	isListSorted(listHigh);
 	return (0);
 }

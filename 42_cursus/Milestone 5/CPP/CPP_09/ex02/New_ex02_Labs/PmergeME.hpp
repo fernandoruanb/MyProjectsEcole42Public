@@ -28,5 +28,9 @@ void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, std::vecto
 void	generateListJacobsthal(std::list<unsigned int> &jacobList, std::list<unsigned int> &orderList, size_t limit);
 void	doTheMagicVector(std::vector<unsigned int> &vectorHigh, std::vector<unsigned int> &vectorLow, std::vector<unsigned int> &orderVector);
 void	doTheMagicList(std::list<unsigned int> &listHigh, std::list<unsigned int> &listLow, std::list<unsigned int> &orderList);
+void	showVector(std::vector<unsigned int> v);
+void	showList(std::list<unsigned int> l);
+bool	isVectorSorted(std::vector<unsigned int> v);
+bool	isListSorted(std::list<unsigned int> l);
 
 #endif /* PMERGE_HPP */
