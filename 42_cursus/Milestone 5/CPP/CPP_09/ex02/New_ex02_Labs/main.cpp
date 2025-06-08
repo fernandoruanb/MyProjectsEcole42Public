@@ -128,6 +128,11 @@ static void	mountListEven(std::list<unsigned int> listBase, std::list<unsigned i
 
 int	main(int argc, char **argv)
 {
+	double	startVector;
+	double	endVector;
+	double	startList;
+	double	endList;
+
 	if (argc < 2)
 	{
 		std::cerr << RED "Error: You need to put arguments" RESET << std::endl;
@@ -144,6 +149,8 @@ int	main(int argc, char **argv)
 	std::vector<unsigned int> orderVector;
 	std::list<unsigned int> orderList;
 	std::list<unsigned int> jacobList;
+	std::list<unsigned int> copyListHigh;
+	std::vector<unsigned int> copyVectorHigh;
 
 	if (!parser(argc, argv, vectorBase, listBase))
 	{
@@ -151,13 +158,19 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	mountVectorEven(vectorBase, vectorHigh, vectorLow);
+	copyVectorHigh = vectorHigh;
 	sortHighVector(vectorHigh);
 	mountListEven(listBase, listHigh, listLow);
+	copyListHigh = listHigh;
 	sortHighList(listHigh);
 	generateVectorJacobsthal(jacobVector, orderVector, vectorLow.size());
 	generateListJacobsthal(jacobList, orderList, listLow.size());
+	startVector = std::clock();
 	doTheMagicVector(vectorHigh, vectorLow, orderVector);
+	endVector = std::clock();
+	startList = std::clock();
 	doTheMagicList(listHigh, listLow, orderList);
+	endList = std::clock();
 	
 	// Comunicate the results to USER
 
@@ -167,9 +180,29 @@ int	main(int argc, char **argv)
 	showList(listBase);
 	std::cout << BRIGHT_MAGENTA "After: " RESET;
 	showVector(vectorHigh);
+	std::cout << LIGHT_BLUE << "VECTOR Time: " << std::fixed << std::setprecision(8) << YELLOW <<(endVector - startVector) / 1000000 << ORANGE " us" RESET << std::endl;
 	std::cout << BRIGHT_MAGENTA "After: " RESET;
 	showList(listHigh);
+	std::cout << LIGHT_BLUE << "LIST Time: " << std::fixed << std::setprecision(8) << YELLOW <<(endList - startList) / 1000000 << ORANGE " us" RESET << std::endl;
+	std::cout << std::endl;
 	isVectorSorted(vectorHigh);
 	isListSorted(listHigh);
+	std::cout << std::endl;
+
+	std::cout << MAGENTA << std::string(10, '=') << WHITE "vectorHigh and ListHigh" << MAGENTA << std::string(10, '=') << std::endl;
+	showVector(copyVectorHigh);
+	showList(copyListHigh);
+
+	std::cout << MAGENTA << std::string(10, '=') << WHITE "vectorLow and ListLow" << MAGENTA << std::string(10, '=') << std::endl;
+	showVector(vectorLow);
+	showList(listLow);
+
+	std::cout << MAGENTA << std::string(10, '=') << WHITE "jacobVector and jacobList" << MAGENTA << std::string(10, '=') << std::endl;
+	showVector(jacobVector);
+	showList(jacobList);
+
+	std::cout << MAGENTA << std::string(10, '=') << WHITE "orderVector and orderList" << MAGENTA << std::string(10, '=') << std::endl;
+	showVector(orderVector);
+	showList(orderList);
 	return (0);
 }

@@ -16,9 +16,11 @@
 # include <list>
 # include <set>
 # include <vector>
+# include <iomanip>
 # include <iostream>
 # include <algorithm>
 # include <climits>
+# include <ctime>
 # include "colours.hpp"
 # include <sstream>
 
