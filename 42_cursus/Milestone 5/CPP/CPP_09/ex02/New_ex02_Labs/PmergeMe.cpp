@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PmergeME.hpp"
+#include "PmergeMe.hpp"
 
 bool	isListSorted(std::list<unsigned int> l)
 {

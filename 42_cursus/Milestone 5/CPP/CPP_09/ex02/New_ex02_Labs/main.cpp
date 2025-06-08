@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
  
-#include "PmergeME.hpp"
+#include "PmergeMe.hpp"
 
 static bool	ft_atoi_check(const char *argv)
 {
