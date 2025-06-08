@@ -156,5 +156,7 @@ int	main(int argc, char **argv)
 	sortHighList(listHigh);
 	generateVectorJacobsthal(jacobVector, orderVector, vectorLow.size());
 	generateListJacobsthal(jacobList, orderList, listLow.size());
+	doTheMagicVector(vectorHigh, vectorLow, orderVector);
+	doTheMagicList(listHigh, listLow, orderList);
 	return (0);
 }

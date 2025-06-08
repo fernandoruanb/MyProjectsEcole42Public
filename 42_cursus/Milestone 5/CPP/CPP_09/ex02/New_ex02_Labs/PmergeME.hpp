@@ -26,5 +26,7 @@ void	sortHighVector(std::vector<unsigned int> &vectorHigh);
 void	sortHighList(std::list<unsigned int> &listHigh);
 void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, std::vector<unsigned int> &orderVector, size_t limit);
 void	generateListJacobsthal(std::list<unsigned int> &jacobList, std::list<unsigned int> &orderList, size_t limit);
+void	doTheMagicVector(std::vector<unsigned int> &vectorHigh, std::vector<unsigned int> &vectorLow, std::vector<unsigned int> &orderVector);
+void	doTheMagicList(std::list<unsigned int> &listHigh, std::list<unsigned int> &listLow, std::list<unsigned int> &orderList);
 
 #endif /* PMERGE_HPP */
