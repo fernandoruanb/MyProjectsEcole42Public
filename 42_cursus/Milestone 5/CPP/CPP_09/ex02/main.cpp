@@ -3,185 +3,211 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 16:00:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/05 16:56:45 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/06/06 17:54:12 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/06/06 17:54:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "PmergeME.hpp"
+ 
+#include "PmergeMe.hpp"
 
 //static void	studyTimeListVectors(void);
 
-static bool	checkVectorSort(std::vector<int> pmergeMe2)
+static bool	ft_atoi_check(const char *argv)
 {
-	std::vector<int>::iterator it = pmergeMe2.begin();
-	std::vector<int>::iterator next;
+	long	result;
+	long	signal;
+	long	index;
 
-	while (it != pmergeMe2.end())
+	result = 0;
+	signal = 1;
+	index = 0;
+	while (argv[index] == '\n' || argv[index] == '\f' || argv[index] == '\v'
+		|| argv[index] == '\t' || argv[index] == '\r')
+		index++;
+	while (argv[index] >= '0' && argv[index] <= '9')
 	{
-		next = it;
-		++next;
-		if (next == pmergeMe2.end())
-			return (1);
-		if (*it > *next)
+		result *= 10;
+		result += argv[index] - '0';
+		if (result > INT_MAX)
 			return (0);
-		++it;
+		index++;
 	}
 	return (1);
 }
 
-static bool	checkListSort(std::list<int> pmergeMe)
+static bool	parser(int argc, char **argv, std::vector<unsigned int> &vectorBase, std::list<unsigned int> &listBase)
 {
-	std::list<int>::iterator it = pmergeMe.begin();
-	std::list<int>::iterator next;
+	long long	count;
+	long long	index;
+	long long	value;
+	std::string	checker;
 
-	while (it != pmergeMe.end())
+	count = 1;
+	while (count < argc)
 	{
-		next = it;
-		++next;
-		if (next == pmergeMe.end())
-			return (1);
-		if (*it > *next)
+		index = 0;
+		if (argv[count][0] == '\0')
 			return (0);
-		++it;
+		checker = argv[count];
+		while (argv[count][index] != '\0')
+		{
+			if (argv[count][index] >= '0' && argv[count][index] <= '9')
+					index++;
+			else
+				return (0);
+		}
+		if (!ft_atoi_check(argv[count]))
+			return (0);
+		std::stringstream ss(argv[count]);
+		ss >> value;
+		vectorBase.push_back(value);
+		listBase.push_back(value);
+		count++;
 	}
 	return (1);
+}
+
+static void	mountVectorEven(std::vector<unsigned int> vectorBase, std::vector<unsigned int> &vectorHigh, std::vector<unsigned int> &vectorLow)
+{
+	vectorLow.clear();
+	vectorHigh.clear();
+	long long	index;
+
+	index = 0;
+	while (index < vectorBase.size())
+	{
+		if (index + 1 >= vectorBase.size())
+		{
+			vectorLow.push_back(vectorBase[index]);
+			break ;
+		}
+		else if (vectorBase[index] < vectorBase[index + 1])
+		{
+			vectorLow.push_back(vectorBase[index]);
+			vectorHigh.push_back(vectorBase[index + 1]);
+		}
+		else
+		{
+			vectorLow.push_back(vectorBase[index + 1]);
+			vectorHigh.push_back(vectorBase[index]);
+		}
+		index += 2;
+	}
+}
+
+static void	mountListEven(std::list<unsigned int> listBase, std::list<unsigned int> &listHigh, std::list<unsigned int> &listLow)
+{
+	listLow.clear();
+	listHigh.clear();
+	std::list<unsigned int>::iterator itl = listBase.begin();
+	std::list<unsigned int>::iterator nl;
+
+	while (itl != listBase.end())
+	{
+		nl = itl;
+		++nl;
+		if (nl == listBase.end())
+		{
+			listLow.push_back(*itl);
+			break ;
+		}
+		else if (*itl < *nl)
+		{
+			listHigh.push_back(*nl);
+			listLow.push_back(*itl);
+		}
+		else
+		{
+			listHigh.push_back(*itl);
+			listLow.push_back(*nl);
+		}
+		itl = nl;
+		++itl;
+	}
 }
 
 int	main(int argc, char **argv)
 {
+	double	startVector;
+	double	endVector;
+	double	startList;
+	double	endList;
+
 	if (argc < 2)
 	{
-		std::cerr << RED "Error: insufficient arguments" RESET << std::endl;
+		std::cerr << RED "Error: You need to put arguments" RESET << std::endl;
 		return (1);
 	}
-	long long	index;
-	long long	count;
-	long long	num;
-	bool	flag;
-	long long	checker;
-	double	startTime;
-	double	endTime;
-	double	totalTime;
-	std::list<int>	pmergeMe;
-	std::vector<int> pmergeMe2;
-	std::list<int>::iterator it;
 
-	index = 0;
-	count = 1;
-	while (count < argc)
+	std::vector<unsigned int> vectorBase;
+	std::list<unsigned int> listBase;
+	std::vector<unsigned int> vectorHigh;
+	std::vector<unsigned int> vectorLow;
+	std::list<unsigned int> listHigh;
+	std::list<unsigned int> listLow;
+	std::vector<unsigned int> jacobVector;
+	std::vector<unsigned int> orderVector;
+	std::list<unsigned int> orderList;
+	std::list<unsigned int> jacobList;
+	std::list<unsigned int> copyListHigh;
+	std::vector<unsigned int> copyVectorHigh;
+
+	if (!parser(argc, argv, vectorBase, listBase))
 	{
-		flag = 0;
-		index = 0;
-		checker = 0;
-		while (argv[count][index] != '\0')
-		{
-			while (argv[count][index] && argv[count][index] == ' ')
-				++index;
-			if (argv[count][index] >= '0' && argv[count][index] <= '9')
-			{
-				while (argv[count][index + checker] && argv[count][index + checker] >= '0'
-						&& argv[count][index + checker] <= '9')
-					checker++;
-				if (checker > 1)
-					flag = 1;
-				std::string	token(argv[count], checker);
-				std::stringstream ss(token);
-				ss >> num;
-				if (num < 0 || num > INT_MAX)
-				{
-					std::cerr << RED "Error: overflow/underflow detected" RESET << std::endl;
-					return (1);
-				}
-				pmergeMe.push_back(num);
-				pmergeMe2.push_back(num);
-			}
-			else
-			{
-				std::cerr << RED "Error" RESET << std::endl;
-				return (1);
-			}
-			if (flag == 1)
-				index += checker;
-			else
-				++index;
-		}
-		count++;
-	}
-	if (pmergeMe.size() == 0 || pmergeMe2.size() == 0)
-	{
-		std::cerr << RED "Error: empty values" RESET << std::endl;
+		std::cerr << RED "Error: Invalid input detected." RESET << std::endl;
 		return (1);
 	}
-	std::cout << MAGENTA "Before LIST: " RESET;
+	mountVectorEven(vectorBase, vectorHigh, vectorLow);
+	copyVectorHigh = vectorHigh;
+	sortHighVector(vectorHigh);
+	mountListEven(listBase, listHigh, listLow);
+	copyListHigh = listHigh;
+	sortHighList(listHigh);
+	generateVectorJacobsthal(jacobVector, orderVector, vectorLow.size());
+	generateListJacobsthal(jacobList, orderList, listLow.size());
+	startVector = std::clock();
+	doTheMagicVector(vectorHigh, vectorLow, orderVector);
+	endVector = std::clock();
+	startList = std::clock();
+	doTheMagicList(listHigh, listLow, orderList);
+	endList = std::clock();
+	
+	// Comunicate the results to USER
 
-	// I am showing to you all values into LIST here
-	it = pmergeMe.begin();
-	while (it != pmergeMe.end())
-	{
-		std::cout << BRIGHT_YELLOW << *it << " " << RESET;
-		++it;
-	}
-	// I am showing to you all values into VECTOR here
-	std::vector<int>::iterator itv = pmergeMe2.begin();
-	std::cout << std::endl << std::endl;
-	std::cout << MAGENTA "Before VECTOR: " RESET;
-	while (itv != pmergeMe2.end())
-	{
-		std::cout <<  BRIGHT_YELLOW << *itv << " " << RESET;
-		++itv;
-	}
+	std::cout << BRIGHT_MAGENTA "Before: " RESET;
+	showVector(vectorBase);
+	std::cout << BRIGHT_MAGENTA "Before: " RESET;
+	showList(listBase);
+	std::cout << BRIGHT_MAGENTA "After: " RESET;
+	showVector(vectorHigh);
+	std::cout << LIGHT_BLUE << "VECTOR Time: " << std::fixed << std::setprecision(8) << YELLOW <<(endVector - startVector) / 1000000 << ORANGE " us" RESET << std::endl;
+	std::cout << BRIGHT_MAGENTA "After: " RESET;
+	showList(listHigh);
+	std::cout << LIGHT_BLUE << "LIST Time: " << std::fixed << std::setprecision(8) << YELLOW <<(endList - startList) / 1000000 << ORANGE " us" RESET << std::endl;
+	std::cout << std::endl;
+	isVectorSorted(vectorHigh);
+	isListSorted(listHigh);
+	std::cout << std::endl;
 
-	// Start Ford-Johnson algorithm and calculate clocks
-	std::cout << std::endl << std::endl;
-	startTime = std::clock();
-	fordJohnsonList(pmergeMe);
-	endTime = std::clock();
-	totalTime = (endTime - startTime) / 1000000;
-	startTime = std::clock();
-	fordJohnsonVector(pmergeMe2);
-	endTime = std::clock();
-	it = pmergeMe.begin();
-	std::cout << MAGENTA "After LIST: " RESET;
+	std::cout << MAGENTA << std::string(10, '=') << WHITE "vectorHigh and ListHigh" << MAGENTA << std::string(10, '=') << std::endl;
+	showVector(copyVectorHigh);
+	showList(copyListHigh);
 
-	// I am here showing the result of LIST
-	it = pmergeMe.begin();
-        while (it != pmergeMe.end())
-        {
-                std::cout << BRIGHT_YELLOW << *it << " " << RESET;
-                ++it;
-        }
-	std::cout << std::endl << std::endl;
-	// I am here showing the result of VECTOR
-	std::cout << MAGENTA "After VECTOR: " RESET;
-	itv = pmergeMe2.begin();
-	while (itv != pmergeMe2.end())
-	{
-		std::cout << BRIGHT_YELLOW << *itv << " " << RESET;
-		++itv;
-	}
-        std::cout << std::endl << std::endl;
+	std::cout << MAGENTA << std::string(10, '=') << WHITE "vectorLow and ListLow" << MAGENTA << std::string(10, '=') << std::endl;
+	showVector(vectorLow);
+	showList(listLow);
 
-	// Check the work!!!
-	if (checkListSort(pmergeMe))
-		std::cout << BRIGHT_GREEN "LIST is Sorted =D!!!" RESET << std::endl;
-	else
-		std::cerr << RED "LIST ISN'T SORTED D=" RESET << std::endl;
-	if (checkVectorSort(pmergeMe2))
-		std::cout << BRIGHT_GREEN "VECTOR is Sorted =D!!!" RESET << std::endl;
-	else
-		std::cerr << RED "VECTOR INS'T SORTED D=" RESET << std::endl;
+	std::cout << MAGENTA << std::string(10, '=') << WHITE "jacobVector and jacobList" << MAGENTA << std::string(10, '=') << std::endl;
+	showVector(jacobVector);
+	showList(jacobList);
 
-	// Now, I will show the time of each process here
-	std::cout << WHITE "Time to process a range of " << YELLOW << pmergeMe.size() << WHITE " elements with " << GREEN "std::list " << ORANGE << std::fixed << std::setprecision(8) << totalTime << WHITE " us" << RESET << std::endl;
-	totalTime = (endTime - startTime) / 1000000;
-	std::cout << WHITE "Time to process a range of " << YELLOW << pmergeMe2.size() << WHITE " elements with " << GREEN "std::vector " << ORANGE << totalTime << WHITE " us" << RESET << std::endl;
-
-	// Now, we can understand about everything!!! Uncomment the following line below
-	//std::cout << std::endl;
-	//studyTimeListVectors();
+	std::cout << MAGENTA << std::string(10, '=') << WHITE "orderVector and orderList" << MAGENTA << std::string(10, '=') << std::endl;
+	showVector(orderVector);
+	showList(orderList);
+//	std::cout << std::endl;
+//	studyTimeListVectors();
 	return (0);
 }
 

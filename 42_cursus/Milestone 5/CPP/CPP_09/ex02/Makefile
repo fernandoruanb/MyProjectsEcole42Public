@@ -14,12 +14,12 @@ INCDIR = .
 
 #SRCS
 
-SRCS =  $(SRCDIR)/main.cpp\
-	$(SRCDIR)/PmergeME.cpp
+SRCS =	main.cpp\
+	PmergeMe.cpp
 
 #OBJS
 
-OBJS =  $(SRCS:.cpp=.o)
+OBJS = $(SRCS:.cpp=.o)
 
 #Main
 
@@ -32,7 +32,7 @@ $(NAME): $(OBJS)
 
 #.cpp -> .o
 
-%.o:%.cpp
+%o:%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # run tests
@@ -93,12 +93,12 @@ run: all
 #clean
 
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(NAME)
 
-#fclean:
+#fclean
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(OBJS)
 
 #restart
 
