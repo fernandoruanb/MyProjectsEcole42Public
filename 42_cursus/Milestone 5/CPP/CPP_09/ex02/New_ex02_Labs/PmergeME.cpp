@@ -69,7 +69,7 @@ void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, std::vecto
 
 	// Full indexes
 
-	index = 2;
+	index = 0;
 	while (index < limit)
 	{
 		indexes.insert(index);
@@ -85,15 +85,15 @@ void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, std::vecto
 		if (number > limit)
 			break ;
 		jacobVector.push_back(number);
-		indexes.erase(number);
+		indexes.erase(number - 1);
 		++it;
 		++index;
 	}
-	it = jacobVector.begin();
-	while (it != jacobVector.end())
+	index = 2;
+	while (index < jacobVector.size())
 	{
-		orderVector.push_back(*it);
-		++it;
+		orderVector.push_back(jacobVector[index] - 1);
+		++index;
 	}
 	showVector(jacobVector);
 	std::set<unsigned int>::iterator s = indexes.begin();
@@ -119,7 +119,7 @@ void	generateListJacobsthal(std::list<unsigned int> &jacobList, std::list<unsign
 	std::list<unsigned int>::iterator next;
 
 	// full indexes
-	index = 2;
+	index = 0;
 	while (index < limit)
 	{
 		indexes.insert(index);
@@ -146,6 +146,7 @@ void	generateListJacobsthal(std::list<unsigned int> &jacobList, std::list<unsign
 	// Insertion order
 
 	it = jacobList.begin();
+	std::advance(it, 2);
 	while (it != jacobList.end())
 	{
 		orderList.push_back(*it);
