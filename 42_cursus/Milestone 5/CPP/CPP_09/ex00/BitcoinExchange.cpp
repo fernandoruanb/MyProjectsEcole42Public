@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:57:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/09 12:06:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:20:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static bool     checkValidStr(const std::string value)
 {
 	const char	*ptr = value.c_str();
 
+	if (value.empty())
+		return (0);
         while (*ptr)
         {
                 if ((*ptr >= '0' && *ptr <= '9') || *ptr == '.')
