@@ -6,13 +6,13 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:54:12 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/06 17:54:12 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/09 11:24:44 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
  
 #include "PmergeMe.hpp"
 
-//static void	studyTimeListVectors(void);
+//static void	studyTimeListVectorsSets(void);
 
 static bool	ft_atoi_check(const char *argv)
 {
@@ -207,11 +207,11 @@ int	main(int argc, char **argv)
 	showVector(orderVector);
 	showList(orderList);
 //	std::cout << std::endl;
-//	studyTimeListVectors();
+//	studyTimeListVectorsSets();
 	return (0);
 }
 
-/*static void	studyTimeListVectors(void)
+/*static void	studyTimeListVectorsSets(void)
 {
 	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
 	std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 1" RESET << std::endl;
@@ -223,6 +223,7 @@ int	main(int argc, char **argv)
 	double	end;
 	std::list<int> testList;
 	std::vector<int> testVector;
+	std::set<int> testSet;
 
 	value = 0;
 	start = std::clock();
@@ -232,7 +233,7 @@ int	main(int argc, char **argv)
 		value++;
 	}
 	end = std::clock();
-	std::cout << WHITE "KEYWORD: " << GREEN << "HOGWARDS" << std::endl;
+	std::cout << WHITE "KEYWORD: " << GREEN << "RESTAURANT" << std::endl;
 	std::cout << ORANGE "The time to put 1.000.000 elements on " << GREEN "LIST " << ORANGE "is " << YELLOW  << (end - start) / CLOCKS_PER_SEC << ORANGE " s" << RESET <<  std::endl;
 	start = std::clock();
 	value = 0;
@@ -242,8 +243,19 @@ int	main(int argc, char **argv)
 		value++;
 	}
 	end = std::clock();
-	std::cout << WHITE "KEYWORD: " << GREEN << "RESTAURANT" << std::endl;
+	std::cout << WHITE "KEYWORD: " << GREEN << "HOGWARDS" << std::endl;
 	std::cout << ORANGE "The time to put 1.000.000 elements on " << GREEN << "VECTOR " << ORANGE "is " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE " s" << RESET << std::endl;
+
+	value = 0;
+	start = std::clock();
+	while (value < 1000000)
+	{
+		testSet.insert(value);
+		value++;
+	}
+	end = std::clock();
+	std::cout << WHITE "KEYWORD: " << GREEN "FASTER AND ORGANIZED" << std::endl;
+	std::cout << ORANGE "The time to put 1.000.000 elements on " << GREEN << "SET " << ORANGE "is " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE " s" << RESET << std::endl;
 
 	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
         std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 2" RESET << std::endl;
@@ -315,6 +327,18 @@ int	main(int argc, char **argv)
 	std::cout << WHITE << "KEYWORD: " << GREEN "ORGANIZED" RESET << std::endl;
 	std::cout << ORANGE << "The " << GREEN "VECTOR " << ORANGE << "time to find is: " << YELLOW << (end - start) / CLOCKS_PER_SEC <<  ORANGE " s" << RESET << std::endl;
 
+	start = std::clock();
+	std::set<int>::iterator its = testSet.find(value);
+	end = std::clock();
+	if (*its == value)
+	{
+		std::cout << WHITE "KEYWORD: " << GREEN "RED/BLACK Tree" RESET << std::endl;
+		std::cout << GREEN "Value found: " << YELLOW << value << GREEN "!!!" << RESET << std::endl;
+		std::cout << ORANGE << "The " << GREEN "SET " << ORANGE << "time to find is: " << YELLOW << (end - start) / CLOCKS_PER_SEC <<  ORANGE " s" << RESET << std::endl;
+	}
+	else
+		std::cerr << RED "SET Error: Value is lost!" RESET << std::endl;
+
 	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
         std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 4" RESET << std::endl;
         std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
@@ -345,6 +369,18 @@ int	main(int argc, char **argv)
 	end = std::clock();
 	std::cout << WHITE "KEYWORD: " << GREEN "SIMPLE" RESET << std::endl;
 	std::cout << ORANGE "The " GREEN "VECTOR" ORANGE " removing values time: " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE " s" RESET << std::endl;
+
+	count = 0;
+	start = std::clock();
+	while (count < 1000)
+	{
+		value = rand();
+		testSet.erase(value);
+		count++;
+	}
+	end = std::clock();
+	std::cout << WHITE "KEYWORD: " << GREEN "SIMPLE" RESET << std::endl;
+        std::cout << ORANGE "The " GREEN "SET" ORANGE " removing values time: " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE " s" RESET << std::endl;
 
 	std::cout << BRIGHT_MAGENTA << std::string(60, '=') << RESET << std::endl;
         std::cout << std::string(27, ' ') << BRIGHT_WHITE "TEST 5" RESET << std::endl;
@@ -386,6 +422,25 @@ int	main(int argc, char **argv)
 	end = std::clock();
 	std::cout << WHITE "KEYWORD: " GREEN "GOD" RESET << std::endl; 
 	 std::cout << ORANGE "The " GREEN "VECTOR " ORANGE "insert/remove tests: " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE << " s" << RESET << std::endl;
+
+	count = 0;
+	start = std::clock();
+	while (count < 1000000)
+	{
+		value = rand();
+		testSet.insert(value);
+		if (count % 1000 == 0)
+		{
+			value = rand();
+			testSet.insert(value);
+			testSet.erase(value);
+		}
+		count++;
+	}
+	end = std::clock();
+
+	 std::cout << WHITE "KEYWORD: " GREEN "THE NEW MODEL" RESET << std::endl;
+         std::cout << ORANGE "The " GREEN "SET " ORANGE "insert/remove tests: " << YELLOW << (end - start) / CLOCKS_PER_SEC << ORANGE << " s" << RESET << std::endl;
 
 	 std::cout << LIGHT_BLUE << std::string(60, '=') << RESET << std::endl;
 	 std::cout << std::string(18, ' ') << WHITE "Sequence of Jacobsthal" RESET << std::endl;
