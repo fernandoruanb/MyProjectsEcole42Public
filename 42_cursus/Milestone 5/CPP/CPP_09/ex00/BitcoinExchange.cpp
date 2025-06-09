@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:57:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/02 14:37:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:06:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	start_mount(std::ifstream &file, std::map<std::string,double> db)
 			value = line.substr(pipe + 3);
 			if (!checkValidStr(value))
 			{
-				std::cerr << RED "Error: Only numbers!!!" RESET << std::endl;
+				std::cerr << RED "Error: invalid value of bitcoin!!!" RESET << std::endl;
 				continue ;
 			}
 			std::stringstream ss(value);
