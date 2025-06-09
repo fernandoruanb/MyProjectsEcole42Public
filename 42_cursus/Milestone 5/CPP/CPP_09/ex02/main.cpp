@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:54:12 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/09 11:24:44 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:04:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
  
@@ -206,8 +206,8 @@ int	main(int argc, char **argv)
 	std::cout << MAGENTA << std::string(10, '=') << WHITE "orderVector and orderList" << MAGENTA << std::string(10, '=') << std::endl;
 	showVector(orderVector);
 	showList(orderList);
-//	std::cout << std::endl;
-//	studyTimeListVectorsSets();
+	//std::cout << std::endl;
+	//studyTimeListVectorsSets();
 	return (0);
 }
 
