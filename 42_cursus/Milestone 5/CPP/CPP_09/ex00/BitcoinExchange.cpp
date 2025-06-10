@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:57:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/09 17:31:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:34:42 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ static bool	investigate_date(const std::string date)
 	std::string	month;
 	std::string	day;
 	ssize_t	checker;
+	ssize_t	year_value;
+	ssize_t	day_value;
+	ssize_t month_value;
 
 	year = date.substr(0, 4);
 	month = date.substr(5, 2);
@@ -53,10 +56,12 @@ static bool	investigate_date(const std::string date)
 		std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
 		return (0);
 	}
+	year_value = checker;
 	ss.clear();
 	ss.str(month);
 	ss >> checker;
-	if (checker < 0 || checker > 12)
+	month_value = checker;
+	if (checker <= 0 || checker > 12)
 	{
 		std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
 		return (0);
@@ -64,8 +69,19 @@ static bool	investigate_date(const std::string date)
 	ss.clear();
 	ss.str(day);
 	ss >> checker;
-	if (checker < 0 || checker > 31)
+	if (checker <= 0 || checker > 31)
 	{
+		std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
+		return (0);
+	}
+	day_value = checker;
+	if (month_value == 2 && day_value > 28)
+	{
+		if (year_value % 4 == 0 && (year_value % 100 != 0 || year_value % 400 == 0))
+		{
+			if (day_value > 0 && day_value <= 29)
+				return (1);
+		}
 		std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
 		return (0);
 	}
