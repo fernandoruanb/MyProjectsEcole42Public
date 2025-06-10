@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:39:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/10 14:39:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:01:03 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int	main(int argc, char **argv)
 							}
 							continue ;
 						}
-						std::cerr << RED "Error: Only numbers with one unit are accepted" RESET << std::endl;
-						return (1);
 					}
 					else
 						--index;
