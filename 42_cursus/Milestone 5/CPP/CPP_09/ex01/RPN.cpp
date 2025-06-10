@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:26 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/02 14:44:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:23:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ bool	process(char magic, std::stack<int> &base, long long *result)
 		if (magic == operators[index])
 		{
 			methods[index](n1, n2, base, result);
-			if (n2 == 0  && magic == '/')
+			if (n2 == 0 && magic == '/')
 				return (0);
 			return (1);
 		}
