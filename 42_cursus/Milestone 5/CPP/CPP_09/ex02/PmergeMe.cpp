@@ -147,12 +147,29 @@ void	doTheMagicVector(std::vector<unsigned int> &vectorHigh, std::vector<unsigne
 	}
 }
 
+static void	mergeHighVector(std::vector<unsigned int> &vectorHigh, int left, int right)
+{
+	std::vector<unsigned int> temp;
+	int	mid;
+
+	if (left >= right)
+		return ;
+
+	mid = left + (right - left) / 2;
+
+	mergeHighVector(vectorHigh, left, mid);
+	mergeHighVector(vectorHigh, mid + 1, right);
+	std::merge(vectorHigh.begin() + left, vectorHigh.begin() + mid + 1,
+        vectorHigh.begin() + mid + 1, vectorHigh.begin() + right + 1, std::back_inserter(temp)
+    );
+	std::copy(temp.begin(), temp.end(), vectorHigh.begin() + left);
+}
+
 void	sortHighVector(std::vector<unsigned int> &vectorHigh)
 {
-	std::vector<unsigned int>::iterator s = vectorHigh.begin();
-	std::vector<unsigned int>::iterator e = vectorHigh.end();
-
-	std::sort(s, e);
+	if (vectorHigh.empty())
+		return ;
+	mergeHighVector(vectorHigh, 0, vectorHigh.size() - 1);
 }
 
 void	generateVectorJacobsthal(std::vector<unsigned int> &jacobVector, std::vector<unsigned int> &orderVector, size_t limit)
