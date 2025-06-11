@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 18:57:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/10 12:34:42 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:38:23 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,28 @@ static bool     checkValidStr(const std::string value)
                         return (0);
         }
         return (1);
+}
+
+static bool	checkDate(ssize_t day_value, ssize_t month_value, ssize_t year_value, const std::string date)
+{
+	int days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+	if (day_value > days[month_value - 1])
+	{
+		if (month_value == 2 && day_value > 28)
+		{
+                	if (year_value % 4 == 0 && (year_value % 100 != 0 || year_value % 400 == 0))
+                	{
+                        	if (day_value > 0 && day_value <= 29)
+                                	return (1);
+                	}
+                	std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
+                	return (0);
+        	}
+		std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
+		return (0);
+	}
+	return (1);
 }
 
 static bool	investigate_date(const std::string date)
@@ -75,13 +97,8 @@ static bool	investigate_date(const std::string date)
 		return (0);
 	}
 	day_value = checker;
-	if (month_value == 2 && day_value > 28)
+	if (!checkDate(day_value, month_value, year_value, date))
 	{
-		if (year_value % 4 == 0 && (year_value % 100 != 0 || year_value % 400 == 0))
-		{
-			if (day_value > 0 && day_value <= 29)
-				return (1);
-		}
 		std::cerr << RED "Error: bad input => " << BRIGHT_YELLOW << date << RESET << std::endl;
 		return (0);
 	}
