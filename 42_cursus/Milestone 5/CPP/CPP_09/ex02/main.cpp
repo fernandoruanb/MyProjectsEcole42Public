@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:54:12 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/16 13:17:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:31:27 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
  
@@ -154,6 +154,8 @@ int	main(int argc, char **argv)
 	std::list<unsigned int> copyListHigh;
 	std::vector<unsigned int> copyVectorHigh;
 
+	startVector = std::clock();
+	startList = std::clock();
 	if (!parser(argc, argv, vectorBase, listBase))
 	{
 		std::cerr << RED "Error: Invalid input detected." RESET << std::endl;
@@ -167,10 +169,8 @@ int	main(int argc, char **argv)
 	sortHighList(listHigh);
 	generateVectorJacobsthal(jacobVector, orderVector, vectorLow.size());
 	generateListJacobsthal(jacobList, orderList, listLow.size());
-	startVector = std::clock();
 	doTheMagicVector(vectorHigh, vectorLow, orderVector);
 	endVector = std::clock();
-	startList = std::clock();
 	doTheMagicList(listHigh, listLow, orderList);
 	endList = std::clock();
 	
