@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:54:12 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/06/09 12:04:27 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:17:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
  
@@ -182,10 +182,10 @@ int	main(int argc, char **argv)
 	showList(listBase);
 	std::cout << BRIGHT_MAGENTA "After: " RESET;
 	showVector(vectorHigh);
-	std::cout << LIGHT_BLUE << "VECTOR Time: " << std::fixed << std::setprecision(8) << YELLOW <<(endVector - startVector) / 1000000 << ORANGE " us" RESET << std::endl;
+	std::cout << LIGHT_BLUE << "VECTOR Time: " << std::fixed << std::setprecision(8) << YELLOW << (endVector - startVector) * 1000000 / CLOCKS_PER_SEC << ORANGE " us" RESET << std::endl;
 	std::cout << BRIGHT_MAGENTA "After: " RESET;
 	showList(listHigh);
-	std::cout << LIGHT_BLUE << "LIST Time: " << std::fixed << std::setprecision(8) << YELLOW <<(endList - startList) / 1000000 << ORANGE " us" RESET << std::endl;
+	std::cout << LIGHT_BLUE << "LIST Time: " << std::fixed << std::setprecision(8) << YELLOW <<(endList - startList) * 1000000 / CLOCKS_PER_SEC << ORANGE " us" RESET << std::endl;
 	std::cout << std::endl;
 	isVectorSorted(vectorHigh);
 	isListSorted(listHigh);
