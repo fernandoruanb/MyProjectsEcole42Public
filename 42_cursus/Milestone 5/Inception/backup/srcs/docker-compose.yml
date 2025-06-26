@@ -1,0 +1,74 @@
+services:
+  wordpress:
+    image: wordpress:v1.0
+    build: ./requirements/wordpress
+    container_name: wordpress
+    env_file:
+      - ".env"
+    environment:
+        WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+        WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+        WORDPRESS_DB_PASS: ${WORDPRESS_DB_PASS}
+        WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+        WORDPRESS_URL: ${WORDPRESS_URL}
+        WORDPRESS_TITLE: ${WORDPRESS_TITLE}
+        WORDPRESS_ADMIN_USER: ${WORDPRESS_ADMIN_USER}
+        WORDPRESS_ADMIN_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD}
+        WORDPRESS_ADMIN_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
+    restart: on-failure
+    volumes:
+      - "web:/var/www/html"
+    expose:
+      - "9000"
+    networks:
+    - "inception"
+  nginx:
+    image: nginx:v1.0
+    build: ./requirements/nginx
+    container_name: nginx
+    restart: on-failure
+    depends_on:
+      - "wordpress"
+    ports:
+      - "443:443"
+    volumes:
+      - "web:/var/www/html"
+    networks:
+      - "inception"
+  mariadb:
+    image: mariadb:v1.0
+    build: ./requirements/mariadb
+    container_name: mariadb
+    env_file:
+      - ".env"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PRIVILEGES: ${MYSQL_PRIVILEGES}
+    volumes:
+      - "mariadb_data:/var/lib/mysql"
+    restart: on-failure
+    networks:
+      - "inception"
+    expose:
+      - "3306"
+
+volumes:
+  web:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/login/data/web
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/login/data/mariadb_data
+networks:
+  inception:
+    driver: bridge
