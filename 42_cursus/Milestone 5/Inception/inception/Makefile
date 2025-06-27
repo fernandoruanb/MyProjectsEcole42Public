@@ -28,8 +28,8 @@ clean: down
 
 fclean: down
 	@echo "Cleaning everything..."
-	@docker system prune -a --volumes -f
-	@bash -c 'docker volume rm -f $$(docker volume ls -q)'
+	@docker system prune -a --volumes -f || true
+	@bash -c 'docker volume rm -f $$(docker volume ls -q)' || true
 
 # restart
 
