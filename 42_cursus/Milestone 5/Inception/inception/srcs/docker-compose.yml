@@ -58,13 +58,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/login/data/web
+      device: /home/fruan-ba/data/web
   mariadb_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/login/data/mariadb_data
+      device: /home/fruan-ba/data/mariadb_data
 networks:
   inception:
     driver: bridge
