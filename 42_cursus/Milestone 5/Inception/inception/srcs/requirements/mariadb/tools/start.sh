@@ -24,6 +24,7 @@ echo "FLUSH PRIVILEGES;" >> /tmp/init.sql
 mysql -u root < /tmp/init.sql
 
 rm -f /tmp/init.sql
+chmod 600 /run/secrets
 
 mysqladmin shutdown
 

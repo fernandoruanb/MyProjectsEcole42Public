@@ -29,5 +29,6 @@ WORDPRESS_ADMIN_EMAIL=$(cat "/run/secrets/wp_admin_email")
 for var in $(env | grep WORDPRESS | cut -d '=' -f 1); do unset $var; done
 
 #rm -rf /run/secrets
+chmod 600 /run/secrets
 
 php-fpm7.4 -F
