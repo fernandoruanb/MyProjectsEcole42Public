@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -rf /var/www/html
+mv /var/www/html /tmp/wp-full
 mkdir -p /var/www/html
 cd /var/www/html
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -30,5 +30,7 @@ for var in $(env | grep WORDPRESS | cut -d '=' -f 1); do unset $var; done
 
 #rm -rf /run/secrets
 chmod 600 /run/secrets
+
+mv /tmp/wp-full /var/www/html
 
 php-fpm7.4 -F
