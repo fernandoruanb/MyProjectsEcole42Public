@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:15:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/04 16:15:06 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/04 18:08:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	atoiIRC(const char *port, int *err)
 {
 	long	result;
 	int	index;
-	int	signal;
 
 	result = 0;
 	index = 0;
@@ -29,6 +28,7 @@ int	atoiIRC(const char *port, int *err)
 			*err = 1;
 			return (0);
 		}
+		index++;
 	}
 	return (result);
 }

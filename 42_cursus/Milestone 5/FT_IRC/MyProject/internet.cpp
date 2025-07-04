@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:45:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/04 16:02:12 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/04 18:15:01 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,15 @@
 static int	checkPort(char *port)
 {
 	char	*temp;
-	int	count;
 
 	if (!port || !*port)
 		return (0);
 	temp = port;
-	count = 0;
 	while (*temp)
 	{
 		if (*temp >= '0' && *temp <= '9')
 			temp++;
 		else
-			return (0);
-		count++;
-		if (count > 5)
 			return (0);
 	}
 	return (1);
@@ -37,6 +32,7 @@ static int	checkPort(char *port)
 static int	checkArguments(int argc, char **argv)
 {
 	std::string	password;
+	int	err;
 
 	if (argc != 3)
 	{
@@ -52,6 +48,13 @@ static int	checkArguments(int argc, char **argv)
 	if (password.empty())
 	{
 		std::cerr << BRIGHT_RED "Error: You need to set a password" RESET << std::endl;
+		return (0);
+	}
+	err = 0;
+	atoiIRC(argv[1], &err);
+	if (err == 1)
+	{
+		std::cerr << BRIGHT_RED "Error: Maximum port is 65535" RESET << std::endl;
 		return (0);
 	}
 	return (1);
