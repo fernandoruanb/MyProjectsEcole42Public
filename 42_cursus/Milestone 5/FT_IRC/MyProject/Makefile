@@ -15,7 +15,8 @@ INCDIR = .
 # SRCS
 
 SRCS =  internet.cpp\
-	utils/atoiIRC.cpp
+	utils/atoiIRC.cpp\
+	utils/getServer.cpp
 
 #OBJS
 

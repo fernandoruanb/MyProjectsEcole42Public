@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:45:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/04 19:03:47 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/04 19:09:13 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,21 @@ static int	checkArguments(int argc, char **argv)
 	return (result);
 }
 
+static void	handleSignal(int signal)
+{
+	if (signal == SIGINT)
+	{
+		std::cout << ORANGE "Recebi SIGINT" RESET << std::endl;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_server	ircserver;
 	int	result;
 
 	ircserver.serverIRC = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	signal(SIGINT, handleSignal);
 	if (ircserver.serverIRC == -1)
 	{
 		std::cerr << "Error: socket didn't start" << std::endl;
