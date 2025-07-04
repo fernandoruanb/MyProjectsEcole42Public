@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:45:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/04 18:48:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/04 19:03:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ static int	checkArguments(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	int	serverIRC = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	sockaddr_in	server;
+	t_server	ircserver;
 	int	result;
 
-	if (serverIRC == -1)
+	ircserver.serverIRC = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	if (ircserver.serverIRC == -1)
 	{
 		std::cerr << "Error: socket didn't start" << std::endl;
 		return (1);
@@ -75,17 +75,20 @@ int	main(int argc, char **argv)
 	result = checkArguments(argc, argv);
 	if (result == 0)
 	{
-		close(serverIRC);
+		close(ircserver.serverIRC);
 		return (1);
 	}
-	server.sin_family = AF_INET;
-	server.sin_port = htons(result);
-	server.sin_addr.s_addr = inet_addr("127.0.0.1");
+	ircserver.opt = 1;
+	ircserver.server.sin_family = AF_INET;
+	ircserver.server.sin_port = htons(result);
+	ircserver.server.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-	if (bind(serverIRC, (struct sockaddr *)&server, sizeof(server)) == 0)
+	setsockopt(ircserver.serverIRC, SOL_SOCKET, SO_REUSEADDR, &ircserver.opt, sizeof(ircserver.opt));
+
+	if (bind(ircserver.serverIRC, (struct sockaddr *)&ircserver.server, sizeof(ircserver.server)) == 0)
 	{
 		std::cout << BRIGHT_GREEN "Bind successfully on " BRIGHT_YELLOW "127.0.0.1:" << argv[1] << RESET << std::endl;
-		if (listen(serverIRC, 10) == 0)
+		if (listen(ircserver.serverIRC, 10) == 0)
 		{
 			std::cout << LIGHT_BLUE "Listen Mode Started =D" RESET << std::endl;
 			sleep(10);
@@ -93,17 +96,17 @@ int	main(int argc, char **argv)
 		else
 		{
 			std::cout << BRIGHT_RED "Listen Mode Failed D=" RESET << std::endl;
-			close(serverIRC);
+			close(ircserver.serverIRC);
 			return (1);
 		}
 	}
 	else
 	{
 		std::cerr << BRIGHT_RED "Error: Bind crash" RESET << std::endl;
-		close(serverIRC);
+		close(ircserver.serverIRC);
 		return (1);
 	}
 	std::cout << BRIGHT_GREEN "Thank you very much for using our IRC Server =D" RESET << std::endl;
-	close(serverIRC);
+	close(ircserver.serverIRC);
 	return (0);
 }
