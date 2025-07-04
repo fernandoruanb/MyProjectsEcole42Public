@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:45:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/04 18:15:01 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/04 18:48:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	checkPort(char *port)
 static int	checkArguments(int argc, char **argv)
 {
 	std::string	password;
+	int	result;
 	int	err;
 
 	if (argc != 3)
@@ -51,26 +52,54 @@ static int	checkArguments(int argc, char **argv)
 		return (0);
 	}
 	err = 0;
-	atoiIRC(argv[1], &err);
+	result = atoiIRC(argv[1], &err);
 	if (err == 1)
 	{
 		std::cerr << BRIGHT_RED "Error: Maximum port is 65535" RESET << std::endl;
 		return (0);
 	}
-	return (1);
+	return (result);
 }
 
 int	main(int argc, char **argv)
 {
 	int	serverIRC = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	
+	sockaddr_in	server;
+	int	result;
+
 	if (serverIRC == -1)
 	{
 		std::cerr << "Error: socket didn't start" << std::endl;
 		return (1);
 	}
-	if (!checkArguments(argc, argv))
+	result = checkArguments(argc, argv);
+	if (result == 0)
 	{
+		close(serverIRC);
+		return (1);
+	}
+	server.sin_family = AF_INET;
+	server.sin_port = htons(result);
+	server.sin_addr.s_addr = inet_addr("127.0.0.1");
+
+	if (bind(serverIRC, (struct sockaddr *)&server, sizeof(server)) == 0)
+	{
+		std::cout << BRIGHT_GREEN "Bind successfully on " BRIGHT_YELLOW "127.0.0.1:" << argv[1] << RESET << std::endl;
+		if (listen(serverIRC, 10) == 0)
+		{
+			std::cout << LIGHT_BLUE "Listen Mode Started =D" RESET << std::endl;
+			sleep(10);
+		}
+		else
+		{
+			std::cout << BRIGHT_RED "Listen Mode Failed D=" RESET << std::endl;
+			close(serverIRC);
+			return (1);
+		}
+	}
+	else
+	{
+		std::cerr << BRIGHT_RED "Error: Bind crash" RESET << std::endl;
 		close(serverIRC);
 		return (1);
 	}
