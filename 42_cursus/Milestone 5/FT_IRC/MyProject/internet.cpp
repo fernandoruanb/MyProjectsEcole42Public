@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:45:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/04 19:09:13 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/04 21:49:37 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,26 @@ static int	checkArguments(int argc, char **argv)
 
 static void	handleSignal(int signal)
 {
+	t_server	*ircserver = getServer();
+
 	if (signal == SIGINT)
 	{
 		std::cout << ORANGE "Recebi SIGINT" RESET << std::endl;
+		ircserver->running = false;
+		close(ircserver->serverIRC);
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_server	ircserver;
+	t_server	*ircserver;
 	int	result;
 
-	ircserver.serverIRC = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	ircserver = getServer();
+	ircserver->serverIRC = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	fcntl(ircserver->serverIRC, F_SETFL, O_NONBLOCK);
 	signal(SIGINT, handleSignal);
-	if (ircserver.serverIRC == -1)
+	if (ircserver->serverIRC == -1)
 	{
 		std::cerr << "Error: socket didn't start" << std::endl;
 		return (1);
@@ -84,38 +90,48 @@ int	main(int argc, char **argv)
 	result = checkArguments(argc, argv);
 	if (result == 0)
 	{
-		close(ircserver.serverIRC);
+		close(ircserver->serverIRC);
 		return (1);
 	}
-	ircserver.opt = 1;
-	ircserver.server.sin_family = AF_INET;
-	ircserver.server.sin_port = htons(result);
-	ircserver.server.sin_addr.s_addr = inet_addr("127.0.0.1");
+	ircserver->opt = 1;
+	ircserver->server.sin_family = AF_INET;
+	ircserver->server.sin_port = htons(result);
+	ircserver->server.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-	setsockopt(ircserver.serverIRC, SOL_SOCKET, SO_REUSEADDR, &ircserver.opt, sizeof(ircserver.opt));
+	setsockopt(ircserver->serverIRC, SOL_SOCKET, SO_REUSEADDR, &ircserver->opt, sizeof(ircserver->opt));
+	ircserver->client_len = sizeof(ircserver->client);
 
-	if (bind(ircserver.serverIRC, (struct sockaddr *)&ircserver.server, sizeof(ircserver.server)) == 0)
+	if (bind(ircserver->serverIRC, (struct sockaddr *)&ircserver->server, sizeof(ircserver->server)) == 0)
 	{
 		std::cout << BRIGHT_GREEN "Bind successfully on " BRIGHT_YELLOW "127.0.0.1:" << argv[1] << RESET << std::endl;
-		if (listen(ircserver.serverIRC, 10) == 0)
+		ircserver->running = true;
+		if (ircserver->running && listen(ircserver->serverIRC, 10) == 0)
 		{
 			std::cout << LIGHT_BLUE "Listen Mode Started =D" RESET << std::endl;
-			sleep(10);
+			ircserver->clFD = accept(ircserver->serverIRC, (struct sockaddr *)&ircserver->client, &ircserver->client_len);
+			if (ircserver->clFD != -1)
+				fcntl(ircserver->clFD, F_SETFL, O_NONBLOCK);
+			pause();
+			if (ircserver->running)
+				close(ircserver->clFD);
 		}
 		else
 		{
 			std::cout << BRIGHT_RED "Listen Mode Failed D=" RESET << std::endl;
-			close(ircserver.serverIRC);
+			if (ircserver->running)
+				close(ircserver->serverIRC);
 			return (1);
 		}
 	}
 	else
 	{
 		std::cerr << BRIGHT_RED "Error: Bind crash" RESET << std::endl;
-		close(ircserver.serverIRC);
+		if (ircserver->running)
+			close(ircserver->serverIRC);
 		return (1);
 	}
 	std::cout << BRIGHT_GREEN "Thank you very much for using our IRC Server =D" RESET << std::endl;
-	close(ircserver.serverIRC);
+	if (ircserver->running)
+		close(ircserver->serverIRC);
 	return (0);
 }

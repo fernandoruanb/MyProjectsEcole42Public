@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:04:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/04 19:16:14 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/04 21:44:41 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ typedef struct	s_server
 {
 	int	serverIRC;
 	sockaddr_in	server;
+	sockaddr_in	client;
+	socklen_t	client_len;
+	int	clFD;
 	int	opt;
+	bool	running;
 }	t_server;
 
 int	atoiIRC(const char *port, int *err);
