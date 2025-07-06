@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 18:12:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/05 18:12:31 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/06 11:24:53 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	serverIRCStartMode(void)
 	while (ircserver->running)
 	{
 		poll(ircserver->fds, ircserver->nclFD, ircserver->timeout);
-		if (ircserver->running && ircserver->fds[0].revents && POLLIN)
+		if (ircserver->running && ircserver->fds[0].revents & POLLIN)
 		{
 			ircserver->clFD = accept(ircserver->serverIRC, (struct sockaddr *)&ircserver->client, &ircserver->client_len);
 			if (ircserver->running && ircserver->clFD != -1)
@@ -77,7 +77,7 @@ void	serverIRCStartMode(void)
 				{
 					std::cout << LIGHT_BLUE "Client " << YELLOW << ircserver->fds[index].fd << LIGHT_BLUE " disconnected" RESET << std::endl;
 					close(ircserver->fds[index].fd);
-					ircserver->fds[index].fd = ircserver->fds[ircserver->nclFD - 1].fd;
+					ircserver->fds[index] = ircserver->fds[ircserver->nclFD - 1];
 					ircserver->fds[ircserver->nclFD - 1].fd = -1;
 					ircserver->nclFD--;
 				}
