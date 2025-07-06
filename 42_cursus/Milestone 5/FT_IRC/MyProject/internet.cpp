@@ -79,10 +79,10 @@ static void	handleSignal(int signal)
 	t_server	*ircserver = getServer();
 	int	index;
 
-	if (signal == SIGINT)
+	if (signal == SIGINT || signal == SIGTERM)
 	{
 		index = 0;
-		std::cout << ORANGE "Recebi SIGINT" RESET << std::endl;
+		std::cout << ORANGE "Recebi sinal para desligar!!!" RESET << std::endl;
 		ircserver->running = false;
 		while (index < 1024)
 		{
@@ -105,6 +105,7 @@ int	main(int argc, char **argv)
 	fullPollFDs();
 	ircserver->serverIRC = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	signal(SIGINT, handleSignal);
+	signal(SIGTERM, handleSignal);
 	if (ircserver->serverIRC == -1)
 	{
 		std::cerr << "Error: socket didn't start" << std::endl;

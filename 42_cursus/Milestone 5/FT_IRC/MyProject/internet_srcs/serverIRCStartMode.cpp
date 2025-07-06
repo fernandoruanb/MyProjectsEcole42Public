@@ -73,6 +73,14 @@ void	serverIRCStartMode(void)
 					std::cout << BRIGHT_GREEN "Client " << YELLOW << ircserver->fds[index].fd << " " << LIGHT_BLUE << ircserver->buffer << RESET <<  std::endl;
 					send(ircserver->fds[index].fd, "Olá cliente =D ", 16, 0);
 				}
+				else if (ircserver->bytes == 0)
+				{
+					std::cout << LIGHT_BLUE "Client " << YELLOW << ircserver->fds[index].fd << LIGHT_BLUE " disconnected" RESET << std::endl;
+					close(ircserver->fds[index].fd);
+					ircserver->fds[index].fd = ircserver->fds[ircserver->nclFD - 1].fd;
+					ircserver->fds[ircserver->nclFD - 1].fd = -1;
+					ircserver->nclFD--;
+				}
 			}
 			index++;
 		}

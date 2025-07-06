@@ -51,4 +51,9 @@ fclean: clean
 
 re: fclean all
 
+#Run Mode
+
+run: all
+	@valgrind --track-origins=yes --show-leak-kinds=all --track-fds=yes --leak-check=full ./ircserver 6667 12345
+
 .PHONY: all fclean clean re
