@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 18:12:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/06 12:19:28 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/06 13:13:43 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	serverIRCStartMode(void)
 					ircserver->buffer[ircserver->bytes] = '\0';
 					std::cout << BRIGHT_GREEN "Client " << YELLOW << ircserver->fds[index].fd << " " << LIGHT_BLUE << ircserver->buffer << RESET <<  std::endl;
 					broadcast(ircserver->fds[index].fd);
+					privmsg(index - 1, "PRIVMSG HELLO");
 				}
 				else if (ircserver->bytes == 0)
 				{

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:04:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/06 12:25:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/06 12:40:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int	atoiIRC(const char *port, int *err);
 t_server*	getServer(void);
 void	serverIRCStartMode(void);
 void	broadcast(const int sender);
+void	privmsg(const int target, const std::string message);
 
 #endif /* INTERNET_HPP */
