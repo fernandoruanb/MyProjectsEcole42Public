@@ -15,8 +15,9 @@ INCDIR = .
 # SRCS
 
 SRCS =  internet.cpp\
-	utils/atoiIRC.cpp\
-	utils/getServer.cpp
+	internet_utils/atoiIRC.cpp\
+	internet_utils/getServer.cpp\
+	internet_srcs/serverIRCStartMode.cpp
 
 #OBJS
 
@@ -49,5 +50,10 @@ fclean: clean
 #restart
 
 re: fclean all
+
+#Run Mode
+
+run: all
+	@valgrind --track-origins=yes --show-leak-kinds=all --track-fds=yes --leak-check=full ./ircserver 6667 12345
 
 .PHONY: all fclean clean re

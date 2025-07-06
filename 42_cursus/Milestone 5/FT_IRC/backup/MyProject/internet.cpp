@@ -12,6 +12,19 @@
 
 #include "internet.hpp"
 
+static void	fullPollFDs(void)
+{
+	t_server	*ircserver = getServer();
+	int	index;
+
+	index = 0;
+	while (index < 1024)
+	{
+		ircserver->fds[index].fd = -1;
+		index++;
+	}
+}
+
 static int	checkPort(char *port)
 {
 	char	*temp;
@@ -64,12 +77,22 @@ static int	checkArguments(int argc, char **argv)
 static void	handleSignal(int signal)
 {
 	t_server	*ircserver = getServer();
+	int	index;
 
-	if (signal == SIGINT)
+	if (signal == SIGINT || signal == SIGTERM)
 	{
-		std::cout << ORANGE "Recebi SIGINT" RESET << std::endl;
+		index = 0;
+		std::cout << ORANGE "Recebi sinal para desligar!!!" RESET << std::endl;
 		ircserver->running = false;
-		close(ircserver->serverIRC);
+		while (index < 1024)
+		{
+			if (ircserver->fds[index].fd != -1)
+			{
+				close(ircserver->fds[index].fd);
+				ircserver->fds[index].fd = -1;
+			}
+			index++;
+		}
 	}
 }
 
@@ -79,14 +102,19 @@ int	main(int argc, char **argv)
 	int	result;
 
 	ircserver = getServer();
+	fullPollFDs();
 	ircserver->serverIRC = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	fcntl(ircserver->serverIRC, F_SETFL, O_NONBLOCK);
 	signal(SIGINT, handleSignal);
+	signal(SIGTERM, handleSignal);
 	if (ircserver->serverIRC == -1)
 	{
 		std::cerr << "Error: socket didn't start" << std::endl;
 		return (1);
 	}
+	fcntl(ircserver->serverIRC, F_SETFL, O_NONBLOCK);
+	ircserver->fds[0].fd = ircserver->serverIRC;
+	ircserver->fds[0].events = POLLIN;
+	ircserver->nclFD = 1;
 	result = checkArguments(argc, argv);
 	if (result == 0)
 	{
@@ -108,12 +136,7 @@ int	main(int argc, char **argv)
 		if (ircserver->running && listen(ircserver->serverIRC, 10) == 0)
 		{
 			std::cout << LIGHT_BLUE "Listen Mode Started =D" RESET << std::endl;
-			ircserver->clFD = accept(ircserver->serverIRC, (struct sockaddr *)&ircserver->client, &ircserver->client_len);
-			if (ircserver->clFD != -1)
-				fcntl(ircserver->clFD, F_SETFL, O_NONBLOCK);
-			pause();
-			if (ircserver->running)
-				close(ircserver->clFD);
+			serverIRCStartMode();
 		}
 		else
 		{
@@ -131,7 +154,5 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	std::cout << BRIGHT_GREEN "Thank you very much for using our IRC Server =D" RESET << std::endl;
-	if (ircserver->running)
-		close(ircserver->serverIRC);
 	return (0);
 }
