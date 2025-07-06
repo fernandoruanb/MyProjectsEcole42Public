@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:04:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/06 15:05:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:00:49 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct	s_server
 	sockaddr_in	client;
 	socklen_t	client_len;
 	struct pollfd	fds[1024];
-	std::string	clientBuffer[1024];
+	std::string	sendBuffer[1023];
+	std::string	recvBuffer[1024];
 	nfds_t	nclFD;
 	int	clFD;
 	int	opt;
@@ -48,5 +49,6 @@ t_server*	getServer(void);
 void	serverIRCStartMode(void);
 void	broadcast(const int sender);
 void	privmsg(const int target, const std::string message);
+void	manageBuffers(int index);
 
 #endif /* INTERNET_HPP */

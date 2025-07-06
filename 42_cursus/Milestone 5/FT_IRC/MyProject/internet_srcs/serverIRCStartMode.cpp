@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 18:12:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/06 15:20:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:22:24 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	addNewClient(void)
 		return ;
 	}
 	ircserver->fds[index].fd = ircserver->clFD;
-	ircserver->fds[index].events = POLLIN | POLLOUT;
+	ircserver->fds[index].events = POLLIN;
 	fcntl(ircserver->clFD, F_SETFL, O_NONBLOCK);
 	ircserver->nclFD++;
 	std::cout << BRIGHT_GREEN "New Client added: " << YELLOW << ircserver->clFD << RESET << std::endl;
@@ -83,7 +83,7 @@ void	serverIRCStartMode(void)
 				addNewClient();
 		}
 		index = 1;
-		while (ircserver->running && index < 1024 && ircserver->fds[index].fd != -1)
+		while (ircserver->running && (nfds_t)index < ircserver->nclFD && ircserver->fds[index].fd != -1)
 		{
 			if (ircserver->fds[index].revents & POLLIN)
 			{
@@ -92,18 +92,36 @@ void	serverIRCStartMode(void)
 				if (ircserver->bytes > 0)
 				{
 					ircserver->buffer[ircserver->bytes] = '\0';
-					std::cout << BRIGHT_GREEN "Client " << YELLOW << ircserver->fds[index].fd << " " << LIGHT_BLUE << ircserver->buffer << RESET <<  std::endl;
-					broadcast(ircserver->fds[index].fd);
-					privmsg(index - 1, "PRIVMSG HELLO");
+					std::cout << BRIGHT_GREEN "Client " << YELLOW << ircserver->fds[index].fd << YELLOW << " " << LIGHT_BLUE << ircserver->buffer << RESET << std::endl;
+					ircserver->recvBuffer[index] = ircserver->buffer;
+					ircserver->fds[index].events |= POLLOUT;
 				}
-				else if (ircserver->bytes == 0)
+				if (ircserver->bytes == 0)
 				{
 					std::cout << LIGHT_BLUE "Client " << YELLOW << ircserver->fds[index].fd << LIGHT_BLUE " disconnected" RESET << std::endl;
 					close(ircserver->fds[index].fd);
+					manageBuffers(index);
 					ircserver->fds[index] = ircserver->fds[ircserver->nclFD - 1];
 					ircserver->fds[ircserver->nclFD - 1].fd = -1;
 					ircserver->nclFD--;
 				}
+			}
+			index++;
+		}
+		index = 1;
+		ssize_t	bytes;
+		while (ircserver->running && (nfds_t)index < ircserver->nclFD && ircserver->fds[index].fd != -1)
+		{
+			if (ircserver->running && ircserver->fds[index].revents & POLLOUT)
+			{
+				ircserver->sendBuffer[index].clear();
+				ircserver->sendBuffer[index].resize(513);
+				ircserver->sendBuffer[index] = ircserver->buffer;
+				bytes = send(ircserver->fds[index].fd, ircserver->sendBuffer[index].c_str(), ircserver->recvBuffer[index].size(), 0);
+				if (bytes > 0)
+					ircserver->sendBuffer[index].erase(0, bytes);
+				if (ircserver->sendBuffer[index].empty())
+					ircserver->fds[index].events &= ~POLLOUT;
 			}
 			index++;
 		}

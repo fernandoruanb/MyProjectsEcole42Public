@@ -17,6 +17,7 @@ INCDIR = .
 SRCS =  internet.cpp\
 	internet_utils/atoiIRC.cpp\
 	internet_utils/getServer.cpp\
+	internet_utils/manageBuffers.cpp\
 	internet_srcs/serverIRCStartMode.cpp\
 	internet_srcs/broadcast.cpp\
 	internet_srcs/privmsg.cpp
