@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 18:12:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/06 11:24:53 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/06 12:04:30 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,34 @@ static void	cleanBuffer(void)
 void	serverIRCStartMode(void)
 {
 	int	index;
+	nfds_t	freedom;
 	t_server *ircserver = getServer();
+	int	ready;
 	ircserver->timeout = -1;
 
 	while (ircserver->running)
 	{
-		poll(ircserver->fds, ircserver->nclFD, ircserver->timeout);
+		ready = poll(ircserver->fds, ircserver->nclFD, ircserver->timeout);
+		if (ready < 0)
+		{
+			if (errno == EINTR)
+			{
+				std::cout << LIGHT_BLUE "Restarting the server..." RESET << std::endl;
+				continue ;
+			}
+			else
+			{
+				std::cerr << RED "Error: Stopping the server..." RESET << std::endl;
+				ircserver->running = false;
+				freedom = 0;
+				while (freedom < ircserver->nclFD)
+				{
+					close(ircserver->fds[freedom].fd);
+					ircserver->fds[freedom].fd = -1;
+					freedom++;
+				}
+			}
+		}
 		if (ircserver->running && ircserver->fds[0].revents & POLLIN)
 		{
 			ircserver->clFD = accept(ircserver->serverIRC, (struct sockaddr *)&ircserver->client, &ircserver->client_len);

@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:04:30 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/04 21:44:41 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/06 11:58:09 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <netinet/in.h>
 # include <arpa/inet.h>
 # include <fcntl.h>
+# include <errno.h>
 # include "colours.hpp"
 
 typedef struct	s_server
