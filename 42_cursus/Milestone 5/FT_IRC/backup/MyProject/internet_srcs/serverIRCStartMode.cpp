@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 18:12:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/06 13:13:43 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/06 15:20:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	addNewClient(void)
 		return ;
 	}
 	ircserver->fds[index].fd = ircserver->clFD;
-	ircserver->fds[index].events = POLLIN;
+	ircserver->fds[index].events = POLLIN | POLLOUT;
 	fcntl(ircserver->clFD, F_SETFL, O_NONBLOCK);
 	ircserver->nclFD++;
 	std::cout << BRIGHT_GREEN "New Client added: " << YELLOW << ircserver->clFD << RESET << std::endl;
