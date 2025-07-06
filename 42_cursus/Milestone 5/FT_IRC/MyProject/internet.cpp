@@ -87,7 +87,10 @@ static void	handleSignal(int signal)
 		while (index < 1024)
 		{
 			if (ircserver->fds[index].fd != -1)
+			{
 				close(ircserver->fds[index].fd);
+				ircserver->fds[index].fd = -1;
+			}
 			index++;
 		}
 	}
@@ -132,8 +135,7 @@ int	main(int argc, char **argv)
 		if (ircserver->running && listen(ircserver->serverIRC, 10) == 0)
 		{
 			std::cout << LIGHT_BLUE "Listen Mode Started =D" RESET << std::endl;
-			while (ircserver->running)
-				serverIRCStartMode();
+			serverIRCStartMode();
 		}
 		else
 		{

@@ -35,6 +35,10 @@ typedef struct	s_server
 	int	opt;
 	bool	running;
 	int	timeout;
+	std::string	clientMessage;
+	std::string	serverMessage;
+	char	buffer[513];
+	ssize_t	bytes;
 }	t_server;
 
 int	atoiIRC(const char *port, int *err);
