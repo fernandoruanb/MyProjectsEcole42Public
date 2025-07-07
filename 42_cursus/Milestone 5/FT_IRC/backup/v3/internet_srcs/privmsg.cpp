@@ -1,40 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   broadcast.cpp                                      :+:      :+:    :+:   */
+/*   privmsg.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/06 12:09:31 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/06 21:06:57 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/07/06 12:35:11 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/07/06 13:02:46 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../internet.hpp"
 
-void	broadcast(const int sender)
+void	privmsg(const int target, const std::string message)
 {
 	t_server	*ircserver = getServer();
-	nfds_t	index;
-	ssize_t	bytes;
-	std::string	temp;
 
-	index = 1;
-	bytes = 1;
-
-	if (!ircserver->sendBuffer[sender].empty())
-	{
-		while (index < ircserver->nclFD)
-		{
-			if (ircserver->fds[index].fd == ircserver->fds[sender].fd)
-			{
-				index++;
-				continue ;
-			}
-			ircserver->sendBuffer[index] += ircserver->sendBuffer[sender];
-			ircserver->fds[index].events |= POLLOUT;
-			index++;
-		}
-		ircserver->sendBuffer[sender].clear();
-	}
+	if (ircserver->running && target != 0 && ircserver->fds[target].fd != -1)
+		send(ircserver->fds[target].fd, message.c_str(), message.size(), 0);
 }
