@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:45:17 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/04 21:49:37 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/07 18:31:08 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	main(int argc, char **argv)
 	signal(SIGTERM, handleSignal);
 	if (ircserver->serverIRC == -1)
 	{
-		std::cerr << "Error: socket didn't start" << std::endl;
+		std::cerr << RED "Error: socket didn't start" RESET << std::endl;
 		return (1);
 	}
 	fcntl(ircserver->serverIRC, F_SETFL, O_NONBLOCK);
