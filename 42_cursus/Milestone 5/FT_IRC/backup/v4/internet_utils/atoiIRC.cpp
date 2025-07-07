@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   privmsg.cpp                                        :+:      :+:    :+:   */
+/*   atoiIRC.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/06 12:35:11 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/06 21:31:59 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/07/04 16:15:03 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/07/04 18:08:57 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../internet.hpp"
 
-void	privmsg(const int target, const std::string message)
+int	atoiIRC(const char *port, int *err)
 {
-	t_server	*ircserver = getServer();
+	long	result;
+	int	index;
 
-	if (ircserver->running && ircserver->fds[target].fd != -1)
+	result = 0;
+	index = 0;
+	while (port[index] >= '0' && port[index] <= '9')
 	{
-		ircserver->sendBuffer[target] += message;
-		ircserver->fds[target].events |= POLLOUT;
+		result *= 10;
+		result += port[index] - '0';
+		if (result > 65535)
+		{
+			*err = 1;
+			return (0);
+		}
+		index++;
 	}
+	return (result);
 }
