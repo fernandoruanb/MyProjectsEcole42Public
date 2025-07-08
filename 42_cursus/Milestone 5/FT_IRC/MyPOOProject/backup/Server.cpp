@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:02:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/08 14:24:16 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/08 14:20:12 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,7 @@ Server::Server(std::string portCheck, std::string password)
 
 	} catch (std::exception &e) 
 	{
-		if (portCheck.empty())
-			portCheck = "(null)";
-		if (password.empty())
-			password = "(null)";
-		std::cerr << RED "Error: Invalid configuration (Port/Password) -> " << YELLOW << portCheck << " " << password << RESET << std::endl;
+		std::cerr << "Error: Invalid configuration (Port/Password) -> " << YELLOW << port << password << RESET << std::endl;
 	}
 }
 
