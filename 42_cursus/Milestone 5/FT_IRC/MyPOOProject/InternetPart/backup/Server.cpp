@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:02:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/08 19:09:33 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:17:19 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	Server::getNumberOfClients(void) const
 
 void	Server::handleSignal(int signal)
 {
-	struct pollfd (&fds)[1024] = getMyFds();
+	struct pollfd (&fds)[1024] = this->getPollFds();
 	int	index;
 
 	index = 0;

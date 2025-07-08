@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:34:33 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/08 18:22:59 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:14:47 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ class	Server
 		void	broadcast(int index);
 		void	privmsg(int index, std::string message);
 		void	chargePrivileges(int target);
-		void	handleSignal(int signal);
+		static void	handleSignal(int signal);
 };
 std::ofstream operator<<(std::ostream &out, const Server &other);
 #endif /* SERVER_HPP */
