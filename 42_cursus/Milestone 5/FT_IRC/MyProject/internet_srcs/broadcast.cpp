@@ -16,11 +16,9 @@ void	broadcast(const int sender)
 {
 	t_server	*ircserver = getServer();
 	nfds_t	index;
-	ssize_t	bytes;
 	std::string	temp;
 
 	index = 1;
-	bytes = 1;
 
 	if (!ircserver->sendBuffer[sender].empty())
 	{

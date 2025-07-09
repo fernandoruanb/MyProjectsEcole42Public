@@ -45,6 +45,9 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 
+run: all
+	@valgrind --track-origins=yes --show-leak-kinds=all --track-fds=yes --leak-check=full ./ircserver 6667 12345
+
 # restart
 
 re: fclean all

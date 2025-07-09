@@ -28,14 +28,14 @@ class	Server
 {
 	private:
 		Server(void);
-		struct pollfd fds[1024];
+		struct pollfd (*fds)[1024];
 		std::string	recvBuffer[1024];
 		std::string	sendBuffer[1024];
 		int	serverIRC;
 		int	numClients;
 		int	port;
 		std::string	password;
-		bool	running;
+		bool	*running;
 	public:
 		Server(std::string portCheck, std::string password);
 		~Server(void);
@@ -60,7 +60,7 @@ class	Server
 		void	broadcast(int index);
 		void	privmsg(int index, std::string message);
 		void	chargePrivileges(int target);
-		void	handleSignal(int signal);
+		static void	handleSignal(int signal);
 };
 std::ofstream operator<<(std::ostream &out, const Server &other);
 #endif /* SERVER_HPP */
