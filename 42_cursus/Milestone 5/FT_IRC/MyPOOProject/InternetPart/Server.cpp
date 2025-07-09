@@ -12,17 +12,94 @@
 
 #include "Server.hpp"
 
-static bool	*getRunning(void)
-{
-	static bool running = true;
-	return (&running);
-}
-
 static struct pollfd(*getMyFds(void))[1024]
 {
 	static struct pollfd	fds[1024];
 
 	return (&fds);
+}
+
+void	Server::PollServerRoom(void)
+{
+	sockaddr_in	client;
+	socklen_t	client_len;
+	struct pollfd (&fds)[1024] = *getMyFds();
+	int	newClient;
+
+	client_len = sizeof(client);
+
+	if (*this->running && fds[0].revents & POLLIN)
+	{
+		newClient = accept(this->serverIRC, (struct sockaddr *)&client, &client_len);
+		if (newClient != -1)
+			this->addNewClient(newClient);
+	}
+}
+
+void	Server::PollInputClientMonitoring(void)
+{
+	int	index;
+	ssize_t	bytes;
+	char	buffer[513];
+	struct pollfd (&fds)[1024] = *getMyFds();
+
+	index = 1;
+	while (*this->running && index < this->numClients && fds[index].fd != -1)
+	{
+		if (fds[index].revents & POLLIN)
+		{
+			bytes = recv(fds[index].fd, buffer, 512, 0);
+			if (bytes > 0)
+			{
+				buffer[bytes] = '\0';
+				std::cout << BRIGHT_GREEN "Client: " << YELLOW << fds[index].fd << LIGHT_BLUE << " " << buffer << RESET << std::endl;
+				this->recvBuffer[index] = buffer;
+				this->sendBuffer[index].clear();
+				this->sendBuffer[index] += buffer;
+				this->broadcast(index);
+                               	this->privmsg(index - 1, "You are very special =D\n");
+				fds[index].events |= POLLOUT;
+			}
+			if (bytes == 0)
+			{
+				std::cout << LIGHT_BLUE "Client " << YELLOW << fds[index].fd << LIGHT_BLUE " disconnected" << RESET << std::endl;
+				close(fds[index].fd);
+				fds[index].fd = fds[numClients - 1].fd;
+				fds[numClients - 1].fd = -1;
+				fds[numClients - 1].events = 0;
+				this->manageBuffers(index);
+				this->numClients--;
+			}
+		}
+		index++;
+	}
+}
+
+void	Server::PollOutMonitoring(void)
+{
+	int	index;
+	ssize_t	bytes;
+	struct pollfd (&fds)[1024] = *getMyFds();
+
+	index = 0;
+	while (*this->running && index < this->numClients && fds[index].fd != -1)
+	{
+		if (fds[index].revents & POLLOUT)
+		{
+			bytes = send(fds[index].fd, this->sendBuffer[index].c_str(), sendBuffer[index].size(), 0);
+			if (bytes > 0)
+				this->sendBuffer[index].erase(0, bytes);
+			if (this->sendBuffer[index].empty())
+				fds[index].events &= ~POLLOUT;
+		}
+		index++;
+	}
+
+}
+static bool	*getRunning(void)
+{
+	static bool running = true;
+	return (&running);
 }
 
 Server::~Server(void)
@@ -247,19 +324,12 @@ void	Server::addNewClient(int clientFD)
 
 void	Server::startIRCService(void)
 {
-	sockaddr_in	client;
-	socklen_t	client_len;
-	char	buffer[513];
 	this->startPollFds();
 	struct pollfd (&fds)[1024] = *getMyFds();
 	int	ready;
-	int	newClient;
-	int	index;
-	ssize_t	bytes;
 
 	fds[0].fd = getServerIRC();
 	fds[0].events = POLLIN;
-	client_len = sizeof(client);
 
 	while (*this->running)
 	{
@@ -271,61 +341,15 @@ void	Server::startIRCService(void)
 				continue ;
 			this->shutdownService();
 		}
-		if (*this->running && fds[0].revents & POLLIN)
-		{
-			newClient = accept(this->serverIRC, (struct sockaddr *)&client, &client_len);
-			if (newClient != -1)
-				this->addNewClient(newClient);
-		}
-		index = 0;
-		while (*this->running && index < this->numClients && fds[index].fd != -1)
-		{
-			if (fds[index].revents & POLLIN)
-			{
-				bytes = recv(fds[index].fd, buffer, 512, 0);
-				if (bytes > 0)
-				{
-					buffer[bytes] = '\0';
-					std::cout << BRIGHT_GREEN "Client: " << YELLOW << fds[index].fd << LIGHT_BLUE << " " << buffer << RESET << std::endl;
-					this->recvBuffer[index] = buffer;
-					this->sendBuffer[index].clear();
-					this->sendBuffer[index] += buffer;
-					this->broadcast(index);
-                                	this->privmsg(index - 1, "You are very special =D\n");
-					fds[index].events |= POLLOUT;
-				}
-				if (bytes == 0)
-				{
-					std::cout << LIGHT_BLUE "Client " << YELLOW << fds[index].fd << LIGHT_BLUE " disconnected" << RESET << std::endl;
-					close(fds[index].fd);
-					fds[index].fd = fds[numClients - 1].fd;
-					fds[numClients - 1].fd = -1;
-					fds[numClients - 1].events = 0;
-					this->manageBuffers(index);
-					this->numClients--;
-				}
-			}
-			index++;
-		}
-		index = 0;
-		while (*this->running && index < this->numClients && fds[index].fd != -1)
-		{
-			if (fds[index].revents & POLLOUT)
-			{
-				bytes = send(fds[index].fd, this->sendBuffer[index].c_str(), sendBuffer[index].size(), 0);
-				if (bytes > 0)
-					this->sendBuffer[index].erase(0, bytes);
-				if (this->sendBuffer[index].empty())
-					fds[index].events &= ~POLLOUT;
-			}
-			index++;
-		}
+		this->PollServerRoom();
+		this->PollInputClientMonitoring();
+		this->PollOutMonitoring();
 	}	
 }
 
 void	Server::broadcast(int sender)
 {
-	struct pollfd (&fds)[1024] = getPollFds();
+	struct pollfd (&fds)[1024] = *getMyFds();
 	int	index;
 
 	index = 1;
@@ -348,7 +372,7 @@ void	Server::broadcast(int sender)
 
 void	Server::privmsg(int index, std::string message)
 {
-	struct pollfd (&fds)[1024] = getPollFds();
+	struct pollfd (&fds)[1024] = *getMyFds();
 
 	if (message.empty() || index < 0 || fds[index].fd == -1)
 		return ;

@@ -60,39 +60,11 @@ class	Server
 		void	broadcast(int index);
 		void	privmsg(int index, std::string message);
 		void	chargePrivileges(int target);
+		void	PollServerRoom(void);
+		void	PollInputClientMonitoring(void);
+		void	PollOutMonitoring(void);
 		static void	handleSignal(int signal);
 };
 std::ofstream operator<<(std::ostream &out, const Server &other);
 
-class	Client
-{
-	private:
-		int	clientFD;
-		bool	authenticated;
-		std::string	nickname;
-		std::string	username;
-		std::string	realname;
-		std::string	bufferIn;
-		std::string	bufferOut;
-		bool	isOperator;
-		Client(const Client &other);
-		Client& operator=(const Client &other);
-	public
-		Client(void);
-		~Client(void);
-		void	setNickName(std::string nickname);
-		void	setUserName(std::string username);
-		void	setRealName(std::string realname);
-		void	setAuthenticated(bool authenticated);
-		void	setClientFD(int clientFD);
-		int	getClientFD(void) const;
-		bool	getAuthenticated(void) const;
-		std::string	getNickName(void) const;
-		std::string	getUserName(void) const;
-		std::string	getRealName(void) const;
-		std::string	getBufferIn(void) const;
-		std::string	getBufferOut(void) const;
-		bool	getIsOperator(void) const;
-};
-std::ofstream operator<<(std::ostream &out, const Client &other);
 #endif /* SERVER_HPP */
