@@ -15,6 +15,8 @@ INCDIR = .
 # SRCS
 
 SRCS =  Server.cpp \
+	Client.cpp \
+	Channel.cpp \
 	main.cpp
 
 # OBJS
