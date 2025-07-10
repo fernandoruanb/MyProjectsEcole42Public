@@ -13,14 +13,6 @@
 #ifndef CHANNEL_HPP
 # define CHANNEL_HPP
 
-# include <set>
-# include <iostream>
-# include <string>
-# include "Server.hpp"
-# include "Client.hpp"
-
-class Client;
-
 class	Channel
 {
 	private:
@@ -36,7 +28,7 @@ class	Channel
 		Channel(const Channel &other);
 		Channel& operator=(const Channel &other);
 	public:
-		Channel(std::string name);
+		Channel(void);
 		~Channel(void);
 		void	setName(std::string name);
 		void	setTopic(std::string topic);

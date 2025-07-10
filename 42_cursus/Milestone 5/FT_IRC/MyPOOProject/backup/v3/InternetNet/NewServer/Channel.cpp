@@ -12,13 +12,6 @@
 
 #include "Channel.hpp"
 
-Channel::Channel(std::string name): name(name)
-{
-	std::cout << LIGHT_BLUE "Channel " << YELLOW << name << LIGHT_BLUE << "created" << RESET << std::endl;
-}
-
-Channel::~Channel(void) {}
-
 void	Channel::setName(std::string name)
 {
 	this->name = name;
@@ -36,7 +29,7 @@ void	Channel::setPassWord(std::string password)
 
 void	Channel::setUserLimit(int userlimit)
 {
-	this->userLimit = userlimit;
+	this->userlimit = userlimit;
 }
 
 void	Channel::setInviteFlag(bool inviteflag)
@@ -61,15 +54,15 @@ std::string	Channel::getTopic(void) const
 
 std::string	Channel::getPassWord(void) const
 {
-	return (password);
+	return (void);
 }
 
-bool	Channel::getInviteFlag(void) const
+std::string	Channel::getInviteFlag(void) const
 {
 	return (inviteFlag);
 }
 
-bool	Channel::getTopicFlag(void) const
+std::string	Channel::getTopicFlag(void) const
 {
 	return (topicFlag);
 }

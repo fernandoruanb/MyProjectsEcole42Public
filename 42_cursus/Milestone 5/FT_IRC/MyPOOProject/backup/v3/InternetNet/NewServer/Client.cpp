@@ -12,16 +12,6 @@
 
 #include "Client.hpp"
 
-Client::Client(int clientFD): clientFD(clientFD)
-{
-	std::cout << LIGHT_BLUE << "Constructor Client* Called" << RESET << std::endl;
-}
-
-Client::~Client(void)
-{
-	std::cout << LIGHT_BLUE "Destructor called for Client *" RESET << std::endl;
-}
-
 void	Client::setNickName(std::string nickname)
 {
 	this->nickname = nickname;
@@ -52,12 +42,12 @@ std::string	Client::getNickName(void) const
 	return (nickname);
 }
 
-int	Client::getClientFD(void) const
+std::string	Client::getClientFD(void) const
 {
-	return (clientFD);
+	return (clientfd);
 }
 
-bool	Client::getAuthenticated(void) const
+std::string	Client::getAuthenticated(void) const
 {
 	return (authenticated);
 }

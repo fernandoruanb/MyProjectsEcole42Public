@@ -13,15 +13,10 @@
 #ifndef CLIENT_HPP
 # define CLIENT_HPP
 
-# include <iostream>
-# include <string>
-# include "Server.hpp"
-
 class	Client
 {
 	private:
 		int	clientFD;
-		int	index;
 		bool	authenticated;
 		std::string	nickname;
 		std::string	username;
@@ -31,9 +26,8 @@ class	Client
 		bool	isOperator;
 		Client(const Client &other);
 		Client& operator=(const Client &other);
+	public
 		Client(void);
-	public:
-		Client(int clientFD);
 		~Client(void);
 		void	setNickName(std::string nickname);
 		void	setUserName(std::string username);
