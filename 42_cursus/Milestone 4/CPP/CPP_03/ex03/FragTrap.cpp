@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:47:51 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/04/14 11:32:01 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/19 16:42:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 FragTrap::~FragTrap()
 {
 	std::cout << "FragTrap destructor called for " << name << " FragTrap" << std::endl;
+}
+
+int	FragTrap::getAttackDamage(void) const
+{
+	return (attack_damage);
 }
 
 FragTrap::FragTrap(const FragTrap &other)

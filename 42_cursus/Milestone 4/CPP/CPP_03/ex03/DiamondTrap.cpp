@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 22:05:27 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/21 16:01:20 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/19 16:40:46 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 DiamondTrap::DiamondTrap(void) : ClapTrap("Bob_clap_name"), ScavTrap("Bob_scav_name"), FragTrap("Bob_frag_name")
 {
 	std::cout << "DiamondTrap empty default constructor called for " << "Bob_aleatory" << " DiamondTrap" << std::endl;
-	this->energy = 50;
-	this->hit_points = 100;
-	this->attack_damage = 30;
+	this->energy = ClapTrap::get_energy();
+	this->hit_points = ScavTrap::getHitPoints();
+	this->attack_damage = FragTrap::getAttackDamage();
 	this->name = "Bob";
 }
 
