@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:24:03 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/05/21 15:59:11 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:54:38 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(void)
 	DiamondTrap d2;
 
 	std::cout << "Name: " << d1.get_name() << std::endl;
-        std::cout << "Hit Points: " << d1.get_hit_points() << std::endl;
+        std::cout << "Hit Points: " << d1.getHitPoints() << std::endl;
         std::cout << "Energy: " << d1.get_energy() << std::endl;
         std::cout << "Attack_Damage: " << d1.get_attack_damage() << std::endl;
 	d1.guardGate();

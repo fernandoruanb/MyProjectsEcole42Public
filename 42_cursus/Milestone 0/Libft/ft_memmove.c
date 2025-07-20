@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:38:15 by fruan-ba          #+#    #+#             */
-/*   Updated: 2024/10/22 16:00:30 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/07/19 22:49:14 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include <stdio.h>*/
 #include "libft.h"
 
-/*void	*ft_memmove(void *dest, const void *src, size_t n);
+//void	*ft_memmove(void *dest, const void *src, size_t n);
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	char	*result;
 	char	*result2;
@@ -55,11 +55,10 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 
 /*int	main(void)
 {
-	char	dest[50] = "Fernando";
+	char	dest[50] = "ASDFG";
 	char	*result;
 
-	result = ft_memmove(dest + 1, dest, 8);
+	result = ft_memmove(dest + 2, dest, 3);
 	printf("Wow! That's work perfectly!!! %s.\n", result);
 	return (0);
-}
-*/
+}*/
