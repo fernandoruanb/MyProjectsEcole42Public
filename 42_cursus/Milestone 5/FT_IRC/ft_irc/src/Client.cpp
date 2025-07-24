@@ -6,17 +6,17 @@
 /*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 16:06:24 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/15 16:53:16 by jopereir         ###   ########.fr       */
+/*   Updated: 2025/07/24 10:47:30 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Client.hpp"
+#include "../includes/Client.hpp"
 #include <iostream>
 #include <ostream>
-#include "colours.hpp"
+#include "../includes/colours.hpp"
 
 Client::Client(int fd)
-	: channelOfTime(0), clientFD(fd), authenticated(false), registered(false), isOperator(false)
+	: channelOfTime(0), clientFD(fd), authenticated(false), registered(false), isOperator(false), nickname("*"), username("*"), host("localhost"), mode("+")
 {
 	std::cout << LIGHT_BLUE << "Constructor Client* Called in fd: " MAGENTA << fd << RESET << std::endl;
 }
@@ -141,6 +141,11 @@ std::set<std::string>&	Client::getOperatorChannels(void)
 	return (operatorChannels);
 }
 
+std::string	(&Client::getSendHistory(void))[1024]
+{
+	return (sendHistory);
+}
+
 std::ostream& operator<<(std::ostream &out, const Client &other)
 {
     out << YELLOW "Client("
@@ -159,7 +164,18 @@ void			Client::setServerName(const std::string& name)
 {
 	this->serverName = name;
 }
+
 const std::string&	Client::getServerName(void) const
 {
 	return (this->serverName);
+}
+
+void			Client::setMode(const std::string& c)
+{
+	mode = c;
+}
+
+const std::string&		Client::getMode(void) const
+{
+	return (mode);
 }
