@@ -24,6 +24,8 @@ SRCS =	utils/messages.cpp \
 		server/commands/nick.cpp \
 		server/commands/handleCommands.cpp \
 		server/commands/invite.cpp \
+		server/commands/cap.cpp \
+		server/commands/whois.cpp \
 		server/commands/join.cpp \
 		server/commands/kick.cpp \
 		server/commands/kill.cpp \
@@ -39,6 +41,7 @@ SRCS =	utils/messages.cpp \
 		server/commands/quit.cpp \
 		server/commands/topic.cpp \
 		server/commands/ping.cpp \
+		server/commands/who.cpp \
 		server/Server_broadcast.cpp \
 		server/Server_channel.cpp \
 		server/Server_getters.cpp \

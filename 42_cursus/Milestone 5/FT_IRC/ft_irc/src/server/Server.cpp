@@ -6,7 +6,7 @@
 /*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:02:08 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/24 10:45:10 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/08/07 18:37:39 by jopereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,52 +15,25 @@
 #include "../includes/messages.hpp"
 #include <cstring>
 
-
-// void	handleNick(std::map<int, Client*>* clients, int fd, std::string buffer, int pollIndex) {
-	
-// }
-
-// bool Server::handleClientAuthentication(std::map<int, Client*>* clients, int fd, char* buffer, int pollIndex) {
-// 	std::map<int, Client*>::iterator it = clients->find(fd);
-// 	if (it != clients->end()) {
-// 		Client* client = it->second;
-// 		if (!client->getAuthenticated()) {
-// 			struct pollfd (&fds)[1024] = *getMyFds();
-// 			std::string input(buffer);
-// 			if (input.empty() || input == "\r" || input == "\n" || input == "\r\n") {
-// 				return true; // Ignore empty inputs
-// 			}
-// 			if (input.rfind("PASS ", 0) == 0) {
-// 				std::string pass = input.substr(5);
-// 				pass.erase(pass.find_last_not_of("\r\n") + 1);
-// 				if (pass == this->getPassword()) {
-// 					client->setAuthenticated(true);
-// 					this->sendBuffer[pollIndex].clear();
-// 					this->sendBuffer[pollIndex] += msg_notice("Authentication successful");
-// 					this->sendBuffer[pollIndex] += msg_notice("USER <username> <hostname> <servername> :<realname>");
-// 					fds[pollIndex].events |= POLLOUT;
-// 					return true;
-// 				} else {	
-// 					this->sendBuffer[pollIndex].clear();
-// 					this->sendBuffer[pollIndex] += msg_err_passwdmismatch();
-// 					fds[pollIndex].events |= POLLOUT;
-// 					return false;
-// 				}
-// 			   } else {
-// 				   this->sendBuffer[pollIndex].clear();
-// 				   this->sendBuffer[pollIndex] += msg_err_needmoreparams("PASS");
-// 				   fds[pollIndex].events |= POLLOUT;
-// 				   return false;
-// 			}
-// 		}
-// 	}
-// 	return true;
-// }
+void Server::tryRegister(s_commands& com)
+{
+    if (com.client->getAuthenticated() && com.client->hasNick() && com.client->hasUser() && !com.client->getRegistered()) {
+        com.client->setRegistered(true);
+        com.sendBuffer += msg_welcome(com.client);
+		com.sendBuffer += msg_yourhost(com.client->getNickName());
+		com.sendBuffer += msg_created(com.client->getNickName());
+		com.sendBuffer += msg_svrinfo(com.client->getNickName());
+    }
+}
 
 void	Server::addNewClient(int clientFD)
 {
 	int	index;
 	struct pollfd (&fds)[1024] = getPollFds();
+	std::map<int,Channel*>* channels = getChannelsMap();
+
+	if (channels->find(0) == channels->end())
+		((*channels)[0] = new Channel("generic"));
 	index = 1;
 	while (index < 1024)
 	{
@@ -78,8 +51,6 @@ void	Server::addNewClient(int clientFD)
 	fds[index].events = POLLIN;
 	fcntl(clientFD, F_SETFL, O_NONBLOCK);
 	this->numClients++;
-	// NOTICE message to the new client. Asking for authentication.
-	this->sendBuffer[index] = msg_notice("Connected. Please authenticate with \"PASS <password>\"");
 	fds[index].events |= POLLOUT;
 	std::cout << BRIGHT_GREEN "New Client added: " << YELLOW << clientFD << RESET << std::endl;
 }
@@ -112,7 +83,22 @@ int	Server::atoiIRC(std::string port)
 	return (result);
 }
 
-Server::Server(std::string portCheck, std::string password): numChannels(0)
+int	Server::getClientFDByNick(std::string nickname, int numClients)
+{
+	struct pollfd (&fds)[1024] = *getMyFds();
+	std::map<int, Client*>* clients = getClientsMap();
+	int	index = 1;
+
+	while (index < numClients && fds[index].fd != -1)
+	{
+		if ((*clients)[fds[index].fd]->getNickName() == nickname)
+			return (fds[index].fd);
+		++index;
+	}
+	return (-1);
+}
+
+Server::Server(std::string portCheck, std::string password): supremeKey("hunter42"), supremeUser("root"), numChannels(0)
 {
 	int	port;
 
@@ -122,18 +108,14 @@ Server::Server(std::string portCheck, std::string password): numChannels(0)
 		this->fds = getMyFds();
 		this->clients = getClientsMap();
 		this->channels = getChannelsMap();
-		(*channels)[0] = new Channel("Generic");
+		(*channels)[0] = new Channel("generic");
 		numChannels++;
-		//isso eh um test
-		// this->createNewChannel("One", 5);
-		// this->changeChannel("One", 5);
-
 		port = atoiIRC(portCheck);
 		if (port == -1)
 			throw std::exception();
 		if (password.empty())
 			throw std::exception();
-		std::cout << LIGHT_BLUE "Starting the server with your configuration 127.0.0.1:" << YELLOW <<  port << RESET << std::endl;
+		std::cout << LIGHT_BLUE "Starting the server with your configuration 127.0.0.1:" << YELLOW << port << RESET << std::endl;
 		init(port, password);
 
 	} catch (std::exception &e) 
@@ -176,7 +158,6 @@ void	Server::handleSignal(int signal)
 		std::map<int, Channel*>::iterator it = channels->find(index);
 		while (it != channels->end())
 		{
-
 			if (it == channels->end())
 				break ;
 			delete it->second;
@@ -186,6 +167,27 @@ void	Server::handleSignal(int signal)
 	}
 }
 
+void	Server::removeOperatorPower(int clientFD, std::string channel)
+{
+	std::map<int,Channel*>* channels = getChannelsMap();
+	std::map<int,Client*>* clients = getClientsMap();
+	int	channelsIndex;
+	int	clientsIndex;
+
+	channelsIndex = getChannelsIndex(channel);
+	clientsIndex = getClientsIndex(clientFD);
+
+	if (channelsIndex == -1)
+		return ;
+	if (clientsIndex == -1)
+		return ;
+	(*channels)[channelsIndex]->getOperatorsSet().erase(clientFD);
+	(*channels)[channelsIndex]->getMembersSet().insert(clientFD);
+	(*clients)[clientFD]->getOperatorChannels().erase(channel);
+	(*clients)[clientFD]->getChannelsSet().insert(channel);
+	if ((*clients)[clientFD]->getOperatorChannels().size() == 0)
+		(*clients)[clientFD]->setIsOperator(false);
+}
 void	Server::init(int port, std::string password)
 {
 	this->setPassword(password);
@@ -301,4 +303,16 @@ int	Server::getClientsFdByName(std::string nickname)
 		++it;
 	}
 	return (-1);
+}
+
+bool	Server::isKing(int fd) const
+{
+	return (this->kingsOfIRC.find(fd) != this->kingsOfIRC.end());
+}
+
+std::ostream& operator<<(std::ostream &out, const Server &other)
+{
+	(void)other;
+	out << SERVER_NAME;
+	return (out);
 }

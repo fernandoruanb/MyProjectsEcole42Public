@@ -3,6 +3,7 @@
 s_commands::s_commands(std::string &l, std::map<int, Client*>* &c, int f, int i, std::string &a, std::string& com, std::string &buf)
 	: sendBuffer(buf), line(l), clients(c), fd(f), index(i)
 {
+	isOnline = true;
 	command = com;
 	client = NULL;
 	std::map<int, Client*>::iterator it = clients->find(fd);

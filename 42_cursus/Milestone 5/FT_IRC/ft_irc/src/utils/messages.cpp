@@ -3,24 +3,25 @@
 #include "../includes/Server.hpp"
 #include "../includes/colours.hpp"
 
-std::string msg_welcome(const std::string& nick) {
-    return ( ":" SERVER_NAME " 001 " + nick + " :Welcome to the IRC Network, " + nick + "!\r\n" );
+std::string msg_welcome(Client* &target) {
+	std::string	nick = target->getNickName();
+    return ( ":" SERVER_NAME " 001 " + nick + " :Welcome to the IRC Network, " + nick + "!" + nick + "@" + target->getHost() + "\r\n" );
 }
 
-// std::string msg_yourhost(const std::string& nick) {
-//     return ":" SERVER_NAME " 002 " + nick + " :Your host is " + SERVER_NAME + ", running version " VERSION "\r\n";
-// }
+std::string msg_yourhost(const std::string& nick) {
+    return ":" SERVER_NAME " 002 " + nick + " :Your host is " + SERVER_NAME + ", running version " VERSION "\r\n";
+}
 
-// std::string msg_created() {
-//     return ":" SERVER_NAME " 003 * :This server was created " __DATE__ " at " __TIME__ "\r\n";
-// }
+std::string msg_created(const std::string& nick) {
+    return ":" SERVER_NAME " 003 " + nick + " :This server was created " __DATE__ " at " __TIME__ "\r\n";
+}
 
-// std::string msg_svrinfo() {
-//     return ":" SERVER_NAME " 004 * " SERVER_NAME " " VERSION " :<http://www.42.fr/>\r\n";
-// } 
+std::string msg_svrinfo(const std::string& nick) {
+    return ":" SERVER_NAME " 004 " + nick + " :" SERVER_NAME " " VERSION " o o\r\n";
+}
 
-std::string msg_err_needmoreparams(const std::string& cmd) {
-    return (CYAN ":" SERVER_NAME " 461 " + cmd + YELLOW " :Not enough parameters\r\n" RESET);
+std::string msg_err_needmoreparams(const std::string& nick, const std::string& cmd) {
+    return (":" SERVER_NAME " 461 " + nick + " " + cmd + " :Not enough parameters\r\n" );
 }
 
 std::string msg_err_passwdmismatch() {
@@ -40,7 +41,7 @@ std::string msg_err_unknowncommand(const std::string& cmd) {
 }
 
 std::string msg_err_nosuchchannel(const std::string& nick, const std::string& channel) {
-    return ":" SERVER_NAME " 403 " + nick + " #" + channel + " :No such channel\r\n";
+    return ":" SERVER_NAME " 403 " + nick + " #" + channel + " :No such nick/channel\r\n";
 }
 
 std::string msg_err_notonchannel(const std::string& nick, const std::string& channel) {
@@ -56,11 +57,11 @@ std::string msg_err_channelisfull(const std::string& nick, const std::string& ch
 }
 
 std::string msg_err_chanoprivsneeded(const std::string& nick, const std::string& channel, const std::string& message) {
-    return ":" SERVER_NAME " 482 " + nick + " #" + channel + message +"\r\n";
+    return ":" SERVER_NAME " 482 " + nick + " #" + channel + " :" + message +"\r\n";
 }
 
 std::string msg_err_erroneusnickname(const std::string& nick) {
-    return ":" SERVER_NAME " 432 * " + nick + " :Erroneous nickname\r\n";
+    return ":" SERVER_NAME " 432 " + nick + " :Erroneous nickname\r\n";
 }
 
 std::string msg_err_alreadyregistered(const std::string& nick) {
@@ -68,7 +69,7 @@ std::string msg_err_alreadyregistered(const std::string& nick) {
 }
 
 std::string msg_notice(const std::string& text) {
-    return (CYAN ":" SERVER_NAME " NOTICE * : " YELLOW  + text + "\r\n" RESET);
+    return (":" SERVER_NAME " NOTICE * : " + text + "\r\n" RESET);
 }
 
 std::string	msg_error(const std::string &message, int error_code, s_commands& com)
@@ -95,7 +96,7 @@ std::string	my_notice_error(const std::string& nickname, const std::string& mess
 
 std::string	my_kick_message(const std::string& nickname, const std::string& username, const std::string& hostname, const std::string& message, const std::string& target, const std::string& channel)
 {
-	return (":" + nickname + "!" + username + "@" + hostname + " KICK " + "#" + channel + " " + target + " : " + message + "\r\n");
+	return (":" + nickname + "!" + username + "@" + hostname + " KICK " + "#" + channel + " " + target + " :" + message + "\r\n");
 }
 
 std::string	my_invite_message(const std::string& nickname, const std::string& username, const std::string& hostname, const std::string& target, const std::string& channel)
@@ -115,7 +116,7 @@ std::string	my_privmsg_message(const std::string& nickname, const std::string& u
 
 std::string	my_join_message(const std::string& nickname, const std::string& username, const std::string& hostname, const std::string& channel)
 {
-	return (":" + nickname + "!" + username + "@" + hostname + " JOIN " + " #" + channel + "\r\n");
+	return (":" + nickname + "!" + username + "@" + hostname + " JOIN " + "#" + channel + "\r\n");
 }
 
 std::string	my_join_rpl_topic(const std::string& nickname, const std::string& channel, const std::string& topic)
@@ -130,7 +131,7 @@ std::string	my_join_rpl_topic_whotime(const std::string& nick, const std::string
 
 std::string	my_join_rpl_namreply(const std::string &nick, const std::string& channel)
 {
-	return (":" SERVER_NAME " 353 " + nick + " #" + channel + " " + ":");
+	return (":" SERVER_NAME " 353 " + nick + " = #" + channel + " " + ":");
 }
 
 std::string	my_join_rpl_endofnames(const std::string &nick, const std::string& channel)
@@ -153,12 +154,170 @@ std::string	my_notonchannel(const std::string& nick, const std::string& channel,
 	return (":" SERVER_NAME " 442 " + nick + " #" + channel + " :" + message + "\r\n");
 }
 
-std::string	my_nosuchnickchannel(const std::string& nick, const std::string& target ,const std::string& channel, const std::string& message)
+std::string	my_nosuchnickchannel(const std::string& nick, const std::string& target)
 {
-	return (":" SERVER_NAME " 401 " + nick + " " + target + " #" + channel + " :" + message + "\r\n");
+	return (":" SERVER_NAME " 401 " + nick + " " + target + " :no such nick/channel" + "\r\n");
+}
+
+std::string msg_nick_changed(const std::string& nick, const std::string& requestedNick, const std::string& finalNick) {
+    return ":" SERVER_NAME " NOTICE " + nick + " :Nickname " + requestedNick + " is already in use. Using " + finalNick + " instead.\r\n";
 }
 
 std::string	my_usernotinchannel(std::string& nick, const std::string& target, const std::string& channel, const std::string& message)
 {
 	return (":" SERVER_NAME " 441 " + nick + " " + target + " #" + channel + " :" + message + "\r\n");
+}
+
+std::string msg_err_usersdontmatch(s_commands& com)
+{
+	return (
+		":" SERVER_NAME " 502 "
+		+ com.client->getNickName()
+		+ " :Cannot change mode for other users\r\n"
+	);
+}
+
+std::string msg_err_noprivileges(s_commands& com)
+{
+	return (
+		":" SERVER_NAME " 481 "
+		+ com.client->getNickName()
+		+ " :Permission Denied - You're not an IRC operator\r\n"
+	);
+}
+
+std::string	msg_err_unknownmode(s_commands&com, char mode)
+{
+	return (
+		":" SERVER_NAME " 472 "
+		+ com.client->getNickName()
+		+ " "
+		+ std::string(1, mode)
+		+ " :is unknown mode char to me\r\n"
+	);
+}
+
+std::string	msg_mode_userwelldone(s_commands& com, Client* &target)
+{
+	return (
+		":"
+		+ com.client->getNickName()
+		+ " MODE "
+		+ target->getNickName()
+		+ " "
+		+ com.args[1]
+		+ "\r\n"
+	);
+}
+
+std::string	msg_showusermodes(s_commands& com, Client* &target)
+{
+	return (
+		":" SERVER_NAME " 221 "
+		+ com.client->getNickName()
+		+ " +"
+		+ target->getMode(com.client->getChannelOfTime())
+		+ "\r\n"
+	);
+}
+
+std::string	msg_showchannelmodes(s_commands& com, Channel* &target, const std::string& modes)
+{
+	return (
+		":" SERVER_NAME " 324 "
+		+ com.client->getNickName()
+		+ " #"
+		+ target->getName()
+		+ " "
+		+ modes
+		+ "\r\n"
+	);
+}
+
+std::string	msg_quit(s_commands& com, const std::string &message)
+{
+	return (
+		":"
+		+ com.client->getNickName()
+		+ "!"
+		+ com.client->getUserName()
+		+ "@"
+		+ com.client->getHost()
+		+ " QUIT :"
+		+ message
+		+ "\r\n"
+	);
+}
+
+std::string	msg_err_invalidparameter(s_commands& com, Channel*& channel)
+{
+	return (
+		":" SERVER_NAME "696 "
+		+ com.client->getNickName()
+		+ " "
+		+ channel->getName()
+		+ " :Invalid user limit\r\n"
+	);
+}
+
+std::string	msg_353(const std::string& nick, const std::string& channelName, const std::string& names)
+{
+	return (
+		":" SERVER_NAME " 353 "
+		+ nick
+		+ " = #"
+		+ channelName
+		+ " :"
+		+ names
+		+ "\r\n"
+	);
+}
+
+std::string	msg_366(const std::string& nick, const std::string& channelName)
+{
+	return (
+		":" SERVER_NAME " 366 "
+		+ nick
+		+ " #"
+		+ channelName
+		+ " :End of /NAMES list.\r\n"
+	);
+}
+
+std::string	msg_endlist(const std::string& nick)
+{
+	return (
+		":" SERVER_NAME " 323 "
+		+ nick
+		+ " :End of /LIST\r\n"
+	);
+}
+
+std::string	msg_showtopic(const std::string& channelName, const std::string& size, const std::string& topic, const std::string& nick)
+{
+	return (
+		":" SERVER_NAME " 322 "
+		+ nick
+		+ " #"
+		+ channelName
+		+ " "
+		+ size
+		+ " :"
+		+ topic
+		+ "\r\n"
+	);
+}
+std::string	msg_badchannelkey(const std::string& nick, const std::string& channelName)
+{
+	return (
+		":" SERVER_NAME " 475 "
+		+ nick
+		+ " #"
+		+ channelName
+		+ " :Cannot join channel (+k)\r\n"
+	);
+}
+
+std::string msg_err_nosuchnick(const std::string& nick, const std::string& target) {
+    return ":" SERVER_NAME " 401 " + nick + " " + target + " :No such nick/channel\r\n";
 }

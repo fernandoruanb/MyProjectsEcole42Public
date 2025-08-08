@@ -13,7 +13,7 @@ void	Server::startPollFds(void)
 		fds[index].fd = -1;
 		index++;
 	}
-}	
+}
 
 void	Server::PollServerRoom(void)
 {
@@ -33,28 +33,33 @@ void	Server::PollServerRoom(void)
 	}
 }
 
-static bool	checkSignUp(Client* &client, std::string &sendBuffer, int i)
+static void	cleanEnd(std::string& line)
 {
-	struct pollfd (&fds)[1024] = *getMyFds();
-
-	// if (!client->getAuthenticated()) {
-	// 	sendBuffer += msg_err_notregistered();
-	// 	fds[i].events |= POLLOUT;
-	// 	std::cout << RED "Client not authenticated, sending error message." RESET << std::endl;
-	// 	return (false);
-	// }
-	if (!client->getRegistered() || client->getNickName() == "*")
+	while (!line.empty())
 	{
-		sendBuffer += msg_err_notregistered();
-		sendBuffer += msg_notice("Please assure the following commands are set:");
-		sendBuffer += msg_notice("Password: PASS <password>");
-		sendBuffer += msg_notice("Nick: NICK <nickname>");
-		sendBuffer += msg_notice("User: USER <username> <hostname> <servername> : <realname>");
-		std::cout << RED "Client not registered, sending error message." RESET << std::endl;
-		fds[i].events |= POLLOUT;
-		return (false);
+		char	lastChar = line[line.size() - 1];
+
+		if (lastChar == '\r' || lastChar == '\n' || lastChar == ' ')
+		 	line.resize(line.size() - 1);
+		else
+			break;
 	}
-	return (true);
+}
+
+static std::string	getFirstArg(std::string &line)
+{
+	line.erase(0, line.find_first_not_of(" \t\r\n"));
+	if (line.empty())
+		return ("");
+
+	size_t	pos = line.find(' ');
+	std::string	result = line.substr(0, pos);
+
+	for (size_t i = 0; i < result.size(); i++)
+		if (!std::isprint(result[i]))
+			return ("");
+
+	return (result);
 }
 
 void	Server::PollInputClientMonitoring(void)
@@ -73,7 +78,7 @@ void	Server::PollInputClientMonitoring(void)
 		   bytes = recv(fds[index].fd, buffer, 512, 0);
 			if (bytes > 0) {
 				buffer[bytes] = '\0';
-				this->recvBuffer[index] += buffer; // Acumula o que chegou
+				this->recvBuffer[index] += buffer;
 
 				size_t pos;
 				while ((pos = this->recvBuffer[index].find('\n')) != std::string::npos)
@@ -82,17 +87,16 @@ void	Server::PollInputClientMonitoring(void)
 					this->recvBuffer[index].erase(0, pos + 1);
 
 					std::string	name = (*clients)[fds[index].fd]->getUserName();
-					std::cout << BRIGHT_GREEN << (name.empty() ? "Client": name) << ": " << YELLOW << fds[index].fd << LIGHT_BLUE << " " << line << RESET << std::endl;
-
+					std::cout << BRIGHT_GREEN << (name.empty() ? "Client": name) << ": " << YELLOW << fds[index].fd << LIGHT_BLUE << " " << line << RESET << std::endl;					
 					Client* client = (*clients)[fds[index].fd];
 					if (handleCommands(clients, line, fds[index].fd, index)
-						|| !checkSignUp(client, this->sendBuffer[index], index))
+						|| client->getRegistered() == false)
 						continue;
 
-					this->sendBuffer[index].clear();
-					if (!isEmptyInput(line))
-					this->sendBuffer[index] += std::string("\n:") + (*clients)[fds[index].fd]->getNickName() + "!" + (*clients)[fds[index].fd]->getUserName() + "@" + (*clients)[fds[index].fd]->getHost() + " PRIVMSG";
-					this->broadcast(index, line);
+					cleanEnd(line);
+					std::string	firstArg = getFirstArg(line);
+					if (!firstArg.empty())
+						this->sendBuffer[index] += msg_err_unknowncommand(firstArg);
 					fds[index].events |= POLLOUT;
 				}
 			}
@@ -100,6 +104,13 @@ void	Server::PollInputClientMonitoring(void)
 			{
 				std::cout << LIGHT_BLUE "Client " << YELLOW << fds[index].fd << LIGHT_BLUE " disconnected" << RESET << std::endl;
 				std::map<int, Client*>::iterator it = clients->find(fds[index].fd);
+				removeAllChannelsOfClient(it->first);
+				(*clients)[it->first]->setAuthenticated(false);
+				(*clients)[it->first]->setRegistered(false);
+				(*clients)[it->first]->setNickName("*");
+				(*clients)[it->first]->setUserName("*");
+				(*clients)[it->first]->setHost("localhost");
+				this->kingsOfIRC.erase(it->first);
 				delete it->second;
 				close(fds[index].fd);
 				fds[index].fd = fds[numClients - 1].fd;
@@ -129,16 +140,6 @@ void	Server::PollOutMonitoring(void)
 		if (fds[index].revents & POLLOUT)
 		{
 			it = clients->find(fds[index].fd);
-
-			/*
-				This is a test-doesn't workd properly
-				what it does
-					shows
-					Me: <your input>
-				uncomment if u want to see
-			*/
-			// if (this->sendBuffer[index].find(":") == std::string::npos)
-			// 	this->sendBuffer[index] = std::string(GREEN) + "Me: " + RESET + this->sendBuffer[index];
 			bytes = send(fds[index].fd, this->sendBuffer[index].c_str(), sendBuffer[index].size(), 0);
 			if (bytes > 0)
 				this->sendBuffer[index].erase(0, bytes);

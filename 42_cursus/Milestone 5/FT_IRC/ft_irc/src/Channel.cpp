@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jopereir <jopereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 16:36:43 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/07/23 17:28:45 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/08/07 18:39:44 by jopereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ int		Channel::getMembersNum(void) const
 	return (membersNum);
 }
 
-std::string	Channel::getTimeStamp(void) const
+std::string&	Channel::getTimeStamp(void)
 {
 	return (timestamp);
 }
 
-std::string	Channel::getOwnerTopic(void) const
+std::string&	Channel::getOwnerTopic(void)
 {
 	return (ownerTopic);
 }
@@ -111,15 +111,20 @@ void	Channel::setOwnerTopic(std::string nick)
 
 void	Channel::addNewMember(int clientFD)
 {
+	std::cout << LIGHT_BLUE "Client " << YELLOW << clientFD << LIGHT_BLUE " added to " << YELLOW << this->name << LIGHT_BLUE " Channel" << RESET << std::endl;
 	this->members.insert(clientFD);
-	++membersNum;
+	this->getOperatorsNames();
+	membersNum = this->getOperatorsSet().size() + this->getMembersSet().size();
 }
 
 void	Channel::removeMember(int clientFD)
 {
 	std::cout << LIGHT_BLUE "Client " << YELLOW << clientFD << LIGHT_BLUE " removed from " << YELLOW << this->name << LIGHT_BLUE " Channel" RESET << std::endl;
 	this->members.erase(clientFD);
-	--membersNum;
+	this->getMembersSet().erase(clientFD);
+	this->getOperatorsSet().erase(clientFD);
+	this->getOperatorsNames();
+	membersNum = this->getOperatorsSet().size() + this->getMembersSet().size();
 }
 
 Channel::Channel(std::string name): name(name), topic("We love IRC"), userLimit(1024), membersNum(0), inviteFlag(false), topicFlag(false)
@@ -175,17 +180,17 @@ void	Channel::setTopicFlag(bool topicflag)
 	this->topicFlag = topicflag;
 }
 
-std::string	Channel::getName(void) const
+std::string&	Channel::getName(void)
 {
 	return (name);
 }
 
-std::string	Channel::getTopic(void) const
+std::string&	Channel::getTopic(void)
 {
 	return (topic);
 }
 
-std::string	Channel::getPassWord(void) const
+std::string&	Channel::getPassWord(void)
 {
 	return (password);
 }
@@ -208,4 +213,19 @@ void	Channel::setMode(const std::string& mod)
 const std::string&	Channel::getMode(void) const
 {
 	return (mode);
+}
+
+void	Channel::setOperator(int fd)
+{
+	this->operators.insert(fd);	
+}
+void	Channel::setMembersNum(int n)
+{
+	this->membersNum = n;
+}
+
+std::ostream&	operator<<(std::ostream &out, Channel &other)
+{
+	out << other.getName();
+	return (out);
 }

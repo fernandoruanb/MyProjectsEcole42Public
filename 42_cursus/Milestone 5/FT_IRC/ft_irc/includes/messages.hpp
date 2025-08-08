@@ -2,12 +2,14 @@
 #include <string>
 
 struct	s_commands;
+class	Client;
+class	Channel;
 
-std::string msg_welcome(const std::string& nick);
+std::string msg_welcome(Client* &target);
 std::string msg_yourhost(const std::string& nick);
-std::string msg_created();
-std::string msg_svrinfo();
-std::string msg_err_needmoreparams(const std::string& cmd);
+std::string msg_created(const std::string& nick);
+std::string msg_svrinfo(const std::string& nick);
+std::string msg_err_needmoreparams(const std::string& nick, const std::string& cmd);
 std::string msg_err_passwdmismatch();
 std::string msg_err_nicknameinuse(const std::string& nick);
 std::string msg_err_notregistered();
@@ -18,6 +20,7 @@ std::string msg_err_usernotinchannel(const std::string nick, const std::string& 
 std::string msg_err_channelisfull(const std::string& nick, const std::string& channel);
 std::string msg_err_chanoprivsneeded(const std::string& nick, const std::string& channel, const std::string& message);
 std::string msg_err_erroneusnickname(const std::string& nick);
+std::string msg_nick_changed(const std::string& nick, const std::string& requestedNick, const std::string& finalNick);
 std::string msg_err_alreadyregistered(const std::string& nick);
 std::string msg_notice(const std::string& text);
 std::string	msg_error(const std::string &message, int error_code, s_commands& com);
@@ -34,8 +37,21 @@ std::string     my_join_rpl_topic_whotime(const std::string& nick, const std::st
 std::string     my_join_rpl_namreply(const std::string &nick, const std::string& channel);
 std::string     my_join_rpl_endofnames(const std::string &nick, const std::string &channel);
 std::string     my_part_message(const std::string& nick, const std::string& user, const std::string& host, const std::string& channel,  const std::string& message);
-std::string     my_topic_operator_error(const std::string& nick, const std::string& channel, const std::string& message);
 std::string     my_useronchannel(const std::string& owner, const std::string& nick, const std::string& channel, const std::string& message);
 std::string     my_notonchannel(const std::string& nick, const std::string& channel, const std::string& message);
-std::string     my_nosuchnickchannel(const std::string& nick, const std::string& forget,const std::string& channel, const std::string& message);
+std::string     my_nosuchnickchannel(const std::string& nick, const std::string& forget);
 std::string     my_usernotinchannel(std::string& nick, const std::string& target, const std::string& channel, const std::string& message);
+std::string 	msg_err_usersdontmatch(s_commands& com);
+std::string 	msg_err_noprivileges(s_commands& com);
+std::string		msg_err_unknownmode(s_commands&com, char mode);
+std::string	msg_mode_userwelldone(s_commands& com, Client* &target);
+std::string	msg_showchannelmodes(s_commands& com, Channel* &target, const std::string& modes);
+std::string	msg_showusermodes(s_commands& com, Client* &target);
+std::string	msg_quit(s_commands& com, const std::string &message);
+std::string	msg_err_invalidparameter(s_commands& com, Channel*& channel);
+std::string	msg_353(const std::string& nick, const std::string& channelName, const std::string& names);
+std::string	msg_366(const std::string& nick, const std::string& channelName);
+std::string	msg_endlist(const std::string& nick);
+std::string	msg_showtopic(const std::string& channelName, const std::string& size, const std::string& topic, const std::string& nick);
+std::string	msg_badchannelkey(const std::string& nick, const std::string& channelName);
+std::string msg_err_nosuchnick(const std::string& nick, const std::string& target);

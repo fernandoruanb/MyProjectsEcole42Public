@@ -1,45 +1,80 @@
 #include "../includes/Server.hpp"
 
-static std::string	getNames(Channel* channel, s_commands& com)
+static bool	setCanSee(Client* caller, Client *other, bool isOper, Channel* channel)
 {
-	std::set<int>	members = channel->getMembersSet();
-	std::set<int>	opertators = channel->getOperatorsSet();
-	std::string		result;
+	int	callerFd = caller->getClientFD();
+	int	otherFd = other->getClientFD();
 
+	bool	sameChannel =
+		(channel->isMemberOfChannel(callerFd) || channel->isOperatorOfChannel(callerFd))
+		&& (channel->isMemberOfChannel(otherFd) || channel->isOperatorOfChannel(otherFd));
+
+	return (isOper || caller->getNickName() == other->getNickName() || sameChannel);
+}
+
+static std::string	fillResult(const std::set<int> &members, s_commands& com, bool canSee, Channel* channel, bool flag = false)
+{
 	std::set<int>::const_iterator it;
+	std::string	result;
+
 	for (it = members.begin(); it != members.end(); it++)
 	{
 		int	fd = *it;
 		Client	*client = NULL;
+		bool	myCanSee = false;
 
 		std::map<int, Client*>::iterator	cit = com.clients->find(fd);
 		if (cit != com.clients->end())
 			client = cit->second;
 		
-		if (client && !findMode(client->getMode(), 'i'))
-			result += (findMode(client->getMode(), 'o') ? "@": "") + client->getNickName() + " ";
-		
-		std::cout << "cliente[" << client->getNickName() << "] esta: " << client->getChannelOfTime() << std::endl;
+		if (client)
+		{
+			myCanSee = setCanSee(com.client, client, canSee, channel);
+			if ((!client->getIsInvisible()) || myCanSee)
+				result += (flag ? "@" : "") + client->getNickName() + " ";
+		}
 	}
 
 	return (result);
 }
 
-static void	showAllNames(s_commands& com, std::map<int, Channel*>* &channels)
+static std::string	getNames(Channel* channel, s_commands& com, bool canSee)
+{
+	std::string		result;
+
+	if (!channel)
+		return (result);
+
+	std::set<int>	members = channel->getMembersSet();
+	
+
+	result = fillResult(members, com, canSee, channel);
+	result += fillResult(channel->getOperatorsSet(), com, canSee, channel, 1);
+	
+	return (result);
+}
+
+static void	showAllNames(s_commands& com, std::map<int, Channel*>* &channels, bool canSee)
 {
 	std::string	names;
+	std::string	nick = com.client->getNickName();
+	std::string	channelName;
 
 	std::map<int, Channel*>::iterator it;
 	for (it = channels->begin(); it != channels->end(); it++)
-		names += getNames(it->second, com);
-
-	callCmdMsg(names, 353, com, com.sendBuffer);
+	{
+			channelName = it->second->getName();
+			names = getNames(it->second, com, canSee);
+			com.sendBuffer += msg_353(nick, channelName, names);
+			com.sendBuffer += msg_366(nick, channelName);
+	}
 }
 
-static void	showChannel(s_commands& com, std::map<int, Channel*>* &channels)
+static void	showChannel(s_commands& com, std::map<int, Channel*>* &channels, bool canSee)
 {
 	std::string	channelName = com.args[0].substr(1);
 	Channel	*channel = NULL;
+	std::string	nick = com.client->getNickName();
 
 	std::map<int, Channel*>::iterator it;
 	for (it = channels->begin(); it != channels->end(); it++)
@@ -50,29 +85,23 @@ static void	showChannel(s_commands& com, std::map<int, Channel*>* &channels)
 		}
 
 	if (!channel)
-		return (callCmdMsg("No such channel", 401, com, com.sendBuffer));
+	{
+		com.sendBuffer += my_nosuchnickchannel(nick, channelName);
+		return;
+	}
 	
-	std::string	names = getNames(channel, com);
-
-	callCmdMsg(names, 353, com, com.sendBuffer);
+	std::string	names = getNames(channel, com, canSee);
+	com.sendBuffer += msg_353(nick, channelName, names);
+	com.sendBuffer += msg_366(nick, channelName);
 }
 
-/*
-	List all users in a channel
-
-	if use NAMES - no arguments
-		shows all user in public channels
-	
-	Sintaxes
-		NAMES #channel
-		NAMES #channel,#channel2,#etc...
-
-		no spaces afters comas
-*/
 void	Server::names(s_commands& com)
 {
-	if (com.args.empty())
-		return (showAllNames(com, this->channels));
-	showChannel(com, this->channels);
+	bool	canSee = (
+		this->isKing(com.client->getClientFD())
+	);
 
+	if (com.args.empty())
+		return (showAllNames(com, this->channels, canSee));
+	showChannel(com, this->channels, canSee);
 }
