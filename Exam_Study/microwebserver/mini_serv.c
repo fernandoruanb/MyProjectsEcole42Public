@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 17:23:04 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/08/09 17:23:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/08/10 11:22:45 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ static void	connectServer(t_server	*myServer)
 	}
 	bzero(&myServer->addr, sizeof(myServer->addr));
 	myServer->addr.sin_family = AF_INET;
-	myServer->addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-	myServer->addr.sin_port = htons(myServer->port);
+	myServer->addr.sin_addr.s_addr = (1 << 24) | (0 << 16) | (0 << 8) | 127;
+	myServer->addr.sin_port = (myServer->port >> 8) | ((myServer->port & 0xFF) << 8);
 	
 	if (bind(myServer->serverFD, (struct sockaddr*)&myServer->addr, sizeof(myServer->addr)) < 0)
 	{
 		write(2, err, strlen(err));
 		exit(1);
 	}
-	if (listen(myServer->serverFD, 1024) < 0)
+	if (listen(myServer->serverFD, FD_SETSIZE) < 0)
 	{
 		write(2, err, strlen(err));
 		exit(1);
