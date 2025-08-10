@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 10:17:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/08/10 14:26:45 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/08/10 16:04:54 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,10 @@ static void	findNewMax(t_server *myServer)
 			fd_max = myServer->clients[fd];
 		++fd;
 	}
-	myServer->fd_max = fd_max;
+	if (fd_max == 0)
+		fd_max = myServer->serverFD;
+	else
+		myServer->fd_max = fd_max;
 }
 
 static void	clearBuffer(t_server *myServer)
@@ -194,8 +197,7 @@ static void	startWebServer(t_server *myServer)
 	while (1)
 	{
 		clearBuffer(myServer);
-		if (fd == myServer->fd_max + 1)
-			fd = 0;
+		fd = 0;
 		read_fds = active_fds;
 		write_fds = active_fds;
 
@@ -210,53 +212,54 @@ static void	startWebServer(t_server *myServer)
 			write(2, err, strlen(err));
 			exit(1);
 		}
-		if (FD_ISSET(fd, &active_fds))
+		while (fd <= myServer->fd_max)
 		{
-			if (fd == myServer->serverFD)
+			if (FD_ISSET(fd, &read_fds))
 			{
-				clientFD = accept(myServer->serverFD, NULL, NULL);
-				if (clientFD >= 0)
+				if (fd == myServer->serverFD)
 				{
-					FD_SET(clientFD, &active_fds);
-					if (clientFD > myServer->fd_max)
-						myServer->fd_max = clientFD;
-					myServer->clients[clientFD] = myServer->next_id;
-					sprintf(msg, "client %d: just arrived\n", myServer->next_id);
-					write(1, msg, strlen(msg));
-					myServer->next_id++;
+					clientFD = accept(myServer->serverFD, NULL, NULL);
+					if (clientFD >= 0)
+					{
+						FD_SET(clientFD, &active_fds);
+						if (clientFD > myServer->fd_max)
+							myServer->fd_max = clientFD;
+						myServer->clients[clientFD] = myServer->next_id;
+						sprintf(msg, "client %d: just arrived\n", myServer->next_id);
+						write(1, msg, strlen(msg));
+						myServer->next_id++;
+					}
+					else
+					{
+						fd = 0;
+						while (fd <= myServer->fd_max)
+						{
+							if (FD_ISSET(fd, &active_fds))
+								close(fd);
+							++fd;
+						}
+						write(2, err, strlen(err));
+						exit(1);
+					}
 				}
 				else
 				{
-					fd = 0;
-					while (fd <= myServer->fd_max)
+					ssize_t bytes = recv(fd, &myServer->buffer, sizeof(myServer->buffer) - 1, 0);
+					if (bytes <= 0)
 					{
-						if (FD_ISSET(fd, &active_fds))
-							close(fd);
-						++fd;
+						broadcast(myServer, fd, &active_fds, true);
+						if (fd == myServer->fd_max)
+							findNewMax(myServer);
+						close(fd);
+						FD_CLR(fd, &active_fds);
+						myServer->next_id--;
 					}
-					write(2, err, strlen(err));
-					exit(1);
+					else if (bytes > 0)
+						broadcast(myServer, fd, &active_fds, false);
 				}
-			}
-			else
-			{
-				ssize_t bytes = recv(fd, &myServer->buffer, sizeof(myServer->buffer) - 1, 0);
-				if (bytes <= 0 && fd != myServer->serverFD)
-				{
-					broadcast(myServer, fd, &active_fds, true);
-					if (fd == myServer->fd_max)
-						findNewMax(myServer);
-					close(fd);
-					FD_CLR(fd, &active_fds);
-					myServer->next_id--;
-					printf("nextID: %d\n", myServer->next_id);
-				}
-				else if (bytes > 0)
-					broadcast(myServer, fd, &active_fds, false);
 			}
 			++fd;
 		}
-		++fd;
 	}
 }
 
