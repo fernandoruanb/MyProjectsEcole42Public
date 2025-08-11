@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 10:11:35 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/08/11 13:33:19 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:07:04 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ static void	broadcast(int ownerFD, t_server *myServer, fd_set *active_fds, int f
 			msg[index] = '\0';
 			++index;
 		}
-		sprintf(msg, "server: client %d: just arrived\n", ownerFD);
+		sprintf(msg, "server: client %d: just arrived\n", myServer->clients[ownerFD]);
 		index = 0;
 		while (index <= myServer->fd_max)
 		{
@@ -137,7 +137,7 @@ static void	broadcast(int ownerFD, t_server *myServer, fd_set *active_fds, int f
 			msg[index] = '\0';
 			++index;
 		}
-		sprintf(msg, "server: client %d: just left\n", ownerFD);
+		sprintf(msg, "server: client %d: just left\n", myServer->clients[ownerFD]);
 		index = 0;
 		while (index <= myServer->fd_max)
 		{
@@ -155,7 +155,7 @@ static void	broadcast(int ownerFD, t_server *myServer, fd_set *active_fds, int f
 			msg[index] = '\0';
 			++index;
 		}
-		sprintf(msg, "client %d: ", ownerFD);
+		sprintf(msg, "client %d: ", myServer->clients[ownerFD]);
 		char	*ptr = myServer->buffer;
 		while (*ptr)
 		{
@@ -182,7 +182,7 @@ static void	broadcast(int ownerFD, t_server *myServer, fd_set *active_fds, int f
 					msg[index] = '\0';
 					++index;
 				}
-				sprintf(msg, "client %d: ", ownerFD);
+				sprintf(msg, "client %d: ", myServer->clients[ownerFD]);
 				if ((*ptr == '\\' && temp == 'n') || *ptr == '\n')
 					++ptr;
 			}
@@ -221,7 +221,6 @@ static void	findNewMax(t_server *myServer, fd_set *active_fds)
 		++fd;
 	}
 	myServer->fd_max = fd_max;
-	printf("O FD MAX: %d\n", myServer->fd_max);
 }
 
 static void	startWebService(t_server *myServer)
@@ -328,6 +327,7 @@ int	main(int argc, char **argv)
 	}
 	connectServer(&myServer);
 	initAllClients(&myServer);
+	myServer.next_id = 0;
 	startWebService(&myServer);
 	close(myServer.serverFD);
 	return (0);
