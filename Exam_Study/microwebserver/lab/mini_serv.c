@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 10:17:47 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/08/10 16:28:48 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/08/11 21:25:34 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,15 +266,8 @@ static void	startWebServer(t_server *myServer)
 					}
 					else
 					{
-						fd = 0;
-						while (fd <= myServer->fd_max)
-						{
-							if (FD_ISSET(fd, &active_fds))
-								close(fd);
-							++fd;
-						}
-						write(2, err, strlen(err));
-						exit(1);
+						++fd;
+						continue ;
 					}
 				}
 				else
