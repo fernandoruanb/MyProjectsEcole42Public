@@ -20,6 +20,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct	s_client
+{
+	char	buffer[90000];
+}	t_client;
+
 typedef struct	s_server
 {
 	int	serverFD;
@@ -29,6 +34,7 @@ typedef struct	s_server
 	int	next_id;
 	int	fd_max;
 	char	buffer[90000];
+	static t_client	clientsBuffer[FD_SETSIZE];
 }	t_server;
 
 static void	initAllClients(t_server *myServer)
@@ -133,7 +139,7 @@ static void	connectServer(t_server *myServer)
 	}
 }
 
-static void	broadcast(int clientFD, t_server *myServer, fd_set *active_fds, int flag)
+static void	broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int flag)
 {
 	char	msg[90000];
 	size_t	index = 0;
@@ -149,8 +155,8 @@ static void	broadcast(int clientFD, t_server *myServer, fd_set *active_fds, int 
 		int fd = 0;
 		while (fd <= myServer->fd_max)
 		{
-			if (FD_ISSET(fd, active_fds) && fd != myServer->serverFD && fd != clientFD)
-				send(fd, &msg, sizeof(msg), 0);
+			if (FD_ISSET(fd, write_fds) && fd != myServer->serverFD && fd != clientFD)
+				send(fd, &msg, strlen(msg), 0);
 			++fd;
 		}
 	}
@@ -160,14 +166,15 @@ static void	broadcast(int clientFD, t_server *myServer, fd_set *active_fds, int 
 		int fd = 0;
 		while (fd <= myServer->fd_max)
 		{
-			if (FD_ISSET(fd, active_fds) && fd != myServer->serverFD && fd != clientFD)
-				send(fd, &msg, sizeof(msg), 0);
+			if (FD_ISSET(fd, write_fds) && fd != myServer->serverFD && fd != clientFD)
+				send(fd, &msg, strlen(msg), 0);
 			++fd;
 		}
 	}
 	else
 	{
 		sprintf(msg, "client %d: ", myServer->clients[clientFD]);
+		strcat(msg, myServer->clientsBuffer[clientFD].buffer);
 		char	*ptr = myServer->buffer;
 		while (*ptr)
 		{
@@ -181,9 +188,9 @@ static void	broadcast(int clientFD, t_server *myServer, fd_set *active_fds, int 
 				int	fd = 0;
 				while (fd <= myServer->fd_max)
 				{
-					if (FD_ISSET(fd, active_fds) && fd != myServer->serverFD && fd != clientFD)
+					if (FD_ISSET(fd, write_fds) && fd != myServer->serverFD && fd != clientFD)
 					{
-						send(fd, &msg, sizeof(msg), 0);
+						send(fd, &msg, strlen(msg), 0);
 						send(fd, "\n", 1, 0);
 					}
 					++fd;
@@ -248,7 +255,7 @@ static void	startWebService(t_server *myServer)
 						if (clientFD > myServer->fd_max)
 							myServer->fd_max = clientFD;
 						FD_SET(clientFD, &active_fds);
-						broadcast(clientFD, myServer, &active_fds, 0);
+						broadcast(clientFD, myServer, &write_fds, 0);
 					}
 					else
 					{
@@ -262,15 +269,20 @@ static void	startWebService(t_server *myServer)
 					ssize_t	bytes = recv(fd, &myServer->buffer, sizeof(myServer->buffer) - 1, 0);
 					if (bytes > 0)
 					{
-						myServer->buffer[bytes] = '\0';
-						broadcast(fd, myServer, &active_fds, 2);
+						if (!checkNewLine(myServer))
+							strcat(clientsBuffer[fd].buffer, myServer->buffer);
+						else
+						{
+							myServer->buffer[bytes] = '\0';
+							broadcast(fd, myServer, &write_fds, 2);
+						}
 					}
 					else
 					{
 						close(fd);
 						FD_CLR(fd, &active_fds);
 						findNewMax(myServer, &active_fds);
-						broadcast(fd, myServer, &active_fds, 1);
+						broadcast(fd, myServer, &write_fds, 1);
 					}
 				}
 			}
