@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:58:37 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/08/14 15:21:51 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/08/14 19:39:35 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct	s_client
 {
-	char	buffer[90000];
+	char	buffer[10000];
 	size_t	sent_total;
 }	t_client;
 
@@ -33,7 +33,7 @@ typedef struct	s_server
 	int	next_id;
 	int	fd_max;
 	int	clients[FD_SETSIZE];
-	char	buffer[90000];
+	char	buffer[10000];
 	struct sockaddr_in	addr;
 }	t_server;
 
@@ -85,6 +85,7 @@ static void	initAllClients(t_server *myServer)
 	{
 		myServer->clients[index] = -1;
 		bzero(&clientsBuffer[index], sizeof(clientsBuffer[index]));
+		clientsBuffer[index].sent_total = 0;
 		++index;
 	}
 }
@@ -101,7 +102,7 @@ static bool	checkPort(const char *nptr)
 }
 
 static int	ft_atoi(const char *nptr, bool *err)
-
+{
 	if (*nptr == '\0' || !checkPort(nptr))
 	{
 		*err = true;
@@ -150,6 +151,96 @@ static void	connectServer(t_server *myServer)
 	}
 }
 
+static void	broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int flag)
+{
+	char	msg[10000];
+	size_t	index = 0;
+	int	fd;
+
+	while (index < sizeof(msg))
+	{
+		msg[index] = '\0';
+		++index;
+	}
+	if (flag == 0 || flag == 1)
+	{
+		fd = 0;
+		while (fd <= myServer->fd_max)
+		{
+			if (FD_ISSET(fd, write_fds) && fd != myServer->serverFD && fd != clientFD)
+			{
+				if (flag == 0)
+				{
+					sprintf(msg, "server: client %d just arrived\n", myServer->clients[clientFD]);
+					send(fd, msg, strlen(msg), 0);
+				}
+				else
+				{
+					sprintf(msg, "server: client %d just left\n", myServer->clients[clientFD]);
+					send(fd, msg, strlen(msg), 0);
+				}
+			}
+			++fd;
+		}
+	}
+	else if (flag == 2)
+	{
+		char	*ptr = myServer->buffer;
+		ssize_t	sent_total;
+		sprintf(msg, "client %d: ", myServer->clients[clientFD]);
+		strcat(msg, clientsBuffer[clientFD].buffer);
+		while (*ptr)
+		{
+			if (*ptr == '\n')
+			{
+				fd = 0;
+				while (fd <= myServer->fd_max)
+				{
+					if (FD_ISSET(fd, write_fds) && fd != myServer->serverFD && fd != clientFD)
+					{
+						size_t	total = strlen(msg);
+						sent_total = send(fd, msg, 20, 0);
+						if (sent_total < 0)
+							continue ;
+						if (sent_total < total)
+						{
+							clientsBuffer[fd].sent_total += sent_total;
+							strcat(clientsBuffer[fd].buffer, msg);
+						}
+						else
+						{
+							clientsBuffer[fd].sent_total = 0;
+							bzero(clientsBuffer[fd].buffer, sizeof(clientsBuffer[fd].buffer));
+							send(fd, "\n", 1, 0);
+						}
+					}
+					++fd;
+				}
+			}
+			else
+			{
+				char	tmp[2] = {*ptr, '\0'};
+				strcat(msg, tmp);
+			}
+			++ptr;
+		}
+	}
+	else if (flag == 3)
+	{
+		ssize_t	sent_total = 0;
+		sent_total = send(clientFD, clientsBuffer[clientFD].buffer + clientsBuffer[clientFD].sent_total, sizeof(clientsBuffer[clientFD].buffer), 0);
+		if (sent_total < 0)
+			return ;
+		clientsBuffer[clientFD].sent_total += sent_total;
+		if (clientsBuffer[clientFD].sent_total > strlen(clientsBuffer[clientFD].buffer))
+		{
+			clientsBuffer[clientFD].sent_total = 0;
+			bzero(clientsBuffer[clientFD].buffer, sizeof(clientsBuffer[clientFD].buffer));
+			send(clientFD, "\n", 1, 0);
+		}
+	}
+}
+
 static void	startWebService(t_server *myServer)
 {
 	fd_set	read_fds;
@@ -190,8 +281,9 @@ static void	startWebService(t_server *myServer)
 						FD_SET(clientFD, &active_fds);
 						if (clientFD > myServer->fd_max)
 							myServer->fd_max = clientFD;
-						clients[clientFD] = myServer->next_id;
+						myServer->clients[clientFD] = myServer->next_id;
 						myServer->next_id++;
+						broadcast(clientFD, myServer, &active_fds, 0);
 					}
 					else
 					{
@@ -202,9 +294,27 @@ static void	startWebService(t_server *myServer)
 				else
 				{
 					clearBuffer(myServer);
-					ssize_t	bytes = recv(fd, 
+					ssize_t	bytes = recv(fd, myServer->buffer, sizeof(myServer->buffer), 0);
+					if (bytes > 0)
+					{
+						if (!checkNewLine(myServer))
+							strcat(clientsBuffer[fd].buffer, myServer->buffer);
+						else
+						{
+							myServer->buffer[bytes] = '\0';
+							broadcast(fd, myServer, &write_fds, 2);
+						}
+					}
+					else
+					{
+						FD_CLR(fd, &active_fds);
+						close(fd);
+						findNewMax(myServer, &active_fds);
+						broadcast(fd, myServer, &write_fds, 1);
+					}
 				}
 			}
+			++fd;
 		}
 	}
 }
@@ -232,6 +342,6 @@ int	main(int argc, char **argv)
 	myServer.next_id = 0;
 	connectServer(&myServer);
 	startWebService(&myServer);
-	close(myServer->serverFD);
+	close(myServer.serverFD);
 	return (0);
 }
