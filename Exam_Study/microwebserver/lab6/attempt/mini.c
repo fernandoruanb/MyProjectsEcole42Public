@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_serv.c                                        :+:      :+:    :+:   */
+/*   mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 17:48:59 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/08/13 20:43:34 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/08/14 12:26:28 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,23 +163,27 @@ static void	broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int f
 				fd = 0;
 				while (fd <= myServer->fd_max)
 				{
-					if (FD_ISSET(fd, write_fds) && fd != myServer->serverFD && fd != clientFD)
+					/*
+					 * Nós devemos tentar enviar a mensagem apenas uma única vez. Se não conseguirmos, colocamos a mesma no buffer do cliente, pendência, e colocamos o sent_total que foi enviado. Quando o loop do select avisar que o fd está novamente pronto para write nós podemos começar a escrever nele usando um broadcast especial para envio e atualização desse buffer do cliente.
+					 * 
+					 * */
+
+					if (FD_ISSET(fd, write_fds) && fd != myServer->serverFD && fd != clientFD && flag == 2)
 					{
-						sent_total = send(fd, msg + clientsBuffer[clientFD].sent_total, strlen(msg), 0);
-						printf("sent_total: %zu\n", sent_total);
-						printf("total: %zu\n", total);
+						sent_total = send(fd, msg , 20, 0);
 						if (sent_total < 0)
 							continue ;
 						if (sent_total < total)
 						{
-							printf("Entrei aqui\n");
 							bzero(&clientsBuffer[clientFD].buffer, sizeof(clientsBuffer[clientFD].buffer));
-							strcat(clientsBuffer[clientFD].buffer, msg);
-							clientsBuffer[clientFD].sent_total = sent_total;
+							strcat(clientsBuffer[fd].buffer, msg);
+							clientsBuffer[fd].sent_total += sent_total;
 						}
 						else
-							clientsBuffer[clientFD].sent_total = 0;
-						send(fd, "\n", 1, 0);
+						{
+							clientsBuffer[fd].sent_total = 0;
+							send(fd, "\n", 1, 0);
+						}
 					}
 					++fd;
 				}
@@ -196,8 +200,22 @@ static void	broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int f
 			}
 			++ptr;
 		}
-		if (clientsBuffer[clientFD].sent_total == 0)
+		bzero(&clientsBuffer[clientFD].buffer, sizeof(clientsBuffer[clientFD].buffer));
+	}
+	else
+	{
+		ssize_t	total = strlen(clientsBuffer[clientFD].buffer);
+		ssize_t	sent_total = send(clientFD, clientsBuffer[clientFD].buffer + clientsBuffer[clientFD].sent_total, 20, 0);
+		if (sent_total < 0)
+			return ;
+		clientsBuffer[clientFD].sent_total += sent_total;
+		if (clientsBuffer[clientFD].sent_total >= total)
+		{
+			printf("Entrei aqui\n");
+			clientsBuffer[clientFD].sent_total = 0;
 			bzero(&clientsBuffer[clientFD].buffer, sizeof(clientsBuffer[clientFD].buffer));
+			send(clientFD, "\n", 1, 0);
+		}
 	}
 }
 
@@ -242,10 +260,11 @@ static void	startWebService(t_server *myServer)
 		}
 		while (fd <= myServer->fd_max)
 		{
+			if (FD_ISSET(fd, &write_fds))
+				if (clientsBuffer[fd].sent_total != 0)
+					broadcast(fd, myServer, &write_fds, 3);
 			if (FD_ISSET(fd, &read_fds))
 			{
-				if (clientsBuffer[fd].sent_total != 0)
-					broadcast(fd, myServer, &write_fds, 2);
 				if (fd == myServer->serverFD)
 				{
 					int	clientFD = accept(myServer->serverFD, NULL, NULL);
