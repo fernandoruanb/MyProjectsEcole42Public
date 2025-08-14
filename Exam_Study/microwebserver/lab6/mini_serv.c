@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 10:12:41 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/08/13 13:37:50 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:36:10 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,7 @@ static void	startWebService(t_server *myServer)
 					ssize_t	bytes = recv(fd, &myServer->buffer, sizeof(myServer->buffer) - 1, 0);
 					if (bytes > 0)
 					{
+						printf("Quantidade de bytes lidos: %zu\n", bytes);
 						if (!checkNewLine(myServer))
 							strcat(clientsBuffer[fd].buffer, myServer->buffer);
 						else
