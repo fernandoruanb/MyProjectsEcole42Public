@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/15 16:41:55 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/08/15 19:33:02 by fruan-ba         ###   ########.fr       */
+/*   Created: 2025/08/15 21:51:04 by fruan-ba          #+#    #+#             */
+/*   Updated: 2025/08/15 22:54:07 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/select.h>
@@ -28,20 +27,16 @@ typedef struct	s_client
 
 typedef struct	s_server
 {
+	char	buffer[90000];
 	int	serverFD;
 	int	port;
 	int	fd_max;
 	int	next_id;
 	int	clients[FD_SETSIZE];
-	struct sockaddr_in	addr;
-	char	buffer[90000];
+	struct	sockaddr_in	addr;
 }	t_server;
 
-static t_client	clientsBuffer[FD_SETSIZE];
-
-static void     findNewMax(t_server *myServer, fd_set *active_fds);
-
-static void     broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int flag);
+static t_client	clients[FD_SETSIZE];
 
 static void	clearBuffer(t_server *myServer)
 {
@@ -51,13 +46,27 @@ static void	clearBuffer(t_server *myServer)
 static void	initAllClients(t_server *myServer)
 {
 	size_t	index = 0;
+
 	while (index < FD_SETSIZE)
 	{
 		myServer->clients[index] = -1;
 		bzero(clientsBuffer[index].buffer, sizeof(clientsBuffer[index].buffer));
-		clientsBuffer[index].sent_total = 0;
+		myServer->clientsBuffer[index].sent_total = 0;
 		++index;
 	}
+}
+
+static void	findNewMax(t_server *myServer, fd_set *active_fds)
+{
+	int	fd = 0;
+	int	fd_max = myServer->serverFD;
+	while (fd < FD_SETSIZE)
+	{
+		if (FD_ISSET(fd, active_fds) && fd > fd_max)
+			fd_max = fd;
+		++fd;
+	}
+	myServer->fd_max = fd_max;
 }
 
 static bool	checkPort(const char *nptr)
@@ -71,6 +80,28 @@ static bool	checkPort(const char *nptr)
 	return (true);
 }
 
+static int	ft_atoi(const char *nptr, bool *err)
+{
+	int	result = 0;
+	if (*nptr == '\0' || !checkPort(nptr))
+	{
+		*err = true;
+		return (0);
+	}
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		result *= 10;
+		result += *nptr - '0';
+		if (result > 65535)
+		{
+			*err = true;
+			return (true);
+		}
+		++nptr;
+	}
+	return (result);
+}
+
 static void	connectServer(t_server *myServer)
 {
 	char	err[] = "Fatal error\n";
@@ -81,10 +112,10 @@ static void	connectServer(t_server *myServer)
 		exit(1);
 	}
 	myServer->addr.sin_family = AF_INET;
-	myServer->addr.sin_port = (myServer->port >> 8) | ((myServer->port & 0xFF) << 8);
+	myServer->addr.sin_port = (myServer->port >> 8) & ((myServer->port & 0xFF) << 8);
 	myServer->addr.sin_addr.s_addr = (1 << 24) | (0 << 16) | (0 << 8) | 127;
 
-	if (bind(myServer->serverFD, (struct sockaddr*)&myServer->addr, sizeof(myServer->addr)) < 0)
+	if (bind(myServer->serverFD, (struct sockaddr*)&myServer->addr, sizeof(myServer->addr) < 0))
 	{
 		write(2, err, strlen(err));
 		close(myServer->serverFD);
@@ -98,35 +129,6 @@ static void	connectServer(t_server *myServer)
 	}
 }
 
-static void	divineEye(int clientFD, t_server *myServer, fd_set *write_fds)
-{
-	char	buffer[90000];
-
-	bzero(buffer, sizeof(buffer));
-	strcat(buffer, myServer->buffer);
-	bzero(myServer->buffer, sizeof(myServer->buffer));
-	size_t	index = 0;
-
-	while (index < strlen(buffer))
-	{
-		if (buffer[index] == '\n')
-		{
-			strcat(myServer->buffer, clientsBuffer[clientFD].buffer);
-			strcat(myServer->buffer, "\n");
-			broadcast(clientFD, myServer, write_fds, 2);
-			bzero(clientsBuffer[clientFD].buffer, sizeof(clientsBuffer[clientFD].buffer));
-			bzero(myServer->buffer, sizeof(myServer->buffer));
-		}
-		else
-		{
-			char	tmp[2] = {buffer[index], '\0'};
-			strcat(clientsBuffer[clientFD].buffer, tmp);
-			printf("O buffer montagem: %s\n", clientsBuffer[clientFD].buffer);
-		}
-		++index;
-	}
-}
-
 static void	broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int flag)
 {
 	char	msg[90000];
@@ -136,34 +138,31 @@ static void	broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int f
 	if (flag == 0 || flag == 1)
 	{
 		if (flag == 0)
-			sprintf(msg, "server: client %d just arrived\n", myServer->clients[clientFD]);
+			sprintf(msg, "server: client %d just arrived\n", clientsBuffer[clientFD]);
 		else
-			sprintf(msg, "server: client %d just left\n", myServer->clients[clientFD]);
+			sprintf(msg, "server: client %d just left\n", clientsBuffer[clientFD]);
 		fd = 0;
 		while (fd <= myServer->fd_max)
 		{
 			if (FD_ISSET(fd, write_fds) && fd != myServer->serverFD && fd != clientFD)
 				send(fd, msg, strlen(msg), 0);
 			++fd;
-		}
+		}	
 	}
 	else if (flag == 2)
 	{
 		char	*ptr = myServer->buffer;
-
 		while (*ptr)
 		{
 			if (*ptr == '\n')
 			{
 				ssize_t	sent_total = 0;
-				sprintf(msg, "client %d: ", myServer->clients[clientFD]);
-				strcat(msg, clientsBuffer[clientFD].buffer);
+				ssize_t	total = strlen(msg);
 				fd = 0;
 				while (fd <= myServer->fd_max)
 				{
 					if (FD_ISSET(fd, write_fds) && fd != myServer->serverFD && fd != clientFD)
 					{
-						ssize_t	total = strlen(msg);
 						sent_total = send(fd, msg, total, 0);
 						if (sent_total < 0)
 							continue ;
@@ -173,7 +172,10 @@ static void	broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int f
 							strcat(clientsBuffer[fd].buffer, msg);
 						}
 						else
+						{
 							send(fd, "\n", 1, 0);
+							bzero(clientsBuffer[clientFD].buffer, sizeof(clientsBuffer[clientFD].buffer));
+						}
 					}
 					++fd;
 				}
@@ -186,21 +188,15 @@ static void	broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int f
 			++ptr;
 		}
 	}
-	else if (flag == 3)
+	else if	(flag == 3)
 	{
-		ssize_t sent_total = 0;
+		ssize_t	sent_total = 0;
 		ssize_t	total = strlen(clientsBuffer[clientFD].buffer);
 
 		sent_total = send(clientFD, clientsBuffer[clientFD].buffer + clientsBuffer[clientFD].sent_total, total - clientsBuffer[clientFD].sent_total, 0);
 		if (sent_total < 0)
 			return ;
 		clientsBuffer[clientFD].sent_total += sent_total;
-		if (clientsBuffer[clientFD].sent_total >= total)
-		{
-			bzero(clientsBuffer[clientFD].buffer, sizeof(clientsBuffer[clientFD].buffer));
-			clientsBuffer[clientFD].sent_total = 0;
-			send(clientFD, "\n", 1, 0);
-		}
 	}
 }
 
@@ -214,7 +210,7 @@ static void	startWebService(t_server *myServer)
 	FD_ZERO(&active_fds);
 	FD_SET(myServer->serverFD, &active_fds);
 	myServer->fd_max = myServer->serverFD;
-	while(1)
+	while (1)
 	{
 		fd = 0;
 		read_fds = active_fds;
@@ -265,7 +261,6 @@ static void	startWebService(t_server *myServer)
 					{
 						FD_CLR(fd, &active_fds);
 						close(fd);
-						findNewMax(myServer, &active_fds);
 						broadcast(fd, myServer, &write_fds, 1);
 						myServer->clients[fd] = -1;
 						bzero(clientsBuffer[fd].buffer, sizeof(clientsBuffer[fd].buffer));
@@ -277,48 +272,11 @@ static void	startWebService(t_server *myServer)
 	}
 }
 
-static int	ft_atoi(const char *nptr, bool *err)
-{
-	int	result = 0;
-
-	if (*nptr == '\0' || !checkPort(nptr))
-	{
-		*err = true;
-		return (0);
-	}
-	while (*nptr >= '0' && *nptr <= '9')
-	{
-		result *= 10;
-		result += *nptr - '0';
-		if (result > 65535)
-		{
-			*err = true;
-			return (0);
-		}
-		++nptr;
-	}
-	return (result);
-}
-
-static void	findNewMax(t_server *myServer, fd_set *active_fds)
-{
-	int	fd = 0;
-	int	fd_max = myServer->serverFD;
-
-	while (fd < FD_SETSIZE)
-	{
-		if (FD_ISSET(fd, active_fds) && fd > fd_max)
-			fd_max = fd;
-		++fd;
-	}
-	myServer->fd_max = fd_max;
-}
-
 int	main(int argc, char **argv)
 {
 	t_server	myServer;
 	bool	err;
-
+	
 	if (argc != 2)
 	{
 		char	err[] = "Wrong number of arguments\n";
@@ -329,7 +287,7 @@ int	main(int argc, char **argv)
 	myServer.port = ft_atoi(argv[1], &err);
 	if (err)
 	{
-		char err[] = "Fatal error\n";
+		char	err[] = "Fatal error\n";
 		write(2, err, strlen(err));
 		exit(1);
 	}
@@ -337,6 +295,6 @@ int	main(int argc, char **argv)
 	myServer.next_id = 0;
 	connectServer(&myServer);
 	startWebService(&myServer);
-	close(myServer.serverFD);
+	close(myServer->serverFD);
 	return (0);
 }

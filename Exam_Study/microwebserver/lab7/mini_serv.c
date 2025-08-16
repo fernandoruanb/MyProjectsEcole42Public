@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 12:58:37 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/08/15 16:21:04 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/08/15 18:57:52 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,16 +324,7 @@ static void	startWebService(t_server *myServer)
 					clearBuffer(myServer);
 					ssize_t	bytes = recv(fd, myServer->buffer, sizeof(myServer->buffer), 0);
 					if (bytes > 0)
-					{
 						divineEye(fd, &write_fds, myServer);
-						/*if (!checkNewLine(myServer))
-							strcat(clientsBuffer[fd].buffer, myServer->buffer);
-						else
-						{
-							myServer->buffer[bytes] = '\0';
-							broadcast(fd, myServer, &write_fds, 2);
-						}*/
-					}
 					else
 					{
 						FD_CLR(fd, &active_fds);
