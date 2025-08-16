@@ -6,7 +6,7 @@
 /*   By: fruan-ba <fruan-ba@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 16:41:55 by fruan-ba          #+#    #+#             */
-/*   Updated: 2025/08/15 19:33:02 by fruan-ba         ###   ########.fr       */
+/*   Updated: 2025/08/16 11:31:00 by fruan-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct	s_client
 {
-	char	buffer[90000];
+	char	buffer[300000];
 	ssize_t	sent_total;
 }	t_client;
 
@@ -34,10 +34,12 @@ typedef struct	s_server
 	int	next_id;
 	int	clients[FD_SETSIZE];
 	struct sockaddr_in	addr;
-	char	buffer[90000];
+	char	buffer[300000];
 }	t_server;
 
 static t_client	clientsBuffer[FD_SETSIZE];
+
+static t_client	thePower[FD_SETSIZE];
 
 static void     findNewMax(t_server *myServer, fd_set *active_fds);
 
@@ -55,6 +57,8 @@ static void	initAllClients(t_server *myServer)
 	{
 		myServer->clients[index] = -1;
 		bzero(clientsBuffer[index].buffer, sizeof(clientsBuffer[index].buffer));
+		bzero(thePower[index].buffer, sizeof(thePower[index].buffer));
+		thePower[index].sent_total = 0;
 		clientsBuffer[index].sent_total = 0;
 		++index;
 	}
@@ -100,7 +104,7 @@ static void	connectServer(t_server *myServer)
 
 static void	divineEye(int clientFD, t_server *myServer, fd_set *write_fds)
 {
-	char	buffer[90000];
+	char	buffer[300000];
 
 	bzero(buffer, sizeof(buffer));
 	strcat(buffer, myServer->buffer);
@@ -111,17 +115,16 @@ static void	divineEye(int clientFD, t_server *myServer, fd_set *write_fds)
 	{
 		if (buffer[index] == '\n')
 		{
-			strcat(myServer->buffer, clientsBuffer[clientFD].buffer);
+			strcat(myServer->buffer, thePower[clientFD].buffer);
 			strcat(myServer->buffer, "\n");
 			broadcast(clientFD, myServer, write_fds, 2);
-			bzero(clientsBuffer[clientFD].buffer, sizeof(clientsBuffer[clientFD].buffer));
+			bzero(thePower[clientFD].buffer, sizeof(thePower[clientFD].buffer));
 			bzero(myServer->buffer, sizeof(myServer->buffer));
 		}
 		else
 		{
 			char	tmp[2] = {buffer[index], '\0'};
-			strcat(clientsBuffer[clientFD].buffer, tmp);
-			printf("O buffer montagem: %s\n", clientsBuffer[clientFD].buffer);
+			strcat(thePower[clientFD].buffer, tmp);
 		}
 		++index;
 	}
@@ -129,7 +132,7 @@ static void	divineEye(int clientFD, t_server *myServer, fd_set *write_fds)
 
 static void	broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int flag)
 {
-	char	msg[90000];
+	char	msg[300000];
 	int	fd;
 
 	bzero(msg, sizeof(msg));
@@ -157,6 +160,7 @@ static void	broadcast(int clientFD, t_server *myServer, fd_set *write_fds, int f
 			{
 				ssize_t	sent_total = 0;
 				sprintf(msg, "client %d: ", myServer->clients[clientFD]);
+				strcat(msg, thePower[clientFD].buffer);
 				strcat(msg, clientsBuffer[clientFD].buffer);
 				fd = 0;
 				while (fd <= myServer->fd_max)
@@ -256,6 +260,7 @@ static void	startWebService(t_server *myServer)
 				}
 				else
 				{
+					clearBuffer(myServer);
 					ssize_t	bytes = recv(fd, myServer->buffer, sizeof(myServer->buffer), 0);
 					if (bytes > 0)
 						divineEye(fd, myServer, &write_fds);
@@ -269,6 +274,7 @@ static void	startWebService(t_server *myServer)
 						broadcast(fd, myServer, &write_fds, 1);
 						myServer->clients[fd] = -1;
 						bzero(clientsBuffer[fd].buffer, sizeof(clientsBuffer[fd].buffer));
+						bzero(thePower[fd].buffer, sizeof(clientsBuffer[fd].buffer));
 					}
 				}
 			}
